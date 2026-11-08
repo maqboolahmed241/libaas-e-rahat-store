@@ -191,6 +191,16 @@ async function renderAdminProducts(){
 }
 async function editProduct(id,price,stock){let np=prompt("نئی قیمت درج کریں:",price);if(np===null)return;let ns=prompt("دستیاب تعداد درج کریں:",stock);if(ns===null)return;let r=await db.from("products").update({price:Number(np),stock:Number(ns),updated_at:new Date().toISOString()}).eq("id",id);if(r.error)return alert("تبدیلی محفوظ نہیں ہوئی: "+r.error.message);await loadStore();await renderAdminProducts()}
 async function deleteProduct(id){if(!confirm("کیا یہ پروڈکٹ حذف کرنی ہے؟"))return;let r=await db.from("products").delete().eq("id",id);if(r.error)return alert("پروڈکٹ حذف نہیں ہوئی: "+r.error.message);delete cart[id];saveCart();await loadStore();await renderAdminProducts()}
+
+function renderPaymentAccountEditors(){
+ const el=document.getElementById("paymentAccountEditors");if(!el)return;
+ el.innerHTML=settings.payment_accounts.map(function(a,i){return '<div class="admin-item" style="display:block"><b>اکاؤنٹ '+(i+1)+'</b><div class="field"><label>سروس / بینک</label><input data-pay="service" value="'+esc(a.service||"")+'" placeholder="ایزی پیسہ / جاز کیش / بینک"></div><div class="field"><label>اکاؤنٹ ہولڈر کا نام</label><input data-pay="holder" value="'+esc(a.holder||"")+'"></div><div class="field"><label>اکاؤنٹ نمبر / IBAN</label><input data-pay="number" value="'+esc(a.number||"")+'"></div><div class="field"><label>ادائیگی کی ہدایات</label><textarea data-pay="instructions">'+esc(a.instructions||"")+'</textarea></div><button class="smallbtn danger" onclick="removePaymentAccountEditor('+i+')">اکاؤنٹ ہٹائیں</button></div>'}).join("")||'<p class="muted">ابھی کوئی اکاؤنٹ شامل نہیں۔</p>';
+}
+function addPaymentAccountEditor(){settings.payment_accounts.push({service:"",holder:"",number:"",instructions:""});renderPaymentAccountEditors()}
+function removePaymentAccountEditor(i){settings.payment_accounts.splice(i,1);renderPaymentAccountEditors()}
+function readPaymentAccountEditors(){return Array.from(document.querySelectorAll("#paymentAccountEditors .admin-item")).map(function(c){function g(k){return c.querySelector('[data-pay="'+k+'"]').value.trim()}return {service:g("service"),holder:g("holder"),number:g("number"),instructions:g("instructions")}}).filter(function(a){return a.service&&a.holder&&a.number})}
+function renderCustomerPaymentOptions(){let box=document.getElementById("customerPaymentAccounts"),sel=document.getElementById("paymentAccount");if(!box||!sel)return;box.innerHTML=settings.payment_accounts.map(function(a){return '<div class="admin-note"><b>'+esc(a.service)+'</b><br>'+esc(a.holder)+'<br><b>'+esc(a.number)+'</b><br>'+esc(a.instructions||"رقم بھیج کر ریفرنس نمبر درج کریں")+'</div>'}).join("")||'<p class="muted">آن لائن ادائیگی اکاؤنٹ ابھی دستیاب نہیں۔</p>';sel.innerHTML=settings.payment_accounts.map(function(a,i){return '<option value="'+i+'">'+esc(a.service)+' — '+esc(a.holder)+'</option>'}).join("")}
+function togglePaymentDetails(){let on=document.getElementById("payment").value==="online";document.getElementById("onlinePaymentPanel").classList.toggle("hidden",!on);if(on)renderCustomerPaymentOptions()}
 async function saveSettings(){
  let nums=["waNumber1","waNumber2","waNumber3"].map(function(id){return document.getElementById(id).value.replace(/\D/g,"")}).filter(Boolean);
  let fee=Math.max(0,Number(document.getElementById("deliveryFee").value)||0);
