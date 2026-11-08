@@ -40,8 +40,8 @@
 <div class="overlay" id="adminModal"><div class="modal"><div class="modal-head"><h2>اسٹور ایڈمن پینل</h2><button class="close" onclick="closeModal('adminModal')">×</button></div><div id="adminLogin"><div class="admin-note">صرف اسٹور کے مجاز ایڈمن کا ای میل اور پاس ورڈ استعمال کریں۔</div><div class="field"><label>ایڈمن ای میل</label><input id="adminEmail" type="email" placeholder="آپ کا ای میل"></div><div class="field"><label>پاس ورڈ</label><input id="adminPassword" type="password" placeholder="محفوظ پاس ورڈ"></div><button class="wide" onclick="loginAdmin()">لاگ اِن کریں</button><button class="wide" style="background:#8b6b50" onclick="createAdminAccount()">نیا اکاؤنٹ بنائیں</button><div id="accessRequest" class="hidden"><p class="admin-note">اکاؤنٹ موجود ہے مگر ابھی ایڈمن اجازت نہیں ملی۔</p><button class="wide" onclick="requestAdminAccess()">ایڈمن اجازت کی درخواست بھیجیں</button></div></div>
 <div id="adminPanel" class="hidden"><div class="admin-tabs"><button class="filter active" onclick="adminTab('productsTab',this)">مصنوعات</button><button class="filter" onclick="adminTab('settingsTab',this)">سیٹنگز</button><button class="filter" onclick="adminTab('ordersTab',this)">آرڈرز</button><button class="filter" onclick="adminTab('teamTab',this)">ایڈمن ٹیم</button></div>
 <div id="productsTab"><h3>نئی پروڈکٹ شامل کریں</h3><div class="field"><label>سوٹ / فیبرک کی تصویر</label><input id="newImage" type="file" accept="image/jpeg,image/png,image/webp"></div><div class="field"><label>پروڈکٹ کا نام</label><input id="newName" placeholder="مثلاً پرنٹڈ لان سوٹ"></div><div class="field"><label>قیمت (روپے)</label><input id="newPrice" type="number" min="0" placeholder="مثلاً 2500"></div><div class="field"><label>دستیاب تعداد</label><input id="newStock" type="number" min="0" value="1"></div><div class="field"><label>فیبرک / قسم</label><select id="newCategory"><option>لان</option><option>کاٹن</option><option>فارمل</option><option>کیمبرک</option><option>کھدر</option></select></div><div class="field"><label>تفصیل</label><textarea id="newDescription" placeholder="سوٹ کی تفصیل، کپڑے کی لمبائی، رنگ وغیرہ"></textarea></div><button class="wide" onclick="addProduct()">تصویر کے ساتھ پروڈکٹ شامل کریں</button><h3>موجودہ مصنوعات</h3><div class="admin-list" id="adminProducts"></div></div>
-<div id="settingsTab" class="hidden"><div class="field"><label>واٹس ایپ نمبر 1 — بنیادی آرڈر نمبر</label><input id="waNumber1" inputmode="numeric" placeholder="923001234567"></div><div class="field"><label>واٹس ایپ نمبر 2 — متبادل</label><input id="waNumber2" inputmode="numeric" placeholder="اختیاری"></div><div class="field"><label>واٹس ایپ نمبر 3 — متبادل</label><input id="waNumber3" inputmode="numeric" placeholder="اختیاری"></div><div class="field"><label>ڈیلیوری چارج (روپے)</label><input id="deliveryFee" type="number" value="150"></div><p class="muted">ایڈمن لاگ اِن محفوظ Supabase اکاؤنٹ سے ہوگا۔ پاس ورڈ اکاؤنٹ کی Auth Settings سے تبدیل ہوگا۔</p><button class="wide" onclick="saveSettings()">سیٹنگز محفوظ کریں</button><p class="muted">گاہک کا آرڈر پہلے نمبر پر بھیجا جائے گا؛ باقی دو متبادل رابطے ہیں۔</p></div>
-<div id="ordersTab" class="hidden"><h3>تمام آن لائن آرڈرز</h3><div class="admin-list" id="adminOrders"></div></div><div id="teamTab" class="hidden"><h3>ایڈمن اجازت کی درخواستیں</h3><p class="muted">صرف موجودہ ایڈمن درخواست منظور کر سکتا ہے۔</p><div class="admin-list" id="adminRequests"></div></div>
+<div id="settingsTab" class="hidden"><div class="field"><label>واٹس ایپ نمبر 1 — بنیادی آرڈر نمبر</label><input id="waNumber1" inputmode="numeric" placeholder="اپنا واٹس ایپ نمبر درج کریں"></div><div class="field"><label>واٹس ایپ نمبر 2 — متبادل</label><input id="waNumber2" inputmode="numeric" placeholder="اختیاری"></div><div class="field"><label>واٹس ایپ نمبر 3 — متبادل</label><input id="waNumber3" inputmode="numeric" placeholder="اختیاری"></div><div class="field"><label>ڈیلیوری چارج (روپے)</label><input id="deliveryFee" type="number" value="150"></div><p class="muted">ایڈمن لاگ اِن محفوظ Supabase اکاؤنٹ سے ہوگا۔ پاس ورڈ اکاؤنٹ کی Auth Settings سے تبدیل ہوگا۔</p><button class="wide" onclick="saveSettings()">سیٹنگز محفوظ کریں</button><p class="muted">گاہک کا آرڈر پہلے نمبر پر بھیجا جائے گا؛ باقی دو متبادل رابطے ہیں۔</p></div>
+<div id="ordersTab" class="hidden"><h3>تمام آن لائن آرڈرز</h3><div class="admin-list" id="adminOrders"></div></div><div id="teamTab" class="hidden"><h3>ایڈمن ٹیم</h3><p class="admin-note">صرف مرکزی مالک اس حصے کو استعمال کر سکتا ہے۔ ای میل درج کریں۔ پہلے سے تصدیق شدہ اکاؤنٹ فوراً ایڈمن بنے گا، ورنہ اسی ای میل سے اکاؤنٹ بنا کر تصدیق کرنے پر اجازت خود مل جائے گی۔</p><div class="field"><label>نئے ایڈمن کی ای میل</label><input id="inviteEmail" type="email" placeholder="ای میل درج کریں"></div><button class="wide" onclick="inviteAdmin()">ایڈمن شامل کریں</button><h3>موجودہ ایڈمنز</h3><div class="admin-list" id="adminTeamList"></div><h3>اجازت کی درخواستیں</h3><div class="admin-list" id="adminRequests"></div></div>
 </div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script>
@@ -98,20 +98,50 @@ async function createAdminAccount(){
  if(!email||password.length<8)return alert("درست ای میل اور کم از کم 8 حروف کا پاس ورڈ درج کریں۔");
  let r=await db.auth.signUp({email:email,password:password});
  if(r.error)return alert("اکاؤنٹ نہیں بن سکا: "+r.error.message);
- if(r.data.session){currentAdminUser=r.data.user;document.getElementById("accessRequest").classList.remove("hidden");return alert("اکاؤنٹ بن گیا۔ اب ایڈمن اجازت کی درخواست بھیجیں۔")}
- alert("اکاؤنٹ بنانے کی درخواست ہوگئی۔ ای میل تصدیق کریں، پھر اسی ای میل اور پاس ورڈ سے لاگ اِن کریں۔");
+ if(r.data.session){currentAdminUser=r.data.user;return await finishAdminLogin()}
+ alert("اکاؤنٹ کی درخواست بن گئی۔ اپنی ای میل میں تصدیقی لنک کھولیں، پھر اسی ای میل اور پاس ورڈ سے لاگ اِن کریں۔ پہلا تصدیق شدہ اکاؤنٹ مرکزی مالک بن سکے گا۔");
 }
 async function loginAdmin(){
  let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
  if(!email||!password)return alert("ای میل اور پاس ورڈ درج کریں۔");
  let result=await db.auth.signInWithPassword({email:email,password:password});
- if(result.error)return alert("لاگ اِن نہیں ہو سکا۔ ای میل/پاس ورڈ چیک کریں؛ اگر نیا اکاؤنٹ ہے تو پہلے ای میل تصدیق کریں۔");
- currentAdminUser=result.data.user;
- let check=await db.from("store_admins").select("user_id").eq("user_id",currentAdminUser.id).maybeSingle();
+ if(result.error)return alert("لاگ اِن نہیں ہو سکا۔ ای میل/پاس ورڈ چیک کریں؛ نئے اکاؤنٹ کی ای میل پہلے تصدیق کریں۔");
+ currentAdminUser=result.data.user;await finishAdminLogin();
+}
+async function finishAdminLogin(){
+ if(!currentAdminUser)return;
+ let claim=await db.rpc("claim_store_owner");
+ if(claim.error)console.warn("Owner claim:",claim.error.message);
+ let check=await db.from("store_admins").select("user_id,role,email").eq("user_id",currentAdminUser.id).maybeSingle();
  if(check.error)return alert("ایڈمن اجازت چیک نہیں ہو سکی: "+check.error.message);
- if(!check.data){document.getElementById("accessRequest").classList.remove("hidden");return alert("اکاؤنٹ درست ہے مگر ایڈمن اجازت ابھی نہیں ملی۔ اجازت کی درخواست بھیجیں۔")}
+ if(!check.data){document.getElementById("accessRequest").classList.remove("hidden");return alert("اکاؤنٹ بن گیا ہے، لیکن ابھی مالک نے ایڈمن اجازت نہیں دی۔")}
+ currentAdminRole=check.data.role||"admin";
  document.getElementById("adminLogin").classList.add("hidden");document.getElementById("adminPanel").classList.remove("hidden");
- await renderAdminProducts();await renderAdminOrders();await loadAdminSettings();await renderAdminRequests();
+ let tb=document.querySelector('.admin-tabs button[onclick*="teamTab"]');if(tb)tb.classList.toggle("hidden",currentAdminRole!=="owner");
+ await renderAdminProducts();await renderAdminOrders();await loadAdminSettings();
+ if(currentAdminRole==="owner")await renderAdminTeam();
+}
+async function inviteAdmin(){
+ if(currentAdminRole!=="owner")return alert("صرف مرکزی مالک ایڈمن شامل کر سکتا ہے۔");
+ let email=document.getElementById("inviteEmail").value.trim();if(!email)return alert("ای میل درج کریں۔");
+ let r=await db.rpc("invite_store_admin",{target_email:email});
+ if(r.error)return alert("ایڈمن شامل نہیں ہوا: "+r.error.message);
+ document.getElementById("inviteEmail").value="";await renderAdminTeam();
+ alert(r.data==="admin_added"?"ایڈمن کامیابی سے شامل ہوگیا۔":"ای میل محفوظ ہوگئی۔ اس شخص کو اسی ای میل سے اکاؤنٹ بنا کر تصدیق کرنے کو کہیں؛ پھر اسے ایڈمن اجازت خود مل جائے گی۔");
+}
+async function renderAdminTeam(){
+ let el=document.getElementById("adminTeamList");if(!el)return;
+ let r=await db.from("store_admins").select("user_id,email,role,created_at").order("created_at",{ascending:true});
+ if(r.error){el.textContent="ایڈمن لسٹ لوڈ نہیں ہوئی: "+r.error.message;return}
+ el.innerHTML=(r.data||[]).map(function(x){return '<div class="admin-item"><span><b>'+esc(x.email||"ای میل دستیاب نہیں")+'</b><br><small>'+(x.role==="owner"?"مرکزی مالک":"ایڈمن")+'</small></span>'+(x.role==="admin"?'<button class="smallbtn danger" onclick="removeAdmin(&quot;'+x.user_id+'&quot;)">ہٹائیں</button>':'')+'</div>'}).join("")||'<p class="muted">ابھی کوئی ایڈمن نہیں۔</p>';
+ await renderAdminRequests();
+}
+async function removeAdmin(uid){
+ if(currentAdminRole!=="owner")return alert("صرف مرکزی مالک ایڈمن ہٹا سکتا ہے۔");
+ if(!confirm("کیا اس ایڈمن کی اجازت ختم کرنی ہے؟"))return;
+ let r=await db.rpc("remove_store_admin",{target_user_id:uid});
+ if(r.error)return alert("ایڈمن نہیں ہٹایا جا سکا: "+r.error.message);
+ await renderAdminTeam();alert("ایڈمن کی اجازت ختم ہوگئی۔");
 }
 async function requestAdminAccess(){
  if(!currentAdminUser)return alert("پہلے اکاؤنٹ بنائیں یا لاگ اِن کریں۔");
@@ -140,7 +170,7 @@ async function approveAdmin(uid){
  if(r.error)return alert("اجازت منظور نہیں ہوئی: "+r.error.message);
  await renderAdminRequests();alert("ایڈمن اجازت منظور ہوگئی۔");
 }
-function adminTab(id,b){["productsTab","settingsTab","ordersTab","teamTab"].forEach(function(x){document.getElementById(x).classList.add("hidden")});document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active");if(id==="teamTab")renderAdminRequests()}
+function adminTab(id,b){["productsTab","settingsTab","ordersTab","teamTab"].forEach(function(x){document.getElementById(x).classList.add("hidden")});document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active");if(id==="teamTab")renderAdminTeam()}
 async function addProduct(){
  let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),stock=Math.max(0,Number(document.getElementById("newStock").value)||0),category=document.getElementById("newCategory").value,description=document.getElementById("newDescription").value.trim(),file=document.getElementById("newImage").files[0];
  if(!name||price<=0)return alert("پروڈکٹ کا نام اور درست قیمت درج کریں۔");
