@@ -129,7 +129,7 @@ async function submitOrder(ev){
   cart={};saveCart();updateCount();
   document.querySelectorAll("#cartModal .total,#cartModal .field").forEach(function(x){x.style.display="none";});
   btn.style.display="none";if(note)note.style.display="none";
-  document.getElementById("cartItems").innerHTML='<div class="admin-note" style="text-align:center;padding:22px"><div style="font-size:42px">✓</div><h2>آپ کا آرڈر موصول ہوگیا!</h2><p>آپ کی خریداری کی درخواست محفوظ کر لی گئی ہے۔ ہماری ٹیم جلد آپ سے رابطہ کرے گی۔</p><p><b>آرڈر نمبر بعد میں ایڈمن پینل میں دیکھا جا سکتا ہے۔</b></p><p><b>کل رقم: '+money(total)+'</b></p>'+(waUrl?'<a class="wide" style="display:block;text-decoration:none;text-align:center;margin-top:14px" href="'+waUrl+'" target="_blank" rel="noopener">واٹس ایپ پر آرڈر کی تفصیل بھیجیں</a>':'')+'<button type="button" class="wide" style="margin-top:12px" onclick="closeModal(\'cartModal\')">خریداری جاری رکھیں</button></div>';
+  document.getElementById("cartItems").innerHTML='<div class="admin-note" style="text-align:center;padding:22px"><div style="font-size:42px">✓</div><h2>آپ کا آرڈر موصول ہوگیا!</h2><p>محترم '+esc(name)+' صاحب/صاحبہ، لباسِ راحت سے خریداری کرنے کا دل سے شکریہ۔ اللہ تعالیٰ آپ کے رزق اور خوشیوں میں برکت عطا فرمائے۔ آپ کا اعتماد ہمارے لیے قیمتی ہے۔</p><p><b>آرڈر نمبر: '+esc(result.data.order_no||"موصول")+'</b></p><p><b>کل رقم: '+money(total)+'</b></p>'+(waUrl?'<a class="wide" style="display:block;text-decoration:none;text-align:center;margin-top:14px" href="'+waUrl+'" target="_blank" rel="noopener">واٹس ایپ پر آرڈر کی تفصیل بھیجیں</a>':'')+'<button type="button" class="wide" style="margin-top:12px" onclick="closeModal(\'cartModal\')">خریداری جاری رکھیں</button></div>';
   modal.classList.add("show");
  }catch(err){
   console.error("Order submit exception:",err);
@@ -274,9 +274,17 @@ async function saveSettings(){
  }catch(e){console.error("saveSettings failed:",e);say("محفوظ کرتے وقت خرابی: "+(e&&e.message?e.message:"نامعلوم مسئلہ"),false);}
 }
 async function renderAdminOrders(){
- let r=await db.from("store_orders").select("*").order("created_at",{ascending:false}).limit(100);if(r.error){document.getElementById("adminOrders").textContent="آرڈرز لوڈ نہیں ہو سکے۔";return}
+ let r=await db.from("store_orders").select("*").order("created_at",{ascending:false}).limit(100);
+ const el=document.getElementById("adminOrders");if(r.error){if(el)el.textContent="آرڈرز لوڈ نہیں ہو سکے: "+r.error.message;return}
  storeOrders=r.data||[];
- document.getElementById("adminOrders").innerHTML=storeOrders.map(function(o){return '<div class="admin-item"><span><b>'+esc(o.order_no)+' · '+esc(o.customer_name)+'</b><br>'+esc(o.phone)+' · '+money(o.total)+'<br><small>'+esc(o.status)+' · ادائیگی: '+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+' · '+esc(o.payment_status||"unpaid")+(o.payment_receipt_path?" · رسید موجود":" · رسید نہیں")+'</small></span><button class="smallbtn" onclick="showOrder(\''+o.id+'\')">تفصیل / ادائیگی</button></div>'}).join("")||'<p class="muted">ابھی کوئی آرڈر موجود نہیں۔</p>';
+ const labels={pending:"نیا آرڈر",confirmed:"کنفرم",packed:"پیک ہوگیا",shipped:"بھیج دیا گیا",delivered:"ڈیلیور ہوگیا",cancelled:"منسوخ"};
+ el.innerHTML=storeOrders.map(function(o){return '<div class="admin-item"><span><b>'+esc(o.order_no)+' · '+esc(o.customer_name)+'</b><br>'+esc(o.phone)+' · '+money(o.total)+'<br><small>'+esc(labels[o.status]||o.status)+' · ادائیگی: '+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+' · '+esc(o.payment_status||"unpaid")+(o.payment_receipt_path?" · رسید موجود":" · رسید نہیں")+'</small></span><span><button class="smallbtn" onclick="showOrder(\''+o.id+'\')">تفصیل / اسٹیٹس</button> <button class="smallbtn" onclick="sendThankYouSMS(\''+o.id+'\')">شکریہ SMS</button></span></div>'}).join("")||'<p class="muted">ابھی کوئی آرڈر موجود نہیں۔</p>';
+}
+function sendThankYouSMS(id){
+ const o=storeOrders.find(function(x){return x.id===id});if(!o)return;
+ const phone=String(o.phone||"").replace(/[^0-9+]/g,"");if(!phone)return alert("اس آرڈر میں موبائل نمبر موجود نہیں۔");
+ const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+"! لباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر "+(o.order_no||"")+" ہمیں موصول ہوا۔ اللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کے شکر گزار ہیں۔";
+ window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);
 }
 async function showOrder(id){
  let o=storeOrders.find(function(x){return x.id===id});if(!o)return;
@@ -284,13 +292,26 @@ async function showOrder(id){
  if(o.payment_receipt_path){const signed=await db.storage.from("payment-receipts").createSignedUrl(o.payment_receipt_path,300);if(signed.error)alert("رسید نہیں کھل سکی: "+signed.error.message);else window.open(signed.data.signedUrl,"_blank","noopener");}
  if(o.payment_method==="online"){
   let ps=prompt("آن لائن ادائیگی کی تفصیل\nٹرانزیکشن ریفرنس: "+(o.payment_reference||"درج نہیں")+"\nادائیگی اسٹیٹس لکھیں: unpaid / pending_verification / paid / rejected",o.payment_status||"pending_verification");
-  if(ps&&["unpaid","pending_verification","paid","rejected"].includes(ps)){let pr=await db.from("store_orders").update({payment_status:ps}).eq("id",id);if(pr.error)return alert("ادائیگی اسٹیٹس محفوظ نہیں ہوا: "+pr.error.message);o.payment_status=ps}
+  if(ps!==null&&ps.trim()!==""){
+   ps=ps.trim().toLowerCase();if(!["unpaid","pending_verification","paid","rejected"].includes(ps))return alert("ادائیگی اسٹیٹس درست نہیں۔");
+   let pr=await db.from("store_orders").update({payment_status:ps}).eq("id",id).select("id,payment_status").maybeSingle();
+   if(pr.error)return alert("ادائیگی اسٹیٹس محفوظ نہیں ہوا: "+pr.error.message);
+   if(!pr.data)return alert("ادائیگی اسٹیٹس محفوظ نہیں ہوا؛ ایڈمن اجازت یا آرڈر ریکارڈ چیک کریں۔");
+   o.payment_status=pr.data.payment_status;
+  }
  }
- let st=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nادائیگی: "+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+" · "+(o.payment_status||"unpaid")+"\nنیا آرڈر اسٹیٹس: pending / confirmed / packed / shipped / delivered / cancelled",o.status);
- if(!st)return;
- if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔");
- let r=await db.from("store_orders").update({status:st}).eq("id",id);if(r.error)return alert("اسٹیٹس تبدیل نہیں ہوا: "+r.error.message);await renderAdminOrders()
+ let raw=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nادائیگی: "+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+" · "+(o.payment_status||"unpaid")+"\nنیا اسٹیٹس درج کریں: pending / confirmed / packed / shipped / delivered / cancelled\nیا اردو میں: نیا / کنفرم / پیک / بھیج دیا / ڈیلیور / منسوخ",o.status);
+ if(raw===null)return;
+ const aliases={"نیا":"pending","کنفرم":"confirmed","کنفرم ہوگیا":"confirmed","پیک":"packed","پیک ہوگیا":"packed","بھیج دیا":"shipped","بھیج دیا گیا":"shipped","شپڈ":"shipped","ڈیلیور":"delivered","ڈلیور":"delivered","ڈیلیور ہوگیا":"delivered","ڈلیور ہوگیا":"delivered","منسوخ":"cancelled","کینسل":"cancelled"};
+ const st=aliases[raw.trim().toLowerCase()]||raw.trim().toLowerCase();
+ if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔ مثال: delivered یا ڈیلیور لکھیں۔");
+ const saved=await db.from("store_orders").update({status:st}).eq("id",id).select("id,status").maybeSingle();
+ if(saved.error)return alert("اسٹیٹس محفوظ نہیں ہوا: "+saved.error.message);
+ if(!saved.data)return alert("اسٹیٹس محفوظ نہیں ہوا؛ ایڈمن کی اجازت یا آرڈر ریکارڈ چیک کریں۔");
+ o.status=saved.data.status;await renderAdminOrders();alert("آرڈر اسٹیٹس کامیابی سے محفوظ ہوگیا: "+labelsForStatus(st));
 }
+function labelsForStatus(st){return {delivered:"ڈیلیور ہوگیا",shipped:"بھیج دیا گیا",packed:"پیک ہوگیا",confirmed:"کنفرم",pending:"نیا آرڈر",cancelled:"منسوخ"}[st]||st}
+
 renderProducts();updateCount();
 async function startStore(){
  try{
