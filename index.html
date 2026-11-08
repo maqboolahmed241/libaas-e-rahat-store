@@ -47,7 +47,7 @@
 <script>
 const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
 const SB_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
-const db=window.supabase.createClient(SB_URL,SB_KEY);
+let db=null,currentAdminRole=null;
 let products=[],cart=JSON.parse(localStorage.getItem("lr_cart")||"{}"),settings={fee:150,wa:"",was:[]},activeFilter="تمام",storeOrders=[],currentAdminUser=null;
 function money(n){return "Rs. "+Number(n||0).toLocaleString("en-PK")}
 function esc(s){return String(s??"").replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
@@ -175,6 +175,28 @@ async function renderAdminOrders(){
  document.getElementById("adminOrders").innerHTML=storeOrders.map(function(o){return '<div class="admin-item"><span><b>'+esc(o.order_no)+' · '+esc(o.customer_name)+'</b><br>'+esc(o.phone)+' · '+money(o.total)+'<br><small>'+esc(o.status)+'</small></span><button class="smallbtn" onclick="showOrder(\''+o.id+'\')">تفصیل / اسٹیٹس</button></div>'}).join("")||'<p class="muted">ابھی کوئی آرڈر موجود نہیں۔</p>';
 }
 async function showOrder(id){let o=storeOrders.find(function(x){return x.id===id});if(!o)return;let details=(o.items||[]).map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n");let st=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nنیا اسٹیٹس: pending / confirmed / packed / shipped / delivered / cancelled",o.status);if(!st)return;if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔");let r=await db.from("store_orders").update({status:st}).eq("id",id);if(r.error)return alert("اسٹیٹس تبدیل نہیں ہوا: "+r.error.message);await renderAdminOrders()}
-renderProducts();loadStore();updateCount();
+renderProducts();updateCount();
+async function startStore(){
+ try{
+  if(!window.supabase) await loadSupabaseFallback();
+  db=window.supabase.createClient(SB_URL,SB_KEY);
+  await loadStore();
+ }catch(e){
+  console.error(e);
+  document.getElementById("products").innerHTML="<p class=muted>اسٹور کنیکٹ نہیں ہو سکا۔ انٹرنیٹ چیک کرکے دوبارہ کھولیں۔</p>";
+  alert("اسٹور ڈیٹا کنیکٹ نہیں ہوا۔ انٹرنیٹ چیک کرکے صفحہ دوبارہ کھولیں۔");
+ }
+}
+function loadSupabaseFallback(){
+ return new Promise(function(resolve,reject){
+  let x=document.createElement("script");
+  x.src="https://unpkg.com/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js";
+  let t=setTimeout(function(){reject(new Error("Supabase library timeout"))},12000);
+  x.onload=function(){clearTimeout(t);resolve()};
+  x.onerror=function(){clearTimeout(t);reject(new Error("Supabase library unavailable"))};
+  document.head.appendChild(x);
+ });
+}
+startStore();
 </script>
 </body></html>
