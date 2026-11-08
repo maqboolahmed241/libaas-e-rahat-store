@@ -115,8 +115,8 @@ async function loginAdmin(){
 }
 async function requestAdminAccess(){
  if(!currentAdminUser)return alert("پہلے اکاؤنٹ بنائیں یا لاگ اِن کریں۔");
- let r=await db.from("admin_access_requests").upsert({user_id:currentAdminUser.id,email:currentAdminUser.email,status:"pending"},{onConflict:"user_id"});
- if(r.error)return alert("درخواست نہیں بھیجی جا سکی: "+r.error.message);
+ let r=await db.from("admin_access_requests").insert({user_id:currentAdminUser.id,email:currentAdminUser.email,status:"pending"});
+ if(r.error){if(r.error.code==="23505")return alert("آپ کی درخواست پہلے ہی بھیجی جا چکی ہے۔ مالک سے منظوری لیں۔");return alert("درخواست نہیں بھیجی جا سکی: "+r.error.message)}
  alert("درخواست محفوظ ہوگئی۔ مالک کے منظور کرنے کے بعد دوبارہ لاگ اِن کریں۔");
 }
 async function loadAdminSettings(){
