@@ -57,7 +57,7 @@ async function loadStore(){
  const results=await Promise.all([db.from("products").select("*").eq("active",true).order("created_at",{ascending:false}),db.from("store_settings").select("*").eq("id",1).maybeSingle()]);
  if(results[0].error){console.error(results[0].error);document.getElementById("products").innerHTML='<p class="muted">مصنوعات لوڈ نہیں ہو سکیں۔</p>';return}
  products=results[0].data||[];
- if(results[1].data){settings.fee=Number(results[1].data.delivery_fee||150);settings.wa=results[1].data.whatsapp_number||"";settings.was=results[1].data.whatsapp_numbers||(settings.wa?[settings.wa]:[])}
+ if(results[1].data){settings.fee=Number(results[1].data.delivery_fee||150);settings.wa=results[1].data.whatsapp_number||"";settings.was=results[1].data.whatsapp_numbers||(settings.wa?[settings.wa]:[]);settings.payment_accounts=Array.isArray(results[1].data.payment_accounts)?results[1].data.payment_accounts:[]}
  renderProducts();updateCount();
 }
 function renderProducts(){
@@ -74,7 +74,7 @@ function renderCart(){
  let rows=Object.entries(cart).filter(function(x){return x[1]>0}).map(function(x){let p=products.find(function(y){return y.id===x[0]});return p?'<div class="cartline"><div><b>'+esc(p.name)+'</b><br><span class="muted">'+money(p.price)+' × '+x[1]+'</span></div><div class="qty"><button onclick="changeQty(\''+x[0]+'\',-1)">−</button>'+x[1]+'<button onclick="changeQty(\''+x[0]+'\',1)">+</button></div><b>'+money(p.price*x[1])+'</b></div>':""}).join("");
  document.getElementById("cartItems").innerHTML=rows||'<p class="muted">آپ کا کارٹ ابھی خالی ہے۔</p>';
  let sub=Object.entries(cart).reduce(function(s,x){let p=products.find(function(y){return y.id===x[0]});return s+(p?p.price*x[1]:0)},0);
- document.getElementById("subtotal").textContent=money(sub);document.getElementById("grandtotal").textContent=money(sub+settings.fee);document.querySelector("#cartModal .total:nth-of-type(2) b").textContent=money(settings.fee);
+ document.getElementById("subtotal").textContent=money(sub);document.getElementById("grandtotal").textContent=money(sub+settings.fee);document.querySelector("#cartModal .total:nth-of-type(2) b").textContent=money(settings.fee);renderCustomerPaymentOptions();
 }
 function changeQty(id,d){let p=products.find(function(x){return x.id===id});cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];else if(p&&cart[id]>p.stock)cart[id]=p.stock;saveCart();updateCount();renderCart()}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
@@ -85,7 +85,7 @@ async function submitOrder(){
  if(!name||!phone||!address)return alert("براہ کرم نام، موبائل نمبر اور مکمل پتہ درج کریں۔");
  if(!area.includes("نبی سر")&&!area.toLowerCase().includes("nabi sar"))return alert("فی الحال ڈیلیوری صرف نبی سر روڈ میں دستیاب ہے۔");
  let subtotal=selected.reduce(function(s,x){return s+x.line_total},0),total=subtotal+settings.fee;
- let result=await db.from("store_orders").insert({customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:settings.fee,total:total,status:"pending"});
+ let method=document.getElementById("payment").value,reference=document.getElementById("paymentReference")?.value.trim()||"",account=settings.payment_accounts[Number(document.getElementById("paymentAccount")?.value||0)];if(method==="online"&&(!account||!reference))return alert("آن لائن ادائیگی کے لیے اکاؤنٹ منتخب کریں اور ٹرانزیکشن ریفرنس درج کریں۔");let result=await db.from("store_orders").insert({customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:settings.fee,total:total,status:"pending",payment_method:method,payment_status:method==="online"?"pending_verification":"unpaid",payment_reference:method==="online"?reference:""});
  if(result.error){console.error(result.error);return alert("آرڈر محفوظ نہیں ہو سکا۔ دوبارہ کوشش کریں۔")}
  let msg="السلام علیکم، نیا آن لائن آرڈر%0Aنام: "+encodeURIComponent(name)+"%0Aموبائل: "+encodeURIComponent(phone)+"%0Aعلاقہ: "+encodeURIComponent(area)+"%0Aپتہ: "+encodeURIComponent(address)+"%0A%0A"+encodeURIComponent(selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n"))+"%0Aڈیلیوری: "+settings.fee+"%0Aکل رقم: "+total+" روپے";
  cart={};saveCart();updateCount();renderCart();closeModal("cartModal");
