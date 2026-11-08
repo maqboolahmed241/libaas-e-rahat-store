@@ -96,7 +96,7 @@ function openAdmin(){document.getElementById("adminModal").classList.add("show")
 async function createAdminAccount(){
  let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
  if(!email||password.length<8)return alert("درست ای میل اور کم از کم 8 حروف کا پاس ورڈ درج کریں۔");
- let r=await db.auth.signUp({email:email,password:password});
+ let r=await db.auth.signUp({email:email,password:password,options:{emailRedirectTo:"https://maqboolahmed241.github.io/libaas-e-rahat-store/"}});
  if(r.error)return alert("اکاؤنٹ نہیں بن سکا: "+r.error.message);
  if(r.data.session){currentAdminUser=r.data.user;return await finishAdminLogin()}
  alert("اکاؤنٹ کی درخواست بن گئی۔ اپنی ای میل میں تصدیقی لنک کھولیں، پھر اسی ای میل اور پاس ورڈ سے لاگ اِن کریں۔ پہلا تصدیق شدہ اکاؤنٹ مرکزی مالک بن سکے گا۔");
