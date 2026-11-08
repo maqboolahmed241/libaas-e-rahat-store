@@ -48,7 +48,7 @@
 const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
 const SB_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
 let db=null,currentAdminRole=null;
-let products=[],cart=JSON.parse(localStorage.getItem("lr_cart")||"{}"),settings={fee:150,wa:"",was:[]},activeFilter="تمام",storeOrders=[],currentAdminUser=null;
+let products=[],cart=JSON.parse(localStorage.getItem("lr_cart")||"{}"),settings={fee:150,wa:"",was:[],payment_accounts:[]},activeFilter="تمام",storeOrders=[],currentAdminUser=null;
 function money(n){return "Rs. "+Number(n||0).toLocaleString("en-PK")}
 function esc(s){return String(s??"").replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function saveCart(){localStorage.setItem("lr_cart",JSON.stringify(cart))}
