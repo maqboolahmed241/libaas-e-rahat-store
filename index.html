@@ -214,7 +214,18 @@ async function renderAdminOrders(){
  storeOrders=r.data||[];
  document.getElementById("adminOrders").innerHTML=storeOrders.map(function(o){return '<div class="admin-item"><span><b>'+esc(o.order_no)+' · '+esc(o.customer_name)+'</b><br>'+esc(o.phone)+' · '+money(o.total)+'<br><small>'+esc(o.status)+' · ادائیگی: '+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+' · '+esc(o.payment_status||"unpaid")+'</small></span><button class="smallbtn" onclick="showOrder(\''+o.id+'\')">تفصیل / ادائیگی</button></div>'}).join("")||'<p class="muted">ابھی کوئی آرڈر موجود نہیں۔</p>';
 }
-async function showOrder(id){let o=storeOrders.find(function(x){return x.id===id});if(!o)return;let details=(o.items||[]).map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n");let st=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nنیا اسٹیٹس: pending / confirmed / packed / shipped / delivered / cancelled",o.status);if(!st)return;if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔");let r=await db.from("store_orders").update({status:st}).eq("id",id);if(r.error)return alert("اسٹیٹس تبدیل نہیں ہوا: "+r.error.message);await renderAdminOrders()}
+async function showOrder(id){
+ let o=storeOrders.find(function(x){return x.id===id});if(!o)return;
+ let details=(o.items||[]).map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n");
+ if(o.payment_method==="online"){
+  let ps=prompt("آن لائن ادائیگی کی تفصیل\nٹرانزیکشن ریفرنس: "+(o.payment_reference||"درج نہیں")+"\nادائیگی اسٹیٹس لکھیں: unpaid / pending_verification / paid / rejected",o.payment_status||"pending_verification");
+  if(ps&&["unpaid","pending_verification","paid","rejected"].includes(ps)){let pr=await db.from("store_orders").update({payment_status:ps}).eq("id",id);if(pr.error)return alert("ادائیگی اسٹیٹس محفوظ نہیں ہوا: "+pr.error.message);o.payment_status=ps}
+ }
+ let st=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nادائیگی: "+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+" · "+(o.payment_status||"unpaid")+"\nنیا آرڈر اسٹیٹس: pending / confirmed / packed / shipped / delivered / cancelled",o.status);
+ if(!st)return;
+ if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔");
+ let r=await db.from("store_orders").update({status:st}).eq("id",id);if(r.error)return alert("اسٹیٹس تبدیل نہیں ہوا: "+r.error.message);await renderAdminOrders()
+}
 renderProducts();updateCount();
 async function startStore(){
  try{
