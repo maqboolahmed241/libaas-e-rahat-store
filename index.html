@@ -48,7 +48,7 @@
 const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
 const SB_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
 const db=window.supabase.createClient(SB_URL,SB_KEY);
-let products=[],cart=JSON.parse(localStorage.getItem("lr_cart")||"{}"),settings={fee:150,wa:"",was:[]},activeFilter="تمام",storeOrders=[];
+let products=[],cart=JSON.parse(localStorage.getItem("lr_cart")||"{}"),settings={fee:150,wa:"",was:[]},activeFilter="تمام",storeOrders=[],currentAdminUser=null;
 function money(n){return "Rs. "+Number(n||0).toLocaleString("en-PK")}
 function esc(s){return String(s??"").replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function saveCart(){localStorage.setItem("lr_cart",JSON.stringify(cart))}
@@ -93,17 +93,54 @@ async function submitOrder(){
  alert("آپ کا آرڈر کامیابی سے موصول ہوگیا۔ شکریہ!");
 }
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
+async function createAdminAccount(){
+ let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
+ if(!email||password.length<8)return alert("درست ای میل اور کم از کم 8 حروف کا پاس ورڈ درج کریں۔");
+ let r=await db.auth.signUp({email:email,password:password});
+ if(r.error)return alert("اکاؤنٹ نہیں بن سکا: "+r.error.message);
+ if(r.data.session){currentAdminUser=r.data.user;document.getElementById("accessRequest").classList.remove("hidden");return alert("اکاؤنٹ بن گیا۔ اب ایڈمن اجازت کی درخواست بھیجیں۔")}
+ alert("اکاؤنٹ بنانے کی درخواست ہوگئی۔ ای میل تصدیق کریں، پھر اسی ای میل اور پاس ورڈ سے لاگ اِن کریں۔");
+}
 async function loginAdmin(){
  let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
  if(!email||!password)return alert("ای میل اور پاس ورڈ درج کریں۔");
  let result=await db.auth.signInWithPassword({email:email,password:password});
- if(result.error)return alert("لاگ اِن نہیں ہو سکا۔ ای میل یا پاس ورڈ چیک کریں۔");
- let check=await db.from("store_admins").select("user_id").eq("user_id",result.data.user.id).maybeSingle();
- if(check.error||!check.data){await db.auth.signOut();return alert("اس ای میل کو اسٹور ایڈمن کی اجازت نہیں دی گئی۔")}
+ if(result.error)return alert("لاگ اِن نہیں ہو سکا۔ ای میل/پاس ورڈ چیک کریں؛ اگر نیا اکاؤنٹ ہے تو پہلے ای میل تصدیق کریں۔");
+ currentAdminUser=result.data.user;
+ let check=await db.from("store_admins").select("user_id").eq("user_id",currentAdminUser.id).maybeSingle();
+ if(check.error)return alert("ایڈمن اجازت چیک نہیں ہو سکی: "+check.error.message);
+ if(!check.data){document.getElementById("accessRequest").classList.remove("hidden");return alert("اکاؤنٹ درست ہے مگر ایڈمن اجازت ابھی نہیں ملی۔ اجازت کی درخواست بھیجیں۔")}
  document.getElementById("adminLogin").classList.add("hidden");document.getElementById("adminPanel").classList.remove("hidden");
- await renderAdminProducts();await renderAdminOrders();document.getElementById("waNumber").value=settings.wa;document.getElementById("deliveryFee").value=settings.fee;
+ await renderAdminProducts();await renderAdminOrders();await loadAdminSettings();await renderAdminRequests();
 }
-function adminTab(id,b){["productsTab","settingsTab","ordersTab"].forEach(function(x){document.getElementById(x).classList.add("hidden")});document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active")}
+async function requestAdminAccess(){
+ if(!currentAdminUser)return alert("پہلے اکاؤنٹ بنائیں یا لاگ اِن کریں۔");
+ let r=await db.from("admin_access_requests").upsert({user_id:currentAdminUser.id,email:currentAdminUser.email,status:"pending"},{onConflict:"user_id"});
+ if(r.error)return alert("درخواست نہیں بھیجی جا سکی: "+r.error.message);
+ alert("درخواست محفوظ ہوگئی۔ مالک کے منظور کرنے کے بعد دوبارہ لاگ اِن کریں۔");
+}
+async function loadAdminSettings(){
+ let r=await db.from("store_settings").select("*").eq("id",1).maybeSingle();
+ if(r.error)return alert("سیٹنگز لوڈ نہیں ہو سکیں: "+r.error.message);
+ let nums=r.data?.whatsapp_numbers||(r.data?.whatsapp_number?[r.data.whatsapp_number]:[]);
+ document.getElementById("waNumber1").value=nums[0]||"";
+ document.getElementById("waNumber2").value=nums[1]||"";
+ document.getElementById("waNumber3").value=nums[2]||"";
+ document.getElementById("deliveryFee").value=r.data?.delivery_fee??150;
+}
+async function renderAdminRequests(){
+ let el=document.getElementById("adminRequests");
+ let r=await db.from("admin_access_requests").select("*").eq("status","pending").order("created_at",{ascending:true});
+ if(r.error){el.textContent="درخواستیں لوڈ نہیں ہو سکیں: "+r.error.message;return}
+ el.innerHTML=(r.data||[]).map(function(x){return '<div class="admin-item"><span><b>'+esc(x.email)+'</b><br><small>نئی ایڈمن درخواست</small></span><button class="smallbtn" onclick="approveAdmin(\\''+x.user_id+'\\')">منظور کریں</button></div>'}).join("")||'<p class="muted">کوئی نئی درخواست نہیں۔</p>';
+}
+async function approveAdmin(uid){
+ if(!confirm("کیا اس شخص کو اسٹور ایڈمن کی اجازت دینی ہے؟"))return;
+ let r=await db.rpc("approve_store_admin_request",{target_user_id:uid});
+ if(r.error)return alert("اجازت منظور نہیں ہوئی: "+r.error.message);
+ await renderAdminRequests();alert("ایڈمن اجازت منظور ہوگئی۔");
+}
+function adminTab(id,b){["productsTab","settingsTab","ordersTab","teamTab"].forEach(function(x){document.getElementById(x).classList.add("hidden")});document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active");if(id==="teamTab")renderAdminRequests()}
 async function addProduct(){
  let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),stock=Math.max(0,Number(document.getElementById("newStock").value)||0),category=document.getElementById("newCategory").value,description=document.getElementById("newDescription").value.trim(),file=document.getElementById("newImage").files[0];
  if(!name||price<=0)return alert("پروڈکٹ کا نام اور درست قیمت درج کریں۔");
@@ -124,7 +161,14 @@ async function renderAdminProducts(){
 }
 async function editProduct(id,price,stock){let np=prompt("نئی قیمت درج کریں:",price);if(np===null)return;let ns=prompt("دستیاب تعداد درج کریں:",stock);if(ns===null)return;let r=await db.from("products").update({price:Number(np),stock:Number(ns),updated_at:new Date().toISOString()}).eq("id",id);if(r.error)return alert("تبدیلی محفوظ نہیں ہوئی: "+r.error.message);await loadStore();await renderAdminProducts()}
 async function deleteProduct(id){if(!confirm("کیا یہ پروڈکٹ حذف کرنی ہے؟"))return;let r=await db.from("products").delete().eq("id",id);if(r.error)return alert("پروڈکٹ حذف نہیں ہوئی: "+r.error.message);delete cart[id];saveCart();await loadStore();await renderAdminProducts()}
-async function saveSettings(){let wa=document.getElementById("waNumber").value.replace(/\D/g,""),fee=Math.max(0,Number(document.getElementById("deliveryFee").value)||0);let r=await db.from("store_settings").update({whatsapp_number:wa,delivery_fee:fee,updated_at:new Date().toISOString()}).eq("id",1);if(r.error)return alert("سیٹنگز محفوظ نہیں ہوئیں: "+r.error.message);settings={wa:wa,fee:fee};renderCart();alert("سیٹنگز آن لائن محفوظ ہوگئیں۔")}
+async function saveSettings(){
+ let nums=["waNumber1","waNumber2","waNumber3"].map(function(id){return document.getElementById(id).value.replace(/\D/g,"")}).filter(Boolean);
+ let fee=Math.max(0,Number(document.getElementById("deliveryFee").value)||0);
+ let r=await db.from("store_settings").update({whatsapp_number:nums[0]||"",whatsapp_numbers:nums,delivery_fee:fee,updated_at:new Date().toISOString()}).eq("id",1);
+ if(r.error)return alert("سیٹنگز محفوظ نہیں ہوئیں: "+r.error.message);
+ settings={wa:nums[0]||"",was:nums,fee:fee};renderCart();
+ alert("واٹس ایپ نمبرز اور ڈیلیوری چارج محفوظ ہوگئے۔ پہلا نمبر بنیادی آرڈر نمبر ہے۔");
+}
 async function renderAdminOrders(){
  let r=await db.from("store_orders").select("*").order("created_at",{ascending:false}).limit(100);if(r.error){document.getElementById("adminOrders").textContent="آرڈرز لوڈ نہیں ہو سکے۔";return}
  storeOrders=r.data||[];
