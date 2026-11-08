@@ -156,7 +156,7 @@ async function loadAdminSettings(){
  document.getElementById("waNumber1").value=nums[0]||"";
  document.getElementById("waNumber2").value=nums[1]||"";
  document.getElementById("waNumber3").value=nums[2]||"";
- document.getElementById("deliveryFee").value=r.data?.delivery_fee??150;
+ document.getElementById("deliveryFee").value=r.data?.delivery_fee??150;settings.payment_accounts=Array.isArray(r.data?.payment_accounts)?r.data.payment_accounts:[];renderPaymentAccountEditors();
 }
 async function renderAdminRequests(){
  let el=document.getElementById("adminRequests");
@@ -204,9 +204,9 @@ function togglePaymentDetails(){let on=document.getElementById("payment").value=
 async function saveSettings(){
  let nums=["waNumber1","waNumber2","waNumber3"].map(function(id){return document.getElementById(id).value.replace(/\D/g,"")}).filter(Boolean);
  let fee=Math.max(0,Number(document.getElementById("deliveryFee").value)||0);
- let r=await db.from("store_settings").update({whatsapp_number:nums[0]||"",whatsapp_numbers:nums,delivery_fee:fee,updated_at:new Date().toISOString()}).eq("id",1);
+ let accounts=readPaymentAccountEditors();let r=await db.from("store_settings").update({whatsapp_number:nums[0]||"",whatsapp_numbers:nums,delivery_fee:fee,payment_accounts:accounts,updated_at:new Date().toISOString()}).eq("id",1);
  if(r.error)return alert("سیٹنگز محفوظ نہیں ہوئیں: "+r.error.message);
- settings={wa:nums[0]||"",was:nums,fee:fee};renderCart();
+ settings={wa:nums[0]||"",was:nums,fee:fee,payment_accounts:accounts};renderCart();
  alert("واٹس ایپ نمبرز اور ڈیلیوری چارج محفوظ ہوگئے۔ پہلا نمبر بنیادی آرڈر نمبر ہے۔");
 }
 async function renderAdminOrders(){
