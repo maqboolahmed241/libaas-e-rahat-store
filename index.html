@@ -37,44 +37,100 @@
 <div class="overlay" id="cartModal"><div class="modal"><div class="modal-head"><h2>آپ کا شاپنگ کارٹ</h2><button class="close" onclick="closeModal('cartModal')">×</button></div><div id="cartItems"></div><div class="total"><span>سب ٹوٹل</span><b id="subtotal">Rs. 0</b></div><div class="total"><span>ڈیلیوری چارج</span><b>Rs. 150</b></div><div class="total grand"><span>کل رقم</span><b id="grandtotal">Rs. 150</b></div>
 <div class="field"><label>آپ کا نام</label><input id="customerName" placeholder="پورا نام درج کریں"></div><div class="field"><label>موبائل نمبر</label><input id="customerPhone" type="tel" placeholder="03XXXXXXXXX"></div><div class="field"><label>علاقہ / شہر</label><input id="customerArea" value="نبی سر روڈ"></div><div class="field"><label>مکمل پتہ</label><textarea id="customerAddress" placeholder="گھر نمبر، گلی، محلہ وغیرہ"></textarea></div><div class="field"><label>ادائیگی</label><select id="payment"><option>کیش آن ڈیلیوری</option></select></div><button class="wide" onclick="submitOrder()">واٹس ایپ پر آرڈر بھیجیں</button><p class="muted">آرڈر بھیجنے کے لیے ایڈمن پینل میں واٹس ایپ نمبر محفوظ ہونا ضروری ہے۔</p></div></div>
 
-<div class="overlay" id="adminModal"><div class="modal"><div class="modal-head"><h2>اسٹور ایڈمن پینل</h2><button class="close" onclick="closeModal('adminModal')">×</button></div><div id="adminLogin"><div class="admin-note">یہ ڈیمو ایڈمن پینل ہے۔ ابتدائی پاس کوڈ <b>1234</b> ہے۔ لائیو ویب سائٹ پر اسے محفوظ سرور لاگ اِن سے بدلنا ضروری ہوگا۔</div><div class="field"><label>ایڈمن پاس کوڈ</label><input id="adminPin" type="password" inputmode="numeric" placeholder="پاس کوڈ"></div><button class="wide" onclick="loginAdmin()">داخل ہوں</button></div>
+<div class="overlay" id="adminModal"><div class="modal"><div class="modal-head"><h2>اسٹور ایڈمن پینل</h2><button class="close" onclick="closeModal('adminModal')">×</button></div><div id="adminLogin"><div class="admin-note">صرف اسٹور کے مجاز ایڈمن کا ای میل اور پاس ورڈ استعمال کریں۔</div><div class="field"><label>ایڈمن ای میل</label><input id="adminEmail" type="email" placeholder="آپ کا ای میل"></div><div class="field"><label>پاس ورڈ</label><input id="adminPassword" type="password" placeholder="محفوظ پاس ورڈ"></div><button class="wide" onclick="loginAdmin()">محفوظ لاگ اِن</button></div>
 <div id="adminPanel" class="hidden"><div class="admin-tabs"><button class="filter active" onclick="adminTab('productsTab',this)">مصنوعات</button><button class="filter" onclick="adminTab('settingsTab',this)">سیٹنگز</button><button class="filter" onclick="adminTab('ordersTab',this)">آرڈرز</button></div>
-<div id="productsTab"><h3>نئی پروڈکٹ شامل کریں</h3><div class="field"><label>پروڈکٹ کا نام</label><input id="newName" placeholder="مثلاً پرنٹڈ لان سوٹ"></div><div class="field"><label>قیمت (روپے)</label><input id="newPrice" type="number" placeholder="مثلاً 2500"></div><div class="field"><label>قسم</label><select id="newCategory"><option>لان</option><option>کॉटن</option><option>فارمل</option></select></div><button class="wide" onclick="addProduct()">پروڈکٹ شامل کریں</button><h3>موجودہ مصنوعات</h3><div class="admin-list" id="adminProducts"></div></div>
-<div id="settingsTab" class="hidden"><div class="field"><label>واٹس ایپ نمبر (ملکی کوڈ سمیت، بغیر + کے)</label><input id="waNumber" placeholder="مثلاً 923001234567"></div><div class="field"><label>ڈیلیوری چارج (روپے)</label><input id="deliveryFee" type="number" value="150"></div><div class="field"><label>ایڈمن پاس کوڈ تبدیل کریں</label><input id="newPin" type="password" placeholder="نیا پاس کوڈ"></div><button class="wide" onclick="saveSettings()">سیٹنگز محفوظ کریں</button><p class="muted">یہ سیٹنگز اسی براؤزر میں محفوظ ہوتی ہیں۔</p></div>
+<div id="productsTab"><h3>نئی پروڈکٹ شامل کریں</h3><div class="field"><label>سوٹ / فیبرک کی تصویر</label><input id="newImage" type="file" accept="image/jpeg,image/png,image/webp"></div><div class="field"><label>پروڈکٹ کا نام</label><input id="newName" placeholder="مثلاً پرنٹڈ لان سوٹ"></div><div class="field"><label>قیمت (روپے)</label><input id="newPrice" type="number" min="0" placeholder="مثلاً 2500"></div><div class="field"><label>دستیاب تعداد</label><input id="newStock" type="number" min="0" value="1"></div><div class="field"><label>فیبرک / قسم</label><select id="newCategory"><option>لان</option><option>کاٹن</option><option>فارمل</option><option>کیمبرک</option><option>کھدر</option></select></div><div class="field"><label>تفصیل</label><textarea id="newDescription" placeholder="سوٹ کی تفصیل، کپڑے کی لمبائی، رنگ وغیرہ"></textarea></div><button class="wide" onclick="addProduct()">تصویر کے ساتھ پروڈکٹ شامل کریں</button><h3>موجودہ مصنوعات</h3><div class="admin-list" id="adminProducts"></div></div>
+<div id="settingsTab" class="hidden"><div class="field"><label>واٹس ایپ نمبر (ملکی کوڈ سمیت، بغیر + کے)</label><input id="waNumber" placeholder="مثلاً 923001234567"></div><div class="field"><label>ڈیلیوری چارج (روپے)</label><input id="deliveryFee" type="number" value="150"></div><p class="muted">ایڈمن لاگ اِن محفوظ Supabase اکاؤنٹ سے ہوگا۔ پاس ورڈ اکاؤنٹ کی Auth Settings سے تبدیل ہوگا۔</p><button class="wide" onclick="saveSettings()">سیٹنگز محفوظ کریں</button><p class="muted">یہ سیٹنگز اسی براؤزر میں محفوظ ہوتی ہیں۔</p></div>
 <div id="ordersTab" class="hidden"><h3>اس ڈیوائس کے آرڈرز</h3><div class="admin-list" id="adminOrders"></div><p class="muted">یہ آرڈرز صرف اسی ڈیوائس/براؤزر میں محفوظ ہیں۔ مستقل آن لائن آرڈر مینجمنٹ کے لیے ڈیٹابیس جوڑنا ہوگا۔</p></div>
 </div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script>
-const starter=[
-{id:1,name:"خوبصورت پرنٹڈ لان سوٹ",price:2850,category:"لان",desc:"روزمرہ کے لیے نفیس انتخاب",c1:"#b88f83",c2:"#e8cfc3",label:"نئی آمد"},
-{id:2,name:"کلاسک کاٹن سوٹ",price:3200,category:"کॉटن",desc:"آرام دہ اور دلکش انداز",c1:"#8b9a83",c2:"#d7d8b7",label:"پسندیدہ"},
-{id:3,name:"ایلیگنٹ فارمل سوٹ",price:4950,category:"فارمل",desc:"خاص موقع کے لیے خاص لباس",c1:"#6e4b52",c2:"#c49a9c",label:"خاص کلیکشن"},
-{id:4,name:"سمر لان کلیکشن",price:2650,category:"لان",desc:"ہلکا، نرم اور خوبصورت",c1:"#8b9eae",c2:"#d6e0e3",label:"گرمیوں کی کلیکشن"}
-];
-let products=JSON.parse(localStorage.getItem("lr_products")||"null")||starter;
-let cart=JSON.parse(localStorage.getItem("lr_cart")||"{}");
-let orders=JSON.parse(localStorage.getItem("lr_orders")||"[]");
-let settings=JSON.parse(localStorage.getItem("lr_settings")||'{"wa":"","fee":150,"pin":"1234"}');
-let activeFilter="تمام";
-function save(){localStorage.setItem("lr_products",JSON.stringify(products));localStorage.setItem("lr_cart",JSON.stringify(cart));localStorage.setItem("lr_orders",JSON.stringify(orders));localStorage.setItem("lr_settings",JSON.stringify(settings))}
-function money(n){return "Rs. "+Number(n).toLocaleString("en-PK")}
-function renderProducts(){let list=products.filter(p=>activeFilter==="تمام"||p.category===activeFilter);document.getElementById("products").innerHTML=list.map(p=>`<article class="product"><div class="product-art" style="--fabric1:${p.c1||'#b88f83'};--fabric2:${p.c2||'#e8cfc3'}"><span>LR</span><i class="tag">${p.label||p.category}</i></div><div class="product-info"><h3>${esc(p.name)}</h3><div class="desc">${esc(p.desc||"خوبصورت اور نفیس انتخاب")}</div><div class="price-row"><span class="price">${money(p.price)}</span><button class="add" onclick="addCart(${p.id})">کارٹ میں ڈالیں +</button></div></div></article>`).join("")||'<p class="muted">اس قسم کی کوئی پروڈکٹ موجود نہیں۔</p>'}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function setFilter(f,b){activeFilter=f;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderProducts()}
-function addCart(id){cart[id]=(cart[id]||0)+1;save();updateCount();openCart()}
-function updateCount(){document.getElementById("cartCount").textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
+const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
+const SB_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
+const db=window.supabase.createClient(SB_URL,SB_KEY);
+let products=[],cart=JSON.parse(localStorage.getItem("lr_cart")||"{}"),settings={fee:150,wa:""},activeFilter="تمام",storeOrders=[];
+function money(n){return "Rs. "+Number(n||0).toLocaleString("en-PK")}
+function esc(s){return String(s??"").replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function saveCart(){localStorage.setItem("lr_cart",JSON.stringify(cart))}
+function updateCount(){document.getElementById("cartCount").textContent=Object.values(cart).reduce(function(a,b){return a+b},0)}
+async function loadStore(){
+ const results=await Promise.all([db.from("products").select("*").eq("active",true).order("created_at",{ascending:false}),db.from("store_settings").select("*").eq("id",1).maybeSingle()]);
+ if(results[0].error){console.error(results[0].error);document.getElementById("products").innerHTML='<p class="muted">مصنوعات لوڈ نہیں ہو سکیں۔</p>';return}
+ products=results[0].data||[];
+ if(results[1].data){settings.fee=Number(results[1].data.delivery_fee||150);settings.wa=results[1].data.whatsapp_number||""}
+ renderProducts();updateCount();
+}
+function renderProducts(){
+ const list=products.filter(function(p){return activeFilter==="تمام"||p.category===activeFilter});
+ document.getElementById("products").innerHTML=list.map(function(p){
+ const art=p.image_url?'<div class="product-art" style="background-image:url('+JSON.stringify(p.image_url)+');background-size:cover;background-position:center"><i class="tag">'+esc(p.category||"سوٹ")+'</i></div>':'<div class="product-art" style="--fabric1:#b88f83;--fabric2:#e8cfc3"><span>LR</span><i class="tag">'+esc(p.category||"سوٹ")+'</i></div>';
+ return '<article class="product">'+art+'<div class="product-info"><h3>'+esc(p.name)+'</h3><div class="desc">'+esc(p.description||p.fabric||"خوبصورت اور نفیس انتخاب")+'</div><div class="price-row"><span class="price">'+money(p.price)+'</span><button class="add" '+(p.stock<=0?"disabled":"")+' onclick="addCart(\''+p.id+'\')">'+(p.stock<=0?"اسٹاک ختم":"کارٹ میں ڈالیں +")+'</button></div></div></article>';
+ }).join("")||'<p class="muted">ابھی کلیکشن شامل کی جا رہی ہے۔ جلد تشریف لائیں۔</p>';
+}
+function setFilter(f,b){activeFilter=f;document.querySelectorAll(".filters .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active");renderProducts()}
+function addCart(id){let p=products.find(function(x){return x.id===id});if(!p)return;if((cart[id]||0)>=p.stock)return alert("معذرت، اتنی تعداد دستیاب نہیں۔");cart[id]=(cart[id]||0)+1;saveCart();updateCount();openCart()}
 function openCart(){renderCart();document.getElementById("cartModal").classList.add("show")}
-function renderCart(){let rows=Object.entries(cart).filter(([id,q])=>q>0).map(([id,q])=>{let p=products.find(x=>x.id==id);return p?`<div class="cartline"><div><b>${esc(p.name)}</b><br><span class="muted">${money(p.price)} × ${q}</span></div><div class="qty"><button onclick="changeQty(${id},-1)">−</button>${q}<button onclick="changeQty(${id},1)">+</button></div><b>${money(p.price*q)}</b></div>`:""}).join("");document.getElementById("cartItems").innerHTML=rows||'<p class="muted">آپ کا کارٹ ابھی خالی ہے۔</p>';let sub=Object.entries(cart).reduce((s,[id,q])=>{let p=products.find(x=>x.id==id);return s+(p?p.price*q:0)},0);document.getElementById("subtotal").textContent=money(sub);document.getElementById("grandtotal").textContent=money(sub+Number(settings.fee||0));document.querySelector("#cartModal .total:nth-of-type(2) b").textContent=money(settings.fee||0)}
-function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];save();updateCount();renderCart()}
+function renderCart(){
+ let rows=Object.entries(cart).filter(function(x){return x[1]>0}).map(function(x){let p=products.find(function(y){return y.id===x[0]});return p?'<div class="cartline"><div><b>'+esc(p.name)+'</b><br><span class="muted">'+money(p.price)+' × '+x[1]+'</span></div><div class="qty"><button onclick="changeQty(\''+x[0]+'\',-1)">−</button>'+x[1]+'<button onclick="changeQty(\''+x[0]+'\',1)">+</button></div><b>'+money(p.price*x[1])+'</b></div>':""}).join("");
+ document.getElementById("cartItems").innerHTML=rows||'<p class="muted">آپ کا کارٹ ابھی خالی ہے۔</p>';
+ let sub=Object.entries(cart).reduce(function(s,x){let p=products.find(function(y){return y.id===x[0]});return s+(p?p.price*x[1]:0)},0);
+ document.getElementById("subtotal").textContent=money(sub);document.getElementById("grandtotal").textContent=money(sub+settings.fee);document.querySelector("#cartModal .total:nth-of-type(2) b").textContent=money(settings.fee);
+}
+function changeQty(id,d){let p=products.find(function(x){return x.id===id});cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];else if(p&&cart[id]>p.stock)cart[id]=p.stock;saveCart();updateCount();renderCart()}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
-function submitOrder(){let items=Object.entries(cart).filter(([id,q])=>q>0).map(([id,q])=>{let p=products.find(x=>x.id==id);return p?`${p.name} × ${q} = ${p.price*q} روپے`:""}).filter(Boolean);if(!items.length)return alert("براہ کرم پہلے کارٹ میں پروڈکٹ شامل کریں۔");let name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),area=document.getElementById("customerArea").value.trim(),address=document.getElementById("customerAddress").value.trim();if(!name||!phone||!address)return alert("براہ کرم نام، موبائل نمبر اور مکمل پتہ درج کریں۔");if(area.toLowerCase().includes("نبی سر")===false)return alert("فی الحال ڈیلیوری صرف نبی سر روڈ میں دستیاب ہے۔");let sub=Object.entries(cart).reduce((s,[id,q])=>{let p=products.find(x=>x.id==id);return s+(p?p.price*q:0)},0),order={id:Date.now(),date:new Date().toLocaleString("ur-PK"),name,phone,area,address,items,total:sub+Number(settings.fee||0)};orders.unshift(order);save();if(!settings.wa){renderAdminOrders();closeModal("cartModal");openAdmin();alert("آرڈر اس ڈیوائس میں محفوظ ہوگیا۔ واٹس ایپ آرڈر بھیجنے کے لیے پہلے ایڈمن سیٹنگز میں واٹس ایپ نمبر درج کریں۔");return}let msg=`السلام علیکم، نیا آرڈر%0Aنام: ${encodeURIComponent(name)}%0Aموبائل: ${encodeURIComponent(phone)}%0Aعلاقہ: ${encodeURIComponent(area)}%0Aپتہ: ${encodeURIComponent(address)}%0A%0A${encodeURIComponent(items.join("\n"))}%0Aڈیلیوری: ${settings.fee}%0Aکل رقم: ${order.total} روپے`;window.open(`https://wa.me/${settings.wa}?text=${msg}`,"_blank");cart={};save();updateCount();renderCart();closeModal("cartModal")}
+async function submitOrder(){
+ let selected=Object.entries(cart).filter(function(x){return x[1]>0}).map(function(x){let p=products.find(function(y){return y.id===x[0]});return p?{product_id:p.id,name:p.name,quantity:x[1],unit_price:p.price,line_total:p.price*x[1]}:null}).filter(Boolean);
+ if(!selected.length)return alert("براہ کرم پہلے کارٹ میں پروڈکٹ شامل کریں۔");
+ let name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),area=document.getElementById("customerArea").value.trim(),address=document.getElementById("customerAddress").value.trim();
+ if(!name||!phone||!address)return alert("براہ کرم نام، موبائل نمبر اور مکمل پتہ درج کریں۔");
+ if(!area.includes("نبی سر")&&!area.toLowerCase().includes("nabi sar"))return alert("فی الحال ڈیلیوری صرف نبی سر روڈ میں دستیاب ہے۔");
+ let subtotal=selected.reduce(function(s,x){return s+x.line_total},0),total=subtotal+settings.fee;
+ let result=await db.from("store_orders").insert({customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:settings.fee,total:total,status:"pending"}).select("order_no").single();
+ if(result.error){console.error(result.error);return alert("آرڈر محفوظ نہیں ہو سکا۔ دوبارہ کوشش کریں۔")}
+ let msg="السلام علیکم، نیا آرڈر "+result.data.order_no+"%0Aنام: "+encodeURIComponent(name)+"%0Aموبائل: "+encodeURIComponent(phone)+"%0Aعلاقہ: "+encodeURIComponent(area)+"%0Aپتہ: "+encodeURIComponent(address)+"%0A%0A"+encodeURIComponent(selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n"))+"%0Aڈیلیوری: "+settings.fee+"%0Aکل رقم: "+total+" روپے";
+ cart={};saveCart();updateCount();renderCart();closeModal("cartModal");
+ if(settings.wa)window.open("https://wa.me/"+settings.wa+"?text="+msg,"_blank");
+ alert("آپ کا آرڈر "+result.data.order_no+" کامیابی سے موصول ہوگیا۔ شکریہ!");
+}
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
-function loginAdmin(){if(document.getElementById("adminPin").value!==settings.pin)return alert("پاس کوڈ درست نہیں۔");document.getElementById("adminLogin").classList.add("hidden");document.getElementById("adminPanel").classList.remove("hidden");renderAdminProducts();renderAdminOrders();document.getElementById("waNumber").value=settings.wa;document.getElementById("deliveryFee").value=settings.fee}
-function adminTab(id,b){["productsTab","settingsTab","ordersTab"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(x=>x.classList.remove("active"));b.classList.add("active")}
-function addProduct(){let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),category=document.getElementById("newCategory").value;if(!name||price<=0)return alert("پروڈکٹ کا نام اور درست قیمت درج کریں۔");products.unshift({id:Date.now(),name,price,category,desc:"آپ کی نئی کلیکشن",c1:"#b88f83",c2:"#e8cfc3",label:"نئی آمد"});save();renderProducts();renderAdminProducts();document.getElementById("newName").value="";document.getElementById("newPrice").value=""}
-function renderAdminProducts(){document.getElementById("adminProducts").innerHTML=products.map(p=>`<div class="admin-item"><span><b>${esc(p.name)}</b><br>${money(p.price)} · ${p.category}</span><button class="smallbtn danger" onclick="deleteProduct(${p.id})">حذف کریں</button></div>`).join("")}
-function deleteProduct(id){if(confirm("کیا یہ پروڈکٹ حذف کرنی ہے؟")){products=products.filter(p=>p.id!==id);delete cart[id];save();renderProducts();renderAdminProducts();updateCount()}}
-function saveSettings(){settings.wa=document.getElementById("waNumber").value.replace(/\D/g,"");settings.fee=Math.max(0,Number(document.getElementById("deliveryFee").value)||0);let pin=document.getElementById("newPin").value.trim();if(pin)settings.pin=pin;save();alert("سیٹنگز محفوظ ہوگئیں۔")}
-function renderAdminOrders(){let el=document.getElementById("adminOrders");if(!el)return;el.innerHTML=orders.map(o=>`<div class="admin-item"><span><b>${esc(o.name)}</b> · ${money(o.total)}<br><span class="muted">${esc(o.phone)} · ${esc(o.date)}</span></span><button class="smallbtn" onclick="alert('${esc(o.items.join("\\n"))}')">تفصیل</button></div>`).join("")||'<p class="muted">ابھی کوئی آرڈر موجود نہیں۔</p>'}
-renderProducts();updateCount();
+async function loginAdmin(){
+ let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
+ if(!email||!password)return alert("ای میل اور پاس ورڈ درج کریں۔");
+ let result=await db.auth.signInWithPassword({email:email,password:password});
+ if(result.error)return alert("لاگ اِن نہیں ہو سکا۔ ای میل یا پاس ورڈ چیک کریں۔");
+ let check=await db.from("store_admins").select("user_id").eq("user_id",result.data.user.id).maybeSingle();
+ if(check.error||!check.data){await db.auth.signOut();return alert("اس ای میل کو اسٹور ایڈمن کی اجازت نہیں دی گئی۔")}
+ document.getElementById("adminLogin").classList.add("hidden");document.getElementById("adminPanel").classList.remove("hidden");
+ await renderAdminProducts();await renderAdminOrders();document.getElementById("waNumber").value=settings.wa;document.getElementById("deliveryFee").value=settings.fee;
+}
+function adminTab(id,b){["productsTab","settingsTab","ordersTab"].forEach(function(x){document.getElementById(x).classList.add("hidden")});document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active")}
+async function addProduct(){
+ let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),stock=Math.max(0,Number(document.getElementById("newStock").value)||0),category=document.getElementById("newCategory").value,description=document.getElementById("newDescription").value.trim(),file=document.getElementById("newImage").files[0];
+ if(!name||price<=0)return alert("پروڈکٹ کا نام اور درست قیمت درج کریں۔");
+ if(!file)return alert("براہ کرم سوٹ کی تصویر منتخب کریں۔");
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5242880)return alert("تصویر JPG، PNG یا WEBP ہو اور 5 MB سے کم ہو۔");
+ let ext=file.name.split(".").pop().toLowerCase(),path=Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
+ let up=await db.storage.from("product-images").upload(path,file,{contentType:file.type,upsert:false});
+ if(up.error)return alert("تصویر اپ لوڈ نہیں ہوئی: "+up.error.message);
+ let pub=db.storage.from("product-images").getPublicUrl(path);
+ let saved=await db.from("products").insert({name:name,price:price,stock:stock,category:category,description:description,image_url:pub.data.publicUrl,active:true});
+ if(saved.error)return alert("پروڈکٹ محفوظ نہیں ہوئی: "+saved.error.message);
+ ["newName","newPrice","newDescription","newImage"].forEach(function(x){document.getElementById(x).value=""});document.getElementById("newStock").value="1";
+ await loadStore();await renderAdminProducts();alert("تصویر اور پروڈکٹ کامیابی سے شامل ہوگئی۔");
+}
+async function renderAdminProducts(){
+ let r=await db.from("products").select("*").order("created_at",{ascending:false});if(r.error){document.getElementById("adminProducts").textContent="مصنوعات لوڈ نہیں ہو سکیں۔";return}
+ document.getElementById("adminProducts").innerHTML=(r.data||[]).map(function(p){return '<div class="admin-item"><span><b>'+esc(p.name)+'</b><br>'+money(p.price)+' · اسٹاک: '+p.stock+'</span><span><button class="smallbtn" onclick="editProduct(\''+p.id+'\','+p.price+','+p.stock+')">ترمیم</button> <button class="smallbtn danger" onclick="deleteProduct(\''+p.id+'\')">حذف</button></span></div>'}).join("")||'<p class="muted">ابھی کوئی پروڈکٹ نہیں۔</p>';
+}
+async function editProduct(id,price,stock){let np=prompt("نئی قیمت درج کریں:",price);if(np===null)return;let ns=prompt("دستیاب تعداد درج کریں:",stock);if(ns===null)return;let r=await db.from("products").update({price:Number(np),stock:Number(ns),updated_at:new Date().toISOString()}).eq("id",id);if(r.error)return alert("تبدیلی محفوظ نہیں ہوئی: "+r.error.message);await loadStore();await renderAdminProducts()}
+async function deleteProduct(id){if(!confirm("کیا یہ پروڈکٹ حذف کرنی ہے؟"))return;let r=await db.from("products").delete().eq("id",id);if(r.error)return alert("پروڈکٹ حذف نہیں ہوئی: "+r.error.message);delete cart[id];saveCart();await loadStore();await renderAdminProducts()}
+async function saveSettings(){let wa=document.getElementById("waNumber").value.replace(/\D/g,""),fee=Math.max(0,Number(document.getElementById("deliveryFee").value)||0);let r=await db.from("store_settings").update({whatsapp_number:wa,delivery_fee:fee,updated_at:new Date().toISOString()}).eq("id",1);if(r.error)return alert("سیٹنگز محفوظ نہیں ہوئیں: "+r.error.message);settings={wa:wa,fee:fee};renderCart();alert("سیٹنگز آن لائن محفوظ ہوگئیں۔")}
+async function renderAdminOrders(){
+ let r=await db.from("store_orders").select("*").order("created_at",{ascending:false}).limit(100);if(r.error){document.getElementById("adminOrders").textContent="آرڈرز لوڈ نہیں ہو سکے۔";return}
+ storeOrders=r.data||[];
+ document.getElementById("adminOrders").innerHTML=storeOrders.map(function(o){return '<div class="admin-item"><span><b>'+esc(o.order_no)+' · '+esc(o.customer_name)+'</b><br>'+esc(o.phone)+' · '+money(o.total)+'<br><small>'+esc(o.status)+'</small></span><button class="smallbtn" onclick="showOrder(\''+o.id+'\')">تفصیل / اسٹیٹس</button></div>'}).join("")||'<p class="muted">ابھی کوئی آرڈر موجود نہیں۔</p>';
+}
+async function showOrder(id){let o=storeOrders.find(function(x){return x.id===id});if(!o)return;let details=(o.items||[]).map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n");let st=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nنیا اسٹیٹس: pending / confirmed / packed / shipped / delivered / cancelled",o.status);if(!st)return;if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔");let r=await db.from("store_orders").update({status:st}).eq("id",id);if(r.error)return alert("اسٹیٹس تبدیل نہیں ہوا: "+r.error.message);await renderAdminOrders()}
+renderProducts();loadStore();updateCount();
 </script>
 </body></html>
