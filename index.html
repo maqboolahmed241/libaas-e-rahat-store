@@ -283,7 +283,7 @@ async function renderAdminOrders(){
 function sendThankYouSMS(id){
  const o=storeOrders.find(function(x){return x.id===id});if(!o)return;
  const phone=String(o.phone||"").replace(/[^0-9+]/g,"");if(!phone)return alert("اس آرڈر میں موبائل نمبر موجود نہیں۔");
- const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+"! لباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر "+(o.order_no||"")+" ہمیں موصول ہوا۔ اللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کے شکر گزار ہیں۔";
+ const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+"! لباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر "+(o.order_no||"")+" ہمیں موصول ہوا ہے۔ ان شاء اللہ آپ کا آرڈر بہت جلد آپ کی دہلیز تک پہنچا دیا جائے گا۔ اللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کے شکر گزار ہیں۔";
  window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);
 }
 async function showOrder(id){
@@ -305,10 +305,13 @@ async function showOrder(id){
  const aliases={"نیا":"pending","کنفرم":"confirmed","کنفرم ہوگیا":"confirmed","پیک":"packed","پیک ہوگیا":"packed","بھیج دیا":"shipped","بھیج دیا گیا":"shipped","شپڈ":"shipped","ڈیلیور":"delivered","ڈلیور":"delivered","ڈیلیور ہوگیا":"delivered","ڈلیور ہوگیا":"delivered","منسوخ":"cancelled","کینسل":"cancelled"};
  const st=aliases[raw.trim().toLowerCase()]||raw.trim().toLowerCase();
  if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔ مثال: delivered یا ڈیلیور لکھیں۔");
- const saved=await db.from("store_orders").update({status:st}).eq("id",id).select("id,status").maybeSingle();
+ const saved=await db.rpc("admin_set_order_status",{p_order_id:id,p_status:st});
  if(saved.error)return alert("اسٹیٹس محفوظ نہیں ہوا: "+saved.error.message);
- if(!saved.data)return alert("اسٹیٹس محفوظ نہیں ہوا؛ ایڈمن کی اجازت یا آرڈر ریکارڈ چیک کریں۔");
- o.status=saved.data.status;await renderAdminOrders();alert("آرڈر اسٹیٹس کامیابی سے محفوظ ہوگیا: "+labelsForStatus(st));
+ if(!saved.data||!saved.data.length)return alert("اسٹیٹس محفوظ نہیں ہوا؛ ایڈمن اجازت یا آرڈر ریکارڈ چیک کریں۔");
+ o.status=st;if(st==="delivered")o.stock_deducted=true;
+ await renderAdminOrders();
+ if(st==="delivered")await loadProducts();
+ alert("آرڈر اسٹیٹس کامیابی سے محفوظ ہوگیا: "+labelsForStatus(st)+(st==="delivered"?"۔ اس آرڈر کا اسٹاک ایک مرتبہ مائنس کر دیا گیا ہے۔":""));
 }
 function labelsForStatus(st){return {delivered:"ڈیلیور ہوگیا",shipped:"بھیج دیا گیا",packed:"پیک ہوگیا",confirmed:"کنفرم",pending:"نیا آرڈر",cancelled:"منسوخ"}[st]||st}
 
