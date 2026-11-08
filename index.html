@@ -132,7 +132,7 @@ async function renderAdminRequests(){
  let el=document.getElementById("adminRequests");
  let r=await db.from("admin_access_requests").select("*").eq("status","pending").order("created_at",{ascending:true});
  if(r.error){el.textContent="درخواستیں لوڈ نہیں ہو سکیں: "+r.error.message;return}
- el.innerHTML=(r.data||[]).map(function(x){return '<div class="admin-item"><span><b>'+esc(x.email)+'</b><br><small>نئی ایڈمن درخواست</small></span><button class="smallbtn" onclick="approveAdmin(\\''+x.user_id+'\\')">منظور کریں</button></div>'}).join("")||'<p class="muted">کوئی نئی درخواست نہیں۔</p>';
+  el.innerHTML=(r.data||[]).map(function(x){return '<div class="admin-item"><span><b>'+esc(x.email)+'</b><br><small>نئی ایڈمن درخواست</small></span><button class="smallbtn" onclick="approveAdmin(&quot;'+x.user_id+'&quot;)">منظور کریں</button></div>'}).join("")||'<p class="muted">کوئی نئی درخواست نہیں۔</p>';
 }
 async function approveAdmin(uid){
  if(!confirm("کیا اس شخص کو اسٹور ایڈمن کی اجازت دینی ہے؟"))return;
