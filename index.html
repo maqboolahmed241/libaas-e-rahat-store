@@ -265,7 +265,7 @@ async function saveSettings(){
    accounts.push(a);
   }
   say("سیٹنگز محفوظ ہو رہی ہیں…",true);
-  const r=await db.from("store_settings").update({whatsapp_number:nums[0]||"",whatsapp_numbers:nums,delivery_fee:fee,payment_accounts:accounts,top_notice:topNotice,show_contact:showContact,updated_at:new Date().toISOString()}).eq("id",1).select("id,payment_accounts,delivery_fee,whatsapp_numbers").maybeSingle();
+  const r=await db.from("store_settings").update({whatsapp_number:nums[0]||"",whatsapp_numbers:nums,delivery_fee:fee,payment_accounts:accounts,top_notice:topNotice,show_contact:showContact,updated_at:new Date().toISOString()}).eq("id",1).select("id,payment_accounts,delivery_fee,whatsapp_numbers,top_notice,show_contact").maybeSingle();
   if(r.error)return say("محفوظ نہیں ہوا: "+r.error.message,false);
   if(!r.data)return say("ڈیٹابیس نے تبدیلی قبول نہیں کی۔ ایڈمن اکاؤنٹ کی اجازت چیک کریں اور دوبارہ لاگ اِن کریں۔",false);
   settings={wa:nums[0]||"",was:nums,fee:fee,payment_accounts:Array.isArray(r.data.payment_accounts)?r.data.payment_accounts:[],top_notice:r.data.top_notice||topNotice,show_contact:r.data.show_contact!==false};const notice=document.getElementById("topNotice");if(notice)notice.textContent=settings.top_notice;renderFooterContact();
