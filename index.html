@@ -85,12 +85,12 @@ async function submitOrder(){
  if(!name||!phone||!address)return alert("براہ کرم نام، موبائل نمبر اور مکمل پتہ درج کریں۔");
  if(!area.includes("نبی سر")&&!area.toLowerCase().includes("nabi sar"))return alert("فی الحال ڈیلیوری صرف نبی سر روڈ میں دستیاب ہے۔");
  let subtotal=selected.reduce(function(s,x){return s+x.line_total},0),total=subtotal+settings.fee;
- let result=await db.from("store_orders").insert({customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:settings.fee,total:total,status:"pending"}).select("order_no").single();
+ let result=await db.from("store_orders").insert({customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:settings.fee,total:total,status:"pending"});
  if(result.error){console.error(result.error);return alert("آرڈر محفوظ نہیں ہو سکا۔ دوبارہ کوشش کریں۔")}
- let msg="السلام علیکم، نیا آرڈر "+result.data.order_no+"%0Aنام: "+encodeURIComponent(name)+"%0Aموبائل: "+encodeURIComponent(phone)+"%0Aعلاقہ: "+encodeURIComponent(area)+"%0Aپتہ: "+encodeURIComponent(address)+"%0A%0A"+encodeURIComponent(selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n"))+"%0Aڈیلیوری: "+settings.fee+"%0Aکل رقم: "+total+" روپے";
+ let msg="السلام علیکم، نیا آن لائن آرڈر%0Aنام: "+encodeURIComponent(name)+"%0Aموبائل: "+encodeURIComponent(phone)+"%0Aعلاقہ: "+encodeURIComponent(area)+"%0Aپتہ: "+encodeURIComponent(address)+"%0A%0A"+encodeURIComponent(selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n"))+"%0Aڈیلیوری: "+settings.fee+"%0Aکل رقم: "+total+" روپے";
  cart={};saveCart();updateCount();renderCart();closeModal("cartModal");
  if(settings.wa)window.open("https://wa.me/"+settings.wa+"?text="+msg,"_blank");
- alert("آپ کا آرڈر "+result.data.order_no+" کامیابی سے موصول ہوگیا۔ شکریہ!");
+ alert("آپ کا آرڈر کامیابی سے موصول ہوگیا۔ شکریہ!");
 }
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
 async function loginAdmin(){
