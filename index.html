@@ -35,7 +35,7 @@
 <footer class="footer"><div class="footer-inner"><div><div class="brandname">LIBAAS E RAAHAT</div><p>لباسِ راحت — خوبصورتی جو آپ کے انداز کو مکمل کرے۔</p></div><div><b>رابطہ اور آرڈر</b><p>آرڈر کے لیے اپنی تفصیلات درج کریں۔<br>واٹس ایپ نمبر ایڈمن سیٹنگ میں شامل کیا جا سکتا ہے۔</p></div></div></footer>
 
 <div class="overlay" id="productModal"><div class="modal"><div class="modal-head"><h2>سوٹ کی مکمل تفصیل</h2><button class="close" onclick="closeModal(&quot;productModal&quot;)">×</button></div><div id="productDetail"></div></div></div><div class="overlay" id="cartModal"><div class="modal"><div class="modal-head"><h2>آپ کا شاپنگ کارٹ</h2><button class="close" onclick="closeModal('cartModal')">×</button></div><div id="cartItems"></div><div class="total"><span>سب ٹوٹل</span><b id="subtotal">Rs. 0</b></div><div class="total"><span>ڈیلیوری چارج</span><b>Rs. 150</b></div><div class="total grand"><span>کل رقم</span><b id="grandtotal">Rs. 150</b></div>
-<div class="field"><label>آپ کا نام</label><input id="customerName" placeholder="پورا نام درج کریں"></div><div class="field"><label>موبائل نمبر</label><input id="customerPhone" type="tel" placeholder="03XXXXXXXXX"></div><div class="field"><label>علاقہ / شہر</label><input id="customerArea" value="نبی سر روڈ"></div><div class="field"><label>مکمل پتہ</label><textarea id="customerAddress" placeholder="گھر نمبر، گلی، محلہ وغیرہ"></textarea></div><div class="field"><label>ادائیگی کا طریقہ</label><select id="payment" onchange="togglePaymentDetails()"><option value="cod">کیش آن ڈیلیوری</option><option value="online">آن لائن ادائیگی</option></select></div><div id="onlinePaymentPanel" class="hidden"><div id="customerPaymentAccounts"></div><div class="field"><label>اکاؤنٹ منتخب کریں</label><select id="paymentAccount"></select></div><div class="field"><label>ٹرانزیکشن ریفرنس</label><input id="paymentReference"></div></div><button class="wide" id="submitOrderBtn" onclick="submitOrder()">آرڈر کنفرم کریں</button><p class="muted" id="checkoutNote">آرڈر محفوظ ہونے کے بعد آپ کو تصدیق دکھائی جائے گی۔</p></div></div>
+<div class="field"><label>آپ کا نام</label><input id="customerName" placeholder="پورا نام درج کریں"></div><div class="field"><label>موبائل نمبر</label><input id="customerPhone" type="tel" placeholder="03XXXXXXXXX"></div><div class="field"><label>علاقہ / شہر</label><input id="customerArea" value="نبی سر روڈ"></div><div class="field"><label>مکمل پتہ</label><textarea id="customerAddress" placeholder="گھر نمبر، گلی، محلہ وغیرہ"></textarea></div><div class="field"><label>ادائیگی کا طریقہ</label><select id="payment" onchange="togglePaymentDetails()"><option value="cod">کیش آن ڈیلیوری</option><option value="online">آن لائن ادائیگی</option></select></div><div id="onlinePaymentPanel" class="hidden"><div id="customerPaymentAccounts"></div><div class="field"><label>اکاؤنٹ منتخب کریں</label><select id="paymentAccount"></select></div><div class="field"><label>ٹرانزیکشن ریفرنس</label><input id="paymentReference"></div></div><button type="button" class="wide" id="submitOrderBtn" onclick="submitOrder(event)">آرڈر کنفرم کریں</button><p class="muted" id="checkoutNote">آرڈر محفوظ ہونے کے بعد آپ کو تصدیق دکھائی جائے گی۔</p></div></div>
 
 <div class="overlay" id="adminModal"><div class="modal"><div class="modal-head"><h2>اسٹور ایڈمن پینل</h2><button class="close" onclick="closeModal('adminModal')">×</button></div><div id="adminLogin"><div class="admin-note">صرف اسٹور کے مجاز ایڈمن کا ای میل اور پاس ورڈ استعمال کریں۔</div><div class="field"><label>ایڈمن ای میل</label><input id="adminEmail" type="email" placeholder="آپ کا ای میل"></div><div class="field"><label>پاس ورڈ</label><input id="adminPassword" type="password" placeholder="محفوظ پاس ورڈ"></div><button class="wide" onclick="loginAdmin()">لاگ اِن کریں</button><button class="wide" style="background:#8b6b50" onclick="createAdminAccount()">نیا اکاؤنٹ بنائیں</button><div id="accessRequest" class="hidden"><p class="admin-note">اکاؤنٹ موجود ہے مگر ابھی ایڈمن اجازت نہیں ملی۔</p><button class="wide" onclick="requestAdminAccess()">ایڈمن اجازت کی درخواست بھیجیں</button></div></div>
 <div id="adminPanel" class="hidden"><div class="admin-tabs"><button class="filter active" onclick="adminTab('productsTab',this)">مصنوعات</button><button class="filter" onclick="adminTab('settingsTab',this)">سیٹنگز</button><button class="filter" onclick="adminTab('ordersTab',this)">آرڈرز</button><button class="filter" onclick="adminTab('teamTab',this)">ایڈمن ٹیم</button></div>
@@ -83,21 +83,55 @@ function renderCart(){
 }
 function changeQty(id,d){let p=products.find(function(x){return x.id===id});cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];else if(p&&cart[id]>p.stock)cart[id]=p.stock;saveCart();updateCount();renderCart()}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
-async function submitOrder(){
- let selected=Object.entries(cart).filter(function(x){return x[1]>0}).map(function(x){let p=products.find(function(y){return y.id===x[0]});return p?{product_id:p.id,name:p.name,quantity:x[1],unit_price:p.price,line_total:p.price*x[1]}:null}).filter(Boolean);
- if(!selected.length)return alert("براہ کرم پہلے کارٹ میں پروڈکٹ شامل کریں۔");
- let name=document.getElementById("customerName").value.trim(),phone=document.getElementById("customerPhone").value.trim(),area=document.getElementById("customerArea").value.trim(),address=document.getElementById("customerAddress").value.trim();
- if(!name||!phone||!address)return alert("براہ کرم نام، موبائل نمبر اور مکمل پتہ درج کریں۔");
- if(!area.includes("نبی سر")&&!area.toLowerCase().includes("nabi sar"))return alert("فی الحال ڈیلیوری صرف نبی سر روڈ میں دستیاب ہے۔");
- let subtotal=selected.reduce(function(s,x){return s+x.line_total},0),total=subtotal+settings.fee;
- let method=document.getElementById("payment").value,reference=document.getElementById("paymentReference")?.value.trim()||"",accounts=Array.isArray(settings.payment_accounts)?settings.payment_accounts:[],account=accounts[Number(document.getElementById("paymentAccount")?.value||0)];if(method==="online"&&(!account||!reference))return alert("آن لائن ادائیگی کے لیے پہلے ایڈمن کا شامل کردہ اکاؤنٹ منتخب کریں اور ٹرانزیکشن ریفرنس درج کریں۔");if(!db)return alert("اسٹور سرور سے رابطہ نہیں ہو رہا، انٹرنیٹ چیک کریں۔");let result=await db.from("store_orders").insert({customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:settings.fee,total:total,status:"pending",payment_method:method,payment_status:method==="online"?"pending_verification":"unpaid",payment_reference:method==="online"?(account.service+" | "+account.number+" | "+reference):""});
- if(result.error){console.error(result.error);return alert("آرڈر محفوظ نہیں ہو سکا۔ دوبارہ کوشش کریں۔")}
- let msg="السلام علیکم، میرا LIBAAS E RAAHAT کا آرڈر ہے۔\nنام: "+name+"\nموبائل: "+phone+"\nعلاقہ: "+area+"\nپتہ: "+address+"\n\n"+selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n")+"\nڈیلیوری: "+settings.fee+" روپے\nکل رقم: "+total+" روپے\nادائیگی: "+(method==="online"?"آن لائن — "+(account.service+" "+account.number+" — ریفرنس: "+reference):"کیش آن ڈیلیوری")+"\nشکریہ۔";
- const waUrl=settings.was.length?"https://wa.me/"+settings.was[0]+"?text="+encodeURIComponent(msg):"";
- cart={};saveCart();updateCount();
- document.querySelectorAll("#cartModal .total,#cartModal .field").forEach(function(x){x.style.display="none";});document.getElementById("submitOrderBtn").style.display="none";document.getElementById("checkoutNote").style.display="none";
- document.getElementById("cartItems").innerHTML='<div class="admin-note" style="text-align:center;padding:22px"><div style="font-size:42px">✓</div><h2>آپ کا آرڈر موصول ہوگیا!</h2><p>آپ کی خریداری کی درخواست محفوظ کر لی گئی ہے۔ ہماری ٹیم جلد آپ سے رابطہ کرے گی۔</p><p><b>کل رقم: '+money(total)+'</b></p>'+(waUrl?'<a class="wide" style="display:block;text-decoration:none;text-align:center;margin-top:14px" href="'+waUrl+'" target="_blank" rel="noopener">واٹس ایپ پر آرڈر کی تفصیل بھیجیں</a>':'<p>آپ کا آرڈر موصول ہوگیا ہے۔</p>')+'<button class="wide" style="margin-top:12px" onclick="closeModal(\'cartModal\')">خریداری جاری رکھیں</button></div>';
- alert("آپ کا آرڈر کامیابی سے محفوظ ہوگیا۔ شکریہ!");
+async function submitOrder(ev){
+ if(ev){ev.preventDefault();ev.stopPropagation();}
+ const btn=document.getElementById("submitOrderBtn");
+ const note=document.getElementById("checkoutNote");
+ const modal=document.getElementById("cartModal");
+ if(!btn||!modal)return;
+ if(btn.dataset.busy==="1")return;
+ const showError=function(message){
+  if(note){note.style.display="block";note.textContent=message;note.style.color="#a33";}
+  modal.classList.add("show");
+  btn.disabled=false;btn.dataset.busy="0";btn.textContent="آرڈر دوبارہ کنفرم کریں";
+ };
+ try{
+  const selected=Object.entries(cart).filter(function(x){return Number(x[1])>0}).map(function(x){
+   const p=products.find(function(y){return y.id===x[0]});
+   return p?{product_id:p.id,name:p.name,quantity:Number(x[1]),unit_price:Number(p.price),line_total:Number(p.price)*Number(x[1])}:null;
+  }).filter(Boolean);
+  if(!selected.length)return alert("براہ کرم پہلے کارٹ میں پروڈکٹ شامل کریں۔");
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const area=document.getElementById("customerArea").value.trim();
+  const address=document.getElementById("customerAddress").value.trim();
+  if(!name||!phone||!address)return alert("براہ کرم نام، موبائل نمبر اور مکمل پتہ درج کریں۔");
+  if(!area.includes("نبی سر")&&!area.toLowerCase().includes("nabi sar"))return alert("فی الحال ڈیلیوری صرف نبی سر روڈ میں دستیاب ہے۔");
+  const subtotal=selected.reduce(function(s,x){return s+x.line_total},0);
+  const total=subtotal+Number(settings.fee||150);
+  const method=document.getElementById("payment").value;
+  const reference=document.getElementById("paymentReference")?.value.trim()||"";
+  const accounts=Array.isArray(settings.payment_accounts)?settings.payment_accounts:[];
+  const account=accounts[Number(document.getElementById("paymentAccount")?.value||0)];
+  if(method==="online"&&(!account||!reference))return alert("آن لائن ادائیگی کے لیے اکاؤنٹ منتخب کریں اور ٹرانزیکشن ریفرنس درج کریں۔");
+  if(!db)return showError("اسٹور سرور سے رابطہ نہیں ہو رہا۔ انٹرنیٹ چیک کرکے دوبارہ کوشش کریں۔");
+  btn.disabled=true;btn.dataset.busy="1";btn.textContent="آرڈر محفوظ ہو رہا ہے…";
+  if(note){note.style.display="block";note.style.color="";note.textContent="براہ کرم انتظار کریں، آپ کا آرڈر محفوظ کیا جا رہا ہے۔";}
+  const payload={customer_name:name,phone:phone,area:"Nabi Sar Road",address:address,items:selected,subtotal:subtotal,delivery_fee:Number(settings.fee||150),total:total,status:"pending",payment_method:method,payment_status:method==="online"?"pending_verification":"unpaid",payment_reference:method==="online"?(account.service+" | "+account.number+" | "+reference):""};
+  const result=await db.from("store_orders").insert(payload);
+  if(result.error){console.error("Order insert failed:",result.error);return showError("آرڈر محفوظ نہیں ہوا: "+(result.error.message||"سرور کی خرابی")+". آپ کی معلومات اسی اسکرین پر موجود ہیں؛ دوبارہ کوشش کریں۔");}
+  const msg="السلام علیکم، میرا LIBAAS E RAAHAT کا آرڈر ہے۔\nنام: "+name+"\nموبائل: "+phone+"\nعلاقہ: "+area+"\nپتہ: "+address+"\n\n"+selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n")+"\nڈیلیوری: "+settings.fee+" روپے\nکل رقم: "+total+" روپے\nادائیگی: "+(method==="online"?"آن لائن — "+account.service+" "+account.number+" — ریفرنس: "+reference:"کیش آن ڈیلیوری")+"\nشکریہ۔";
+  const was=Array.isArray(settings.was)?settings.was:[];
+  const waUrl=was.length?"https://wa.me/"+was[0]+"?text="+encodeURIComponent(msg):"";
+  cart={};saveCart();updateCount();
+  document.querySelectorAll("#cartModal .total,#cartModal .field").forEach(function(x){x.style.display="none";});
+  btn.style.display="none";if(note)note.style.display="none";
+  document.getElementById("cartItems").innerHTML='<div class="admin-note" style="text-align:center;padding:22px"><div style="font-size:42px">✓</div><h2>آپ کا آرڈر موصول ہوگیا!</h2><p>آپ کی خریداری کی درخواست محفوظ کر لی گئی ہے۔ ہماری ٹیم جلد آپ سے رابطہ کرے گی۔</p><p><b>آرڈر نمبر بعد میں ایڈمن پینل میں دیکھا جا سکتا ہے۔</b></p><p><b>کل رقم: '+money(total)+'</b></p>'+(waUrl?'<a class="wide" style="display:block;text-decoration:none;text-align:center;margin-top:14px" href="'+waUrl+'" target="_blank" rel="noopener">واٹس ایپ پر آرڈر کی تفصیل بھیجیں</a>':'')+'<button type="button" class="wide" style="margin-top:12px" onclick="closeModal(\'cartModal\')">خریداری جاری رکھیں</button></div>';
+  modal.classList.add("show");
+ }catch(err){
+  console.error("Order submit exception:",err);
+  showError("آرڈر بھیجتے وقت مسئلہ پیش آیا: "+(err&&err.message?err.message:"نامعلوم خرابی")+". صفحہ بند نہ کریں، دوبارہ کوشش کریں۔");
+ }
 }
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
 async function createAdminAccount(){
