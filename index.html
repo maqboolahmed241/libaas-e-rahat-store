@@ -554,7 +554,7 @@ async function showOrder(id){
  if(!saved.data||!saved.data.length)return alert("اسٹیٹس محفوظ نہیں ہوا؛ ایڈمن اجازت یا آرڈر ریکارڈ چیک کریں۔");
  o.status=st;if(st==="delivered")o.stock_deducted=true;
  await renderAdminOrders();
- if(st==="delivered")await loadProducts();
+ if(st==="delivered"){await loadStore();await renderAdminProducts();}
  alert("آرڈر اسٹیٹس کامیابی سے محفوظ ہوگیا: "+labelsForStatus(st)+(st==="delivered"?"۔ اس آرڈر کا اسٹاک ایک مرتبہ مائنس کر دیا گیا ہے۔":""));
 }
 let adminNotificationChannel=null;
