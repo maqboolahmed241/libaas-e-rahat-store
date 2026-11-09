@@ -60,6 +60,17 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .section{margin-top:60px}.section-head h2{color:#3b2821}.section-head h2:after{content:"";display:block;width:42px;height:2px;background:#b9955d;margin-top:9px}.filter{transition:all .2s}.filter:hover{border-color:#b9955d;color:#765238}.product{border-radius:5px 19px 5px 19px;box-shadow:0 7px 22px #44291b0a}.product:hover{transform:translateY(-5px)}.product-art{background:linear-gradient(145deg,#f5e9dd,#d8c0aa)}.product-info{padding:15px}.add{border-radius:4px 13px 4px 13px}.feature{border-radius:5px 17px 5px 17px;background:linear-gradient(135deg,#fffdf8,#f8efe5)}.feature-icon{background:#f0e4d7;color:#9a754e}
 @media(max-width:800px){.hero{margin-top:13px;padding:0 12px}.hero-inner{grid-template-columns:1fr;min-height:0;border-radius:7px 24px 7px 24px}.hero-copy{padding:38px 7% 10px}.hero-label{margin-top:18px}.hero h1{font-size:clamp(29px,8vw,40px)}.hero-art{min-height:265px}.fabric-swatch{width:160px;height:220px}.hero-monogram{width:145px;height:145px}.hero-monogram strong{font-size:47px}.art-orbit.orbit-one{width:260px}.art-orbit.orbit-two{width:220px}.floating-tag{bottom:9%;left:5%}.home-promises{margin:13px 12px 0;padding:13px 10px;gap:8px}.home-promises>div{column-gap:5px}.home-promises b{font-size:10px}.home-promises small{font-size:9px}.home-promises>i{height:24px}}
 @media(max-width:420px){.home-promises{padding:11px 7px}.home-promises>div>span{font-size:16px}.home-promises b{font-size:9px}.home-promises small{font-size:8px}.hero-cta button{padding:11px 14px;font-size:12px}.hero-art{min-height:235px}}
+
+/* Store growth counters */
+.growth-stats{max-width:1160px;margin:28px auto 22px;padding:24px 18px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#fffdf9,#f3e8d9);box-shadow:var(--shadow);text-align:center}
+.growth-stats h2{margin:0 0 6px;font-size:clamp(19px,4vw,26px);color:var(--brown)}
+.growth-stats .growth-sub{margin:0 0 18px;color:var(--muted);font-size:13px}
+.growth-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.growth-item{padding:15px 8px;border:1px solid #e8d9c5;border-radius:16px;background:#fffdf9}
+.growth-item .growth-number{display:block;color:var(--brown);font-family:Georgia,serif;font-size:clamp(24px,5vw,34px);font-weight:700;line-height:1.35}
+.growth-item .growth-label{display:block;color:var(--brown2);font-size:12px;margin-top:5px}
+.growth-note{display:block;margin-top:14px;color:var(--muted);font-size:10px}
+@media(max-width:560px){.growth-stats{margin:22px 12px;padding:19px 10px}.growth-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.growth-item{padding:13px 6px}}
 </style>
 </head>
 <body>
@@ -81,6 +92,18 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 </section>
 <section class="section" id="about"><div class="section-head"><div><h2>آپ کا اعتماد، ہماری ترجیح</h2><p>آسان خریداری اور ذاتی توجہ کے ساتھ</p></div></div>
  <div class="features"><div class="feature"><div class="feature-icon">✦</div><div><b>منتخب کلیکشن</b><small>نفاست اور معیار کا خیال</small></div></div><div class="feature"><div class="feature-icon">⌂</div><div><b>مقامی ڈیلیوری</b><small>ابتدائی طور پر نبی سر روڈ</small></div></div><div class="feature"><div class="feature-icon">♡</div><div><b>آسان آرڈر</b><small>کیش آن ڈیلیوری کی سہولت</small></div></div></div>
+</section>
+
+<section class="growth-stats" aria-labelledby="growthTitle">
+ <h2 id="growthTitle">لباسِ راحت کی بڑھتی ہوئی پہچان</h2>
+ <p class="growth-sub">آپ کے اعتماد اور محبت کا شکریہ</p>
+ <div class="growth-grid">
+  <div class="growth-item"><span class="growth-number" id="growthOrders">—</span><span class="growth-label">مکمل آرڈرز</span></div>
+  <div class="growth-item"><span class="growth-number" id="growthCustomers">—</span><span class="growth-label">خوشحال گاہک</span></div>
+  <div class="growth-item"><span class="growth-number" id="growthSuits">—</span><span class="growth-label">فروخت ہونے والے سوٹ</span></div>
+  <div class="growth-item"><span class="growth-number" id="growthFeedback">—</span><span class="growth-label">موصولہ آراء</span></div>
+ </div>
+ <small class="growth-note">یہ اعدادوشمار مکمل شدہ آرڈرز اور موصولہ آراء کی بنیاد پر خودکار طور پر اپ ڈیٹ ہوتے ہیں۔</small>
 </section>
 </main>
 <footer class="footer"><div class="footer-inner"><div><div class="brandname">LIBAAS E RAAHAT</div><p>لباسِ راحت — خوبصورتی جو آپ کے انداز کو مکمل کرے۔</p></div><div id="footerContact"><b>رابطہ اور آرڈر</b><p>واٹس ایپ نمبر ایڈمن سیٹنگ میں شامل کیا جا سکتا ہے۔</p></div></div></footer>
@@ -544,12 +567,25 @@ function subscribeAdminNotifications(){
 function labelsForStatus(st){return {delivered:"ڈیلیور ہوگیا",shipped:"بھیج دیا گیا",packed:"پیک ہوگیا",confirmed:"کنفرم",pending:"نیا آرڈر",cancelled:"منسوخ"}[st]||st}
 
 renderProducts();updateCount();
+
+async function loadPublicStats(){
+ const ids=["growthOrders","growthCustomers","growthSuits","growthFeedback"];
+ try{
+  const result=await db.from("store_public_stats").select("completed_orders,unique_customers,suits_sold,feedback_received").single();
+  if(result.error)throw result.error;
+  const values=[result.data.completed_orders,result.data.unique_customers,result.data.suits_sold,result.data.feedback_received];
+  ids.forEach(function(id,i){const el=document.getElementById(id);if(el)el.textContent=Number(values[i]||0).toLocaleString("en-US");});
+ }catch(e){console.warn("Public store statistics unavailable:",e);ids.forEach(function(id){const el=document.getElementById(id);if(el)el.textContent="—";});}
+}
+
 async function startStore(){
  try{
   if("serviceWorker" in navigator && window.isSecureContext){navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(function(e){console.warn("Store app service worker registration:",e);});}
   if(!window.supabase) await loadSupabaseFallback();
   db=window.supabase.createClient(SB_URL,SB_KEY);
   await loadStore();
+  await loadPublicStats();
+  window.setInterval(loadPublicStats,60000);
   await refreshAdminNav();
   db.auth.onAuthStateChange(function(){setTimeout(refreshAdminNav,0)});
   if(location.hash==="#admin-login"){openAdmin()}
