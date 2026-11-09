@@ -434,7 +434,7 @@ async function renderAdminNotifications(){
  const r=await db.from("admin_notifications").select("*").eq("user_id",currentAdminUser.id).order("created_at",{ascending:false}).limit(100);
  if(r.error){el.textContent="نوٹیفکیشن لوڈ نہیں ہوئے: "+r.error.message;return}
  const rows=r.data||[],unread=rows.filter(x=>!x.read_at).length,b=document.getElementById("unreadNotificationCount");if(b)b.textContent=unread;
- el.innerHTML=rows.map(x=>'<div class="admin-item '+(!x.read_at?'order-progress':'')+'"><span><b>'+esc(x.title)+'</b><br>'+esc(x.body)+'<br><small>'+esc(new Date(x.created_at).toLocaleString("ur-PK"))+'</small></span><span>'+(x.read_at?'✓ پڑھا ہوا':'<button class="smallbtn" onclick="markNotificationRead(\\''+x.id+'\\')">پڑھ لیا</button>')+'</span></div>').join("")||'<p class="muted">ابھی کوئی نوٹیفکیشن نہیں آیا۔</p>';
+ el.innerHTML=rows.map(x=>'<div class="admin-item '+(!x.read_at?'order-progress':'')+'"><span><b>'+esc(x.title)+'</b><br>'+esc(x.body)+'<br><small>'+esc(new Date(x.created_at).toLocaleString("ur-PK"))+'</small></span><span>'+(x.read_at?'✓ پڑھا ہوا':'<button class="smallbtn" onclick="markNotificationRead(&quot;'+x.id+'&quot;)">پڑھ لیا</button>')+'</span></div>').join("")||'<p class="muted">ابھی کوئی نوٹیفکیشن نہیں آیا۔</p>';
 }
 async function markNotificationRead(id){
  const r=await db.from("admin_notifications").update({read_at:new Date().toISOString()}).eq("id",id).eq("user_id",currentAdminUser.id);
