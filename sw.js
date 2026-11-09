@@ -5,8 +5,6 @@ self.addEventListener("push", event => {
   const title = data.title || "لباسِ راحت";
   const options = {
     body: data.body || "آپ کے اسٹور میں نئی اطلاع موصول ہوئی",
-    icon: "./icon-192.png",
-    badge: "./icon-192.png",
     tag: "libaas-store-" + (data.event_type || "update"),
     renotify: true,
     data: { url: data.url || STORE_URL }
