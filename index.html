@@ -502,7 +502,7 @@ async function requestAdminNotificationPermission(){
   let subscription=await registration.pushManager.getSubscription();
   if(!subscription)subscription=await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array("BDWcucU-eKNPgdPGPnaXq4W0eG1mrYw37EXjDq7BjANmNXhQtcLM3BAsb5iGNoMd0-Nk4ggEaCMvkjHgCUTfTbA")});
   const keys=subscription.toJSON().keys||{};
-  const saved=await db.from("admin_push_subscriptions").upsert({user_id:currentAdminUser.id,endpoint:subscription.endpoint,p256dh:keys.p256dh,auth:keys.auth,updated_at:new Date().toISOString()},{onConflict:"endpoint"});
+  const saved=await db.from("admin_push_subscriptions").upsert({user_id:currentAdminUser.id,endpoint:subscription.endpoint,p256dh:keys.p256dh,auth:keys.auth,updated_at:new Date().toISOString()},{onConflict:"user_id,endpoint"});
   if(saved.error)throw saved.error;
   showPushPermissionStatus("نوٹیفکیشن Allow ہیں اور اس موبائل کی سبسکرپشن محفوظ ہوگئی ہے۔");
   alert("موبائل نوٹیفکیشن کامیابی سے فعال ہوگیا۔");
