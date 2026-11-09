@@ -71,10 +71,28 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .growth-item .growth-label{display:block;color:var(--brown2);font-size:12px;margin-top:5px}
 .growth-note{display:block;margin-top:14px;color:var(--muted);font-size:10px}
 @media(max-width:560px){.growth-stats{margin:22px 12px;padding:19px 10px}.growth-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.growth-item{padding:13px 6px}}
+
+/* Lightweight Urdu welcome-message rotator */
+.message-rotator{max-width:1160px;margin:12px auto 0;padding:0 18px}
+.message-rotator-inner{min-height:54px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 18px;border:1px solid #ffffffa8;border-radius:5px 17px 5px 17px;box-shadow:0 7px 22px #34211c12;transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+.message-rotator-text{font-size:clamp(13px,2.5vw,16px);font-weight:700;line-height:1.9}
+.message-tone-gold .message-rotator-inner{background:linear-gradient(110deg,#fff8e9,#ead6ad);color:#62451f;border-color:#d8bd86}
+.message-tone-rose .message-rotator-inner{background:linear-gradient(110deg,#fff1f2,#f0d1d7);color:#793e50;border-color:#dfb4c0}
+.message-tone-plum .message-rotator-inner{background:linear-gradient(110deg,#f6effa,#dfd0ec);color:#59416d;border-color:#c7b0d9}
+.message-tone-green .message-rotator-inner{background:linear-gradient(110deg,#eff8ef,#d2e7d4);color:#315d40;border-color:#b1d0b5}
+.message-tone-blue .message-rotator-inner{background:linear-gradient(110deg,#eff6fb,#d2e4f1);color:#31566f;border-color:#b4cfdf}
+.message-tone-copper .message-rotator-inner{background:linear-gradient(110deg,#fff2e8,#edcfb8);color:#75452e;border-color:#dcb99c}
+.message-rotator.is-changing .message-rotator-text{animation:messageReveal .5s ease both}
+@keyframes messageReveal{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){.message-rotator{padding:0 12px;margin-top:9px}.message-rotator-inner{min-height:50px;padding:9px 12px}}
+@media(prefers-reduced-motion:reduce){.message-rotator-inner{transition:none}.message-rotator.is-changing .message-rotator-text{animation:none}}
 </style>
 </head>
 <body>
 <div class="topline" id="topNotice">نبی سر روڈ میں ڈیلیوری دستیاب ہے — ابتدائی ڈیلیوری چارج صرف 150 روپے</div>
+<div class="message-rotator message-tone-gold" id="brandMessageRotator" aria-live="polite" aria-atomic="true">
+ <div class="message-rotator-inner"><span class="message-rotator-text" id="brandMessageText">لباسِ راحت — آپ کی پسند، آپ کے گھر تک!</span></div>
+</div>
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
@@ -648,6 +666,41 @@ async function loadPublicStats(){
  }catch(e){console.warn("Public store statistics unavailable:",e);ids.forEach(function(id){const el=document.getElementById(id);if(el)el.textContent="—";});}
 }
 
+function startBrandMessageRotator(){
+ const box=document.getElementById("brandMessageRotator");
+ const text=document.getElementById("brandMessageText");
+ if(!box||!text||box.dataset.started==="yes")return;
+ box.dataset.started="yes";
+ const messages=[
+  ["لباسِ راحت — آپ کی پسند، آپ کے گھر تک!", "gold"],
+  ["آپ کی خوبصورتی، ہمارے خوبصورت انتخاب کے ساتھ۔", "rose"],
+  ["نئی کلیکشن، نئے انداز — صرف آپ کے لیے۔", "plum"],
+  ["گھر بیٹھے اپنی پسند کا لباس منتخب کریں اور آرڈر منگوائیں۔", "green"],
+  ["ہر لباس میں نفاست، ہر انتخاب میں خوبصورتی۔", "blue"],
+  ["آپ کا اعتماد ہمارا فخر، آپ کی خوشی ہماری کامیابی۔", "copper"],
+  ["لباس ایسا جو آپ کے انداز کو خاص بنا دے۔", "gold"],
+  ["خوبصورت ملبوسات کی دنیا میں خوش آمدید!", "rose"],
+  ["آپ کی پسند، ہماری ترجیح — لباسِ راحت۔", "plum"],
+  ["اپنے ہر دن کو بنائیں مزید خوبصورت۔", "green"],
+  ["معیار، نفاست اور اعتماد — ایک ہی جگہ۔", "blue"],
+  ["اپنی پسند کی کلیکشن دیکھیں، آرڈر کریں، گھر منگوائیں۔", "copper"],
+  ["ہر خاص لمحے کے لیے ایک خوبصورت انتخاب۔", "gold"],
+  ["خریداری اب آسان — بس اپنی پسند منتخب کریں۔", "rose"],
+  ["آپ کے انداز کی خوبصورتی، ہماری پہچان۔", "plum"],
+  ["لباسِ راحت کے ساتھ نفاست کا نیا احساس۔", "green"],
+  ["آپ کی محبت اور اعتماد ہی ہماری اصل کامیابی ہے۔", "blue"],
+  ["آج ہی ہماری کلیکشن دریافت کریں — آپ کے لیے خاص۔", "copper"]
+ ];
+ let current=0;
+ window.setInterval(function(){
+  if(document.hidden)return;
+  current=(current+1)%messages.length;
+  box.classList.add("is-changing");
+  box.className="message-rotator message-tone-"+messages[current][1]+" is-changing";
+  text.textContent=messages[current][0];
+  window.setTimeout(function(){box.classList.remove("is-changing")},550);
+ },90000);
+}
 async function startStore(){
  try{
   if("serviceWorker" in navigator && window.isSecureContext){navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(function(e){console.warn("Store app service worker registration:",e);});}
@@ -675,6 +728,7 @@ function loadSupabaseFallback(){
   document.head.appendChild(x);
  });
 }
+startBrandMessageRotator();
 startStore();
 
 let deferredInstallPrompt=null;
