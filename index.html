@@ -71,6 +71,15 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .growth-item .growth-label{display:block;color:var(--brown2);font-size:12px;margin-top:5px}
 .growth-note{display:block;margin-top:14px;color:var(--muted);font-size:10px}
 @media(max-width:560px){.growth-stats{margin:22px 12px;padding:19px 10px}.growth-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.growth-item{padding:13px 6px}}
+
+/* Three-language selector */
+.language-control{display:flex;align-items:center;gap:6px;background:#fffdf8;border:1px solid #d9c6ad;border-radius:22px;padding:5px 9px;color:#50392e;font-size:12px}
+.language-control select{border:0;background:transparent;color:inherit;font:inherit;outline:none;max-width:88px;cursor:pointer}
+@media(max-width:520px){.nav{gap:7px;padding:9px 10px}.nav-actions{gap:5px;flex-wrap:wrap;justify-content:flex-end}.language-control{padding:5px 7px}.language-control select{max-width:72px}.iconbtn{padding:7px 9px;font-size:11px}.pillbtn{padding:8px 11px;font-size:12px}}
+html[dir="ltr"] body{text-align:left}
+html[dir="ltr"] .hero-copy,html[dir="ltr"] .section-head,html[dir="ltr"] .product-info,html[dir="ltr"] .footer{text-align:left}
+html[dir="ltr"] .story-highlights ul{padding-left:22px;padding-right:0}
+
 </style>
 </head>
 <body>
@@ -78,7 +87,7 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
- <div class="nav-actions"><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
+ <div class="nav-actions"><label class="language-control" aria-label="Select website language">🌐 <select id="siteLanguage" onchange="setStoreLanguage(this.value)" aria-label="Website language"><option value="ur">اردو</option><option value="sd">سنڌي</option><option value="en">English</option></select></label><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
@@ -721,5 +730,119 @@ function installStoreApp(){
  alert("Chrome میں اوپر تین نقطے ⋮ دبائیں، پھر 'Install app' یا 'Add to Home screen' منتخب کریں۔");
 }
 syncInstallButton();
+
+/* LIBAAS E RAAHAT: Urdu, Sindhi and English language support */
+(function(){
+ const languageNames={ur:"اردو",sd:"سنڌي",en:"English"};
+ const translations={
+  ur:{
+   "Home":"ہوم","Collection":"کلیکشن","About us":"ہمارے بارے میں","Install app":"ایپ انسٹال کریں","Admin":"ایڈمن","Cart":"کارٹ",
+   "Discover the collection":"کلیکشن دریافت کریں","Your cart":"آپ کا کارٹ","Our collection":"ہماری کلیکشن","Choose your favourite outfit":"اپنی پسند کا لباس منتخب کریں",
+   "All collection":"تمام کلیکشن","Lawn cotton":"لان کاٹن","Ready to wear":"ریڈی ٹو وئیر","Hand-stitched collection":"گھر کی سلی ہوئی کلیکشن","Kids suits":"بچوں کے سوٹ",
+   "Your trust, our priority":"آپ کا اعتماد، ہماری ترجیح","Easy shopping with personal attention":"آسان خریداری اور ذاتی توجہ کے ساتھ",
+   "Selected collection":"منتخب کلیکشن","For every style":"ہر انداز کے لیے","Easy ordering":"آسان آرڈر","Simple and secure shopping":"سادہ اور محفوظ خریداری",
+   "Personal care":"ذاتی توجہ","Your trust is our priority":"آپ کا اعتماد ہماری ترجیح","Local delivery":"مقامی ڈیلیوری","Cash on delivery":"کیش آن ڈیلیوری",
+   "Completed orders":"مکمل آرڈرز","Unique customers":"منفرد گاہک","Suits sold":"فروخت ہونے والے سوٹ","Your valuable reviews":"آپ کے قیمتی تاثرات",
+   "Contact & orders":"رابطہ اور آرڈر","Turn on new collection alerts":"نئی کلیکشن کی اطلاع آن کریں","Help & feedback":"مدد اور فیڈبیک",
+   "Your name":"آپ کا نام","Mobile number":"موبائل نمبر","Full address":"مکمل پتہ","Payment method":"ادائیگی کا طریقہ",
+   "Select city":"شہر منتخب کریں","Select account":"اکاؤنٹ منتخب کریں","Confirm order":"آرڈر کنفرم کریں","Shopping cart":"آپ کا شاپنگ کارٹ",
+   "Subtotal":"سب ٹوٹل","Delivery charge":"ڈیلیوری چارج","Total amount":"کل رقم","Continue shopping":"خریداری جاری رکھیں",
+   "Order received!":"آپ کا آرڈر موصول ہوگیا!","Send order details on WhatsApp":"واٹس ایپ پر آرڈر کی تفصیل بھیجیں",
+   "Online payment":"آن لائن ادائیگی","Transaction reference":"ٹرانزیکشن ریفرنس","Upload payment receipt / screenshot":"ادائیگی کی رسید / اسکرین شاٹ اپلوڈ کریں",
+   "Feedback":"فیڈبیک","Submit feedback":"فیڈبیک جمع کریں","Close":"بند کریں","Product details":"سوٹ کی مکمل تفصیل"
+  },
+  sd:{
+   "Home":"گهر","Collection":"ڪليڪشن","About us":"اسان بابت","Install app":"ايپ انسٽال ڪريو","Admin":"ايڊمن","Cart":"ڪارٽ",
+   "Discover the collection":"ڪليڪشن ڏسو","Your cart":"توهان جو ڪارٽ","Our collection":"اسان جي ڪليڪشن","Choose your favourite outfit":"پنهنجي پسند جو لباس چونڊيو",
+   "All collection":"سڄي ڪليڪشن","Lawn cotton":"لان ڪاٽن","Ready to wear":"تيار لباس","Hand-stitched collection":"گهر ۾ سبيل ڪليڪشن","Kids suits":"ٻارن جا سوٽ",
+   "Your trust, our priority":"توهان جو اعتماد، اسان جي ترجيح","Easy shopping with personal attention":"آسان خريداري ۽ ذاتي ڌيان سان",
+   "Selected collection":"چونڊيل ڪليڪشن","For every style":"هر انداز لاءِ","Easy ordering":"آسان آرڊر","Simple and secure shopping":"سادي ۽ محفوظ خريداري",
+   "Personal care":"ذاتي خيال","Your trust is our priority":"توهان جو اعتماد اسان جي ترجيح","Local delivery":"مقامي ڊليوري","Cash on delivery":"ڪيش آن ڊليوري",
+   "Completed orders":"مڪمل آرڊر","Unique customers":"الڳ گراهڪ","Suits sold":"وڪرو ٿيل سوٽ","Your valuable reviews":"توهان جا قيمتي رايا",
+   "Contact & orders":"رابطو ۽ آرڊر","Turn on new collection alerts":"نئين ڪليڪشن جا اطلاع کوليو","Help & feedback":"مدد ۽ راءِ",
+   "Your name":"توهان جو نالو","Mobile number":"موبائل نمبر","Full address":"مڪمل پتو","Payment method":"ادائيگي جو طريقو",
+   "Select city":"شهر چونڊيو","Select account":"اڪائونٽ چونڊيو","Confirm order":"آرڊر پڪو ڪريو","Shopping cart":"توهان جو شاپنگ ڪارٽ",
+   "Subtotal":"ذيلي رقم","Delivery charge":"ڊليوري خرچ","Total amount":"ڪل رقم","Continue shopping":"خريداري جاري رکو",
+   "Order received!":"توهان جو آرڊر ملي ويو!","Send order details on WhatsApp":"آرڊر جا تفصيل واٽس ايپ تي موڪليو",
+   "Online payment":"آن لائن ادائيگي","Transaction reference":"ٽرانزيڪشن حوالو","Upload payment receipt / screenshot":"ادائيگي جي رسيد / اسڪرين شاٽ اپلوڊ ڪريو",
+   "Feedback":"راءِ","Submit feedback":"راءِ جمع ڪريو","Close":"بند ڪريو","Product details":"سوٽ جا مڪمل تفصيل"
+  },
+  en:{
+   "ہوم":"Home","گھر":"Home","کلیکشن":"Collection","ڪليڪشن":"Collection","ہمارے بارے میں":"About us","اسان بابت":"About us","ایپ انسٹال کریں":"Install app","ايپ انسٽال ڪريو":"Install app","ایڈمن":"Admin","ڪارٽ":"Cart","کارٹ":"Cart",
+   "لباسِ راحت پیش کرتا ہے":"LIBAAS E RAAHAT presents","آپ کی خوبصورتی،":"Your beauty,","آپ کے اپنے انداز میں":"in your own style","نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔":"Beautifully selected outfits to make every day special and every moment memorable.",
+   "کلیکشن دریافت کریں":"Discover the collection","آپ کا کارٹ":"Your cart","نئی کلیکشن":"New collection","خاص آپ کے لیے":"Especially for you",
+   "منتخب کلیکشن":"Curated collection","ہر انداز کے لیے":"For every style","آسان آرڈر":"Easy ordering","سادہ اور محفوظ خریداری":"Simple and secure shopping","ذاتی توجہ":"Personal care","آپ کا اعتماد ہماری ترجیح":"Your trust is our priority",
+   "ہماری کلیکشن":"Our collection","اپنی پسند کا لباس منتخب کریں":"Choose your favourite outfit","تمام کلیکشن":"All collection","لان کاٹن":"Lawn cotton","گھر کی سلی ہوئی کلیکشن":"Hand-stitched collection","ننھے ستارے — بچوں کے سوٹ":"Little stars — kids' suits",
+   "آپ کا اعتماد، ہماری ترجیح":"Your trust, our priority","آسان خریداری اور ذاتی توجہ کے ساتھ":"Easy shopping with personal attention","منتخب کلیکشن":"Curated collection","نفاست اور معیار کا خیال":"Carefully selected quality","مقامی ڈیلیوری":"Local delivery","ابتدائی طور پر نبی سر روڈ":"Initially Nabi Sar Road","کیش آن ڈیلیوری کی سہولت":"Cash on delivery available",
+   "لباسِ راحت کی بڑھتی ہوئی پہچان":"The growing reach of LIBAAS E RAAHAT","آپ کے اعتماد اور محبت کا شکریہ":"Thank you for your trust and love","مکمل آرڈرز":"Completed orders","منفرد گاہک":"Unique customers","فروخت ہونے والے سوٹ":"Suits sold","آپ کے قیمتی تاثرات":"Your valuable reviews",
+   "لباسِ راحت — خوبصورتی جو آپ کے انداز کو مکمل کرے۔":"LIBAAS E RAAHAT — beauty that completes your style.","رابطہ اور آرڈر":"Contact & orders","واٹس ایپ نمبر ایڈمن سیٹنگ میں شامل کیا جا سکتا ہے۔":"WhatsApp number can be added in admin settings.",
+   "نئی کلیکشن کی اطلاع آن کریں":"Turn on new collection alerts","مدد اور فیڈبیک":"Help & feedback","مدد، شکایت اور فیڈبیک":"Help, complaints & feedback",
+   "آپ کا نام":"Your name","موبائل نمبر":"Mobile number","شہر / ڈیلیوری کا علاقہ":"City / delivery area","مکمل پتہ":"Full address","ادائیگی کا طریقہ":"Payment method",
+   "شہر منتخب کریں":"Select city","اکاؤنٹ منتخب کریں":"Select account","آرڈر کنفرم کریں":"Confirm order","آپ کا شاپنگ کارٹ":"Your shopping cart","سب ٹوٹل":"Subtotal","ڈیلیوری چارج":"Delivery charge","کل رقم":"Total amount",
+   "آن لائن ادائیگی":"Online payment","کیش آن ڈیلیوری":"Cash on delivery","ٹرانزیکشن ریفرنس":"Transaction reference","ادائیگی کی رسید / اسکرین شاٹ اپلوڈ کریں":"Upload payment receipt / screenshot",
+   "فیڈبیک":"Feedback","فیڈبیک جمع کریں":"Submit feedback","بند کریں":"Close","سوٹ کی مکمل تفصیل":"Full product details","خریداری جاری رکھیں":"Continue shopping",
+   "آپ کا آرڈر موصول ہوگیا!":"Your order has been received!","واٹس ایپ پر آرڈر کی تفصیل بھیجیں":"Send order details on WhatsApp"
+  }
+ };
+ let current="ur",observer=null,applying=false;
+ const allEntries=Object.keys(translations).reduce((out,lang)=>{out[lang]=Object.entries(translations[lang]).sort((a,b)=>b[0].length-a[0].length);return out;},{});
+ function translateText(value,lang){
+  if(lang==="ur")return value;
+  let out=value;
+  for(const [from,to] of allEntries[lang]) if(out.includes(from))out=out.split(from).join(to);
+  return out;
+ }
+ function applyLanguage(lang){
+  if(!translations[lang])lang="ur";
+  current=lang;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="en"?"ltr":"rtl";
+  document.body.style.fontFamily=lang==="sd"?'"Noto Sans Arabic","Noto Sans",Tahoma,sans-serif':lang==="en"?'Arial, sans-serif':'"Noto Nastaliq Urdu","Noto Sans Arabic",Tahoma,Arial,sans-serif';
+  const picker=document.getElementById("siteLanguage");if(picker)picker.value=lang;
+  applying=true;
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let node;while((node=walker.nextNode())){if(node.parentElement&&node.parentElement.closest("script,style,select,option,textarea,input"))continue;const original=node.__lrOriginalText??node.nodeValue;node.__lrOriginalText=original;node.nodeValue=translateText(original,lang);}
+  document.querySelectorAll("input[placeholder],textarea[placeholder],button[title],a[title],label[title]").forEach(el=>{for(const attr of ["placeholder","title"]){if(el.hasAttribute(attr)){const key="__lr_"+attr;if(!el.dataset[key])el.dataset[key]=el.getAttribute(attr);el.setAttribute(attr,translateText(el.dataset[key],lang));}}});
+  applying=false;
+  try{localStorage.setItem("lr-store-language",lang)}catch(e){}
+ }
+ window.setStoreLanguage=applyLanguage;
+ function detectLanguage(){
+  let saved=null;try{saved=localStorage.getItem("lr-store-language")}catch(e){}
+  if(saved&&translations[saved])return saved;
+  const browser=(navigator.languages&&navigator.languages[0]||navigator.language||"").toLowerCase();
+  if(browser.startsWith("sd"))return "sd";
+  if(browser.startsWith("ur"))return "ur";
+  return "en";
+ }
+ function initLanguage(){
+  const picker=document.getElementById("siteLanguage");
+  if(picker)picker.value=detectLanguage();
+  applyLanguage(detectLanguage());
+  if(observer)observer.disconnect();
+  observer=new MutationObserver(records=>{
+   if(applying||current==="ur")return;
+   applying=true;
+   for(const record of records){
+    if(record.type==="childList"){
+     record.addedNodes.forEach(n=>{
+      if(n.nodeType===Node.TEXT_NODE){n.__lrOriginalText=n.nodeValue;n.nodeValue=translateText(n.nodeValue,current)}
+      else if(n.nodeType===Node.ELEMENT_NODE){
+       const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT);let t;
+       while((t=w.nextNode())){if(t.parentElement&&t.parentElement.closest("script,style,select,option,textarea,input"))continue;t.__lrOriginalText=t.nodeValue;t.nodeValue=translateText(t.nodeValue,current)}
+      }
+     });
+    }else if(record.type==="characterData"){
+     const n=record.target;if(!n.__lrOriginalText)n.__lrOriginalText=n.nodeValue;
+     n.nodeValue=translateText(n.__lrOriginalText,current);
+    }
+   }
+   applying=false;
+  });
+  observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initLanguage,{once:true});else initLanguage();
+})();
+
 </script>
 </body></html>
