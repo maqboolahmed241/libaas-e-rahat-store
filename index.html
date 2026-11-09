@@ -244,7 +244,7 @@ async function updateFeedbackStatus(id,status){
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
 async function refreshAdminNav(){
  const btn=document.getElementById("adminNavBtn");
- if(btn)btn.classList.add("hidden");
+ if(btn){btn.textContent="ایڈمن لاگ اِن";btn.classList.remove("hidden");}
 }
 async function createAdminAccount(){
  let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
@@ -572,27 +572,48 @@ function loadSupabaseFallback(){
 startStore();
 
 let deferredInstallPrompt=null;
+function isStoreInstalled(){
+ return (window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true;
+}
+function syncInstallButton(){
+ const btn=document.getElementById("installAppBtn");
+ if(!btn)return;
+ if(isStoreInstalled()){
+  btn.classList.add("hidden");
+  btn.disabled=true;
+  return;
+ }
+ btn.classList.remove("hidden");
+ btn.disabled=false;
+ btn.textContent="ایپ انسٹال کریں";
+}
 window.addEventListener("beforeinstallprompt",function(event){
  event.preventDefault();
  deferredInstallPrompt=event;
- const btn=document.getElementById("installAppBtn");
- if(btn){btn.textContent="ایپ انسٹال کریں";btn.classList.remove("hidden");}
+ syncInstallButton();
 });
 window.addEventListener("appinstalled",function(){
  deferredInstallPrompt=null;
  const btn=document.getElementById("installAppBtn");
- if(btn){btn.textContent="ایپ انسٹال ہوگئی";btn.disabled=true;}
+ if(btn)btn.classList.add("hidden");
 });
-async function installStoreApp(){
+if(window.matchMedia){
+ const displayMode=window.matchMedia("(display-mode: standalone)");
+ if(displayMode.addEventListener)displayMode.addEventListener("change",syncInstallButton);
+}
+window.addEventListener("pageshow",syncInstallButton);
+function installStoreApp(){
+ if(isStoreInstalled()){syncInstallButton();return;}
  if(deferredInstallPrompt){
   deferredInstallPrompt.prompt();
-  const choice=await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt=null;
-  const btn=document.getElementById("installAppBtn");
-  if(btn&&choice&&choice.outcome==="accepted"){btn.textContent="ایپ انسٹال ہوگئی";btn.disabled=true;}
+  deferredInstallPrompt.userChoice.then(function(choice){
+   deferredInstallPrompt=null;
+   if(choice&&choice.outcome==="accepted"){const btn=document.getElementById("installAppBtn");if(btn)btn.classList.add("hidden");}
+  }).catch(function(e){console.warn("Install prompt:",e);});
   return;
  }
- alert("Chrome میں ویب سائٹ کھلی ہو تو اوپر تین نقطے ⋮ دبائیں، پھر 'Install app' یا 'Add to Home screen' منتخب کریں۔ اگر یہ آپشن نہ آئے تو Chrome بند کرکے دوبارہ کھولیں اور کچھ دیر بعد چیک کریں۔");
+ alert("Chrome میں اوپر تین نقطے ⋮ دبائیں، پھر 'Install app' یا 'Add to Home screen' منتخب کریں۔");
 }
+syncInstallButton();
 </script>
 </body></html>
