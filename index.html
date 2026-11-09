@@ -86,6 +86,26 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 @keyframes messageReveal{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:560px){.message-rotator{padding:0 12px;margin-top:9px}.message-rotator-inner{min-height:50px;padding:9px 12px}}
 @media(prefers-reduced-motion:reduce){.message-rotator-inner{transition:none}.message-rotator.is-changing .message-rotator-text{animation:none}}
+
+/* Premium rotating collection photography — uses existing shop product photos */
+.hero-art{min-height:440px;padding:0;overflow:hidden;isolation:isolate}
+.hero-slideshow{position:absolute;inset:0;overflow:hidden;border-radius:0 0 0 0;background:linear-gradient(135deg,#ead9c8,#c9a77f)}
+.hero-slideshow.has-slides{background:#ead9c8}
+.hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(1.025);transition:opacity 1s ease,transform 5s ease,visibility 1s}
+.hero-slide.active{opacity:1;visibility:visible;transform:scale(1)}
+.hero-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#241610b8 0%,#24161022 38%,transparent 72%),linear-gradient(135deg,var(--slide-tint),transparent 68%);pointer-events:none}
+.hero-slide-tone-0{--slide-tint:#c99b6b55}.hero-slide-tone-1{--slide-tint:#bd718755}.hero-slide-tone-2{--slide-tint:#80649b55}.hero-slide-tone-3{--slide-tint:#64876d55}.hero-slide-tone-4{--slide-tint:#668ca655}.hero-slide-tone-5{--slide-tint:#b77b4f55}
+.hero-slide-caption{position:absolute;z-index:2;right:22px;bottom:38px;left:22px;color:#fffaf2;text-align:right;text-shadow:0 2px 10px #241610a8}
+.hero-slide-caption small{display:inline-block;padding:5px 11px;border:1px solid #ffffff85;border-radius:20px;background:#34211c55;font-size:10px;margin-bottom:8px}
+.hero-slide-caption strong{display:block;font-size:clamp(17px,2.5vw,23px);line-height:1.7}
+.hero-slide-caption span{display:block;font-size:11px;opacity:.9;margin-top:2px}
+.hero-slide-dots{position:absolute;z-index:5;left:18px;bottom:17px;display:flex;gap:7px;direction:ltr}
+.hero-slide-dot{width:7px;height:7px;padding:0;border:1px solid #fff;background:#ffffff66;border-radius:20px;transition:width .25s,background .25s}
+.hero-slide-dot.active{width:23px;background:#fff}
+.hero-slideshow.has-slides .art-orbit,.hero-slideshow.has-slides .fabric-swatch,.hero-slideshow.has-slides .hero-monogram,.hero-slideshow.has-slides>.floating-tag,.hero-slideshow.has-slides .art-side-note{display:none}
+@media(max-width:800px){.hero-art{min-height:285px}.hero-slide-caption{right:15px;left:15px;bottom:34px}.hero-slide-dots{left:14px;bottom:13px}}
+@media(prefers-reduced-motion:reduce){.hero-slide,.hero-slide-dot{transition:none}}
 </style>
 </head>
 <body>
@@ -101,7 +121,7 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 <main>
 <section class="hero" id="home"><div class="hero-inner">
  <div class="hero-copy"><div class="hero-kicker"><span class="kicker-line"></span> نفاست بھری نئی کلیکشن <span class="kicker-year">2026</span></div><div class="hero-label">لباسِ راحت پیش کرتا ہے</div><h1>آپ کی خوبصورتی،<br><em>آپ کے اپنے انداز میں</em></h1><p>نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔</p><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">آپ کا کارٹ <span>♡</span></button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
- <div class="hero-art"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="fabric-swatch swatch-back"></div><div class="fabric-swatch swatch-front"></div><div class="hero-monogram"><span class="monogram-small">لباس پہننے کا خوبصورت انداز</span><strong>LR</strong><span class="monogram-urdu">لباسِ راحت</span><i></i></div><div class="floating-tag"><span>✦</span> نئی کلیکشن <small>خاص آپ کے لیے</small></div><div class="art-side-note">ہر دن کے لیے نفاست</div></div>
+ <div class="hero-art"><div class="hero-slideshow" id="heroSlideshow" aria-label="لباسِ راحت کی تصویری کلیکشن"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="fabric-swatch swatch-back"></div><div class="fabric-swatch swatch-front"></div><div class="hero-monogram"><span class="monogram-small">لباس پہننے کا خوبصورت انداز</span><strong>LR</strong><span class="monogram-urdu">لباسِ راحت</span><i></i></div><div class="floating-tag"><span>✦</span> نئی کلیکشن <small>خاص آپ کے لیے</small></div><div class="art-side-note">ہر دن کے لیے نفاست</div></div></div>
 </div></section>
 <div class="home-promises"><div><span>✧</span><b>منتخب کلیکشن</b><small>ہر انداز کے لیے</small></div><i></i><div><span>◇</span><b>آسان آرڈر</b><small>سادہ اور محفوظ خریداری</small></div><i></i><div><span>♡</span><b>ذاتی توجہ</b><small>آپ کا اعتماد ہماری ترجیح</small></div></div>
 <section class="section" id="collection"><div class="section-head"><div><h2>ہماری کلیکشن</h2><p>اپنی پسند کا لباس منتخب کریں</p></div><span class="muted">LIBAAS E RAAHAT</span></div>
@@ -154,6 +174,7 @@ async function loadStore(){
  const results=await Promise.all([db.from("products").select("*").eq("active",true).order("created_at",{ascending:false}),db.from("store_settings").select("*").eq("id",1).maybeSingle()]);
  if(results[0].error){console.error(results[0].error);document.getElementById("products").innerHTML='<p class="muted">مصنوعات لوڈ نہیں ہو سکیں۔</p>';return}
  products=results[0].data||[];
+ renderHeroSlideshow();
  Object.keys(cart).forEach(function(id){const p=products.find(function(x){return String(x.id)===String(id)});if(!p||Number(p.stock)<=0)delete cart[id];else if(Number(cart[id])>Number(p.stock))cart[id]=Number(p.stock);});
  saveCart();
  if(results[1].data){settings.delivery_areas=Array.isArray(results[1].data.delivery_areas)&&results[1].data.delivery_areas.length?results[1].data.delivery_areas:[{name:"نبی سر روڈ",fee:Number(results[1].data.delivery_fee||150),active:true}];settings.fee=Number(results[1].data.delivery_fee||150);settings.wa=results[1].data.whatsapp_number||"";settings.was=results[1].data.whatsapp_numbers||(settings.wa?[settings.wa]:[]);settings.whatsapp_visibility=results[1].data.whatsapp_visibility||[true,true,true];settings.payment_accounts=Array.isArray(results[1].data.payment_accounts)?results[1].data.payment_accounts:[];settings.top_notice=results[1].data.top_notice||"نبی سر روڈ میں ڈیلیوری دستیاب ہے";settings.show_contact=results[1].data.show_contact!==false;}renderCustomerDeliveryAreas();
@@ -162,6 +183,33 @@ async function loadStore(){
 }
 function renderFooterContact(){const el=document.getElementById("footerContact");if(!el)return;const visibility=settings.whatsapp_visibility||[true,true,true];const nums=(settings.was||[]).map(function(n,i){return {number:n,index:i}}).filter(function(x){return Boolean(x.number)&&visibility[x.index]!==false;});if(settings.show_contact&&nums.length){el.innerHTML="<b>رابطہ اور آرڈر</b>"+nums.map(function(x){const intl=x.number.replace(/\\D/g,"").replace(/^0/,"92");return '<p>واٹس ایپ نمبر '+(x.index+1)+': <a href="https://wa.me/'+esc(intl)+'" target="_blank" rel="noopener">'+esc(x.number)+'</a></p>';}).join("");}else{el.innerHTML="<b>رابطہ اور آرڈر</b><p>رابطہ نمبر فی الحال دستیاب نہیں۔</p>";}}
 function getProductImages(p){let arr=Array.isArray(p.image_urls)?p.image_urls:[];if(!arr.length&&p.image_url)arr=[p.image_url];return arr.filter(Boolean).slice(0,3)}
+
+let heroSlideTimer=null,heroSlideIndex=0;
+function showHeroSlide(index){
+ const root=document.getElementById("heroSlideshow");if(!root)return;
+ const slides=[...root.querySelectorAll(".hero-slide")],dots=[...root.querySelectorAll(".hero-slide-dot")];
+ if(!slides.length)return;
+ heroSlideIndex=(index+slides.length)%slides.length;
+ slides.forEach(function(el,i){el.classList.toggle("active",i===heroSlideIndex);el.setAttribute("aria-hidden",i===heroSlideIndex?"false":"true");});
+ dots.forEach(function(el,i){el.classList.toggle("active",i===heroSlideIndex);el.setAttribute("aria-current",i===heroSlideIndex?"true":"false");});
+}
+function renderHeroSlideshow(){
+ const root=document.getElementById("heroSlideshow");if(!root)return;
+ const seen=new Set(),items=[];
+ products.filter(function(p){return Number(p.stock)>0;}).forEach(function(p){
+  getProductImages(p).forEach(function(url){
+   if(url&&!seen.has(url)&&items.length<8){seen.add(url);items.push({url:url,name:p.name||"خوبصورت کلیکشن",category:p.category||"لباسِ راحت"});}
+  });
+ });
+ if(!items.length)return;
+ root.classList.add("has-slides");
+ root.innerHTML=items.map(function(item,i){
+  return '<div class="hero-slide hero-slide-tone-'+(i%6)+(i===0?' active':'')+'" aria-hidden="'+(i===0?'false':'true')+'"><img src="'+esc(item.url)+'" alt="'+esc(item.name)+'" '+(i===0?'fetchpriority="high"':'loading="lazy"')+'><div class="hero-slide-caption"><small>'+esc(item.category)+'</small><strong>'+esc(item.name)+'</strong><span>لباسِ راحت — نفاست، خوبصورتی اور اعتماد</span></div></div>';
+ }).join("")+(items.length>1?'<div class="hero-slide-dots" aria-label="تصویری سلائیڈ منتخب کریں">'+items.map(function(_,i){return '<button type="button" class="hero-slide-dot '+(i===0?'active':'')+'" aria-label="تصویر '+(i+1)+'" aria-current="'+(i===0?'true':'false')+'" onclick="showHeroSlide('+i+')"></button>';}).join("")+'</div>':'');
+ heroSlideIndex=0;
+ if(heroSlideTimer){clearInterval(heroSlideTimer);heroSlideTimer=null;}
+ if(items.length>1)heroSlideTimer=window.setInterval(function(){if(!document.hidden)showHeroSlide(heroSlideIndex+1);},30000);
+}
 function renderProducts(){
  const list=products.filter(function(p){return Number(p.stock)>0&&(activeFilter==="تمام"||p.category===activeFilter)});
  document.getElementById("products").innerHTML=list.map(function(p){
