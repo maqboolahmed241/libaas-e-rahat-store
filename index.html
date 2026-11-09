@@ -546,6 +546,7 @@ function labelsForStatus(st){return {delivered:"ڈیلیور ہوگیا",shipped
 renderProducts();updateCount();
 async function startStore(){
  try{
+  if("serviceWorker" in navigator && window.isSecureContext){navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(function(e){console.warn("Store app service worker registration:",e);});}
   if(!window.supabase) await loadSupabaseFallback();
   db=window.supabase.createClient(SB_URL,SB_KEY);
   await loadStore();
