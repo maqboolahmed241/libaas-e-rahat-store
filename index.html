@@ -346,7 +346,7 @@ async function renderAdminOrders(){
 function sendThankYouSMS(id){
  const o=storeOrders.find(function(x){return x.id===id});if(!o)return;
  const phone=String(o.phone||"").replace(/[^0-9+]/g,"");if(!phone)return alert("اس آرڈر میں موبائل نمبر موجود نہیں۔");
- const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+"! لباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر "+(o.order_no||"")+" ہمیں موصول ہوا ہے۔ ان شاء اللہ آپ کا آرڈر بہت جلد آپ کی دہلیز تک پہنچا دیا جائے گا۔ اللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کے شکر گزار ہیں۔";
+ const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+"! لباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر "+(o.order_no||"")+" ہمیں موصول ہوا ہے۔ ان شاء اللہ آپ کا آرڈر بہت جلد آپ کی دہلیز تک پہنچا دیا جائے گا۔ اللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کے شکر گزار ہیں۔\\n\\nایک چھوٹی سی گزارش: براہِ کرم اپنا قیمتی فیڈبیک ضرور شیئر کریں، آپ کی رائے ہمارے لیے بہت اہم ہے۔ شکریہ!";
  window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);
 }
 async function showOrder(id){
