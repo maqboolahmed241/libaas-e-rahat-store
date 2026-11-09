@@ -454,8 +454,8 @@ async function enableCustomerPush(){
   let sub=await reg.pushManager.getSubscription();
   if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array("BDWcucU-eKNPgdPGPnaXq4W0eG1mrYw37EXjDq7BjANmNXhQtcLM3BAsb5iGNoMd0-Nk4ggEaCMvkjHgCUTfTbA")});
   const keys=sub.toJSON().keys||{};
-  const saved=await db.from("customer_push_subscriptions").upsert({endpoint:sub.endpoint,p256dh:keys.p256dh,auth:keys.auth,updated_at:new Date().toISOString()},{onConflict:"endpoint"});
-  if(saved.error)throw saved.error;
+  const saved=await db.from("customer_push_subscriptions").insert({endpoint:sub.endpoint,p256dh:keys.p256dh,auth:keys.auth});
+  if(saved.error && saved.error.code!=="23505")throw saved.error;
   say("شکریہ! اس موبائل پر لباسِ راحت کی نئی کلیکشن کی اطلاع آن ہوگئی ہے۔");
  }catch(e){console.error("Customer push setup",e);say("نوٹیفکیشن فعال نہیں ہوا: "+(e.message||"دوبارہ کوشش کریں"));}
 }
