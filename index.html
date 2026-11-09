@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#3b241d">
+<meta name="description" content="LIBAAS E RAAHAT — لباسِ راحت، خوبصورتی، نفاست اور اعتماد">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="لباسِ راحت">
+<meta name="application-name" content="LIBAAS E RAAHAT">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./icon.svg">
+<link rel="apple-touch-icon" href="./icon.svg">
 <title>LIBAAS E RAAHAT | لباسِ راحت</title>
 <style>
 :root{--cream:#fbf6ee;--paper:#fffdf9;--brown:#3b241d;--brown2:#684638;--gold:#c7a46a;--pink:#ead2cf;--muted:#8d7b70;--line:#eadfd2;--shadow:0 12px 35px #44291b12}
@@ -59,7 +67,7 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
- <div class="nav-actions"><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
+ <div class="nav-actions"><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
@@ -561,5 +569,29 @@ function loadSupabaseFallback(){
  });
 }
 startStore();
+
+let deferredInstallPrompt=null;
+window.addEventListener("beforeinstallprompt",function(event){
+ event.preventDefault();
+ deferredInstallPrompt=event;
+ const btn=document.getElementById("installAppBtn");
+ if(btn){btn.textContent="ایپ انسٹال کریں";btn.classList.remove("hidden");}
+});
+window.addEventListener("appinstalled",function(){
+ deferredInstallPrompt=null;
+ const btn=document.getElementById("installAppBtn");
+ if(btn){btn.textContent="ایپ انسٹال ہوگئی";btn.disabled=true;}
+});
+async function installStoreApp(){
+ if(deferredInstallPrompt){
+  deferredInstallPrompt.prompt();
+  const choice=await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt=null;
+  const btn=document.getElementById("installAppBtn");
+  if(btn&&choice&&choice.outcome==="accepted"){btn.textContent="ایپ انسٹال ہوگئی";btn.disabled=true;}
+  return;
+ }
+ alert("Chrome میں ویب سائٹ کھلی ہو تو اوپر تین نقطے ⋮ دبائیں، پھر 'Install app' یا 'Add to Home screen' منتخب کریں۔ اگر یہ آپشن نہ آئے تو Chrome بند کرکے دوبارہ کھولیں اور کچھ دیر بعد چیک کریں۔");
+}
 </script>
 </body></html>
