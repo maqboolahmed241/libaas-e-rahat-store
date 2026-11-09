@@ -832,14 +832,13 @@ syncInstallButton();
        while((t=w.nextNode())){if(t.parentElement&&t.parentElement.closest("script,style,select,option,textarea,input"))continue;t.__lrOriginalText=t.nodeValue;t.nodeValue=translateText(t.nodeValue,current)}
       }
      });
-    }else if(record.type==="characterData"){
-     const n=record.target;if(!n.__lrOriginalText)n.__lrOriginalText=n.nodeValue;
-     n.nodeValue=translateText(n.__lrOriginalText,current);
     }
    }
    applying=false;
   });
-  observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+  // Observe only newly inserted content. Watching characterData here causes
+  // the observer to react to its own translations and can freeze mobile browsers.
+  observer.observe(document.body,{childList:true,subtree:true});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initLanguage,{once:true});else initLanguage();
 })();
