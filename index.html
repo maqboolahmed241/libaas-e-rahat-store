@@ -145,7 +145,7 @@ async function submitOrder(ev){
   const payload={customer_name:name,phone:phone,area:area,address:address,items:selected,subtotal:subtotal,delivery_fee:deliveryFee,total:total,status:"pending",payment_method:method,payment_status:method==="online"?"pending_verification":"unpaid",payment_reference:method==="online"?(account.service+" | "+account.number+" | "+reference):"",payment_receipt_path:receiptPath||null};
   const result=await db.from("store_orders").insert(payload);
   if(result.error){console.error("Order insert failed:",result.error);return showError("آرڈر محفوظ نہیں ہوا: "+(result.error.message||"سرور کی خرابی")+". آپ کی معلومات اسی اسکرین پر موجود ہیں؛ دوبارہ کوشش کریں۔");}
-  const msg="السلام علیکم، میرا LIBAAS E RAAHAT کا آرڈر ہے۔\nنام: "+name+"\nموبائل: "+phone+"\nعلاقہ: "+area+"\nپتہ: "+address+"\n\n"+selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n")+"\nڈیلیوری: "+settings.fee+" روپے\nکل رقم: "+total+" روپے\nادائیگی: "+(method==="online"?"آن لائن — "+account.service+" "+account.number+" — ریفرنس: "+reference:"کیش آن ڈیلیوری")+"\nشکریہ۔";
+  const msg="السلام علیکم، میرا LIBAAS E RAAHAT کا آرڈر ہے۔\nنام: "+name+"\nموبائل: "+phone+"\nعلاقہ: "+area+"\nپتہ: "+address+"\n\n"+selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n")+"\nڈیلیوری: "+deliveryFee+" روپے\nکل رقم: "+total+" روپے\nادائیگی: "+(method==="online"?"آن لائن — "+account.service+" "+account.number+" — ریفرنس: "+reference:"کیش آن ڈیلیوری")+"\nشکریہ۔";
   const was=Array.isArray(settings.was)?settings.was:[];
   const waUrl=was.length?"https://wa.me/"+was[0]+"?text="+encodeURIComponent(msg):"";
   cart={};saveCart();updateCount();
