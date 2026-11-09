@@ -208,7 +208,7 @@ function renderHeroSlideshow(){
  }).join("")+(items.length>1?'<div class="hero-slide-dots" aria-label="تصویری سلائیڈ منتخب کریں">'+items.map(function(_,i){return '<button type="button" class="hero-slide-dot '+(i===0?'active':'')+'" aria-label="تصویر '+(i+1)+'" aria-current="'+(i===0?'true':'false')+'" onclick="showHeroSlide('+i+')"></button>';}).join("")+'</div>':'');
  heroSlideIndex=0;
  if(heroSlideTimer){clearInterval(heroSlideTimer);heroSlideTimer=null;}
- if(items.length>1)heroSlideTimer=window.setInterval(function(){if(!document.hidden)showHeroSlide(heroSlideIndex+1);},30000);
+ if(items.length>1)heroSlideTimer=window.setInterval(function(){if(!document.hidden)showHeroSlide(heroSlideIndex+1);},10000);
 }
 function renderProducts(){
  const list=products.filter(function(p){return Number(p.stock)>0&&(activeFilter==="تمام"||p.category===activeFilter)});
