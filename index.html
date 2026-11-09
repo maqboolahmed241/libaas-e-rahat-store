@@ -59,7 +59,7 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
- <div class="nav-actions"><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
+ <div class="nav-actions"><button class="iconbtn" id="adminNavBtn" onclick="openAdmin()">ایڈمن لاگ اِن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
@@ -235,13 +235,8 @@ async function updateFeedbackStatus(id,status){
 }
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
 async function refreshAdminNav(){
- const btn=document.getElementById("adminNavBtn");if(!btn||!db)return;
- try{
-  const auth=await db.auth.getSession();const user=auth.data?.session?.user;
-  if(!user){btn.classList.add("hidden");return}
-  const access=await db.from("store_admins").select("user_id").eq("user_id",user.id).maybeSingle();
-  btn.classList.toggle("hidden",!access.data||!!access.error);
- }catch(e){btn.classList.add("hidden")}
+ const btn=document.getElementById("adminNavBtn");
+ if(btn){btn.classList.remove("hidden");btn.textContent="ایڈمن لاگ اِن";}
 }
 async function createAdminAccount(){
  let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
