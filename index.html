@@ -282,25 +282,58 @@ async function approveAdmin(uid){
  await renderAdminRequests();alert("ایڈمن اجازت منظور ہوگئی۔");
 }
 async function adminTab(id,b){["productsTab","settingsTab","ordersTab","feedbackTab","teamTab"].forEach(function(x){const el=document.getElementById(x);if(el)el.classList.add("hidden")});document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".admin-tabs .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active");if(id==="settingsTab")await loadAdminSettings();if(id==="ordersTab")await renderAdminOrders();if(id==="feedbackTab")await renderAdminFeedback();if(id==="teamTab")await renderAdminTeam()}
+async function uploadProductImages(files){
+ const urls=[];
+ for(const file of files){
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5242880)throw new Error("ہر تصویر JPG، PNG یا WEBP ہو اور 5 MB سے کم ہو۔");
+  const ext=file.name.split(".").pop().toLowerCase(),path=Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
+  const up=await db.storage.from("product-images").upload(path,file,{contentType:file.type,upsert:false});
+  if(up.error)throw new Error("تصویر اپ لوڈ نہیں ہوئی: "+up.error.message);
+  urls.push(db.storage.from("product-images").getPublicUrl(path).data.publicUrl);
+ }
+ return urls;
+}
 async function addProduct(){
- let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),stock=Math.max(0,Number(document.getElementById("newStock").value)||0),category=document.getElementById("newCategory").value,description=document.getElementById("newDescription").value.trim(),file=document.getElementById("newImage").files[0];
+ let name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),stock=Math.max(0,Number(document.getElementById("newStock").value)||0),category=document.getElementById("newCategory").value,description=document.getElementById("newDescription").value.trim(),files=Array.from(document.getElementById("newImage").files||[]);
  if(!name||price<=0)return alert("پروڈکٹ کا نام اور درست قیمت درج کریں۔");
- if(!file)return alert("براہ کرم سوٹ کی تصویر منتخب کریں۔");
- if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5242880)return alert("تصویر JPG، PNG یا WEBP ہو اور 5 MB سے کم ہو۔");
- let ext=file.name.split(".").pop().toLowerCase(),path=Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
- let up=await db.storage.from("product-images").upload(path,file,{contentType:file.type,upsert:false});
- if(up.error)return alert("تصویر اپ لوڈ نہیں ہوئی: "+up.error.message);
- let pub=db.storage.from("product-images").getPublicUrl(path);
- let saved=await db.from("products").insert({name:name,price:price,stock:stock,category:category,description:description,image_url:pub.data.publicUrl,active:true});
- if(saved.error)return alert("پروڈکٹ محفوظ نہیں ہوئی: "+saved.error.message);
- ["newName","newPrice","newDescription","newImage"].forEach(function(x){document.getElementById(x).value=""});document.getElementById("newStock").value="1";
- await loadStore();await renderAdminProducts();alert("تصویر اور پروڈکٹ کامیابی سے شامل ہوگئی۔");
+ if(!files.length)return alert("براہ کرم سوٹ کی کم از کم ایک تصویر منتخب کریں۔");
+ if(files.length>3)return alert("ایک سوٹ کی زیادہ سے زیادہ 3 تصاویر منتخب کریں۔");
+ try{
+  const urls=await uploadProductImages(files);
+  const saved=await db.from("products").insert({name:name,price:price,stock:stock,category:category,description:description,image_url:urls[0],image_urls:urls,active:true});
+  if(saved.error)return alert("پروڈکٹ محفوظ نہیں ہوئی: "+saved.error.message);
+  ["newName","newPrice","newDescription","newImage"].forEach(function(x){document.getElementById(x).value=""});document.getElementById("newStock").value="1";
+  await loadStore();await renderAdminProducts();alert("پروڈکٹ اور تصاویر کامیابی سے شامل ہوگئیں۔");
+ }catch(e){alert(e.message||"تصاویر اپ لوڈ نہیں ہو سکیں۔")}
 }
 async function renderAdminProducts(){
  let r=await db.from("products").select("*").order("created_at",{ascending:false});if(r.error){document.getElementById("adminProducts").textContent="مصنوعات لوڈ نہیں ہو سکیں۔";return}
- document.getElementById("adminProducts").innerHTML=(r.data||[]).map(function(p){return '<div class="admin-item"><span><b>'+esc(p.name)+'</b><br>'+money(p.price)+' · اسٹاک: '+p.stock+'</span><span><button class="smallbtn" onclick="editProduct(\''+p.id+'\','+p.price+','+p.stock+')">ترمیم</button> <button class="smallbtn danger" onclick="deleteProduct(\''+p.id+'\')">حذف</button></span></div>'}).join("")||'<p class="muted">ابھی کوئی پروڈکٹ نہیں۔</p>';
+ document.getElementById("adminProducts").innerHTML=(r.data||[]).map(function(p){let im=getProductImages(p);return '<div class="admin-item"><span><b>'+esc(p.name)+'</b><br>'+money(p.price)+' · اسٹاک: '+p.stock+'<br><small>'+im.length+' تصاویر</small></span><span><button class="smallbtn" onclick="editProduct(\''+p.id+'\')">ترمیم / تصویر</button> <button class="smallbtn danger" onclick="deleteProduct(\''+p.id+'\')">حذف</button></span></div>'}).join("")||'<p class="muted">ابھی کوئی پروڈکٹ نہیں۔</p>';
 }
-async function editProduct(id,price,stock){let np=prompt("نئی قیمت درج کریں:",price);if(np===null)return;let ns=prompt("دستیاب تعداد درج کریں:",stock);if(ns===null)return;let r=await db.from("products").update({price:Number(np),stock:Number(ns),updated_at:new Date().toISOString()}).eq("id",id);if(r.error)return alert("تبدیلی محفوظ نہیں ہوئی: "+r.error.message);await loadStore();await renderAdminProducts()}
+let editingProductId=null;
+async function editProduct(id){
+ const r=await db.from("products").select("*").eq("id",id).single();if(r.error||!r.data)return alert("پروڈکٹ کی تفصیل نہیں کھل سکی۔");
+ const p=r.data;editingProductId=id;
+ document.getElementById("editProductPrice").value=p.price;
+ document.getElementById("editProductStock").value=p.stock;
+ document.getElementById("editProductImages").value="";
+ const imgs=getProductImages(p);
+ document.getElementById("editCurrentImages").innerHTML='<b>موجودہ تصاویر</b><div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0">'+imgs.map(function(u){return '<img src="'+esc(u)+'" style="width:75px;height:85px;object-fit:cover;border-radius:9px;border:1px solid #eadfd2">'}).join("")+'</div><small>نئی تصویر منتخب نہ کرنے پر یہی تصاویر رہیں گی۔</small>';
+ document.getElementById("productEditModal").classList.add("show");
+}
+async function saveProductEdit(){
+ if(!editingProductId)return;
+ const price=Number(document.getElementById("editProductPrice").value),stock=Number(document.getElementById("editProductStock").value),files=Array.from(document.getElementById("editProductImages").files||[]);
+ if(price<=0||!Number.isFinite(price)||!Number.isInteger(stock)||stock<0)return alert("قیمت اور اسٹاک کی درست مقدار درج کریں۔");
+ if(files.length>3)return alert("زیادہ سے زیادہ 3 تصاویر منتخب کریں۔");
+ try{
+  let patch={price:price,stock:stock,updated_at:new Date().toISOString()};
+  if(files.length){const urls=await uploadProductImages(files);patch.image_urls=urls;patch.image_url=urls[0]}
+  const saved=await db.from("products").update(patch).eq("id",editingProductId);
+  if(saved.error)return alert("تبدیلی محفوظ نہیں ہوئی: "+saved.error.message);
+  closeModal("productEditModal");editingProductId=null;await loadStore();await renderAdminProducts();alert("قیمت، اسٹاک اور تصویر کی تبدیلی محفوظ ہوگئی۔");
+ }catch(e){alert(e.message||"تصویر اپ لوڈ نہیں ہو سکی۔")}
+}
 async function deleteProduct(id){if(!confirm("کیا یہ پروڈکٹ حذف کرنی ہے؟"))return;let r=await db.from("products").delete().eq("id",id);if(r.error)return alert("پروڈکٹ حذف نہیں ہوئی: "+r.error.message);delete cart[id];saveCart();await loadStore();await renderAdminProducts()}
 
 function renderPaymentAccountEditors(){
