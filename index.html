@@ -699,7 +699,7 @@ function startBrandMessageRotator(){
   box.className="message-rotator message-tone-"+messages[current][1]+" is-changing";
   text.textContent=messages[current][0];
   window.setTimeout(function(){box.classList.remove("is-changing")},550);
- },90000);
+ },30000);
 }
 async function startStore(){
  try{
