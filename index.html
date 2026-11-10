@@ -653,12 +653,21 @@ async function showOrder(id){
  const aliases={"نیا":"pending","کنفرم":"confirmed","کنفرم ہوگیا":"confirmed","پیک":"packed","پیک ہوگیا":"packed","بھیج دیا":"shipped","بھیج دیا گیا":"shipped","شپڈ":"shipped","ڈیلیور":"delivered","ڈلیور":"delivered","ڈیلیور ہوگیا":"delivered","ڈلیور ہوگیا":"delivered","منسوخ":"cancelled","کینسل":"cancelled"};
  const st=aliases[raw.trim().toLowerCase()]||raw.trim().toLowerCase();
  if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔ مثال: delivered یا ڈیلیور لکھیں۔");
+ const previousStatus=o.status;
  const saved=await db.rpc("admin_set_order_status",{p_order_id:id,p_status:st});
  if(saved.error)return alert("اسٹیٹس محفوظ نہیں ہوا: "+saved.error.message);
  if(!saved.data||!saved.data.length)return alert("اسٹیٹس محفوظ نہیں ہوا؛ ایڈمن اجازت یا آرڈر ریکارڈ چیک کریں۔");
  o.status=st;if(st==="delivered")o.stock_deducted=true;
  await renderAdminOrders();
  if(st==="delivered"){await loadStore();await renderAdminProducts();}
+ if(st==="cancelled"&&previousStatus!=="cancelled"){
+  const phone=String(o.phone||"").replace(/[^0-9+]/g,"");
+  const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+" صاحب/صاحبہ!\n\nلباسِ راحت (LIBAAS E RAAHAT) سے آپ کے آرڈر نمبر "+(o.order_no||"")+" کے بارے میں معذرت خواہ ہیں۔ یہ کلیکشن دکان سے فروخت ہو چکی ہے، اس لیے فی الحال ہم آپ کا آرڈر مکمل نہیں کر سکتے۔ آپ کو ہونے والی زحمت کے لیے دل سے معذرت۔ ان شاء اللہ نئی کلیکشن میں آپ کی خدمت کریں گے۔\n\nشکریہ، لباسِ راحت";
+  alert("آرڈر منسوخ ہوگیا۔ اب کسٹمر کے لیے معذرت کا SMS کھلے گا؛ براہِ کرم Messages میں Send ضرور دبائیں۔");
+  if(phone.length>=10){window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);}
+  else alert("آرڈر منسوخ ہوگیا، لیکن اس میں درست موبائل نمبر موجود نہیں؛ کسٹمر کو الگ سے اطلاع دیں۔");
+  return;
+ }
  alert("آرڈر اسٹیٹس کامیابی سے محفوظ ہوگیا: "+labelsForStatus(st)+(st==="delivered"?"۔ اس آرڈر کا اسٹاک ایک مرتبہ مائنس کر دیا گیا ہے۔":""));
 }
 let adminNotificationChannel=null;
