@@ -634,6 +634,19 @@ function sendThankYouSMS(id){
   const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+" صاحب/صاحبہ!\n\nلباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر نمبر "+(o.order_no||"")+" کامیابی سے موصول ہو گیا ہے۔\n\nان شاء اللہ آپ کا آرڈر جلد از جلد آپ کی دہلیز تک پہنچایا جائے گا۔\n\nاللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کا تہِ دل سے شکریہ۔\n\n🌸 ایک چھوٹی سی گزارش: براہِ کرم اپنا قیمتی فیڈبیک ضرور شیئر کریں۔ آپ کی رائے ہمارے لیے بہت اہم ہے۔\n\nلباسِ راحت — آپ کے اعتماد کا شکریہ!";
  window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);
 }
+function chooseOrderStatus(o,details){
+ return new Promise(function(resolve){
+  const labels={pending:"نیا آرڈر",confirmed:"آرڈر کنفرم",packed:"پارسل پیک ہوگیا",shipped:"پارسل بھیج دیا گیا",delivered:"کسٹمر کو ڈیلیور ہوگیا",cancelled:"آرڈر منسوخ کریں"};
+  const overlay=document.createElement("div");
+  overlay.style.cssText="position:fixed;inset:0;z-index:99999;background:#160e0bd9;display:flex;align-items:center;justify-content:center;padding:16px";
+  const panel=document.createElement("div");
+  panel.dir="rtl";panel.style.cssText="width:min(100%,430px);background:#fffdf9;color:#3b241d;border-radius:18px;padding:20px;box-shadow:0 18px 60px #0008;font-family:inherit";
+  panel.innerHTML='<h3 style="margin:0 0 10px;font-size:20px">آرڈر اسٹیٹس منتخب کریں</h3><p style="margin:0 0 12px;line-height:1.7;font-size:14px">آرڈر: '+esc(o.order_no||"")+' · '+esc(o.customer_name||"")+'</p><div style="max-height:110px;overflow:auto;white-space:pre-line;font-size:13px;color:#806e62;margin-bottom:14px">'+esc(details)+'</div><label for="orderStatusChoice" style="display:block;margin-bottom:7px;font-weight:700">نئی حالت منتخب کریں</label><select id="orderStatusChoice" style="width:100%;padding:13px;border:1px solid #cbb9a8;border-radius:10px;background:#fff;font-size:16px;color:#3b241d">'+Object.keys(labels).map(function(k){return '<option value="'+k+'" '+(o.status===k?'selected':'')+'>'+labels[k]+'</option>';}).join("")+'</select><div style="display:flex;gap:10px;margin-top:18px"><button type="button" data-action="cancel" style="flex:1;padding:12px;border:1px solid #cbb9a8;border-radius:10px;background:#fff;color:#3b241d;font-weight:700">واپس</button><button type="button" data-action="ok" style="flex:1;padding:12px;border:0;border-radius:10px;background:#684638;color:#fff;font-weight:700">اوکے، محفوظ کریں</button></div>';
+  overlay.appendChild(panel);document.body.appendChild(overlay);
+  panel.querySelector('[data-action="cancel"]').onclick=function(){overlay.remove();resolve(null);};
+  panel.querySelector('[data-action="ok"]').onclick=function(){const value=panel.querySelector("#orderStatusChoice").value;overlay.remove();resolve(value);};
+ });
+}
 async function showOrder(id){
  let o=storeOrders.find(function(x){return x.id===id});if(!o)return;
  let details=(o.items||[]).map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" روپے"}).join("\n");
@@ -648,11 +661,8 @@ async function showOrder(id){
    o.payment_status=pr.data.payment_status;
   }
  }
- let raw=prompt("آرڈر: "+o.order_no+"\nنام: "+o.customer_name+"\nفون: "+o.phone+"\nپتہ: "+o.address+"\n"+details+"\nکل: "+o.total+"\nادائیگی: "+(o.payment_method==="online"?"آن لائن":"کیش آن ڈیلیوری")+" · "+(o.payment_status||"unpaid")+"\nنیا اسٹیٹس درج کریں: pending / confirmed / packed / shipped / delivered / cancelled\nیا اردو میں: نیا / کنفرم / پیک / بھیج دیا / ڈیلیور / منسوخ",o.status);
- if(raw===null)return;
- const aliases={"نیا":"pending","کنفرم":"confirmed","کنفرم ہوگیا":"confirmed","پیک":"packed","پیک ہوگیا":"packed","بھیج دیا":"shipped","بھیج دیا گیا":"shipped","شپڈ":"shipped","ڈیلیور":"delivered","ڈلیور":"delivered","ڈیلیور ہوگیا":"delivered","ڈلیور ہوگیا":"delivered","منسوخ":"cancelled","کینسل":"cancelled"};
- const st=aliases[raw.trim().toLowerCase()]||raw.trim().toLowerCase();
- if(!["pending","confirmed","packed","shipped","delivered","cancelled"].includes(st))return alert("اسٹیٹس درست نہیں۔ مثال: delivered یا ڈیلیور لکھیں۔");
+ const st=await chooseOrderStatus(o,details);
+ if(st===null)return;
  const previousStatus=o.status;
  const saved=await db.rpc("admin_set_order_status",{p_order_id:id,p_status:st});
  if(saved.error)return alert("اسٹیٹس محفوظ نہیں ہوا: "+saved.error.message);
