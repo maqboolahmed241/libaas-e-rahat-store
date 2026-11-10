@@ -110,6 +110,20 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-slideshow.has-slides .art-orbit,.hero-slideshow.has-slides .fabric-swatch,.hero-slideshow.has-slides .hero-monogram,.hero-slideshow.has-slides>.floating-tag,.hero-slideshow.has-slides .art-side-note{display:none}
 @media(max-width:800px){.hero-art{min-height:285px}.hero-slide-caption{right:15px;left:15px;bottom:34px}.hero-slide-dots{left:14px;bottom:13px}}
 @media(prefers-reduced-motion:reduce){.hero-slide,.hero-slide-dot{transition:none}}
+
+/* Centered 2026 collection title with animated Ma Sha Allah bubbles */
+.hero-copy .hero-kicker{direction:rtl;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;justify-items:center;gap:clamp(5px,1.5vw,12px);width:100%;font-family:inherit;font-size:clamp(10px,1.25vw,13px);letter-spacing:0;color:#76543f;text-align:center}
+.hero-kicker-center{display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;font-weight:800;color:#604331}
+.hero-kicker-center .kicker-year{font:700 10px Georgia,serif;letter-spacing:1px;padding:5px 9px;background:#fff8ed;border-color:#c6a477;color:#805b35}
+.ma-shaallah-bubble{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:clamp(66px,8vw,82px);padding:8px 9px;border:1px solid #fff;border-radius:999px;background:linear-gradient(135deg,#ffe2ec,#f6c5d8,#e9d7ff,#d6f3ef);background-size:240% 240%;color:#71385b;font-size:clamp(10px,1.15vw,12px);font-weight:900;white-space:nowrap;box-shadow:0 5px 13px #70465a24,inset 0 1px 4px #ffffffd9;animation:maBubbleColors 6s ease-in-out infinite,maBubbleFloat 3s ease-in-out infinite}
+.ma-shaallah-bubble:before,.ma-shaallah-bubble:after{content:"";position:absolute;border-radius:50%;background:inherit;border:1px solid #ffffffb8;box-shadow:0 2px 6px #70465a20;pointer-events:none}
+.ma-shaallah-bubble:before{width:8px;height:8px;top:-4px;right:13px}
+.ma-shaallah-bubble:after{width:5px;height:5px;bottom:-3px;left:13px}
+.ma-shaallah-bubble:last-child{animation-delay:-3s,-1.5s}
+@keyframes maBubbleColors{0%,100%{background-position:0% 50%;color:#71385b;filter:hue-rotate(0deg)}50%{background-position:100% 50%;color:#285c68;filter:hue-rotate(35deg)}}
+@keyframes maBubbleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:420px){.hero-copy .hero-kicker{gap:4px;font-size:10px}.hero-kicker-center{gap:4px}.hero-kicker-center .kicker-year{padding:4px 6px;font-size:9px}.ma-shaallah-bubble{min-width:59px;padding:7px 6px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.ma-shaallah-bubble{animation:none}}
 </style>
 </head>
 <body>
@@ -124,7 +138,7 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
- <div class="hero-copy"><div class="hero-kicker"><span class="kicker-line"></span> نفاست بھری نئی کلیکشن <span class="kicker-year">2026</span></div><div class="hero-label">لباسِ راحت پیش کرتا ہے</div><h1>آپ کی خوبصورتی،<br><em>آپ کے اپنے انداز میں</em></h1><p>نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔</p><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">آپ کا کارٹ <span>♡</span></button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
+ <div class="hero-copy"><div class="hero-kicker"><span class="ma-shaallah-bubble">ماشاءاللہ</span><span class="hero-kicker-center"><span class="kicker-year">2026</span><span>نفاست بھری کلیکشن</span></span><span class="ma-shaallah-bubble">ماشاءاللہ</span></div><div class="hero-label">لباسِ راحت پیش کرتا ہے</div><h1>آپ کی خوبصورتی،<br><em>آپ کے اپنے انداز میں</em></h1><p>نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔</p><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">آپ کا کارٹ <span>♡</span></button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
  <div class="hero-art"><div class="hero-slideshow" id="heroSlideshow" aria-label="لباسِ راحت کی تصویری کلیکشن"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="fabric-swatch swatch-back"></div><div class="fabric-swatch swatch-front"></div><div class="hero-monogram"><span class="monogram-small">لباس پہننے کا خوبصورت انداز</span><strong>LR</strong><span class="monogram-urdu">لباسِ راحت</span><i></i></div><div class="floating-tag"><span>✦</span> نئی کلیکشن <small>خاص آپ کے لیے</small></div><div class="art-side-note">ہر دن کے لیے نفاست</div></div></div>
 </div></section>
 <div class="home-promises"><div><span>✧</span><b>منتخب کلیکشن</b><small>ہر انداز کے لیے</small></div><i></i><div><span>◇</span><b>آسان آرڈر</b><small>سادہ اور محفوظ خریداری</small></div><i></i><div><span>♡</span><b>ذاتی توجہ</b><small>آپ کا اعتماد ہماری ترجیح</small></div></div>
