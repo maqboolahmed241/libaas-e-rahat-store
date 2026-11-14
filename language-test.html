@@ -1142,7 +1142,9 @@ function setSiteLanguage(lang){
  const observer=new MutationObserver(function(records){
   const textStart=lrTextNodes.length,attrStart=lrAttrNodes.length;
   records.forEach(function(rec){rec.addedNodes.forEach(function(n){if(n.nodeType===1)lrRegisterTree(n);else if(n.nodeType===3&&!lrTextSeen.has(n)){lrTextSeen.add(n);lrTextOriginal.set(n,n.nodeValue);lrTextNodes.push(n);}});});
-  lrApplyNodes(lrTextNodes.slice(textStart),lrAttrNodes.slice(attrStart),lrCurrentLanguage);
+  const newText=lrTextNodes.slice(textStart),newAttrs=lrAttrNodes.slice(attrStart),adminRoot=document.getElementById("adminModal");
+  lrApplyNodes(newText.filter(function(node){return !adminRoot||!adminRoot.contains(node);}),newAttrs.filter(function(el){return !adminRoot||!adminRoot.contains(el);}),lrCurrentLanguage);
+  if(adminRoot)lrApplyNodes(newText.filter(function(node){return adminRoot.contains(node);}),newAttrs.filter(function(el){return adminRoot.contains(el);}),lrCurrentAdminLanguage);
  });
  observer.observe(document.body,{childList:true,subtree:true});
  setSiteLanguage(lrCurrentLanguage);
