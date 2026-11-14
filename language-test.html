@@ -139,6 +139,12 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .newsletter-signup .newsletter-honeypot{position:absolute;right:-10000px;width:1px;height:1px;overflow:hidden}
 @media(max-width:700px){.newsletter-signup{flex:1 1 100%;max-width:none;order:3}}
 
+
+/* LR_BILINGUAL_SAFE_V1 */
+.language-control{display:flex;align-items:center}
+.language-control select{border:1px solid var(--line);background:#fff;color:var(--brown);border-radius:22px;padding:9px 11px;font:inherit;font-size:12px;min-width:92px;cursor:pointer}
+@media(max-width:760px){.language-control{order:4}.language-control select{padding:8px 9px;min-width:82px}}
+
 </style>
 </head>
 <body>
@@ -149,6 +155,7 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
+ <div class="language-control"><label for="siteLanguageSelect" class="sr-only">زبان / Language</label><select id="siteLanguageSelect" aria-label="زبان منتخب کریں"><option value="ur">اردو</option><option value="en">English</option></select></div>
  <div class="nav-actions"><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
 </nav></header>
 <main>
@@ -1031,5 +1038,130 @@ function installStoreApp(){
  alert("Chrome میں اوپر تین نقطے ⋮ دبائیں، پھر 'Install app' یا 'Add to Home screen' منتخب کریں۔");
 }
 syncInstallButton();
+</script>
+<script>
+
+/* LR_BILINGUAL_SAFE_V1 — explicit phrase translation; no MutationObserver and no handler rewrites */
+(function(){
+ "use strict";
+ const translations = {
+ "نبی سر روڈ میں ڈیلیوری دستیاب ہے — ابتدائی ڈیلیوری چارج صرف 150 روپے":"Delivery available in Nabi Sar Road — introductory delivery charge only Rs. 150",
+ "لباسِ راحت — آپ کی پسند، آپ کے گھر تک!":"LIBAAS E RAAHAT — Your choice, delivered to your doorstep!",
+ "لباسِ راحت · خوبصورتی، نفاست اور اعتماد":"LIBAAS E RAAHAT · Beauty, elegance and trust",
+ "ہوم":"Home","کلیکشن":"Collection","ہمارے بارے میں":"About us","ایپ انسٹال کریں":"Install App","ایڈمن":"Admin","ایڈمن لاگ اِن":"Admin Login","کارٹ":"Cart",
+ "ماشاءاللہ":"MashaAllah","نفاست بھری کلیکشن":"Elegant Collection","لباسِ راحت پیش کرتا ہے":"Presented by LIBAAS E RAAHAT",
+ "آپ کی خوبصورتی،":"Your beauty,","آپ کے اپنے انداز میں":"in your own style",
+ "نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔":"Beautifully selected outfits to make every day special and every occasion memorable.",
+ "کلیکشن دریافت کریں":"Explore Collection","آپ کا کارٹ":"Your Cart","معیار، نفاست اور اعتماد — ایک ہی جگہ":"Quality, elegance and trust — all in one place",
+ "لباس پہننے کا خوبصورت انداز":"A beautiful way to dress","لباسِ راحت":"LIBAAS E RAAHAT","نئی کلیکشن":"New Collection","خاص آپ کے لیے":"Especially for you","ہر دن کے لیے نفاست":"Elegance for every day",
+ "منتخب کلیکشن":"Curated Collection","ہر انداز کے لیے":"For every style","آسان آرڈر":"Easy Ordering","سادہ اور محفوظ خریداری":"Simple and secure shopping","ذاتی توجہ":"Personal Attention","آپ کا اعتماد ہماری ترجیح":"Your trust is our priority",
+ "ہماری کلیکشن":"Our Collection","اپنی پسند کا لباس منتخب کریں":"Choose an outfit you love","تمام کلیکشن":"All Collection","لان کاٹن":"Lawn Cotton","کاٹن":"Cotton","شنیل":"Chenille","بانا ڈورا":"Bana Dora","ریڈی ٹو وئیر":"Ready to Wear","گھر کی سلی ہوئی کلیکشن":"Home-Stitched Collection","ننھے ستارے — بچوں کے سوٹ":"Little Stars — Kids' Suits","فارمل":"Formal","کیمبرک":"Cambric","کھدر":"Khaddar",
+ "آپ کا اعتماد، ہماری ترجیح":"Your Trust, Our Priority","آسان خریداری اور ذاتی توجہ کے ساتھ":"With easy shopping and personal attention","مقامی ڈیلیوری":"Local Delivery","ابتدائی طور پر نبی سر روڈ":"Initially in Nabi Sar Road","کیش آن ڈیلیوری کی سہولت":"Cash on Delivery Available",
+ "لباسِ راحت — خوبصورتی جو آپ کے انداز کو مکمل کرے۔":"LIBAAS E RAAHAT — beauty that completes your style.",
+ "رابطہ اور آرڈر":"Contact & Orders","واٹس ایپ نمبر ایڈمن سیٹنگ میں شامل کیا جا سکتا ہے۔":"WhatsApp number can be added in Admin Settings.",
+ "🌸 نئی کلیکشن کی خبر سب سے پہلے پائیں":"🌸 Be the first to hear about new collections",
+ "لباسِ راحت کی نئی کلیکشن، خوبصورت ڈیزائن اور خصوصی اپ ڈیٹس اپنے ای میل پر حاصل کریں۔ اللہ تعالیٰ آپ کے رزق اور گھر میں برکت عطا فرمائے۔ آمین۔":"Receive new collections, beautiful designs and special updates by email. May Allah bless your livelihood and home. Ameen.",
+ "یہ خانہ خالی چھوڑیں":"Leave this field empty","آپ کا نام (اختیاری)":"Your name (optional)","آپ کا ای میل ایڈریس":"Your email address",
+ "میں لباسِ راحت کی نئی کلیکشن اور اپ ڈیٹس ای میل کے ذریعے حاصل کرنے کی اجازت دیتا/دیتی ہوں۔":"I agree to receive LIBAAS E RAAHAT collection updates by email.",
+ "سبسکرائب کریں ✦":"Subscribe ✦","🔔 نئی کلیکشن کی اطلاع آن کریں":"🔔 Turn on new collection alerts","نئی کلیکشن کی اطلاع موبائل پر حاصل کرنے کے لیے اجازت دیں۔":"Allow notifications to receive new collection alerts on your phone.",
+ "مدد اور فیڈبیک":"Help & Feedback","مدد، شکایت اور فیڈبیک":"Help, Complaints & Feedback","آپ کی رائے ہمارے لیے اہم ہے۔ اپنی شکایت یا تجویز یہاں بھیجیں، یہ ایڈمن پینل میں محفوظ ہوگی。":"Your feedback matters. Send your complaint or suggestion here; it will be saved in the Admin Panel.",
+ "آپ کی رائے ہمارے لیے اہم ہے۔ اپنی شکایت یا تجویز یہاں بھیجیں، یہ ایڈمن پینل میں محفوظ ہوگی۔":"Your feedback matters. Send your complaint or suggestion here; it will be saved in the Admin Panel.",
+ "آپ کا نام":"Your Name","موبائل نمبر":"Mobile Number","آرڈر نمبر (اگر موجود ہو)":"Order Number (if available)","موضوع":"Subject","بہتری کی تجویز":"Suggestion","شکایت":"Complaint","آرڈر کا مسئلہ":"Order Issue","ڈیلیوری":"Delivery","ادائیگی":"Payment","دیگر":"Other",
+ "ریٹنگ":"Rating","ریٹنگ دینا اختیاری ہے":"Rating is optional","بہت اچھا":"Excellent","اچھا":"Good","مناسب":"Fair","کمزور":"Poor","بہت خراب":"Very Poor",
+ "اپنی بات تفصیل سے لکھیں":"Tell us more","آپ کو کیا مسئلہ پیش آیا یا ویب سائٹ میں کیا بہتری چاہتے ہیں؟":"What issue did you face, or what would you like us to improve?",
+ "فیڈبیک جمع کریں":"Submit Feedback","واٹس ایپ ہیلپ سینٹر":"WhatsApp Help Center","بند کریں":"Close",
+ "سوٹ / کلیکشن کی مکمل ترمیم":"Edit Suit / Collection","پروڈکٹ کا نام":"Product Name","قیمت (روپے)":"Price (PKR)","دستیاب تعداد":"Available Quantity","کلیکشن / قسم":"Collection / Category","مختصر تعارف":"Short Description","مکمل پروڈکٹ تفصیل":"Full Product Details","فیبرک / کپڑے کی کوالٹی":"Fabric / Quality","کڑھائی / کام کی تفصیل":"Embroidery / Work Details","سوٹ میں شامل چیزیں":"Items Included","موسم / استعمال":"Season / Use","نمایاں خصوصیات (ہر لائن میں ایک)":"Key Features (one per line)","تصاویر تبدیل کریں (زیادہ سے زیادہ 3)":"Change Images (up to 3)","تمام تبدیلیاں محفوظ کریں":"Save All Changes",
+ "سوٹ کی مکمل تفصیل":"Full Suit Details","آپ کا شاپنگ کارٹ":"Your Shopping Cart","سب ٹوٹل":"Subtotal","ڈیلیوری چارج":"Delivery Charge","کل رقم":"Grand Total","پورا نام درج کریں":"Enter your full name","شہر / ڈیلیوری کا علاقہ":"City / Delivery Area","شہر منتخب کریں":"Select City","مکمل پتہ":"Full Address","گھر نمبر، گلی، محلہ وغیرہ":"House number, street, area, etc.","ادائیگی کا طریقہ":"Payment Method","کیش آن ڈیلیوری":"Cash on Delivery","آن لائن ادائیگی":"Online Payment","اکاؤنٹ منتخب کریں":"Select Account","ٹرانزیکشن ریفرنس":"Transaction Reference","ٹرانزیکشن آئی ڈی درج کریں":"Enter transaction ID","ادائیگی کی رسید / اسکرین شاٹ اپلوڈ کریں":"Upload Payment Receipt / Screenshot","آرڈر کنفرم کریں":"Confirm Order","آرڈر محفوظ ہونے کے بعد آپ کو تصدیق دکھائی جائے گی۔":"You will see a confirmation after your order is saved.",
+ "اسٹور ایڈمن پینل":"Store Admin Panel","صرف اسٹور کے مجاز ایڈمن کا ای میل اور پاس ورڈ استعمال کریں۔":"Only the authorized store admin should use their email and password.","ایڈمن ای میل":"Admin Email","آپ کا ای میل":"Your Email","پاس ورڈ":"Password","محفوظ پاس ورڈ":"Secure Password","لاگ اِن کریں":"Log In","نیا اکاؤنٹ بنائیں":"Create New Account","اکاؤنٹ موجود ہے مگر ابھی ایڈمن اجازت نہیں ملی۔":"Account exists, but admin access has not yet been granted.","ایڈمن اجازت کی درخواست بھیجیں":"Request Admin Access",
+ "مصنوعات":"Products","ویب سائٹ وزٹرز":"Website Visitors","اسٹور اعدادوشمار":"Store Statistics","گاہکوں کو SMS":"SMS Customers","سیٹنگز":"Settings","آرڈرز":"Orders","نوٹیفکیشن":"Notifications","فیڈبیک":"Feedback","ایڈمن ٹیم":"Admin Team","ای میل سبسکرائبرز":"Email Subscribers",
+ "اسٹور کے مجموعی اعدادوشمار":"Overall Store Statistics","یہ معلومات صرف ایڈمن پینل میں نظر آئیں گی۔":"This information is visible only in the Admin Panel.","مکمل آرڈرز":"Completed Orders","منفرد گاہک":"Unique Customers","فروخت ہونے والے سوٹ":"Suits Sold","گاہکوں کے تاثرات":"Customer Feedback","اعدادوشمار تازہ کریں":"Refresh Statistics",
+ "ویب سائٹ وزٹرز کی رپورٹ":"Website Visitors Report","یہ اعداد و شمار گمنام وزٹس پر مشتمل ہیں؛ کسی وزٹر کا نام یا فون نمبر جمع نہیں ہوتا۔":"These are anonymous visit counts; visitor names and phone numbers are not collected.","کل وزٹس":"Total Visits","منفرد براؤزرز":"Unique Browsers","آج کے وزٹس":"Today's Visits","گزشتہ 7 دن":"Last 7 Days","گزشتہ 30 دن":"Last 30 Days","رپورٹ تازہ کریں":"Refresh Report",
+ "نئی پروڈکٹ شامل کریں":"Add New Product","سوٹ / فیبرک کی تصویر":"Suit / Fabric Image","ایک سوٹ کی زیادہ سے زیادہ 3 تصاویر منتخب کریں۔ پہلی تصویر فرنٹ پر نظر آئے گی۔":"Select up to 3 images per suit. The first image appears on the storefront.","مثلاً پرنٹڈ لان سوٹ":"e.g. Printed Lawn Suit","مثلاً 2500":"e.g. 2500","تصویر کے ساتھ پروڈکٹ شامل کریں":"Add Product with Image","موجودہ مصنوعات":"Current Products","سوٹ نمبر یا نام سے تلاش کریں":"Search by Suit Number or Name","مثلاً LR-A1B2C3D4 یا سوٹ کا نام":"e.g. LR-A1B2C3D4 or suit name",
+ "واٹس ایپ نمبر 1 — بنیادی آرڈر نمبر":"WhatsApp Number 1 — Main Order Number","ویب سائٹ پر نمبر 1 دکھائیں":"Show Number 1 on Website","واٹس ایپ نمبر 2 — متبادل":"WhatsApp Number 2 — Alternate","ویب سائٹ پر نمبر 2 دکھائیں":"Show Number 2 on Website","واٹس ایپ نمبر 3 — متبادل":"WhatsApp Number 3 — Alternate","ویب سائٹ پر نمبر 3 دکھائیں":"Show Number 3 on Website","گاہک کے آرڈر کا واٹس ایپ کس نمبر پر آئے؟":"Which WhatsApp number should receive customer orders?","نمبر 1":"Number 1","نمبر 2":"Number 2","نمبر 3":"Number 3","یہ انتخاب صرف ایڈمن کرے گا۔ گاہک کو نمبر منتخب کرنے کا اختیار نہیں ہوگا۔":"Only the admin can make this choice. Customers cannot select a number.",
+ "اوپر چلنے والا پیغام / ڈیلیوری علاقہ":"Top Banner Message / Delivery Area","شہر اور ڈیلیوری چارجز":"Cities and Delivery Charges","ہر شہر کا نام اور ڈیلیوری فیس درج کریں۔ غیر فعال شہر گاہک کو نظر نہیں آئے گا۔":"Enter each city and its delivery fee. Inactive cities will not be shown to customers.","+ نیا شہر / علاقہ شامل کریں":"+ Add City / Area","ویب سائٹ پر واٹس ایپ اور رابطہ نمبر دکھائیں":"Show WhatsApp and contact numbers on website",
+ "آن لائن ادائیگی اکاؤنٹس":"Online Payment Accounts","یہاں اپنا ایزی پیسہ، جاز کیش یا بینک اکاؤنٹ شامل کریں۔ گاہک کو یہی تفصیلات چیک آؤٹ پر دکھائی جائیں گی۔":"Add your Easypaisa, JazzCash or bank account here. Customers will see these details at checkout.",
+ "اکاؤنٹ شامل کرنے کے بعد نیچے \"سیٹنگز محفوظ کریں\" لازمی دبائیں۔":"After adding an account, be sure to press \"Save Settings\" below.","+ نیا اکاؤنٹ شامل کریں":"+ Add Account","ایڈمن لاگ اِن محفوظ Supabase اکاؤنٹ سے ہوگا۔ پاس ورڈ اکاؤنٹ کی Auth Settings سے تبدیل ہوگا۔":"Admin login uses a secure Supabase account. Change the password in the account Auth Settings.","سیٹنگز محفوظ کریں":"Save Settings","گاہک کا آرڈر پہلے نمبر پر بھیجا جائے گا؛ باقی دو متبادل رابطے ہیں۔":"Customer orders will go to the first number; the other two are alternate contacts.",
+ "ایڈمن نوٹیفکیشن":"Admin Notifications","نئے آرڈرز اور نئی کلیکشن کی اطلاعات یہاں محفوظ رہیں گی۔":"New order and collection notifications will be saved here.","نوٹیفکیشن اجازت چیک / آن کریں":"Check / Enable Notification Permission","سب کو پڑھا ہوا کریں":"Mark All as Read","اجازت کی حالت چیک کرنے کے لیے اوپر والا بٹن دبائیں۔":"Press the button above to check permission status.",
+ "نئی کلیکشن کا SMS":"New Collection SMS","یہ فہرست ان منفرد فون نمبروں سے بنے گی جن کے آرڈر ڈیلیور ہو چکے ہیں۔ گاہک منتخب کریں، پیغام لکھیں، پھر ہر SMS اپنے موبائل کی Messages ایپ سے بھیجیں۔":"This list includes unique phone numbers of customers with delivered orders. Select customers, write a message, then send each SMS from your phone's Messages app.",
+ "گاہکوں کی فہرست تازہ کریں":"Refresh Customer List","سب منتخب کریں":"Select All","سب ہٹائیں":"Clear All","فہرست لوڈ نہیں ہوئی۔":"List not loaded.","SMS پیغام":"SMS Message","منتخب گاہک کو SMS کھولیں":"Open SMS for Selected Customer","SMS آپ کے فون کی Messages ایپ میں کھلے گا؛ بھیجنے کے لیے وہاں Send دبانا ہوگا۔":"SMS will open in your phone's Messages app; press Send there to send it.",
+ "ویب سائٹ نوٹیفکیشن":"Website Notifications","جن گاہکوں نے ویب سائٹ نوٹیفکیشن کی اجازت دی ہے، ان سب کو نئی کلیکشن کی اطلاع بھیجیں۔":"Send a new collection notification to customers who allowed website notifications.","منتخب کلیکشن کی Push اطلاع بھیجیں":"Send Collection Push Notification",
+ "واٹس ایپ":"WhatsApp","منتخب گاہکوں کے نمبر پر تیار پیغام WhatsApp میں کھولیں۔ ہر پیغام وہاں سے دستی طور پر بھیجنا ہوگا۔ خودکار WhatsApp بھیجنے کے لیے Business API درکار ہے۔":"Open a prepared message in WhatsApp for selected customers. Each message must be sent manually. Automatic WhatsApp sending requires the Business API.","منتخب گاہک کو WhatsApp پیغام کھولیں":"Open WhatsApp Message for Selected Customer",
+ "کسٹمر فیڈبیک، تجاویز اور شکایات":"Customer Feedback, Suggestions & Complaints","یہاں کسٹمر کی بھیجی ہوئی رائے اور شکایات نظر آئیں گی۔ اسٹیٹس بدل کر انہیں زیرِ غور یا حل شدہ کریں۔":"Customer feedback and complaints appear here. Change their status to Under Review or Resolved.",
+ "تمام آرڈرز":"All Orders","نئے آرڈرز":"New Orders","زیرِ تکمیل":"In Progress","ڈیلیور شدہ":"Delivered","سرخ = نیا آرڈر · زرد = ابھی ڈیلیور نہیں ہوا · سبز = ڈیلیور ہو چکا":"Red = New Order · Yellow = Not Yet Delivered · Green = Delivered",
+ "صرف مرکزی مالک اس حصے کو استعمال کر سکتا ہے۔ ای میل درج کریں۔ پہلے سے تصدیق شدہ اکاؤنٹ فوراً ایڈمن بنے گا، ورنہ اسی ای میل سے اکاؤنٹ بنا کر تصدیق کرنے پر اجازت خود مل جائے گی۔":"Only the primary owner can use this section. Enter an email. A verified account becomes an admin immediately; otherwise, create and verify an account with that email to receive access.",
+ "نئے ایڈمن کی ای میل":"New Admin Email","ای میل درج کریں":"Enter Email","ایڈمن شامل کریں":"Add Admin","موجودہ ایڈمنز":"Current Admins","اجازت کی درخواستیں":"Access Requests",
+ "یہ وہ گاہک ہیں جنہوں نے ویب سائٹ پر ای میل اپ ڈیٹس کی رضامندی دی ہے۔":"These customers agreed to receive email updates on the website.","فہرست تازہ کریں":"Refresh List","CSV فائل ڈاؤن لوڈ کریں":"Download CSV File","تمام ای میلز منتخب کریں":"Select All Emails","منتخب":"Selected",
+ "🌸 نئی کلیکشن کا ای میل پیغام":"🌸 New Collection Email","فہرست میں سے ایک یا زیادہ ای میلز منتخب کریں۔ صرف منتخب ای میلز کو بھیجا جائے گا؛ ہر گروپ میں زیادہ سے زیادہ 25 پتے BCC میں شامل ہوں گے۔":"Select one or more email addresses. Only selected addresses will be included; each group supports up to 25 BCC recipients.",
+ "ای میل کا عنوان":"Email Subject","ای میل پیغام":"Email Message","منتخب ای میلز کو Gmail میں تیار کریں (اگلے 25)":"Prepare Selected Emails in Gmail (Next 25)",
+ "Gmail میں ہر گروپ BCC کے ذریعے تیار ہوگا۔ آپ پیغام چیک کرکے خود Send دبائیں گے؛ کوئی ای میل خودکار طور پر نہیں بھیجی جائے گی۔":"Each group will be prepared in Gmail using BCC. Review the message and press Send yourself; no email is sent automatically."
+ };
+ const originals = new WeakMap();
+ function setLang(lang){
+  const root=document.documentElement;
+  root.lang=lang==="en"?"en":"ur";
+  const select=document.getElementById("siteLanguageSelect");
+  if(select && select.value!==lang) select.value=lang;
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+   acceptNode:function(n){
+    if(!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+    const p=n.parentElement;
+    if(!p || p.closest("script,style,textarea,option,select,input,[data-no-translate]")) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
+   }
+  });
+  let node;
+  while((node=walker.nextNode())){
+   if(!originals.has(node)) originals.set(node,node.nodeValue);
+   const original=originals.get(node);
+   if(lang==="ur"){node.nodeValue=original;continue;}
+   const trimmed=original.trim();
+   const translated=translations[trimmed];
+   if(translated!==undefined){
+    const lead=original.match(/^\s*/)[0], tail=original.match(/\s*$/)[0];
+    node.nodeValue=lead+translated+tail;
+   }
+  }
+  document.querySelectorAll("input[placeholder],textarea[placeholder]").forEach(function(el){
+   if(!el.dataset.lrOriginalPlaceholder) el.dataset.lrOriginalPlaceholder=el.getAttribute("placeholder");
+   const original=el.dataset.lrOriginalPlaceholder;
+   if(lang==="ur") el.setAttribute("placeholder",original);
+   else if(translations[original]) el.setAttribute("placeholder",translations[original]);
+  });
+  document.querySelectorAll("select option").forEach(function(el){
+   if(!el.dataset.lrOriginalText) el.dataset.lrOriginalText=el.textContent;
+   const original=el.dataset.lrOriginalText.trim();
+   if(lang==="ur") el.textContent=el.dataset.lrOriginalText;
+   else if(translations[original]) el.textContent=translations[original];
+  });
+  try{localStorage.setItem("lr_store_language",lang)}catch(e){}
+  document.body.dataset.storeLanguage=lang;
+ }
+ window.setStoreLanguage=setLang;
+ const select=document.getElementById("siteLanguageSelect");
+ let initial="ur";
+ try{initial=localStorage.getItem("lr_store_language")==="en"?"en":"ur"}catch(e){}
+ if(select){select.value=initial;select.addEventListener("change",function(){setLang(this.value)});}
+ const renderNames=["renderProducts","openProductDetail","renderCart","renderAdminProducts","renderAdminOrders","renderAdminNewsletter","renderAdminFeedback","renderAdminTeam","renderAdminRequests","renderVisitorStats","renderAdminStoreStats","renderAdminNotifications","renderSmsCustomers"];
+ renderNames.forEach(function(name){
+  const original=window[name];
+  if(typeof original!=="function" || original.__lrWrapped) return;
+  const wrapped=function(){
+   const result=original.apply(this,arguments);
+   if(result && typeof result.then==="function") return result.then(function(value){setLang(document.body.dataset.storeLanguage||initial);return value});
+   setLang(document.body.dataset.storeLanguage||initial);
+   return result;
+  };
+  wrapped.__lrWrapped=true;
+  window[name]=wrapped;
+ });
+ document.addEventListener("click",function(){
+  window.setTimeout(function(){setLang(document.body.dataset.storeLanguage||initial)},80);
+ },false);
+ document.addEventListener("submit",function(){
+  window.setTimeout(function(){setLang(document.body.dataset.storeLanguage||initial)},100);
+ },false);
+ setLang(initial);
+})();
+
 </script>
 </body></html>
