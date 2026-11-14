@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لباسِ راحت — ای میل ٹیسٹ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f1e9;color:#34251d;font-family:Arial,sans-serif;line-height:1.7}
+main{max-width:680px;margin:24px auto;padding:16px}.panel{background:#fff;border:1px solid #d8c3a5;border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 5px 20px #0000000a}
+h1,h2{color:#6c452b;margin-top:0}.muted{color:#76695f;font-size:14px}label{display:block;margin:10px 0 4px}input{width:100%;padding:12px;border:1px solid #cdbda9;border-radius:9px;font-size:16px}
+button{border:0;border-radius:9px;padding:12px 16px;background:#5b3926;color:white;font-size:15px;cursor:pointer;margin-top:12px}button:disabled{opacity:.6}
+.check{display:flex;gap:8px;align-items:center}.check input{width:auto}.status{min-height:28px;color:#315b38}.sub{padding:12px;border-bottom:1px solid #eee}.hidden{display:none}
+</style>
+</head>
+<body><main>
+<div class="panel">
+<h1>LIBAAS E RAAHAT</h1>
+<h2>ای میل سبسکرپشن ٹیسٹ</h2>
+<p>یہ الگ ٹیسٹ صفحہ ہے۔ اس پر کیا جانے والا ٹیسٹ اصل اسٹور کے آرڈر یا مصنوعات کو تبدیل نہیں کرے گا۔</p>
+<p class="muted">نوٹ: یہاں درج کیا گیا ای میل اصل newsletter_subscribers فہرست میں محفوظ ہوگا، تاکہ حقیقی سبسکرپشن کی جانچ ہو سکے۔</p>
+<form id="subscribeForm">
+<label for="personName">آپ کا نام (اختیاری)</label><input id="personName" maxlength="80" autocomplete="name" placeholder="اپنا نام">
+<label for="personEmail">ای میل ایڈریس</label><input id="personEmail" type="email" required autocomplete="email" placeholder="name@example.com">
+<label class="check"><input id="consent" type="checkbox" required> میں ای میل اپ ڈیٹس حاصل کرنے پر رضامند ہوں۔</label>
+<button id="subscribeBtn" type="submit">سبسکرائب کریں</button>
+<p id="subscribeStatus" class="status" role="status" aria-live="polite"></p>
+</form></div>
+<div class="panel">
+<h2>ایڈمن فہرست کی جانچ</h2>
+<p class="muted">اپنے موجودہ لباسِ راحت ایڈمن اکاؤنٹ کی ای میل اور پاس ورڈ سے لاگ اِن کریں۔ صرف owner/admin فہرست دیکھ سکتے ہیں۔</p>
+<div id="loginBox">
+<label for="adminEmail">ایڈمن ای میل</label><input id="adminEmail" type="email" autocomplete="username">
+<label for="adminPassword">پاس ورڈ</label><input id="adminPassword" type="password" autocomplete="current-password">
+<button id="loginBtn" type="button">ایڈمن لاگ اِن</button>
+</div>
+<div id="adminBox" class="hidden">
+<p id="adminStatus" class="status" role="status" aria-live="polite"></p>
+<button id="refreshBtn" type="button">فہرست تازہ کریں</button>
+<button id="csvBtn" type="button">CSV ڈاؤن لوڈ</button>
+<button id="logoutBtn" type="button">لاگ آؤٹ</button>
+<div id="subscriberList"></div>
+</div>
+<p id="loginStatus" class="status" role="status" aria-live="polite"></p>
+</div>
+<p class="muted">ٹیسٹ مکمل ہونے کے بعد اصل اسٹور کے لنک پر واپس جا سکتے ہیں۔ یہ صفحہ صرف جانچ کے لیے ہے۔</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+"use strict";
+const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
+const SB_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
+const db=window.supabase.createClient(SB_URL,SB_KEY);
+let subscribers=[];
+const $=id=>document.getElementById(id);
+function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+$("subscribeForm").addEventListener("submit",async function(e){
+ e.preventDefault();
+ const btn=$("subscribeBtn"),status=$("subscribeStatus");
+ const name=$("personName").value.trim(),email=$("personEmail").value.trim().toLowerCase();
+ if(!$("consent").checked){status.textContent="براہ کرم رضامندی کی تصدیق کریں۔";return;}
+ btn.disabled=true;status.textContent="محفوظ ہو رہا ہے…";
+ try{
+  const r=await db.from("newsletter_subscribers").insert({name:name||null,email});
+  if(r.error){if(r.error.code==="23505"){status.textContent="یہ ای میل پہلے ہی فہرست میں موجود ہے۔";return;}throw r.error;}
+  status.textContent="کامیابی! ای میل فہرست میں محفوظ ہوگیا۔";
+  $("personName").value="";$("personEmail").value="";$("consent").checked=false;
+ }catch(err){console.error(err);status.textContent="محفوظ نہیں ہو سکا: "+(err.message||"سرور کی خرابی");}
+ finally{btn.disabled=false;}
+});
+async function loadSubscribers(){
+ $("adminStatus").textContent="فہرست لوڈ ہو رہی ہے…";
+ const r=await db.from("newsletter_subscribers").select("id,name,email,created_at").order("created_at",{ascending:false}).limit(2000);
+ if(r.error){$("adminStatus").textContent="فہرست لوڈ نہیں ہوئی: "+r.error.message;return;}
+ subscribers=r.data||[];
+ $("subscriberList").innerHTML=subscribers.map(x=>'<div class="sub"><b>'+safe(x.email)+'</b><br><span class="muted">'+safe(x.name||"نام درج نہیں")+' · '+safe(x.created_at?new Date(x.created_at).toLocaleString("ur-PK"):"")+'</span></div>').join("")||'<p class="muted">ابھی کوئی ای میل محفوظ نہیں۔</p>';
+ $("adminStatus").textContent="کل "+subscribers.length+" ای میلز محفوظ ہیں۔";
+}
+$("loginBtn").addEventListener("click",async function(){
+ const btn=$("loginBtn");btn.disabled=true;$("loginStatus").textContent="لاگ اِن چیک ہو رہا ہے…";
+ try{
+  const login=await db.auth.signInWithPassword({email:$("adminEmail").value.trim(),password:$("adminPassword").value});
+  if(login.error)throw login.error;
+  const user=login.data.user;
+  const check=await db.from("store_admins").select("user_id,role").eq("user_id",user.id).maybeSingle();
+  if(check.error)throw check.error;
+  if(!check.data||!["owner","admin"].includes(check.data.role)){
+   await db.auth.signOut();throw new Error("اس اکاؤنٹ کو ایڈمن فہرست دیکھنے کی اجازت نہیں۔");
+  }
+  $("loginBox").classList.add("hidden");$("adminBox").classList.remove("hidden");$("loginStatus").textContent="";
+  await loadSubscribers();
+ }catch(err){$("loginStatus").textContent="لاگ اِن نہیں ہوا: "+(err.message||"تفصیل دستیاب نہیں");}
+ finally{btn.disabled=false;}
+});
+$("refreshBtn").addEventListener("click",loadSubscribers);
+$("csvBtn").addEventListener("click",function(){
+ if(!subscribers.length){$("adminStatus").textContent="CSV کے لیے پہلے فہرست تازہ کریں۔";return;}
+ const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+ const csv="Name,Email,Joined\n"+subscribers.map(x=>[q(x.name),q(x.email),q(x.created_at)].join(",")).join("\n");
+ const blob=new Blob(["\ufeff",csv],{type:"text/csv;charset=utf-8"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="Libaas-E-Rahat-Email-Subscribers.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+});
+$("logoutBtn").addEventListener("click",async function(){
+ await db.auth.signOut();subscribers=[];$("adminBox").classList.add("hidden");$("loginBox").classList.remove("hidden");$("subscriberList").innerHTML="";$("adminStatus").textContent="";$("loginStatus").textContent="آپ لاگ آؤٹ ہوگئے ہیں۔";
+});
+})();
+</script></body></html>
