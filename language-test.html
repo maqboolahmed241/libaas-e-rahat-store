@@ -145,6 +145,31 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .language-control select{border:1px solid var(--line);background:#fff;color:var(--brown);border-radius:22px;padding:9px 11px;font:inherit;font-size:12px;min-width:92px;cursor:pointer}
 @media(max-width:760px){.language-control{order:4}.language-control select{padding:8px 9px;min-width:82px}}
 
+
+/* LR_BILINGUAL_LAYOUT_GUARD_V1 */
+body[data-store-language="en"]{font-family:Arial,"Noto Sans",Tahoma,sans-serif}
+body[data-store-language="en"] .nav,
+body[data-store-language="en"] .nav-actions,
+body[data-store-language="en"] .section-head{flex-wrap:wrap}
+body[data-store-language="en"] .language-control{flex:0 0 auto}
+body[data-store-language="en"] .nav-actions{min-width:0}
+body[data-store-language="en"] .nav-actions>*,
+body[data-store-language="en"] .admin-tabs>*,
+body[data-store-language="en"] .hero-cta>*{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+body[data-store-language="en"] .product-info h3,
+body[data-store-language="en"] .product-info p,
+body[data-store-language="en"] .feature,
+body[data-store-language="en"] .modal,
+body[data-store-language="en"] .admin-list,
+body[data-store-language="en"] .field label{min-width:0;overflow-wrap:anywhere}
+body[data-store-language="en"] input,
+body[data-store-language="en"] select,
+body[data-store-language="en"] textarea{max-width:100%;min-width:0}
+@media(max-width:760px){
+ body[data-store-language="en"] .nav{justify-content:space-between;row-gap:9px}
+ body[data-store-language="en"] .nav-actions{flex:1 1 100%;justify-content:flex-start}
+ body[data-store-language="en"] .language-control{margin-left:auto}
+}
 </style>
 </head>
 <body>
