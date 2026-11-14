@@ -322,6 +322,39 @@ function openHelpWhatsApp(reason){
  const msg="السلام علیکم، لباسِ راحت ہیلپ سینٹر سے رابطہ کر رہا/رہی ہوں۔\n"+reason+"\nآرڈر نمبر (اگر ہو): ";
  window.open("https://wa.me/"+num+"?text="+encodeURIComponent(msg),"_blank","noopener");
 }
+let newsletterSubscribers=[];
+async function submitNewsletter(event){
+ if(event){event.preventDefault();event.stopPropagation();}
+ const status=document.getElementById("newsletterStatus"),btn=document.getElementById("newsletterSubmitBtn");
+ const name=document.getElementById("newsletterName").value.trim(),email=document.getElementById("newsletterEmail").value.trim().toLowerCase();
+ if(document.getElementById("newsletterWebsite").value.trim())return;
+ if(!document.getElementById("newsletterConsent").checked){status.textContent="براہ کرم ای میل اپ ڈیٹس کے لیے اپنی رضامندی دیں۔";return;}
+ if(!email||!/^\S+@\S+\.\S+$/.test(email)){status.textContent="درست ای میل ایڈریس درج کریں۔";return;}
+ if(!db){status.textContent="سرور سے رابطہ نہیں ہو رہا۔ انٹرنیٹ چیک کرکے دوبارہ کوشش کریں۔";return;}
+ btn.disabled=true;btn.textContent="محفوظ ہو رہا ہے…";status.textContent="";
+ try{
+  const result=await db.from("newsletter_subscribers").insert({name:name||null,email:email});
+  if(result.error){if(result.error.code==="23505"){status.textContent="یہ ای میل پہلے ہی ہماری فہرست میں شامل ہے۔ شکریہ!";return;}throw result.error;}
+  status.textContent="شکریہ! آپ کا ای میل لباسِ راحت کی فہرست میں شامل ہوگیا ہے۔";
+  document.getElementById("newsletterName").value="";document.getElementById("newsletterEmail").value="";document.getElementById("newsletterConsent").checked=false;
+ }catch(e){console.error("Newsletter subscribe:",e);status.textContent="ابھی سبسکرپشن محفوظ نہیں ہو سکی۔ براہ کرم کچھ دیر بعد دوبارہ کوشش کریں۔";}
+ finally{btn.disabled=false;btn.textContent="سبسکرائب کریں ✦";}
+}
+async function renderAdminNewsletter(){
+ const el=document.getElementById("adminNewsletterList"),status=document.getElementById("newsletterAdminStatus");if(!el||!currentAdminUser)return;
+ if(status)status.textContent="فہرست لوڈ ہو رہی ہے…";
+ const r=await db.from("newsletter_subscribers").select("id,name,email,created_at").order("created_at",{ascending:false}).limit(2000);
+ if(r.error){if(status)status.textContent="فہرست لوڈ نہیں ہوئی: "+r.error.message;return;}
+ newsletterSubscribers=r.data||[];
+ el.innerHTML=newsletterSubscribers.map(function(x){return '<div class="admin-item"><span><b>'+esc(x.email)+'</b><br><small>'+esc(x.name||"نام درج نہیں")+' · '+esc(x.created_at?new Date(x.created_at).toLocaleString("ur-PK"):"")+'</small></span></div>';}).join("")||'<p class="muted">ابھی کوئی سبسکرائبر شامل نہیں ہوا۔</p>';
+ if(status)status.textContent="کل "+newsletterSubscribers.length+" ای میلز محفوظ ہیں۔";
+}
+function downloadNewsletterCsv(){
+ if(!newsletterSubscribers.length)return alert("پہلے ای میل سبسکرائبرز کی فہرست تازہ کریں۔");
+ const quote=function(v){return '"'+String(v??"").replace(/"/g,'""')+'"';};
+ const csv="Name,Email,Joined\n"+newsletterSubscribers.map(function(x){return [quote(x.name),quote(x.email),quote(x.created_at)].join(",");}).join("\n");
+ const blob=new Blob(["\ufeff",csv],{type:"text/csv;charset=utf-8;"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Libaas-E-Raahat-Email-Subscribers.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
 async function submitCustomerFeedback(){
  const name=document.getElementById("feedbackName").value.trim(),phone=document.getElementById("feedbackPhone").value.trim(),order=document.getElementById("feedbackOrder").value.trim(),category=document.getElementById("feedbackCategory").value,message=document.getElementById("feedbackMessage").value.trim(),rating=document.getElementById("feedbackRating").value,btn=document.getElementById("sendFeedbackBtn"),status=document.getElementById("feedbackStatus");
  if(!name||!phone||message.length<5){status.textContent="براہ کرم نام، موبائل نمبر اور کم از کم پانچ حروف پر مشتمل پیغام درج کریں۔";return}
