@@ -529,7 +529,7 @@ function openNewsletterGmailCampaign(){
  const total=newsletterSubscribers.length,batchSize=25,start=newsletterEmailBatchOffset;
  const batch=newsletterSubscribers.slice(start,start+batchSize);
  if(!batch.length){newsletterEmailBatchOffset=0;if(status)status.textContent="تمام گروپس تیار ہو چکے ہیں۔ دوبارہ شروع کرنے کے لیے بٹن دبائیں۔";return;}
- const recipients=batch.map(function(x){return String(x.email||"").trim().toLowerCase();}).filter(function(email){return /^\\S+@\\S+\\.\\S+$/.test(email);});
+ const recipients=batch.map(function(x){return String(x.email||"").trim().toLowerCase();}).filter(function(email){return /^\S+@\S+\.\S+$/.test(email);});
  if(!recipients.length){if(status)status.textContent="اس گروپ میں کوئی درست ای میل ایڈریس نہیں ملا۔";return;}
  const subject=document.getElementById("newsletterCampaignSubject").value.trim();
  const body=document.getElementById("newsletterCampaignBody").value.trim();
