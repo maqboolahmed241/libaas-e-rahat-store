@@ -180,6 +180,29 @@ body[data-store-language="en"] textarea{max-width:100%;min-width:0}
  #productModal .close{width:auto;min-width:72px;height:38px;border-radius:20px;padding:0 12px;font-size:13px}
  #productModal #productMainPhoto{max-height:38vh!important;object-fit:contain}
 }
+
+/* Keep product detail centered on the page in Urdu and English */
+@media(max-width:900px), (pointer:coarse) and (max-width:1100px){
+ #productModal{
+  position:fixed!important;inset:0!important;
+  width:100vw!important;height:100vh!important;height:100dvh!important;
+  max-width:none!important;max-height:none!important;
+  margin:0!important;padding:0!important;
+  display:none;align-items:stretch!important;justify-content:center!important;
+  box-sizing:border-box!important;overflow:hidden!important;
+ }
+ #productModal.show{display:flex!important}
+ #productModal>.modal{
+  position:relative!important;inset:auto!important;
+  width:100%!important;min-width:0!important;max-width:none!important;
+  height:100%!important;min-height:100%!important;max-height:100%!important;
+  margin:0 auto!important;transform:none!important;
+  border-radius:0!important;box-sizing:border-box!important;
+  padding:14px 15px calc(22px + env(safe-area-inset-bottom))!important;
+  overflow-y:auto!important;overscroll-behavior:contain;
+ }
+ #productModal .modal-head{position:sticky;top:-14px;z-index:5;background:var(--paper);padding:10px 0 12px;margin:-14px 0 14px;border-bottom:1px solid var(--line)}
+}
 </style>
 </head>
 <body>
