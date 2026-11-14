@@ -24,6 +24,21 @@ button{border:0;border-radius:9px;padding:12px 16px;background:#5b3926;color:whi
 <button id="subscribeBtn" type="submit">سبسکرائب کریں</button>
 <p id="subscribeStatus" class="status" role="status" aria-live="polite"></p>
 </form></div>
+
+<div class="panel" id="gmailPanel">
+<h2>Gmail کے ذریعے ای میل بھیجنے کا ٹیسٹ</h2>
+<p class="muted">یہ سہولت Gmail میں پیغام تیار کرے گی۔ Gmail کھلنے کے بعد آپ خود پیغام دیکھ کر Send دبائیں گے۔ ویب سائٹ آپ کے Gmail پاس ورڈ یا خفیہ کوڈ کو محفوظ نہیں کرتی۔</p>
+<label for="testRecipient">ٹیسٹ وصول کنندہ کا ای میل</label><input id="testRecipient" type="email" placeholder="اپنا ای میل ایڈریس درج کریں">
+<label for="mailSubject">ای میل کا عنوان</label><input id="mailSubject" maxlength="150" value="لباسِ راحت — ای میل ٹیسٹ">
+<label for="mailBody">پیغام</label><textarea id="mailBody" rows="5" style="width:100%;padding:12px;border:1px solid #cdbda9;border-radius:9px;font:16px Arial;line-height:1.7">السلام علیکم!
+
+لباسِ راحت کی طرف سے یہ ایک ٹیسٹ ای میل ہے۔
+
+شکریہ
+LIBAAS E RAAHAT</textarea>
+<button id="gmailTestBtn" type="button">Gmail میں ٹیسٹ ای میل تیار کریں</button>
+<p id="gmailStatus" class="status" role="status" aria-live="polite"></p>
+</div>
 <div class="panel">
 <h2>ایڈمن فہرست کی جانچ</h2>
 <p class="muted">اپنے موجودہ لباسِ راحت ایڈمن اکاؤنٹ کی ای میل اور پاس ورڈ سے لاگ اِن کریں۔ صرف owner/admin فہرست دیکھ سکتے ہیں۔</p>
@@ -91,6 +106,22 @@ $("loginBtn").addEventListener("click",async function(){
  }catch(err){$("loginStatus").textContent="لاگ اِن نہیں ہوا: "+(err.message||"تفصیل دستیاب نہیں");}
  finally{btn.disabled=false;}
 });
+
+function openGmailDraft(to){
+ const subject=$("mailSubject").value.trim();
+ const body=$("mailBody").value.trim();
+ if(!subject||!body){$("gmailStatus").textContent="عنوان اور پیغام دونوں درج کریں۔";return;}
+ const params=new URLSearchParams({view:"cm",fs:"1",to, su:subject, body});
+ const url="https://mail.google.com/mail/?"+params.toString();
+ window.open(url,"_blank","noopener");
+ $("gmailStatus").textContent="Gmail میں پیغام تیار کیا جا رہا ہے۔ Gmail کھلنے پر تفصیل دیکھ کر خود Send دبائیں۔";
+}
+$("gmailTestBtn").addEventListener("click",function(){
+ const to=$("testRecipient").value.trim();
+ if(!to||!$("testRecipient").checkValidity()){$("gmailStatus").textContent="درست وصول کنندہ ای میل درج کریں۔";return;}
+ openGmailDraft(to);
+});
+
 $("refreshBtn").addEventListener("click",loadSubscribers);
 $("csvBtn").addEventListener("click",function(){
  if(!subscribers.length){$("adminStatus").textContent="CSV کے لیے پہلے فہرست تازہ کریں۔";return;}
