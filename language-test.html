@@ -1124,7 +1124,7 @@ function setSiteLanguage(lang){
   if(scheduled)return;scheduled=true;
   queueMicrotask(function(){
    scheduled=false;const roots=pending;pending=[];
-   const unique=roots.filter(function(n){return !roots.some(function(other){return other!==n&&other.nodeType===1&&other.contains&&other.contains(n));});
+   const unique=roots.filter(function(n){return !roots.some(function(other){return other!==n&&other.nodeType===1&&other.contains&&other.contains(n);});});
    const current=localStorage.getItem("lr_site_language")||"ur";
    unique.forEach(function(n){lrTranslateTree(n,current);});
   });
