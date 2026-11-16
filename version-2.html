@@ -146,6 +146,14 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-brand-title{display:block;font-family:Georgia,"Noto Nastaliq Urdu",Tahoma,serif;font-size:clamp(21px,3vw,29px);font-weight:800;letter-spacing:.3px;line-height:1.7;color:#765238;text-align:center}
 html[lang="en"] .hero-brand-title{font-family:Georgia,Arial,sans-serif;letter-spacing:1.5px}
 @media(max-width:700px){.nav{flex-wrap:wrap;justify-content:center}.brand{width:100%;justify-content:center}.navlinks{order:3;width:100%;justify-content:center;gap:14px}.nav-actions{width:100%;justify-content:center;flex-wrap:wrap}.hero-copy{padding:34px 7% 30px}.hero-kicker{margin-bottom:2px}}
+
+/* Product detail modal: mobile visibility and scroll fix */
+#productModal{z-index:1000;align-items:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px;padding-top:max(12px,env(safe-area-inset-top));}
+#productModal.show{display:flex!important;visibility:visible!important;opacity:1!important;}
+#productModal>.modal{display:block!important;visibility:visible!important;opacity:1!important;position:relative;z-index:1;flex:0 0 auto;width:min(560px,100%);max-width:100%;max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;margin:auto;padding:18px;box-sizing:border-box;background:var(--paper,#fffdfa);color:var(--brown,#34211c);-webkit-overflow-scrolling:touch;}
+#productModal #productDetail{display:block!important;visibility:visible!important;opacity:1!important;min-height:40px;color:var(--brown,#34211c);}
+@media(max-width:600px){#productModal{padding:8px;padding-top:max(8px,env(safe-area-inset-top));}#productModal>.modal{width:100%;max-height:calc(100dvh - 16px);border-radius:17px;padding:15px;}#productModal .modal-head{position:sticky;top:-15px;z-index:4;background:var(--paper,#fffdfa);padding:8px 0;margin:0 0 12px;}#productModal #productMainPhoto{max-height:36dvh!important;}}
+
 </style>
 </head>
 <body>
@@ -846,12 +854,22 @@ function renderProducts(){
  }).join("")||'<p class="muted">ابھی کلیکشن شامل کی جا رہی ہے۔ جلد تشریف لائیں۔</p>';
 }
 function openProductDetail(id){
- let p=products.find(function(x){return String(x.id)===String(id)});if(!p||Number(p.stock)<=0){alert("معذرت، یہ سوٹ اب دستیاب نہیں ہے۔");return;}
+ let p=products.find(function(x){return String(x.id)===String(id)});
+ if(!p||Number(p.stock)<=0){alert("معذرت، یہ سوٹ اب دستیاب نہیں ہے۔");return;}
  let imgs=getProductImages(p),first=imgs[0]||p.image_url;
  let thumbs=imgs.length>1?'<div style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">'+imgs.map(function(u,i){return '<button type="button" onclick="showProductPhoto(\''+p.id+'\','+i+')" style="padding:3px;border:2px solid '+(i===0?'#c7a46a':'#eadfd2')+';border-radius:10px;background:white"><img src="'+esc(u)+'" alt="سوٹ کی تصویر '+(i+1)+'" style="width:68px;height:76px;object-fit:cover;border-radius:7px"></button>'}).join("")+'</div>':'';
- let el=document.getElementById("productDetail");if(!el)return;
+ let el=document.getElementById("productDetail"),overlay=document.getElementById("productModal");
+ if(!el||!overlay){alert("پروڈکٹ کی تفصیل ابھی دستیاب نہیں۔ براہ کرم دوبارہ کوشش کریں۔");return;}
  el.innerHTML='<div style="display:grid;gap:12px"><div style="background:#f7eee5;border-radius:16px;padding:8px;text-align:center"><img id="productMainPhoto" src="'+esc(first||"")+'" alt="'+esc(p.name)+'" style="width:100%;max-height:420px;object-fit:contain;border-radius:12px;'+(!first?'display:none':'')+'">'+(!first?'<div class="product-art"><span>LIBAAS E RAAHAT</span></div>':'')+'</div>'+thumbs+'<h2 style="margin:4px 0">'+esc(p.name)+'</h2><small style="display:inline-block;margin:0 0 5px;padding:3px 8px;border-radius:6px;background:#f5e8d4;color:#68452d;font-size:10px;font-weight:800">سوٹ نمبر: '+productCode(p)+'</small><div style="font-size:1.35rem;font-weight:800;color:#9a6b43">'+money(p.price)+'</div><section class="product-story"><div class="story-intro"><span>LIBAAS E RAAHAT</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.description||"نفاست، آرام اور خوبصورت انداز کا حسین امتزاج۔")+'</p></div><h3>🧵 پروڈکٹ کی تفصیل</h3><div class="story-grid"><div><b>🧶 فیبرک / کوالٹی</b><p>'+esc(p.fabric_details||p.fabric||p.category||"تفصیل دستیاب نہیں")+'</p></div><div><b>✨ کام / کڑھائی</b><p>'+esc(p.work_details||"خوبصورت اور نفیس فنشنگ")+'</p></div><div><b>🎀 سوٹ میں شامل</b><p>'+esc(p.includes_details||"مزید تفصیل جلد شامل ہوگی")+'</p></div><div><b>🌙 موسم / استعمال</b><p>'+esc(p.season_details||"ہر موقع کے لیے")+'</p></div></div><div class="story-highlights"><b>💖 آپ کو کیوں پسند آئے گا</b><ul>'+(p.highlights?String(p.highlights).split(/\r?\n/).filter(Boolean).map(function(x){return "<li>"+esc(x)+"</li>"}).join(""):"<li>آرام دہ اور نفیس انتخاب</li><li>خوبصورت ڈیزائن اور بہترین فنشنگ</li>")+'</ul></div><p class="stock-line">دستیاب اسٹاک: '+Number(p.stock||0)+'</p></section><div class="admin-note"><b>ادائیگی</b><p style="margin:6px 0">کیش آن ڈیلیوری دستیاب ہے۔ آن لائن ادائیگی کے لیے چیک آؤٹ پر دستیاب اکاؤنٹ منتخب کریں۔</p></div><div class="field"><label>مقدار منتخب کریں</label><input id="detailQty" type="number" min="1" max="'+Math.max(1,Number(p.stock||0))+'" value="1" '+(p.stock<=0?"disabled":"")+'></div><button class="wide" '+(p.stock<=0?"disabled":"")+' onclick="detailAddToCart(\''+p.id+'\')">کارٹ میں شامل کریں</button><button class="wide" style="background:#9b7658" '+(p.stock<=0?"disabled":"")+' onclick="detailBuyNow(\''+p.id+'\')">ابھی آرڈر کریں</button></div>';
- document.getElementById("productModal").classList.add("show");
+ overlay.style.display="flex";
+ overlay.style.visibility="visible";
+ overlay.style.opacity="1";
+ overlay.setAttribute("aria-hidden","false");
+ overlay.classList.add("show");
+ let modal=overlay.querySelector(".modal");
+ if(modal){modal.style.display="block";modal.style.visibility="visible";modal.scrollTop=0;}
+ overlay.scrollTop=0;
+ document.body.style.overflow="hidden";
 }
 function showProductPhoto(id,index){let p=products.find(function(x){return String(x.id)===String(id)});if(!p)return;let url=getProductImages(p)[index];if(!url)return;let main=document.getElementById("productMainPhoto");if(main){main.src=url;main.style.display="block"}document.querySelectorAll("#productDetail button").forEach(function(b,i){if(b.querySelector("img"))b.style.borderColor=i===index?"#c7a46a":"#eadfd2"})}
 
@@ -868,7 +886,7 @@ function renderCart(){
  const subtotalEl=document.getElementById("subtotal"),grandtotalEl=document.getElementById("grandtotal"),feeEl=document.getElementById("deliveryFeeDisplay"),areaEl=document.getElementById("customerArea"),chosenArea=(settings.delivery_areas||[]).find(function(x){return x.name===areaEl?.value&&x.active!==false;}),currentFee=chosenArea?Number(chosenArea.fee||0):0;if(subtotalEl)subtotalEl.textContent=money(sub);if(grandtotalEl)grandtotalEl.textContent=money(sub+currentFee);if(feeEl)feeEl.textContent=money(currentFee);else{const totals=document.querySelectorAll("#cartModal .total");if(totals.length>1){const feeValue=totals[1].querySelector("b");if(feeValue)feeValue.textContent=money(settings.fee);}}renderCustomerPaymentOptions();
 }
 function changeQty(id,d){let p=products.find(function(x){return x.id===id});cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];else if(p&&cart[id]>p.stock)cart[id]=p.stock;saveCart();updateCount();renderCart()}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
+function closeModal(id){let el=document.getElementById(id);if(!el)return;el.classList.remove("show");el.style.display="none";el.setAttribute("aria-hidden","true");if(!document.querySelector(".overlay.show"))document.body.style.overflow="";}
 async function submitOrder(ev){
  if(ev){ev.preventDefault();ev.stopPropagation();}
  const btn=document.getElementById("submitOrderBtn");
