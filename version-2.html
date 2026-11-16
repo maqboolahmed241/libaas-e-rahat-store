@@ -231,6 +231,46 @@ ur:{topNotice:"نبی سر روڈ میں ڈیلیوری دستیاب ہے — ا
 sd:{topNotice:"نبي سر روڊ ۾ ڊيليوري موجود آهي — شروعاتي ڊيليوري چارج 150 رپيا",brandTag:"خوبصورتي، نفاست ۽ اعتماد",navHome:"گهر",navCollection:"ڪليڪشن",navAbout:"اسان بابت",installApp:"ايپ انسٽال ڪريو",admin:"ايڊمن",cart:"ڪارٽ",heroKicker:"نفاست ڀري ڪليڪشن",heroBrand:"لباسِ راحت",heroLabel:"لباسِ راحت پيش ڪري ٿو",heroTitle:"توهان جي خوبصورتي،<br><em>توهان جي پنهنجي انداز ۾</em>",heroText:"نفاست سان چونڊيل خوبصورت ڪپڙا — هر ڏينهن کي خاص ۽ هر موقعي کي يادگار بڻائڻ لاءِ.",discover:"ڪليڪشن ڏسو",yourCart:"توهان جو ڪارٽ",heroFoot:"معيار، نفاست ۽ اعتماد — سڀ هڪ هنڌ",promise1:"چونڊيل ڪليڪشن",promise1s:"هر انداز لاءِ",promise2:"آسان آرڊر",promise2s:"سادي ۽ محفوظ خريداري",promise3:"ذاتي خيال",promise3s:"توهان جو اعتماد اسان جي ترجيح",collectionTitle:"اسان جي ڪليڪشن",collectionSub:"پنهنجي پسند جو لباس چونڊيو",aboutTitle:"توهان جو اعتماد، اسان جي ترجيح",aboutSub:"آسان خريداري ۽ ذاتي خيال سان"}
 };
 
+
+const STORE_ATTRIBUTE_SOURCE=new WeakMap();
+const STORE_ATTRIBUTE_TRANSLATIONS={
+"آپ کا نام (اختیاری)":{en:"Your Name (Optional)",sd:"توهان جو نالو (اختياري)"},
+"آپ کا ای میل ایڈریس":{en:"Your Email Address",sd:"توهان جو اي ميل پتو"},
+"اپنا نام":{en:"Your Name",sd:"پنهنجو نالو"},
+"مثلاً LR-XXXXXXXX":{en:"e.g. LR-XXXXXXXX",sd:"مثال طور LR-XXXXXXXX"},
+"آپ کو کیا مسئلہ پیش آیا یا ویب سائٹ میں کیا بہتری چاہتے ہیں؟":{en:"Describe the issue or improvement you suggest for the website",sd:"ويب سائيٽ بابت مسئلو يا بهتري جي صلاح لکو"},
+"سوٹ کا نام":{en:"Suit Name",sd:"سوٽ جو نالو"},
+"پورا نام درج کریں":{en:"Enter Full Name",sd:"پورو نالو لکو"},
+"گھر نمبر، گلی، محلہ وغیرہ":{en:"House number, street, area, etc.",sd:"گهر نمبر، گهٽي، پاڙو وغيره"},
+"ٹرانزیکشن آئی ڈی درج کریں":{en:"Enter Transaction ID",sd:"ٽرانزيڪشن آءِ ڊي لکو"},
+"آپ کا ای میل":{en:"Your Email",sd:"توهان جو اي ميل"},
+"محفوظ پاس ورڈ":{en:"Secure Password",sd:"محفوظ پاسورڊ"},
+"مثلاً پرنٹڈ لان سوٹ":{en:"e.g. Printed Lawn Suit",sd:"مثال طور پرنٽڊ لان سوٽ"},
+"مثلاً 2500":{en:"e.g. 2500",sd:"مثال طور 2500"},
+"سوٹ کا مختصر اور دلکش تعارف":{en:"A short, attractive suit description",sd:"سوٽ جو مختصر ۽ دلڪش تعارف"},
+"مثلاً پریمیم لان کاٹن":{en:"e.g. Premium Lawn Cotton",sd:"مثال طور پريميئم لان ڪاٽن"},
+"مثلاً نفیس ایمبرائیڈری":{en:"e.g. Elegant Embroidery",sd:"مثال طور نفيس ايمبرائيڊري"},
+"مثلاً شرٹ + ٹراؤزر + دوپٹہ":{en:"e.g. Shirt + Trousers + Dupatta",sd:"مثال طور شرٽ + ٽرائوزر + دوپٽو"},
+"مثلاً گرمیوں اور روزمرہ استعمال کے لیے":{en:"e.g. For summer and everyday wear",sd:"مثال طور اونهاري ۽ روزاني استعمال لاءِ"},
+"مثلاً LR-A1B2C3D4 یا سوٹ کا نام":{en:"e.g. LR-A1B2C3D4 or suit name",sd:"مثال طور LR-A1B2C3D4 يا سوٽ جو نالو"},
+"اپنا واٹس ایپ نمبر درج کریں":{en:"Enter your WhatsApp number",sd:"پنهنجو واٽس ايپ نمبر لکو"},
+"اختیاری":{en:"Optional",sd:"اختياري"},
+"مثلاً نبی سر روڈ میں ڈیلیوری دستیاب ہے":{en:"e.g. Delivery available in Nabi Sar Road",sd:"مثال طور نبي سر روڊ ۾ ڊيليوري موجود آهي"},
+"ای میل درج کریں":{en:"Enter Email",sd:"اي ميل لکو"},
+"شہر / علاقہ":{en:"City / Area",sd:"شهر / علائقو"},
+"فیس":{en:"Fee",sd:"فيس"},
+"تصویری سلائیڈ منتخب کریں":{en:"Select Image Slide",sd:"تصويري سلائيڊ چونڊيو"},
+"ای میل منتخب کریں":{en:"Select Email",sd:"اي ميل چونڊيو"},
+"فیڈبیک اسٹیٹس":{en:"Feedback Status",sd:"راءِ جي حالت"},
+"ایزی پیسہ / جاز کیش / بینک":{en:"Easypaisa / JazzCash / Bank",sd:"ايزي پيسا / جاز ڪيش / بئنڪ"}
+};
+function applyStoreAttributeTranslations(language){
+ document.querySelectorAll("[placeholder],[title],[aria-label]").forEach(function(el){
+  let saved=STORE_ATTRIBUTE_SOURCE.get(el);
+  if(!saved){saved={};["placeholder","title","aria-label"].forEach(function(a){if(el.hasAttribute(a))saved[a]=el.getAttribute(a);});STORE_ATTRIBUTE_SOURCE.set(el,saved);}
+  ["placeholder","title","aria-label"].forEach(function(a){if(saved[a]===undefined)return;const original=saved[a],entry=STORE_ATTRIBUTE_TRANSLATIONS[original];el.setAttribute(a,language==="ur"?original:(entry&&entry[language]||original));});
+ });
+}
 const STORE_TEXT_SOURCE=new WeakMap();
 const STORE_NODE_TRANSLATIONS={
 "لباسِ راحت — آپ کی پسند، آپ کے گھر تک!":{en:"LIBAAS E RAAHAT — Your choice, delivered to your home!",sd:"لباسِ راحت — توهان جي پسند، توهان جي گهر تائين!"},
@@ -448,6 +488,7 @@ function applyStoreLanguage(language){
  document.body.classList.toggle("store-english",lang==="en");
  document.querySelectorAll("[data-lr-i18n]").forEach(function(el){const key=el.getAttribute("data-lr-i18n");if(STORE_LANG_TEXT[lang][key]!==undefined)el.innerHTML=STORE_LANG_TEXT[lang][key];});
  applyStoreNodeTranslations(lang);
+ applyStoreAttributeTranslations(lang);
  const picker=document.getElementById("storeLanguageSelect");if(picker)picker.value=lang;
  try{localStorage.setItem("lr_store_language_v2",lang);}catch(e){}
 }
