@@ -342,7 +342,7 @@ function applyStoreNodeTranslations(language,root){
   const original=STORE_TEXT_SOURCE.get(node),trimmed=original.trim(),entry=STORE_NODE_TRANSLATIONS[trimmed];
   if(!entry)return;
   const translated=language==="ur"?trimmed:(entry[language]||trimmed);
-  const leading=(original.match(/^\\s*/)||[""])[0],trailing=(original.match(/\\s*$/)||[""])[0];
+  const leading=(original.match(/^\s*/)||[""])[0],trailing=(original.match(/\s*$/)||[""])[0];
   node.nodeValue=leading+translated+trailing;
  };
  if(target.nodeType===3){translateNode(target);return;}
