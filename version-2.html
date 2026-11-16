@@ -1639,6 +1639,7 @@ function applyStoreLanguage(language){
  applyStoreAttributeTranslations(lang);
  if(typeof renderFooterContact==="function")renderFooterContact();
  const picker=document.getElementById("storeLanguageSelect");if(picker)picker.value=lang;
+ if(typeof setProductViewMode==="function")setProductViewMode(productViewMode);
  try{localStorage.setItem("lr_store_language_v2",lang);}catch(e){}
 }
 
