@@ -494,7 +494,7 @@ function applyStoreLanguage(language){
 }
 
 applyStoreLanguage((function(){try{return localStorage.getItem('lr_store_language_v2')||'en';}catch(e){return 'en';}})());
-const storeLanguageObserver=new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===3)applyStoreNodeTranslations(document.documentElement.lang,node);else if(node.nodeType===1)applyStoreNodeTranslations(document.documentElement.lang,node);});});});
+const storeLanguageObserver=new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===3)applyStoreNodeTranslations(document.documentElement.lang,node);else if(node.nodeType===1)applyStoreNodeTranslations(document.documentElement.lang,node);});});applyStoreAttributeTranslations(document.documentElement.lang);});
 storeLanguageObserver.observe(document.body,{childList:true,subtree:true});
 </script>
 <script>
