@@ -144,30 +144,35 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .nav-actions{align-items:center;flex-wrap:wrap;justify-content:flex-end}
 @media(max-width:560px){.nav{padding:10px 12px;gap:8px;flex-wrap:wrap}.nav-actions{width:100%;justify-content:flex-end;gap:6px}.language-select{min-height:36px}.nav-actions .iconbtn,.nav-actions .pillbtn{padding:8px 10px;font-size:12px}}
 
-/* English LTR mobile viewport and product-detail fit fixes */
-html[dir="ltr"],html[dir="ltr"] body{width:100%;max-width:100%;overflow-x:hidden}
+/* English-only mobile layout and tap-target correction */
+html[dir="ltr"],html[dir="ltr"] body{width:100%;max-width:100%;overflow-x:clip}
 html[dir="ltr"] body{font-family:Arial,"Noto Sans",Tahoma,sans-serif}
-html[dir="ltr"] *{min-width:0}
+html[dir="ltr"] .site-header,html[dir="ltr"] .topline,html[dir="ltr"] .hero,html[dir="ltr"] .section,html[dir="ltr"] .footer{max-width:100%;min-width:0}
 html[dir="ltr"] img,html[dir="ltr"] video,html[dir="ltr"] iframe{max-width:100%}
-html[dir="ltr"] .nav{width:100%;max-width:1160px;flex-wrap:wrap}
-html[dir="ltr"] .brand{min-width:0;max-width:100%}
-html[dir="ltr"] .brandname{overflow-wrap:anywhere}
-html[dir="ltr"] .nav-actions{max-width:100%;flex-wrap:wrap}
-html[dir="ltr"] .hero,html[dir="ltr"] .section{width:100%;max-width:1160px;min-width:0}
+html[dir="ltr"] .nav{width:100%;max-width:1160px;min-width:0;flex-wrap:wrap}
+html[dir="ltr"] .brand,html[dir="ltr"] .nav-actions{min-width:0;max-width:100%;flex-wrap:wrap}
+html[dir="ltr"] .brandname,html[dir="ltr"] .brandtag{overflow-wrap:anywhere}
+html[dir="ltr"] .hero,html[dir="ltr"] .section{width:100%;min-width:0}
+html[dir="ltr"] .hero-inner{min-width:0;max-width:100%}
 html[dir="ltr"] .section-head,html[dir="ltr"] .price-row{flex-wrap:wrap}
-html[dir="ltr"] .product-info,html[dir="ltr"] .product-story,html[dir="ltr"] #productDetail{min-width:0;max-width:100%;overflow-wrap:anywhere}
-html[dir="ltr"] .overlay#productModal{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;max-width:100%;padding:8px;overflow:hidden;align-items:center;justify-content:center}
+html[dir="ltr"] #products{width:100%;max-width:100%;min-width:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+html[dir="ltr"] .product,html[dir="ltr"] .product-info,html[dir="ltr"] .product-story,html[dir="ltr"] #productDetail{min-width:0;max-width:100%;overflow-wrap:anywhere}
+html[dir="ltr"] button,html[dir="ltr"] a{touch-action:manipulation}
+html[dir="ltr"] .product-info button,html[dir="ltr"] #productDetail button{position:relative;z-index:2;pointer-events:auto;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+html[dir="ltr"] .overlay:not(.show){pointer-events:none}
+html[dir="ltr"] .overlay.show{pointer-events:auto;z-index:1000}
+html[dir="ltr"] .overlay.show>.modal{position:relative;z-index:1;pointer-events:auto}
+html[dir="ltr"] #productModal{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;max-width:100%;padding:8px;overflow:hidden;align-items:center;justify-content:center}
 html[dir="ltr"] #productModal>.modal{width:100%;max-width:560px;min-width:0;max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px);height:auto;margin:auto;padding:clamp(12px,3vw,20px);overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
 html[dir="ltr"] #productDetail>div{min-width:0;max-width:100%;overflow-wrap:anywhere}
 html[dir="ltr"] #productMainPhoto{display:block;width:100%;max-width:100%;height:auto;max-height:24vh;max-height:24dvh;object-fit:contain}
 html[dir="ltr"] .product-story{padding:12px;margin:8px 0}
 html[dir="ltr"] .story-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 html[dir="ltr"] .story-grid>div{min-width:0;padding:9px;overflow-wrap:anywhere}
-html[dir="ltr"] #productDetail button{max-width:100%;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:560px){
  html[dir="ltr"] .nav{gap:7px}
  html[dir="ltr"] .nav-actions{width:100%;justify-content:flex-end}
- html[dir="ltr"] .brandtag{overflow-wrap:anywhere}
+ html[dir="ltr"] #products{grid-template-columns:minmax(0,1fr)}
  html[dir="ltr"] #productModal>.modal{border-radius:16px}
  html[dir="ltr"] #productMainPhoto{max-height:20vh;max-height:20dvh}
  html[dir="ltr"] .story-grid{grid-template-columns:1fr 1fr}
