@@ -230,17 +230,140 @@ en:{topNotice:"Delivery available in Nabi Sar Road — starting delivery charge 
 ur:{topNotice:"نبی سر روڈ میں ڈیلیوری دستیاب ہے — ابتدائی ڈیلیوری چارج 150 روپے",brandTag:"خوبصورتی، نفاست اور اعتماد",navHome:"ہوم",navCollection:"کلیکشن",navAbout:"ہمارے بارے میں",installApp:"ایپ انسٹال کریں",admin:"ایڈمن",cart:"کارٹ",heroKicker:"نفاست بھری کلیکشن",heroBrand:"لباسِ راحت",heroLabel:"لباسِ راحت پیش کرتا ہے",heroTitle:"آپ کی خوبصورتی،<br><em>آپ کے اپنے انداز میں</em>",heroText:"نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔",discover:"کلیکشن دریافت کریں",yourCart:"آپ کا کارٹ",heroFoot:"معیار، نفاست اور اعتماد — ایک ہی جگہ",promise1:"منتخب کلیکشن",promise1s:"ہر انداز کے لیے",promise2:"آسان آرڈر",promise2s:"سادہ اور محفوظ خریداری",promise3:"ذاتی توجہ",promise3s:"آپ کا اعتماد ہماری ترجیح",collectionTitle:"ہماری کلیکشن",collectionSub:"اپنی پسند کا لباس منتخب کریں",aboutTitle:"آپ کا اعتماد، ہماری ترجیح",aboutSub:"آسان خریداری اور ذاتی توجہ کے ساتھ"},
 sd:{topNotice:"نبي سر روڊ ۾ ڊيليوري موجود آهي — شروعاتي ڊيليوري چارج 150 رپيا",brandTag:"خوبصورتي، نفاست ۽ اعتماد",navHome:"گهر",navCollection:"ڪليڪشن",navAbout:"اسان بابت",installApp:"ايپ انسٽال ڪريو",admin:"ايڊمن",cart:"ڪارٽ",heroKicker:"نفاست ڀري ڪليڪشن",heroBrand:"لباسِ راحت",heroLabel:"لباسِ راحت پيش ڪري ٿو",heroTitle:"توهان جي خوبصورتي،<br><em>توهان جي پنهنجي انداز ۾</em>",heroText:"نفاست سان چونڊيل خوبصورت ڪپڙا — هر ڏينهن کي خاص ۽ هر موقعي کي يادگار بڻائڻ لاءِ.",discover:"ڪليڪشن ڏسو",yourCart:"توهان جو ڪارٽ",heroFoot:"معيار، نفاست ۽ اعتماد — سڀ هڪ هنڌ",promise1:"چونڊيل ڪليڪشن",promise1s:"هر انداز لاءِ",promise2:"آسان آرڊر",promise2s:"سادي ۽ محفوظ خريداري",promise3:"ذاتي خيال",promise3s:"توهان جو اعتماد اسان جي ترجيح",collectionTitle:"اسان جي ڪليڪشن",collectionSub:"پنهنجي پسند جو لباس چونڊيو",aboutTitle:"توهان جو اعتماد، اسان جي ترجيح",aboutSub:"آسان خريداري ۽ ذاتي خيال سان"}
 };
+
+const STORE_TEXT_SOURCE=new WeakMap();
+const STORE_NODE_TRANSLATIONS={
+"لباسِ راحت — آپ کی پسند، آپ کے گھر تک!":{en:"LIBAAS E RAAHAT — Your choice, delivered to your home!",sd:"لباسِ راحت — توهان جي پسند، توهان جي گهر تائين!"},
+"لباس پہننے کا خوبصورت انداز":{en:"A beautiful way to dress",sd:"لباس پائڻ جو خوبصورت انداز"},
+"نئی کلیکشن خاص آپ کے لیے":{en:"A new collection, just for you",sd:"نئين ڪليڪشن، خاص توهان لاءِ"},
+"ہر دن کے لیے نفاست":{en:"Elegance for every day",sd:"هر ڏينهن لاءِ نفاست"},
+"تمام کلیکشن":{en:"All Collections",sd:"سڀ ڪليڪشن"},
+"لان کاٹن":{en:"Lawn Cotton",sd:"لان ڪاٽن"},
+"کاٹن":{en:"Cotton",sd:"ڪاٽن"},
+"شنیل":{en:"Chenille",sd:"شينل"},
+"بانا ڈورا":{en:"Bana Dora",sd:"بانا ڊورا"},
+"ریڈی ٹو وئیر":{en:"Ready to Wear",sd:"ريڊي ٽو ويئر"},
+"گھر کی سلی ہوئی کلیکشن":{en:"Home-Stitched Collection",sd:"گهر ۾ سِبيل ڪليڪشن"},
+"ننھے ستارے — بچوں کے سوٹ":{en:"Little Stars — Kids' Suits",sd:"ننڍڙا ستارا — ٻارن جا سوٽ"},
+"فارمل":{en:"Formal",sd:"فارمل"},
+"کیمبرک":{en:"Cambric",sd:"ڪيمبرڪ"},
+"کھدر":{en:"Khaddar",sd:"کدر"},
+"نفاست اور معیار کا خیال":{en:"Carefully selected quality and elegance",sd:"نفاست ۽ معيار جو خاص خيال"},
+"مقامی ڈیلیوری":{en:"Local Delivery",sd:"مقامي ڊيليوري"},
+"ابتدائی طور پر نبی سر روڈ":{en:"Initially available in Nabi Sar Road",sd:"شروعات ۾ نبي سر روڊ ۾ موجود"},
+"آسان آرڈر":{en:"Easy Ordering",sd:"آسان آرڊر"},
+"کیش آن ڈیلیوری کی سہولت":{en:"Cash on Delivery Available",sd:"ڪيش آن ڊيليوري جي سهولت"},
+"لباسِ راحت — خوبصورتی جو آپ کے انداز کو مکمل کرے۔":{en:"LIBAAS E RAAHAT — Beauty that completes your style.",sd:"لباسِ راحت — خوبصورتي جيڪا توهان جي انداز کي مڪمل ڪري."},
+"رابطہ اور آرڈر":{en:"Contact & Orders",sd:"رابطو ۽ آرڊر"},
+"واٹس ایپ نمبر ایڈمن سیٹنگ میں شامل کیا جا سکتا ہے۔":{en:"The WhatsApp number can be added in Admin Settings.",sd:"واٽس ايپ نمبر ايڊمن سيٽنگز ۾ شامل ڪري سگهجي ٿو."},
+"نئی کلیکشن کی خبر سب سے پہلے پائیں":{en:"Be the first to hear about our new collection",sd:"اسان جي نئين ڪليڪشن جي خبر سڀ کان پهرين حاصل ڪريو"},
+"لباسِ راحت کی نئی کلیکشن، خوبصورت ڈیزائن اور خصوصی اپ ڈیٹس اپنے ای میل پر حاصل کریں۔":{en:"Get our latest collection, beautiful designs and special updates by email.",sd:"لباسِ راحت جي نئين ڪليڪشن، خوبصورت ڊيزائن ۽ خاص اپڊيٽس اي ميل تي حاصل ڪريو."},
+"سبسکرائب کریں":{en:"Subscribe",sd:"سبسڪرائب ڪريو"},
+"نئی کلیکشن کی اطلاع آن کریں":{en:"Turn on new collection alerts",sd:"نئين ڪليڪشن جون اطلاعون آن ڪريو"},
+"نئی کلیکشن کی اطلاع موبائل پر حاصل کرنے کے لیے اجازت دیں۔":{en:"Allow notifications to receive new collection alerts on your phone.",sd:"موبائل تي نئين ڪليڪشن جون اطلاعون حاصل ڪرڻ لاءِ اجازت ڏيو."},
+"مدد اور فیڈبیک":{en:"Help & Feedback",sd:"مدد ۽ راءِ"},
+"مدد، شکایت اور فیڈبیک":{en:"Help, Complaints & Feedback",sd:"مدد، شڪايت ۽ راءِ"},
+"آپ کی رائے ہمارے لیے اہم ہے۔":{en:"Your feedback matters to us.",sd:"توهان جي راءِ اسان لاءِ اهم آهي."},
+"اپنی شکایت یا تجویز یہاں بھیجیں، یہ ایڈمن پینل میں محفوظ ہوگی۔":{en:"Send your complaint or suggestion here. It will be saved in the Admin Panel.",sd:"پنهنجي شڪايت يا صلاح هتي موڪليو؛ اها ايڊمن پينل ۾ محفوظ ٿيندي."},
+"آپ کا نام":{en:"Your Name",sd:"توهان جو نالو"},
+"موبائل نمبر":{en:"Mobile Number",sd:"موبائل نمبر"},
+"آرڈر نمبر (اگر موجود ہو)":{en:"Order Number (if available)",sd:"آرڊر نمبر (جيڪڏهن موجود هجي)"},
+"موضوع":{en:"Subject",sd:"موضوع"},
+"بہتری کی تجویز":{en:"Suggestion",sd:"بهتري لاءِ صلاح"},
+"شکایت":{en:"Complaint",sd:"شڪايت"},
+"آرڈر کا مسئلہ":{en:"Order Issue",sd:"آرڊر جو مسئلو"},
+"ڈیلیوری":{en:"Delivery",sd:"ڊيليوري"},
+"ادائیگی":{en:"Payment",sd:"ادائيگي"},
+"دیگر":{en:"Other",sd:"ٻيا"},
+"ریٹنگ دینا اختیاری ہے":{en:"Rating is optional",sd:"ريٽنگ ڏيڻ اختياري آهي"},
+"بہت اچھا":{en:"Excellent",sd:"تمام سٺو"},
+"اچھا":{en:"Good",sd:"سٺو"},
+"مناسب":{en:"Fair",sd:"مناسب"},
+"کمزور":{en:"Poor",sd:"ڪمزور"},
+"بہت خراب":{en:"Very Poor",sd:"تمام خراب"},
+"اپنی بات تفصیل سے لکھیں":{en:"Write your message in detail",sd:"پنهنجو پيغام تفصيل سان لکو"},
+"فیڈبیک جمع کریں":{en:"Submit Feedback",sd:"راءِ جمع ڪريو"},
+"واٹس ایپ ہیلپ سینٹر":{en:"WhatsApp Help Center",sd:"واٽس ايپ مدد مرڪز"},
+"بند کریں":{en:"Close",sd:"بند ڪريو"},
+"آپ کا شاپنگ کارٹ":{en:"Your Shopping Cart",sd:"توهان جو شاپنگ ڪارٽ"},
+"سب ٹوٹل":{en:"Subtotal",sd:"ذيلي ڪل"},
+"ڈیلیوری چارج":{en:"Delivery Charge",sd:"ڊيليوري چارج"},
+"کل رقم":{en:"Grand Total",sd:"ڪل رقم"},
+"شہر / ڈیلیوری کا علاقہ":{en:"City / Delivery Area",sd:"شهر / ڊيليوري جو علائقو"},
+"شہر منتخب کریں":{en:"Select City",sd:"شهر چونڊيو"},
+"مکمل پتہ":{en:"Full Address",sd:"مڪمل پتو"},
+"ادائیگی کا طریقہ":{en:"Payment Method",sd:"ادائيگي جو طريقو"},
+"کیش آن ڈیلیوری":{en:"Cash on Delivery",sd:"ڪيش آن ڊيليوري"},
+"آن لائن ادائیگی":{en:"Online Payment",sd:"آن لائن ادائيگي"},
+"اکاؤنٹ منتخب کریں":{en:"Select Account",sd:"اڪائونٽ چونڊيو"},
+"ٹرانزیکشن ریفرنس":{en:"Transaction Reference",sd:"ٽرانزيڪشن ريفرنس"},
+"آرڈر کنفرم کریں":{en:"Confirm Order",sd:"آرڊر جي تصديق ڪريو"},
+"اسٹور ایڈمن پینل":{en:"Store Admin Panel",sd:"اسٽور ايڊمن پينل"},
+"ایڈمن ای میل":{en:"Admin Email",sd:"ايڊمن اي ميل"},
+"پاس ورڈ":{en:"Password",sd:"پاسورڊ"},
+"لاگ اِن کریں":{en:"Log In",sd:"لاگ اِن ڪريو"},
+"نیا اکاؤنٹ بنائیں":{en:"Create New Account",sd:"نئون اڪائونٽ ٺاهيو"},
+"مصنوعات":{en:"Products",sd:"پراڊڪٽس"},
+"ویب سائٹ وزٹرز":{en:"Website Visitors",sd:"ويب سائيٽ وزيٽرز"},
+"اسٹور اعدادوشمار":{en:"Store Statistics",sd:"اسٽور جا انگ اکر"},
+"گاہکوں کو SMS":{en:"Customer SMS",sd:"گراهڪن کي SMS"},
+"سیٹنگز":{en:"Settings",sd:"سيٽنگون"},
+"آرڈرز":{en:"Orders",sd:"آرڊرز"},
+"نوٹیفکیشن":{en:"Notifications",sd:"نوٽيفڪيشن"},
+"فیڈبیک":{en:"Feedback",sd:"راءِ"},
+"ایڈمن ٹیم":{en:"Admin Team",sd:"ايڊمن ٽيم"},
+"ای میل سبسکرائبرز":{en:"Email Subscribers",sd:"اي ميل سبسڪرائبرز"},
+"نئی پروڈکٹ شامل کریں":{en:"Add New Product",sd:"نئون پراڊڪٽ شامل ڪريو"},
+"پروڈکٹ کا نام":{en:"Product Name",sd:"پراڊڪٽ جو نالو"},
+"قیمت (روپے)":{en:"Price (PKR)",sd:"قيمت (روپيا)"},
+"دستیاب تعداد":{en:"Available Quantity",sd:"موجود مقدار"},
+"مختصر تعارف":{en:"Short Description",sd:"مختصر تعارف"},
+"مکمل پروڈکٹ تفصیل":{en:"Full Product Description",sd:"پراڊڪٽ جو مڪمل تفصيل"},
+"تصاویر تبدیل کریں":{en:"Change Images",sd:"تصويرون تبديل ڪريو"},
+"تمام تبدیلیاں محفوظ کریں":{en:"Save All Changes",sd:"سڀ تبديليون محفوظ ڪريو"},
+"موجودہ مصنوعات":{en:"Current Products",sd:"موجوده پراڊڪٽس"},
+"سیٹنگز محفوظ کریں":{en:"Save Settings",sd:"سيٽنگون محفوظ ڪريو"},
+"نیا شہر / علاقہ شامل کریں":{en:"Add New City / Area",sd:"نئون شهر / علائقو شامل ڪريو"},
+"اکاؤنٹ شامل کریں":{en:"Add Account",sd:"اڪائونٽ شامل ڪريو"},
+"سب منتخب کریں":{en:"Select All",sd:"سڀ چونڊيو"},
+"سب ہٹائیں":{en:"Clear Selection",sd:"چونڊ ختم ڪريو"},
+"فہرست تازہ کریں":{en:"Refresh List",sd:"فهرست ريفريش ڪريو"},
+"پیغام لکھیں":{en:"Write Message",sd:"پيغام لکو"},
+"منتخب گاہک کو SMS کھولیں":{en:"Open SMS for Selected Customers",sd:"چونڊيل گراهڪن لاءِ SMS کوليو"},
+"منتخب گاہک کو WhatsApp پیغام کھولیں":{en:"Open WhatsApp Message for Selected Customers",sd:"چونڊيل گراهڪن لاءِ واٽس ايپ پيغام کوليو"},
+"CSV فائل ڈاؤن لوڈ کریں":{en:"Download CSV File",sd:"CSV فائل ڊائون لوڊ ڪريو"},
+"منتخب ای میلز کو Gmail میں تیار کریں (اگلے 25)":{en:"Prepare Selected Emails in Gmail (Next 25)",sd:"چونڊيل اي ميلون Gmail ۾ تيار ڪريو (اڳيون 25)"}
+};
+function applyStoreNodeTranslations(language,root){
+ const target=root||document.body;if(!target)return;
+ const translateNode=function(node){
+  if(node.nodeType!==3)return;
+  if(!STORE_TEXT_SOURCE.has(node))STORE_TEXT_SOURCE.set(node,node.nodeValue);
+  const original=STORE_TEXT_SOURCE.get(node),trimmed=original.trim(),entry=STORE_NODE_TRANSLATIONS[trimmed];
+  if(!entry)return;
+  const translated=language==="ur"?trimmed:(entry[language]||trimmed);
+  const leading=(original.match(/^\\s*/)||[""])[0],trailing=(original.match(/\\s*$/)||[""])[0];
+  node.nodeValue=leading+translated+trailing;
+ };
+ if(target.nodeType===3){translateNode(target);return;}
+ const walker=document.createTreeWalker(target,NodeFilter.SHOW_TEXT);let node;
+ while((node=walker.nextNode()))translateNode(node);
+}
+
 function applyStoreLanguage(language){
  const lang=STORE_LANG_TEXT[language]?language:"en";
  document.documentElement.lang=lang;
  document.documentElement.dir=lang==="en"?"ltr":"rtl";
  document.body.classList.toggle("store-english",lang==="en");
  document.querySelectorAll("[data-lr-i18n]").forEach(function(el){const key=el.getAttribute("data-lr-i18n");if(STORE_LANG_TEXT[lang][key]!==undefined)el.innerHTML=STORE_LANG_TEXT[lang][key];});
+ applyStoreNodeTranslations(lang);
  const picker=document.getElementById("storeLanguageSelect");if(picker)picker.value=lang;
  try{localStorage.setItem("lr_store_language_v2",lang);}catch(e){}
 }
 
 applyStoreLanguage((function(){try{return localStorage.getItem('lr_store_language_v2')||'en';}catch(e){return 'en';}})());
+const storeLanguageObserver=new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===3)applyStoreNodeTranslations(document.documentElement.lang,node);else if(node.nodeType===1)applyStoreNodeTranslations(document.documentElement.lang,node);});});});
+storeLanguageObserver.observe(document.body,{childList:true,subtree:true});
 </script>
 <script>
 const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
