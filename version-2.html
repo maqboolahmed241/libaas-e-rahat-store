@@ -157,6 +157,17 @@ body.store-english .modal{max-width:min(560px,100%);max-height:90vh;overflow:aut
 body.store-english #productDetail{min-width:0;overflow-wrap:anywhere}
 body.store-english #productDetail img{max-width:100%;height:auto;object-fit:contain}
 @media(max-width:800px){body.store-english .nav{gap:8px}body.store-english .nav-actions{width:100%}}
+
+/* Customer product search */
+.store-search{width:100%;max-width:620px;margin:12px 0 18px;direction:rtl;text-align:right}
+.store-search-label{display:block;font-weight:800;font-size:15px;margin-bottom:8px;color:var(--brown)}
+.store-search-row{display:flex;gap:8px;width:100%;min-width:0}
+.store-search-row input{flex:1;min-width:0;width:100%;padding:13px 15px;border:1px solid #c7a46a;border-radius:12px;background:#fffdf9;color:var(--brown);font-size:14px;outline:none}
+.store-search-row input:focus{border-color:#8b6846;box-shadow:0 0 0 3px #c7a46a30}
+.store-search-row button{flex:0 0 auto;padding:11px 16px;border-radius:12px;background:var(--brown);color:#fff7eb;font-weight:700;white-space:nowrap}
+body.store-english .store-search{direction:ltr;text-align:left}
+body.store-english .store-search-row{direction:ltr}
+@media(max-width:420px){.store-search-row{flex-wrap:wrap}.store-search-row button{width:100%}}
 </style>
 </head>
 <body>
@@ -167,11 +178,11 @@ body.store-english #productDetail img{max-width:100%;height:auto;object-fit:cont
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
- <div class="nav-actions"><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
+ <div class="nav-actions"><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">🛒 کارٹ <span id="cartCount">0</span></button></div>
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
- <div class="hero-copy"><div class="hero-kicker"><span class="hero-kicker-center"><span class="kicker-year">2026</span><span>نفاست بھری کلیکشن</span></span></div><div class="hero-label">لباسِ راحت پیش کرتا ہے</div><p>نفاست سے منتخب کیے گئے خوبصورت ملبوسات — ہر دن کو خاص بنانے کے لیے، اور ہر خاص لمحے کو یادگار بنانے کے لیے۔</p><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">آپ کا کارٹ <span>♡</span></button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
+ <div class="hero-copy"><div class="store-search"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ کا نام، کپڑا یا کوڈ لکھیں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" onclick="searchStoreProducts(document.getElementById(&quot;storeProductSearch&quot;).value)">🔍 تلاش کریں</button></div></div><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">🛒 شاپنگ کارٹ</button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
  <div class="hero-art"><div class="hero-slideshow" id="heroSlideshow" aria-label="لباسِ راحت کی تصویری کلیکشن"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="fabric-swatch swatch-back"></div><div class="fabric-swatch swatch-front"></div><div class="hero-monogram"><span class="monogram-small">لباس پہننے کا خوبصورت انداز</span><strong>LR</strong><span class="monogram-urdu">لباسِ راحت</span><i></i></div><div class="floating-tag"><span>✦</span> نئی کلیکشن <small>خاص آپ کے لیے</small></div><div class="art-side-note">ہر دن کے لیے نفاست</div></div></div>
 </div></section>
 <div class="home-promises"><div><span>✧</span><b>منتخب کلیکشن</b><small>ہر انداز کے لیے</small></div><i></i><div><span>◇</span><b>آسان آرڈر</b><small>سادہ اور محفوظ خریداری</small></div><i></i><div><span>♡</span><b>ذاتی توجہ</b><small>آپ کا اعتماد ہماری ترجیح</small></div></div>
@@ -289,12 +300,13 @@ function renderHeroSlideshow(){
  if(items.length>1)heroSlideTimer=window.setInterval(function(){if(!document.hidden)showHeroSlide(heroSlideIndex+1);},10000);
 }
 function renderProducts(){
- const list=products.filter(function(p){return Number(p.stock)>0&&(activeFilter==="تمام"||p.category===activeFilter)});
+ const term=(document.getElementById("storeProductSearch")?.value||"").trim().toLocaleLowerCase();
+ const list=products.filter(function(p){const matchesCategory=activeFilter==="تمام"||p.category===activeFilter;const searchable=[p.name,p.description,p.fabric,p.fabric_details,p.category,p.code,p.product_code].filter(Boolean).join(" ").toLocaleLowerCase();return Number(p.stock)>0&&matchesCategory&&(!term||searchable.includes(term));});
  document.getElementById("products").innerHTML=list.map(function(p){
   const firstImage=getProductImages(p)[0]||p.image_url;
   const codeTag='<small style="position:absolute;bottom:8px;left:8px;z-index:5;background:#fffaf0;color:#68452d;border:1px solid #d9bd91;border-radius:6px;padding:2px 6px;font-size:9px;font-weight:800;letter-spacing:.3px;box-shadow:0 1px 5px #0002">'+productCode(p)+'</small>';
    const art=firstImage?'<div class="product-art has-photo" style="position:relative"><img src="'+esc(firstImage)+'" alt="'+esc(p.name)+'" loading="lazy">'+codeTag+'<i class="tag">'+esc(p.category||"سوٹ")+'</i><span class="sale-badge">SALE</span></div>':'<div class="product-art" style="position:relative;--fabric1:#b88f83;--fabric2:#e8cfc3"><span>LR</span>'+codeTag+'<i class="tag">'+esc(p.category||"سوٹ")+'</i><span class="sale-badge">SALE</span></div>';
-  return '<article class="product" data-pid="'+p.id+'">'+art+'<div class="product-info"><h3>'+esc(p.name)+'</h3><div class="desc">'+esc(p.description||p.fabric||"خوبصورت اور نفیس انتخاب")+'</div><div class="price-row"><span class="price">'+money(p.price)+'</span><button type="button" class="add" '+(p.stock<=0?"disabled":"")+' onclick="addCart(\''+p.id+'\')">'+(p.stock<=0?"اسٹاک ختم":"کارٹ میں ڈالیں +")+'</button></div><button type="button" class="wide" style="margin-top:10px" onclick="openProductDetail(\''+p.id+'\')">مکمل تفصیل اور خریداری دیکھیں</button></div></article>';
+  return '<article class="product" data-pid="'+p.id+'">'+art+'<div class="product-info"><h3>'+esc(p.name)+'</h3><div class="desc">'+esc(p.description||p.fabric||"خوبصورت اور نفیس انتخاب")+'</div><div class="price-row"><span class="price">'+money(p.price)+'</span><button type="button" class="add" '+(p.stock<=0?"disabled":"")+' onclick="addCart(\''+p.id+'\')">'+(p.stock<=0?"اسٹاک ختم":"🛒 کارٹ میں ڈالیں +")+'</button></div><button type="button" class="wide" style="margin-top:10px" onclick="openProductDetail(\''+p.id+'\')">مکمل تفصیل اور خریداری دیکھیں</button></div></article>';
  }).join("")||'<p class="muted">ابھی کلیکشن شامل کی جا رہی ہے۔ جلد تشریف لائیں۔</p>';
 }
 function openProductDetail(id){
@@ -302,13 +314,14 @@ function openProductDetail(id){
  let imgs=getProductImages(p),first=imgs[0]||p.image_url;
  let thumbs=imgs.length>1?'<div style="display:flex;gap:9px;flex-wrap:wrap;justify-content:center">'+imgs.map(function(u,i){return '<button type="button" onclick="showProductPhoto(\''+p.id+'\','+i+')" style="padding:3px;border:2px solid '+(i===0?'#c7a46a':'#eadfd2')+';border-radius:10px;background:white"><img src="'+esc(u)+'" alt="سوٹ کی تصویر '+(i+1)+'" style="width:68px;height:76px;object-fit:cover;border-radius:7px"></button>'}).join("")+'</div>':'';
  let el=document.getElementById("productDetail");if(!el)return;
- el.innerHTML='<div style="display:grid;gap:12px"><div style="background:#f7eee5;border-radius:16px;padding:8px;text-align:center"><img id="productMainPhoto" src="'+esc(first||"")+'" alt="'+esc(p.name)+'" style="width:100%;max-height:420px;object-fit:contain;border-radius:12px;'+(!first?'display:none':'')+'">'+(!first?'<div class="product-art"><span>LIBAAS E RAAHAT</span></div>':'')+'</div>'+thumbs+'<h2 style="margin:4px 0">'+esc(p.name)+'</h2><small style="display:inline-block;margin:0 0 5px;padding:3px 8px;border-radius:6px;background:#f5e8d4;color:#68452d;font-size:10px;font-weight:800">سوٹ نمبر: '+productCode(p)+'</small><div style="font-size:1.35rem;font-weight:800;color:#9a6b43">'+money(p.price)+'</div><section class="product-story"><div class="story-intro"><span>LIBAAS E RAAHAT</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.description||"نفاست، آرام اور خوبصورت انداز کا حسین امتزاج۔")+'</p></div><h3>🧵 پروڈکٹ کی تفصیل</h3><div class="story-grid"><div><b>🧶 فیبرک / کوالٹی</b><p>'+esc(p.fabric_details||p.fabric||p.category||"تفصیل دستیاب نہیں")+'</p></div><div><b>✨ کام / کڑھائی</b><p>'+esc(p.work_details||"خوبصورت اور نفیس فنشنگ")+'</p></div><div><b>🎀 سوٹ میں شامل</b><p>'+esc(p.includes_details||"مزید تفصیل جلد شامل ہوگی")+'</p></div><div><b>🌙 موسم / استعمال</b><p>'+esc(p.season_details||"ہر موقع کے لیے")+'</p></div></div><div class="story-highlights"><b>💖 آپ کو کیوں پسند آئے گا</b><ul>'+(p.highlights?String(p.highlights).split(/\r?\n/).filter(Boolean).map(function(x){return "<li>"+esc(x)+"</li>"}).join(""):"<li>آرام دہ اور نفیس انتخاب</li><li>خوبصورت ڈیزائن اور بہترین فنشنگ</li>")+'</ul></div><p class="stock-line">دستیاب اسٹاک: '+Number(p.stock||0)+'</p></section><div class="admin-note"><b>ادائیگی</b><p style="margin:6px 0">کیش آن ڈیلیوری دستیاب ہے۔ آن لائن ادائیگی کے لیے چیک آؤٹ پر دستیاب اکاؤنٹ منتخب کریں۔</p></div><div class="field"><label>مقدار منتخب کریں</label><input id="detailQty" type="number" min="1" max="'+Math.max(1,Number(p.stock||0))+'" value="1" '+(p.stock<=0?"disabled":"")+'></div><button class="wide" '+(p.stock<=0?"disabled":"")+' onclick="detailAddToCart(\''+p.id+'\')">کارٹ میں شامل کریں</button><button class="wide" style="background:#9b7658" '+(p.stock<=0?"disabled":"")+' onclick="detailBuyNow(\''+p.id+'\')">ابھی آرڈر کریں</button></div>';
+ el.innerHTML='<div style="display:grid;gap:12px"><div style="background:#f7eee5;border-radius:16px;padding:8px;text-align:center"><img id="productMainPhoto" src="'+esc(first||"")+'" alt="'+esc(p.name)+'" style="width:100%;max-height:420px;object-fit:contain;border-radius:12px;'+(!first?'display:none':'')+'">'+(!first?'<div class="product-art"><span>LIBAAS E RAAHAT</span></div>':'')+'</div>'+thumbs+'<h2 style="margin:4px 0">'+esc(p.name)+'</h2><small style="display:inline-block;margin:0 0 5px;padding:3px 8px;border-radius:6px;background:#f5e8d4;color:#68452d;font-size:10px;font-weight:800">سوٹ نمبر: '+productCode(p)+'</small><div style="font-size:1.35rem;font-weight:800;color:#9a6b43">'+money(p.price)+'</div><section class="product-story"><div class="story-intro"><span>LIBAAS E RAAHAT</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.description||"نفاست، آرام اور خوبصورت انداز کا حسین امتزاج۔")+'</p></div><h3>🧵 پروڈکٹ کی تفصیل</h3><div class="story-grid"><div><b>🧶 فیبرک / کوالٹی</b><p>'+esc(p.fabric_details||p.fabric||p.category||"تفصیل دستیاب نہیں")+'</p></div><div><b>✨ کام / کڑھائی</b><p>'+esc(p.work_details||"خوبصورت اور نفیس فنشنگ")+'</p></div><div><b>🎀 سوٹ میں شامل</b><p>'+esc(p.includes_details||"مزید تفصیل جلد شامل ہوگی")+'</p></div><div><b>🌙 موسم / استعمال</b><p>'+esc(p.season_details||"ہر موقع کے لیے")+'</p></div></div><div class="story-highlights"><b>💖 آپ کو کیوں پسند آئے گا</b><ul>'+(p.highlights?String(p.highlights).split(/\r?\n/).filter(Boolean).map(function(x){return "<li>"+esc(x)+"</li>"}).join(""):"<li>آرام دہ اور نفیس انتخاب</li><li>خوبصورت ڈیزائن اور بہترین فنشنگ</li>")+'</ul></div><p class="stock-line">دستیاب اسٹاک: '+Number(p.stock||0)+'</p></section><div class="admin-note"><b>ادائیگی</b><p style="margin:6px 0">کیش آن ڈیلیوری دستیاب ہے۔ آن لائن ادائیگی کے لیے چیک آؤٹ پر دستیاب اکاؤنٹ منتخب کریں۔</p></div><div class="field"><label>مقدار منتخب کریں</label><input id="detailQty" type="number" min="1" max="'+Math.max(1,Number(p.stock||0))+'" value="1" '+(p.stock<=0?"disabled":"")+'></div><button class="wide" '+(p.stock<=0?"disabled":"")+' onclick="detailAddToCart(\''+p.id+'\')">🛒 کارٹ میں شامل کریں</button><button class="wide" style="background:#9b7658" '+(p.stock<=0?"disabled":"")+' onclick="detailBuyNow(\''+p.id+'\')">ابھی آرڈر کریں</button></div>';
  document.getElementById("productModal").classList.add("show");
 }
 function showProductPhoto(id,index){let p=products.find(function(x){return String(x.id)===String(id)});if(!p)return;let url=getProductImages(p)[index];if(!url)return;let main=document.getElementById("productMainPhoto");if(main){main.src=url;main.style.display="block"}document.querySelectorAll("#productDetail button").forEach(function(b,i){if(b.querySelector("img"))b.style.borderColor=i===index?"#c7a46a":"#eadfd2"})}
 
 function detailAddToCart(id){let p=products.find(function(x){return x.id===id}),q=Math.max(1,Number(document.getElementById("detailQty")?.value||1));if(!p||q>p.stock)return alert("منتخب مقدار دستیاب اسٹاک سے زیادہ ہے۔");if((cart[id]||0)+q>p.stock)return alert("کارٹ میں موجود مقدار ملا کر اسٹاک سے زیادہ ہو رہی ہے۔");cart[id]=(cart[id]||0)+q;saveCart();updateCount();closeModal("productModal");openCart()}
 function detailBuyNow(id){let p=products.find(function(x){return String(x.id)===String(id)}),q=Math.max(1,Number(document.getElementById("detailQty")?.value||1));if(!p||q>p.stock)return alert("منتخب مقدار دستیاب اسٹاک سے زیادہ ہے۔");cart={};cart[id]=q;saveCart();updateCount();closeModal("productModal");openCart()}
+function searchStoreProducts(value){activeFilter="تمام";document.querySelectorAll(".filters .filter").forEach(function(x){x.classList.toggle("active",x.textContent.trim()==="تمام کلیکشن");});renderProducts();}
 function setFilter(f,b){activeFilter=f;document.querySelectorAll(".filters .filter").forEach(function(x){x.classList.remove("active")});b.classList.add("active");renderProducts()}
 function addCart(id){let p=products.find(function(x){return x.id===id});if(!p)return;if((cart[id]||0)>=p.stock)return alert("معذرت، اتنی تعداد دستیاب نہیں۔");cart[id]=(cart[id]||0)+1;saveCart();updateCount();openCart()}
 function openCart(){renderCart();document.getElementById("cartModal").classList.add("show")}
@@ -1060,6 +1073,7 @@ sd:{topNotice:"نبي سر روڊ ۾ ڊيليوري موجود آهي — شرو
 
 const STORE_ATTRIBUTE_SOURCE=new WeakMap();
 const STORE_ATTRIBUTE_TRANSLATIONS={
+"سوٹ کا نام، کپڑا یا کوڈ لکھیں":{en:"Search by suit name, fabric or code"},
 "آپ کا نام (اختیاری)":{en:"Your Name (Optional)",sd:"توهان جو نالو (اختياري)"},
 "آپ کا ای میل ایڈریس":{en:"Your Email Address",sd:"توهان جو اي ميل پتو"},
 "اپنا نام":{en:"Your Name",sd:"پنهنجو نالو"},
@@ -1099,6 +1113,11 @@ function applyStoreAttributeTranslations(language){
 }
 const STORE_TEXT_SOURCE=new WeakMap();
 const STORE_NODE_TRANSLATIONS={
+"پراڈکٹ تلاش کریں":{en:"Search Products"},
+"🔍 تلاش کریں":{en:"🔍 Search"},
+"🛒 شاپنگ کارٹ":{en:"🛒 Shopping Cart"},
+"🛒 کارٹ میں ڈالیں +":{en:"🛒 Add to Cart +"},
+"🛒 کارٹ میں شامل کریں":{en:"🛒 Add to Cart"},
 "لباسِ راحت — آپ کی پسند، آپ کے گھر تک!":{en:"LIBAAS E RAAHAT — Your choice, delivered to your home!",sd:"لباسِ راحت — توهان جي پسند، توهان جي گهر تائين!"},
 "لباس پہننے کا خوبصورت انداز":{en:"A beautiful way to dress",sd:"لباس پائڻ جو خوبصورت انداز"},
 "نئی کلیکشن خاص آپ کے لیے":{en:"A new collection, just for you",sd:"نئين ڪليڪشن، خاص توهان لاءِ"},
