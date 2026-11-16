@@ -139,8 +139,10 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .newsletter-signup .newsletter-honeypot{position:absolute;right:-10000px;width:1px;height:1px;overflow:hidden}
 @media(max-width:700px){.newsletter-signup{flex:1 1 100%;max-width:none;order:3}}
 
-.language-select{background:#fffdf9;border:1px solid var(--gold);color:var(--brown);border-radius:22px;padding:8px 10px;font-size:13px;max-width:112px}
-html[lang="en"] body{font-family:Arial,"Noto Sans",sans-serif}
+
+.language-select{background:#fffdf9;border:1px solid var(--gold);color:var(--brown);border-radius:22px;padding:8px 10px;font-size:13px;max-width:112px;min-width:88px}
+.nav-actions{align-items:center;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:560px){.nav{padding:10px 12px;gap:8px;flex-wrap:wrap}.nav-actions{width:100%;justify-content:flex-end;gap:6px}.language-select{min-height:36px}.nav-actions .iconbtn,.nav-actions .pillbtn{padding:8px 10px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -1595,5 +1597,4 @@ function translateStoreRuntimeMessage(value,language){
  window.prompt=function(message,defaultValue){return nativePrompt(translateStoreRuntimeMessage(message,document.documentElement.lang||"en"),defaultValue);};
 })();
 
-</script>
-</body></html>
+</script></body></html>
