@@ -151,7 +151,7 @@ html[lang="en"] body{font-family:Arial,"Noto Sans",sans-serif}
 <header class="site-header"><nav class="nav">
  <div class="brand"><div class="logo">LR</div><div><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="navlinks"><a href="#home">ہوم</a><a href="#collection">کلیکشن</a><a href="#about">ہمارے بارے میں</a></div>
- <div class="nav-actions"><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="ur">اردو</option><option value="en">English</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
+ <div class="nav-actions"><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button><button class="iconbtn hidden" id="adminNavBtn" onclick="openAdmin()">ایڈمن</button><button class="pillbtn" onclick="openCart()">کارٹ <span id="cartCount">0</span></button></div>
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
@@ -1571,7 +1571,7 @@ function applyStoreLanguage(language){
  try{localStorage.setItem("lr_store_language_v2",lang);}catch(e){}
 }
 
-applyStoreLanguage((function(){try{return localStorage.getItem('lr_store_language_v2')||'ur';}catch(e){return 'en';}})());
+applyStoreLanguage((function(){try{return localStorage.getItem('lr_store_language_v2')||'en';}catch(e){return 'en';}})());
 const storeLanguageObserver=new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===3)applyStoreNodeTranslations(document.documentElement.lang,node);else if(node.nodeType===1)applyStoreNodeTranslations(document.documentElement.lang,node);});});applyStoreAttributeTranslations(document.documentElement.lang);});
 storeLanguageObserver.observe(document.body,{childList:true,subtree:true});
 
