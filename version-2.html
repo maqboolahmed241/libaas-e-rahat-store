@@ -1602,7 +1602,7 @@ function applyStoreNodeTranslations(language,root){
 function applyStoreLanguage(language){
  const lang=STORE_LANG_TEXT[language]?language:"en";
  document.documentElement.lang=lang;
- document.documentElement.dir=lang==="en"?"ltr":"rtl";
+ document.documentElement.dir="rtl";
  document.body.classList.toggle("store-english",lang==="en");
  document.title=lang==="en"?"LIBAAS E RAAHAT | Clothing & Style":"LIBAAS E RAAHAT | لباسِ راحت";
  document.querySelectorAll("[data-lr-i18n]").forEach(function(el){const key=el.getAttribute("data-lr-i18n");if(STORE_LANG_TEXT[lang][key]!==undefined)el.innerHTML=STORE_LANG_TEXT[lang][key];});
