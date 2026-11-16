@@ -204,6 +204,29 @@ body.store-english .store-search-row{direction:ltr}
 .products.view-detail .product-card-price{min-height:38px;padding:4px 8px 0}
 .products.view-detail .product-detail-cta{margin-top:5px;min-height:44px;padding:8px 12px}
 
+
+/* Reduce the overall vertical footprint of the collection section */
+#collection{margin-top:28px;margin-bottom:28px}
+#collection .section-head{margin-bottom:6px}
+#collection .section-head h2:after{margin-top:5px}
+#collection .filters{margin-bottom:10px;gap:5px}
+#collection .filter{padding:4px 8px;line-height:1.45}
+#collection .products.view-image{gap:9px}
+#collection .products.view-image .product-art{aspect-ratio:1/1}
+#collection .products.view-detail{row-gap:9px}
+#collection .products.view-detail .product-art{height:180px}
+@media(max-width:700px){
+ #collection{margin-top:22px;margin-bottom:22px}
+ #collection .section-head{margin-bottom:5px}
+ #collection .filters{margin-bottom:8px}
+ #collection .products.view-image{gap:7px}
+ #collection .products.view-image .product-art{aspect-ratio:1/1}
+ #collection .products.view-detail .product-art{height:155px}
+}
+@media(max-width:380px){
+ #collection .products.view-detail .product-art{height:145px}
+}
+
 </style>
 </head>
 <body>
