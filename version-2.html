@@ -716,6 +716,20 @@ Object.assign(STORE_NODE_TRANSLATIONS,{
 });
 
 
+
+Object.assign(STORE_NODE_TRANSLATIONS,{
+"suit emrady":{ur:"سوٹ پر کڑھائی",sd:"سوٽ تي ڀرت"},
+"Shirt trouser":{ur:"شرٹ اور ٹراؤزر",sd:"شرٽ ۽ ٽرائوزر"},
+"Shirt and trouser":{ur:"شرٹ اور ٹراؤزر",sd:"شرٽ ۽ ٽرائوزر"},
+"Salwar aur kameez":{ur:"شلوار اور قمیض",sd:"شلوار ۽ قميص"},
+"Saturn trouser dupatta":{ur:"ساٹن ٹراؤزر اور دوپٹہ",sd:"ساٽن ٽرائوزر ۽ دوپٽو"},
+"Around the fabric":{ur:"کپڑے کے کناروں پر کام",sd:"ڪپڙي جي ڪنارن تي ڪم"},
+"Hot cool":{ur:"گرمی اور سردی دونوں موسم",sd:"گرمي ۽ سردي ٻنهي موسمن لاءِ"},
+"Hot":{ur:"گرم موسم",sd:"گرم موسم"},
+"Cool":{ur:"سرد موسم",sd:"ٿڌي موسم"},
+"Colour brown length 5 mtr":{ur:"بھورا رنگ، لمبائی 5 میٹر",sd:"ناسي رنگ، ڊيگهه 5 ميٽر"}
+});
+
 function applyStoreNodeTranslations(language,root){
  const target=root||document.body;if(!target)return;
  const translateNode=function(node){
@@ -747,6 +761,27 @@ function applyStoreLanguage(language){
 applyStoreLanguage((function(){try{return localStorage.getItem('lr_store_language_v2')||'en';}catch(e){return 'en';}})());
 const storeLanguageObserver=new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===3)applyStoreNodeTranslations(document.documentElement.lang,node);else if(node.nodeType===1)applyStoreNodeTranslations(document.documentElement.lang,node);});});applyStoreAttributeTranslations(document.documentElement.lang);});
 storeLanguageObserver.observe(document.body,{childList:true,subtree:true});
+
+function translateStoreRuntimeMessage(value,language){
+ const source=String(value==null?"":value);
+ const exact=STORE_NODE_TRANSLATIONS[source];
+ if(exact&&exact[language])return exact[language];
+ const keys=Object.keys(STORE_NODE_TRANSLATIONS).sort(function(a,b){return b.length-a.length;});
+ for(const key of keys){
+  if(source.indexOf(key)===0){
+   const entry=STORE_NODE_TRANSLATIONS[key];
+   if(entry&&entry[language])return entry[language]+source.slice(key.length);
+  }
+ }
+ return source;
+}
+(function(){
+ const nativeAlert=window.alert.bind(window),nativeConfirm=window.confirm.bind(window),nativePrompt=window.prompt.bind(window);
+ window.alert=function(message){return nativeAlert(translateStoreRuntimeMessage(message,document.documentElement.lang||"en"));};
+ window.confirm=function(message){return nativeConfirm(translateStoreRuntimeMessage(message,document.documentElement.lang||"en"));};
+ window.prompt=function(message,defaultValue){return nativePrompt(translateStoreRuntimeMessage(message,document.documentElement.lang||"en"),defaultValue);};
+})();
+
 </script>
 <script>
 const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
