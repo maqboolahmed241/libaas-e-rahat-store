@@ -169,7 +169,7 @@ body.store-english #productDetail img{max-width:100%;height:auto;object-fit:cont
 body.store-english .store-search{direction:ltr;text-align:left}
 body.store-english .store-search-row{direction:ltr}
 @media(max-width:420px){.store-search-row{flex-wrap:wrap}.store-search-row button{width:100%}}
-</style>
+ .product-detail-cta{width:100%;margin-top:12px;min-height:49px;display:flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;border:1px solid #d9b779;border-radius:13px;background:linear-gradient(135deg,#35251d 0%,#765034 52%,#3a281f 100%);color:#ffedc9;font-size:14px;font-weight:800;letter-spacing:.1px;box-shadow:0 5px 14px rgba(73,45,27,.22),inset 0 1px 0 rgba(255,255,255,.16);transition:transform .18s ease,box-shadow .18s ease;cursor:pointer}.product-detail-cta .cta-icon{color:#f4d28f;font-size:18px}.product-detail-cta .cta-arrow{font-size:19px;color:#f4d28f}.product-detail-cta:active{transform:scale(.985);box-shadow:0 2px 7px rgba(73,45,27,.2)}@media(hover:hover){.product-detail-cta:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(73,45,27,.27)}}</style>
 </head>
 <body>
 <div class="topline" id="topNotice">🇵🇰 لباسِ راحت — پاکستان بھر میں ڈیلیوری دستیاب ہے | آپ کا پسندیدہ لباس، آپ کی دہلیز تک</div>
@@ -307,7 +307,7 @@ function renderProducts(){
   const firstImage=getProductImages(p)[0]||p.image_url;
   const codeTag='<small style="position:absolute;bottom:8px;left:8px;z-index:5;background:#fffaf0;color:#68452d;border:1px solid #d9bd91;border-radius:6px;padding:2px 6px;font-size:9px;font-weight:800;letter-spacing:.3px;box-shadow:0 1px 5px #0002">'+productCode(p)+'</small>';
    const art=firstImage?'<div class="product-art has-photo" style="position:relative"><img src="'+esc(firstImage)+'" alt="'+esc(p.name)+'" loading="lazy">'+codeTag+'<i class="tag">'+esc(p.category||"سوٹ")+'</i><span class="sale-badge">SALE</span></div>':'<div class="product-art" style="position:relative;--fabric1:#b88f83;--fabric2:#e8cfc3"><span>LR</span>'+codeTag+'<i class="tag">'+esc(p.category||"سوٹ")+'</i><span class="sale-badge">SALE</span></div>';
-  return '<article class="product" data-pid="'+p.id+'">'+art+'<div class="product-info"><h3>'+esc(p.name)+'</h3><div class="desc">'+esc(p.description||p.fabric||"خوبصورت اور نفیس انتخاب")+'</div><div class="price-row">'+productPriceMarkup(p)+'<button type="button" class="add" '+(p.stock<=0?"disabled":"")+' onclick="addCart(\''+p.id+'\')">'+(p.stock<=0?"اسٹاک ختم":"🛒 کارٹ میں ڈالیں +")+'</button></div><button type="button" class="wide" style="margin-top:10px" onclick="openProductDetail(\''+p.id+'\')">مکمل تفصیل اور خریداری دیکھیں</button></div></article>';
+  return '<article class="product" data-pid="'+p.id+'">'+art+'<div class="product-info"><h3>'+esc(p.name)+'</h3><div class="desc">'+esc(p.description||p.fabric||"خوبصورت اور نفیس انتخاب")+'</div><div class="price-row">'+productPriceMarkup(p)+'<button type="button" class="add" '+(p.stock<=0?"disabled":"")+' onclick="addCart(\''+p.id+'\')">'+(p.stock<=0?"اسٹاک ختم":"🛒 کارٹ میں ڈالیں +")+'</button></div><button type="button" class="product-detail-cta" onclick="openProductDetail(\''+p.id+'\')"><span class="cta-icon">✦</span><span>تفصیل دیکھیں اور خریدیں</span><span class="cta-arrow">←</span></button></div></article>';
  }).join("")||'<p class="muted">ابھی کلیکشن شامل کی جا رہی ہے۔ جلد تشریف لائیں۔</p>';
 }
 function openProductDetail(id){
