@@ -1106,6 +1106,11 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 .site-header .brand .brand-emblem svg{display:block!important;width:100%!important;height:100%!important;max-width:154px!important;overflow:visible!important}
 .site-header .brand .brand-emblem{width:clamp(132px,35vw,154px)!important;height:66px!important;overflow:visible!important}
 @media(max-width:480px){.site-header .brand .brand-emblem{width:clamp(128px,34vw,148px)!important;height:64px!important}}
+
+/* Exact approved header logo crop; keep navigation controls independent */
+.site-header .brand .brand-emblem{width:clamp(180px,52vw,390px)!important;height:auto!important;min-height:0!important;max-height:104px!important;overflow:hidden!important}
+.site-header .brand .lr-emblem-art{display:block!important;width:100%!important;height:auto!important;max-width:none!important;max-height:104px!important;object-fit:contain!important;filter:none!important}
+@media(max-width:480px){.site-header .brand .brand-emblem{width:clamp(180px,52vw,390px)!important;max-height:96px!important}.site-header .brand .lr-emblem-art{max-height:96px!important}}
 </style>
 </head>
 <body>
@@ -1116,28 +1121,7 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 <header class="site-header"><nav class="nav">
 <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button>
 <div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat ornate LR logo">
-<svg viewBox="0 0 640 300" role="img" aria-label="LIBAAS E RAAHAT luxury fashion crest">
-<defs>
- <linearGradient id="crestGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff8d9"/><stop offset=".2" stop-color="#f4d58a"/><stop offset=".48" stop-color="#b77a2d"/><stop offset=".72" stop-color="#ffe9ad"/><stop offset="1" stop-color="#9b5d20"/></linearGradient>
- <linearGradient id="velvet" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#6a2734"/><stop offset=".55" stop-color="#35131e"/><stop offset="1" stop-color="#170b12"/></linearGradient>
- <linearGradient id="silk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0c5"/><stop offset=".5" stop-color="#d9a34c"/><stop offset="1" stop-color="#8b501d"/></linearGradient>
- <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<path d="M40 151 Q12 112 38 78 Q54 57 77 83 Q85 39 119 35 Q143 34 157 68 Q184 24 214 43 Q239 58 230 91 Q267 69 285 99 Q306 134 275 159" fill="none" stroke="url(#crestGold)" stroke-width="4" stroke-linecap="round"/>
-<path d="M360 151 Q388 112 362 78 Q346 57 323 83 Q315 39 281 35 Q257 34 243 68 Q216 24 186 43 Q161 58 170 91 Q133 69 115 99 Q94 134 125 159" fill="none" stroke="url(#crestGold)" stroke-width="4" stroke-linecap="round" opacity=".0"/>
-<path d="M320 16 L343 49 L389 27 L380 75 L428 76 L393 111 Q320 133 247 111 L212 76 L260 75 L251 27 L297 49Z" fill="url(#crestGold)" stroke="#fff2c5" stroke-width="3"/>
-<path d="M260 113 Q320 136 380 113 L370 130 Q320 151 270 130Z" fill="url(#crestGold)" stroke="#9b6426" stroke-width="2"/>
-<circle cx="320" cy="17" r="7" fill="#fff6d8" filter="url(#softGlow)"/>
-<path d="M320 145 C228 145 165 183 160 231 C155 277 230 289 320 289 C410 289 485 277 480 231 C475 183 412 145 320 145Z" fill="url(#velvet)" stroke="url(#crestGold)" stroke-width="6"/>
-<path d="M320 157 C240 157 181 190 178 231 C175 265 242 276 320 276 C398 276 465 265 462 231 C459 190 400 157 320 157Z" fill="none" stroke="#e9c77d" stroke-width="1.8" opacity=".85"/>
-<path d="M195 224 Q218 196 243 211 M445 224 Q422 196 397 211" fill="none" stroke="url(#crestGold)" stroke-width="3" stroke-linecap="round"/>
-<text x="220" y="260" font-family="Georgia,serif" font-size="108" font-weight="bold" letter-spacing="-13" fill="url(#crestGold)" stroke="#6d431b" stroke-width="1.8">LR</text>
-<path d="M386 172 Q408 173 414 195 L405 210 L424 238 L435 267 Q407 281 380 267 L390 238 L371 210 L365 193 Q370 176 386 172Z" fill="url(#silk)" stroke="#fff0c5" stroke-width="2.5"/>
-<path d="M370 208 Q397 221 414 208 M379 231 Q402 244 425 231 M376 259 Q404 274 434 259" fill="none" stroke="#77451d" stroke-width="2"/>
-<path d="M384 174 Q399 157 416 174 M395 174 L400 187" fill="none" stroke="#fff0c5" stroke-width="2"/>
-<path d="M125 240 Q105 222 116 203 Q129 187 145 207 M515 240 Q535 222 524 203 Q511 187 495 207" fill="none" stroke="url(#crestGold)" stroke-width="3" stroke-linecap="round"/>
-<path d="M137 252 Q153 235 169 252 M503 252 Q487 235 471 252" fill="none" stroke="url(#crestGold)" stroke-width="2"/>
-</svg></div></div>
+<img class="lr-emblem-art" src="assets/libaas-header-logo.jpg" alt="Libaas e Raahat LR ladies fashion logo"></div></div>
 <div class="header-tools">
  <div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کھولیں" onclick="toggleHeaderSearch()">⌕</button></div></div>
  <div class="nav-actions"><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 3.5h2l2.2 11.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L21 8H6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.2" cy="19.5" r="1.4" fill="currentColor"/><circle cx="18" cy="19.5" r="1.4" fill="currentColor"/></svg><span id="cartCount">0</span></button></div>
