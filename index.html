@@ -264,6 +264,14 @@ body.store-english .store-search-row{direction:ltr}
 @media(max-width:700px){.collection-pagination{gap:5px;margin-top:10px}.collection-pagination button{min-width:32px;height:32px;padding:0 8px}}
 
 .store-menu{left:18px;right:auto}.menu-preferences .language-select{width:100%;min-height:40px}.cart-icon-only #cartCount{display:inline-block}
+
+/* Mobile header: menu and cart on the top row, brand below */
+@media(max-width:800px){
+ .site-header .nav{display:flex;flex-direction:column-reverse;align-items:stretch;gap:5px;padding:8px 14px 10px}
+ .site-header .nav-actions{width:100%;display:flex;justify-content:space-between;align-items:center}
+ .site-header .brand{width:100%;margin-top:2px;gap:3px}
+ .site-header .brand-copy{align-items:center}
+}
 </style>
 </head>
 <body>
