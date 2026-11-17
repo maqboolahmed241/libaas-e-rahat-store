@@ -891,6 +891,33 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .nav-actions{display:flex!important;visibility:visible!important;opacity:1!important;width:40px!important;height:40px!important}
  .site-header .nav-actions .cart-icon-only{display:grid!important;visibility:visible!important;opacity:1!important;width:38px!important;height:38px!important;min-width:38px!important}
 }
+
+/* Final compact header: menu | decorative LR | magnifier-only | cart */
+.site-header .nav{display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px 44px!important;grid-template-rows:58px!important;gap:8px!important;align-items:center!important;min-height:74px!important;padding:8px 10px!important;position:relative!important;overflow:visible!important}
+.site-header #storeMenuToggle{grid-column:1!important;grid-row:1!important;display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:10!important;width:40px!important;height:40px!important;min-width:40px!important;max-width:40px!important;padding:0!important;place-items:center!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;color:#38200e!important;border:1px solid #f8e3ad!important;border-radius:10px!important;font-size:25px!important}
+.site-header .brand{grid-column:2!important;grid-row:1!important;display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:2!important;transform:none!important;width:100%!important;min-width:0!important;justify-content:center!important;align-items:center!important}
+.site-header .brand .brand-emblem{display:flex!important;align-items:center!important;justify-content:center!important}
+.site-header .simple-lr{display:block!important;transform:translateY(4px)!important;font-family:"Palatino Linotype",Georgia,serif!important;font-style:italic!important;font-weight:800!important;font-size:clamp(44px,10vw,58px)!important;letter-spacing:-6px!important;line-height:1!important;color:#f4d080!important;text-shadow:0 2px 0 #80501e,0 4px 9px #0009!important}
+.site-header .header-store-search{grid-column:3!important;grid-row:1!important;position:relative!important;display:block!important;visibility:visible!important;opacity:1!important;width:42px!important;min-width:42px!important;height:42px!important;overflow:visible!important;margin:0!important}
+.site-header .header-store-search .store-search-label{display:none!important}
+.site-header .header-store-search .store-search-row{display:flex!important;align-items:center!important;justify-content:center!important;width:42px!important;height:42px!important;min-height:42px!important;border:1px solid #f8e3ad!important;border-radius:50%!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;box-shadow:0 2px 6px #0004!important;overflow:hidden!important}
+.site-header .header-store-search input{display:none!important;width:0!important;min-width:0!important;padding:0!important;border:0!important}
+.site-header .header-store-search.search-open{position:absolute!important;right:62px!important;top:50%!important;transform:translateY(-50%)!important;width:min(64vw,270px)!important;height:40px!important;z-index:20!important}
+.site-header .header-store-search.search-open .store-search-row{width:100%!important;height:40px!important;min-height:40px!important;border-radius:12px!important;background:#fff9eb!important}
+.site-header .header-store-search.search-open input{display:block!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;height:38px!important;padding:4px 8px!important;border:0!important;background:transparent!important;color:#38200e!important}
+.site-header .header-store-search .store-search-row>button{display:grid!important;flex:0 0 40px!important;width:40px!important;min-width:40px!important;height:40px!important;place-items:center!important;padding:0!important;border:0!important;background:transparent!important;color:#38200e!important;font-size:27px!important;line-height:1!important}
+.site-header .nav-actions{grid-column:4!important;grid-row:1!important;display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:10!important;width:44px!important;height:44px!important;align-items:center!important;justify-content:center!important}
+.site-header .nav-actions .cart-icon-only{display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;margin:0!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;color:#38200e!important;border:1px solid #f8e3ad!important;border-radius:10px!important;font-size:22px!important}
+.site-header .cart-icon-only #cartCount{display:grid!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:-5px!important;right:-5px!important;z-index:6!important;min-width:17px!important;height:17px!important;border-radius:50%!important}
+@media(max-width:480px){
+ .site-header .nav{grid-template-columns:38px minmax(0,1fr) 38px 40px!important;grid-template-rows:54px!important;gap:6px!important;min-height:68px!important;padding:7px 7px!important}
+ .site-header #storeMenuToggle{width:36px!important;height:36px!important;min-width:36px!important;max-width:36px!important;font-size:22px!important}
+ .site-header .simple-lr{font-size:46px!important;letter-spacing:-6px!important}
+ .site-header .header-store-search,.site-header .header-store-search .store-search-row{width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important}
+ .site-header .header-store-search .store-search-row>button{width:36px!important;min-width:36px!important;height:36px!important;font-size:24px!important}
+ .site-header .nav-actions{width:40px!important;height:40px!important}
+ .site-header .nav-actions .cart-icon-only{width:38px!important;height:38px!important;min-width:38px!important}
+}
 </style>
 </head>
 <body>
@@ -901,7 +928,7 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 <header class="site-header"><nav class="nav">
 <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button>
 <div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat LR logo"><span class="simple-lr" aria-hidden="true">LR</span></div></div>
-<div class="store-search header-store-search"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کریں" onclick="searchStoreProducts(document.getElementById(&quot;storeProductSearch&quot;).value)">⌕</button></div></div>
+<div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کھولیں" onclick="toggleHeaderSearch()">⌕</button></div></div>
 <div class="nav-actions"><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div>
 <div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button></div>
 </nav></header>
@@ -1247,6 +1274,13 @@ async function updateFeedbackStatus(id,status){
  await renderAdminFeedback();
 }
 function toggleHeaderSearch(){const box=document.querySelector(".search-top"),input=document.getElementById("storeProductSearch");if(!box||!input)return;box.classList.toggle("mobile-search-open");if(box.classList.contains("mobile-search-open")){setTimeout(()=>input.focus(),50)}}
+function toggleHeaderSearch(){
+ const box=document.getElementById("headerSearchBox");
+ const input=document.getElementById("storeProductSearch");
+ if(!box||!input)return;
+ const opened=box.classList.toggle("search-open");
+ if(opened){input.focus();}else{input.value="";searchStoreProducts("");}
+}
 function toggleStoreMenu(){const menu=document.getElementById("storeMenu"),btn=document.getElementById("storeMenuToggle");if(!menu||!btn)return;const opening=menu.classList.contains("hidden");menu.classList.toggle("hidden",!opening);btn.setAttribute("aria-expanded",opening?"true":"false")}
 function closeStoreMenu(){const menu=document.getElementById("storeMenu"),btn=document.getElementById("storeMenuToggle");if(menu)menu.classList.add("hidden");if(btn)btn.setAttribute("aria-expanded","false")}
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
