@@ -1124,6 +1124,17 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 .site-header .brand .lr-pink-swish{position:absolute;width:58%;height:8px;left:30%;bottom:1px;border-bottom:3px solid #d94c83;border-radius:0 0 90% 70%;transform:skewX(-20deg)}
 .site-header .brand .lr-wordmark i{pointer-events:none}
 @media(max-width:480px){.site-header .brand .brand-emblem{width:clamp(132px,37vw,160px)!important;height:70px!important}}
+
+/* Header search: icon stays beside cart; search field drops below LR and toggles closed */
+.site-header .header-tools{display:flex!important;flex-direction:column!important;align-items:center!important;width:100%!important;gap:0!important}
+.site-header .header-tools .nav-actions{order:0!important;width:100%!important}
+.site-header .header-tools #headerSearchBox{order:1!important;display:none!important;width:min(92%,560px)!important;max-width:560px!important;margin:8px auto 3px!important;padding:10px 12px!important;background:#fff8e9!important;border:1px solid #d9b568!important;border-radius:16px!important;box-shadow:0 5px 16px #12090355!important}
+.site-header .header-tools #headerSearchBox.search-open{display:block!important}
+.site-header .header-tools #headerSearchBox .store-search-label{display:block!important;color:#57351f!important;margin:0 0 5px!important;font-size:13px!important}
+.site-header .header-tools #headerSearchBox .store-search-row{display:flex!important;flex-wrap:nowrap!important;gap:0!important}
+.site-header .header-tools #headerSearchBox input{width:100%!important;min-height:42px!important;border:1px solid #c9a45e!important;border-radius:10px!important;background:#fffdf8!important;color:#3d2418!important;padding:9px 12px!important}
+.site-header .nav-actions .header-search-toggle{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:52px!important;min-height:52px!important;border:0!important;color:#f5cb70!important;background:transparent!important;font-size:34px!important}
+@media(max-width:800px){.site-header .header-tools{width:100%!important}.site-header .header-tools #headerSearchBox{width:92%!important}}
 </style>
 </head>
 <body>
@@ -1136,8 +1147,8 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 <div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat ornate LR logo">
 <div class="lr-wordmark" role="img" aria-label="LR gold fashion monogram"><span>LR</span><i class="lr-gold-swish"></i><i class="lr-pink-swish"></i></div></div></div>
 <div class="header-tools">
- <div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کھولیں" onclick="toggleHeaderSearch()">⌕</button></div></div>
- <div class="nav-actions"><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 3.5h2l2.2 11.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L21 8H6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.2" cy="19.5" r="1.4" fill="currentColor"/><circle cx="18" cy="19.5" r="1.4" fill="currentColor"/></svg><span id="cartCount">0</span></button></div>
+ <div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"></div></div>
+ <div class="nav-actions"><button class="iconbtn header-search-toggle" type="button" aria-label="تلاش کھولیں" title="تلاش" onclick="toggleHeaderSearch()">⌕</button><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 3.5h2l2.2 11.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L21 8H6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.2" cy="19.5" r="1.4" fill="currentColor"/><circle cx="18" cy="19.5" r="1.4" fill="currentColor"/></svg><span id="cartCount">0</span></button></div>
 </div>
 <div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button></div>
 </nav></header>
@@ -1491,8 +1502,10 @@ function toggleHeaderSearch(){const box=document.querySelector(".search-top"),in
 function toggleHeaderSearch(){
  const box=document.getElementById("headerSearchBox");
  const input=document.getElementById("storeProductSearch");
+ const button=document.querySelector(".header-search-toggle");
  if(!box||!input)return;
  const opened=box.classList.toggle("search-open");
+ if(button){button.setAttribute("aria-expanded",String(opened));button.setAttribute("aria-label",opened?"تلاش بند کریں":"تلاش کھولیں");}
  if(opened){input.focus();}else{input.value="";searchStoreProducts("");}
 }
 function toggleStoreMenu(){const menu=document.getElementById("storeMenu"),btn=document.getElementById("storeMenuToggle");if(!menu||!btn)return;const opening=menu.classList.contains("hidden");menu.classList.toggle("hidden",!opening);btn.setAttribute("aria-expanded",opening?"true":"false")}
