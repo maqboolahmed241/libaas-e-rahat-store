@@ -553,6 +553,33 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
  .site-header .nav>.nav-actions{width:82px!important;min-width:82px!important;gap:1px!important}
  .site-header .nav>.nav-actions .header-search-toggle,.site-header .nav>.nav-actions .cart-icon-only{width:40px!important;min-width:40px!important;height:42px!important}
 }
+
+/* Version 3: completely refreshed typographic fashion logo */
+.site-header .nav>.libaas-new-brand{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:clamp(7px,1.4vw,16px)!important;min-width:0!important;overflow:visible!important}
+.site-header .nav>.libaas-new-brand .libaas-monogram{position:relative!important;isolation:isolate!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:0!important;flex:0 0 auto!important;width:clamp(48px,6.4vw,72px)!important;min-width:clamp(48px,6.4vw,72px)!important;height:clamp(48px,6.4vw,72px)!important;border:1.5px solid #f2d28a!important;border-radius:17px 5px 17px 5px!important;background:linear-gradient(145deg,#67303a 0%,#321720 55%,#1e1017 100%)!important;box-shadow:inset 0 0 0 3px #6d482b,inset 0 0 0 4px #e4bc70,0 3px 9px #12090a88!important;color:#f8dda0!important;overflow:hidden!important}
+.site-header .nav>.libaas-new-brand .libaas-monogram:before,.site-header .nav>.libaas-new-brand .libaas-monogram:after{content:"";position:absolute;z-index:-1;width:46px;height:46px;border:1px solid #e4bc70;border-radius:50%;opacity:.25}
+.site-header .nav>.libaas-new-brand .libaas-monogram:before{top:-27px;left:-24px}
+.site-header .nav>.libaas-new-brand .libaas-monogram:after{right:-24px;bottom:-27px}
+.site-header .nav>.libaas-new-brand .libaas-monogram-flower{font-size:10px!important;line-height:1!important;color:#ffe8b2!important;margin-bottom:-2px!important;text-shadow:0 0 6px #f4d28a!important}
+.site-header .nav>.libaas-new-brand .libaas-monogram-letters{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(25px,3.5vw,39px)!important;font-weight:700!important;letter-spacing:-4px!important;line-height:1!important;padding-right:4px!important;color:#f5d58e!important;text-shadow:0 1px 0 #6e441d,0 2px 5px #000!important}
+.site-header .nav>.libaas-new-brand .libaas-monogram-line{width:58%!important;height:1px!important;margin-top:3px!important;background:linear-gradient(90deg,transparent,#f7dfaa,transparent)!important}
+.site-header .nav>.libaas-new-brand .brand-copy{align-items:flex-start!important;gap:3px!important;padding:0!important;min-width:0!important;max-width:100%!important}
+.site-header .nav>.libaas-new-brand .brandname{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(15px,3.2vw,29px)!important;font-weight:800!important;letter-spacing:clamp(.5px,.22vw,2.3px)!important;line-height:1.1!important;color:#f8d78e!important;text-shadow:0 1px 0 #57321a,0 3px 8px #0009!important;padding:0 0 5px!important;white-space:nowrap!important}
+.site-header .nav>.libaas-new-brand .brandname:after{content:"";display:block;width:100%;height:1.5px;margin-top:4px;background:linear-gradient(90deg,transparent,#f6d48b 15%,#b47b38 50%,#f6d48b 85%,transparent)!important}
+.site-header .nav>.libaas-new-brand .brandtag{display:inline-block!important;align-self:flex-start!important;margin:0!important;padding:1px 8px 3px!important;border:1px solid #c99b55!important;border-radius:3px 12px 3px 12px!important;background:linear-gradient(100deg,#4b242c,#75434a 50%,#3a1b25)!important;color:#f7dfb0!important;font-family:"Noto Nastaliq Urdu","Noto Sans Arabic",serif!important;font-size:clamp(9px,1.55vw,14px)!important;font-weight:700!important;line-height:1.65!important;white-space:nowrap!important;box-shadow:0 2px 5px #0004!important}
+@media(max-width:560px){
+ .site-header .nav>.libaas-new-brand{gap:5px!important}
+ .site-header .nav>.libaas-new-brand .libaas-monogram{width:46px!important;min-width:46px!important;height:46px!important;border-radius:12px 4px 12px 4px!important}
+ .site-header .nav>.libaas-new-brand .libaas-monogram-letters{font-size:25px!important}
+ .site-header .nav>.libaas-new-brand .brandname{font-size:clamp(11px,3.1vw,16px)!important;letter-spacing:0!important}
+ .site-header .nav>.libaas-new-brand .brandtag{font-size:clamp(7px,1.9vw,9px)!important;padding:1px 4px 2px!important}
+}
+@media(max-width:390px){
+ .site-header .nav>.libaas-new-brand{gap:3px!important}
+ .site-header .nav>.libaas-new-brand .libaas-monogram{width:42px!important;min-width:42px!important;height:42px!important}
+ .site-header .nav>.libaas-new-brand .brandname{font-size:clamp(10px,2.9vw,12px)!important;letter-spacing:0!important}
+ .site-header .nav>.libaas-new-brand .brandtag{font-size:7px!important;padding:1px 3px 2px!important}
+}
 </style>
 </head>
 <body>
@@ -561,23 +588,17 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
  <div class="message-rotator-inner"><span class="message-rotator-text" id="brandMessageText">لباسِ راحت — آپ کی پسند، آپ کے گھر تک!</span></div>
 </div>
 <header class="site-header"><nav class="nav">
- <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button><div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat crowned fashion monogram">
-<svg viewBox="0 0 420 250" role="img" aria-label="LIBAAS E RAAHAT elegant gold fashion monogram">
-<defs>
- <linearGradient id="lrGoldNew" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4cf"/><stop offset=".28" stop-color="#d9ad5b"/><stop offset=".55" stop-color="#a86f2c"/><stop offset=".78" stop-color="#f5d995"/><stop offset="1" stop-color="#8b5423"/></linearGradient>
- <linearGradient id="lrWineNew" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b2431"/><stop offset="1" stop-color="#241019"/></linearGradient>
- <filter id="lrShadowNew" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<path d="M48 125 C78 45 145 22 210 32 C280 42 343 25 374 94 C393 137 362 190 308 207 C245 228 153 217 95 197 C45 180 27 151 48 125Z" fill="url(#lrWineNew)" stroke="url(#lrGoldNew)" stroke-width="7"/>
-<path d="M63 126 C91 62 151 44 210 51 C272 58 329 47 355 101 C375 143 342 177 302 190 C243 209 158 198 105 181 C65 168 47 148 63 126Z" fill="none" stroke="url(#lrGoldNew)" stroke-width="2.2"/>
-<path d="M78 169 C120 190 173 195 225 190 C279 184 326 163 347 131" fill="none" stroke="#f3d99e" stroke-width="2" opacity=".75"/>
-<path d="M92 86 C125 52 160 48 193 57 C165 70 145 93 133 121 C122 148 105 160 83 160 C101 143 107 121 92 86Z" fill="url(#lrGoldNew)" opacity=".9"/>
-<path d="M327 82 C300 55 265 50 232 58 C259 70 280 93 291 120 C303 147 320 159 342 158 C324 142 318 119 327 82Z" fill="url(#lrGoldNew)" opacity=".82"/>
-<text x="210" y="153" text-anchor="middle" font-family="Georgia,serif" font-size="105" font-weight="600" letter-spacing="-12" fill="url(#lrGoldNew)" stroke="#4b2b1b" stroke-width="1.3" filter="url(#lrShadowNew)">LR</text>
-<path d="M158 174 Q210 190 262 174" fill="none" stroke="url(#lrGoldNew)" stroke-width="3" stroke-linecap="round"/>
-<path d="M198 27 L210 16 L222 27" fill="none" stroke="url(#lrGoldNew)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="210" cy="16" r="4" fill="#fff0c5"/>
-</svg></div><div class="brand-copy"><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
+ <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button><div class="brand libaas-new-brand" aria-label="Libaas e Raahat brand logo">
+  <div class="brand-emblem libaas-monogram" aria-hidden="true">
+   <span class="libaas-monogram-flower">✦</span>
+   <span class="libaas-monogram-letters">LR</span>
+   <span class="libaas-monogram-line"></span>
+  </div>
+  <div class="brand-copy">
+   <div class="brandname">LIBAAS E RAAHAT</div>
+   <div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div>
+  </div>
+ </div>
  <div class="nav-actions"><button type="button" class="iconbtn header-search-toggle" aria-label="Search" title="Search" onclick="toggleHeaderSearch()">🔍</button><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div><div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button></div>
 </nav></header>
 <main>
