@@ -918,6 +918,38 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .nav-actions{width:40px!important;height:40px!important}
  .site-header .nav-actions .cart-icon-only{width:38px!important;height:38px!important;min-width:38px!important}
 }
+
+/* Keep search and cart together on the right, above the header artwork */
+.site-header .nav{display:grid!important;grid-template-columns:44px minmax(0,1fr) auto!important;grid-template-rows:60px!important;gap:8px!important;align-items:center!important;min-height:76px!important;padding:8px 10px!important;position:relative!important;overflow:visible!important}
+.site-header #storeMenuToggle{grid-column:1!important;grid-row:1!important;position:relative!important;z-index:30!important;display:grid!important;visibility:visible!important;opacity:1!important}
+.site-header .brand{grid-column:2!important;grid-row:1!important;position:relative!important;z-index:20!important;display:flex!important;visibility:visible!important;opacity:1!important;transform:none!important;justify-content:center!important;align-items:center!important;min-width:0!important}
+.site-header .simple-lr{transform:translateY(4px)!important;font-size:clamp(44px,10vw,58px)!important}
+.site-header .header-tools{grid-column:3!important;grid-row:1!important;position:relative!important;z-index:40!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;min-width:0!important;overflow:visible!important}
+.site-header .header-store-search{position:relative!important;z-index:42!important;display:block!important;visibility:visible!important;opacity:1!important;flex:0 0 40px!important;width:40px!important;min-width:40px!important;height:40px!important;margin:0!important;overflow:visible!important}
+.site-header .header-store-search .store-search-label{display:none!important}
+.site-header .header-store-search .store-search-row{display:flex!important;align-items:center!important;justify-content:center!important;width:40px!important;height:40px!important;min-height:40px!important;border:1px solid #f8e3ad!important;border-radius:50%!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;box-shadow:0 2px 6px #0004!important;overflow:hidden!important}
+.site-header .header-store-search input{display:none!important}
+.site-header .header-store-search .store-search-row>button{display:grid!important;place-items:center!important;width:40px!important;min-width:40px!important;height:40px!important;border:0!important;background:transparent!important;color:#38200e!important;font-size:27px!important}
+.site-header .header-store-search.search-open{position:absolute!important;right:50px!important;top:50%!important;transform:translateY(-50%)!important;z-index:60!important;flex:none!important;width:min(62vw,260px)!important;height:40px!important}
+.site-header .header-store-search.search-open .store-search-row{width:100%!important;height:40px!important;border-radius:12px!important;background:#fff9eb!important}
+.site-header .header-store-search.search-open input{display:block!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;height:38px!important;padding:4px 8px!important;border:0!important;background:transparent!important;color:#38200e!important}
+.site-header .header-store-search.search-open .store-search-row>button{flex:0 0 40px!important}
+.site-header .nav-actions{position:relative!important;z-index:45!important;display:flex!important;visibility:visible!important;opacity:1!important;flex:0 0 42px!important;width:42px!important;height:42px!important;align-items:center!important;justify-content:center!important;margin:0!important;padding:0!important}
+.site-header .nav-actions .cart-icon-only{position:relative!important;z-index:46!important;display:grid!important;visibility:visible!important;opacity:1!important;place-items:center!important;width:40px!important;height:40px!important;min-width:40px!important;padding:0!important;margin:0!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;color:#38200e!important;border:1px solid #f8e3ad!important;border-radius:10px!important;font-size:21px!important}
+.site-header .cart-icon-only #cartCount{display:grid!important;position:absolute!important;top:-5px!important;right:-5px!important;z-index:48!important}
+@media(max-width:480px){
+ .site-header .nav{grid-template-columns:38px minmax(0,1fr) auto!important;grid-template-rows:54px!important;gap:6px!important;min-height:68px!important;padding:7px 7px!important}
+ .site-header #storeMenuToggle{width:36px!important;height:36px!important;min-width:36px!important;max-width:36px!important}
+ .site-header .simple-lr{font-size:44px!important;letter-spacing:-5px!important}
+ .site-header .header-tools{gap:5px!important}
+ .site-header .header-store-search,.site-header .header-store-search .store-search-row{width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;flex-basis:34px!important}
+ .site-header .header-store-search .store-search-row>button{width:34px!important;min-width:34px!important;height:34px!important;font-size:23px!important}
+ .site-header .header-store-search.search-open{width:min(60vw,230px)!important;height:36px!important}
+ .site-header .header-store-search.search-open .store-search-row{height:36px!important;min-height:36px!important}
+ .site-header .header-store-search.search-open input{height:34px!important;min-height:34px!important}
+ .site-header .nav-actions{width:36px!important;height:36px!important;flex-basis:36px!important}
+ .site-header .nav-actions .cart-icon-only{width:34px!important;height:34px!important;min-width:34px!important;font-size:19px!important}
+}
 </style>
 </head>
 <body>
@@ -928,8 +960,10 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 <header class="site-header"><nav class="nav">
 <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button>
 <div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat LR logo"><span class="simple-lr" aria-hidden="true">LR</span></div></div>
-<div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کھولیں" onclick="toggleHeaderSearch()">⌕</button></div></div>
-<div class="nav-actions"><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div>
+<div class="header-tools">
+ <div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کھولیں" onclick="toggleHeaderSearch()">⌕</button></div></div>
+ <div class="nav-actions"><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div>
+</div>
 <div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button></div>
 </nav></header>
 <main>
