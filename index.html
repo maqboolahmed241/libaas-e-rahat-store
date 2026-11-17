@@ -1044,6 +1044,24 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .brand .brand-emblem{height:56px!important;padding:0 5px!important}
  .site-header .brand .simple-lr{font-size:clamp(46px,12vw,58px)!important;letter-spacing:-7px!important}
 }
+
+/* Ornate LR monogram: crowned, intertwined serif initials with gold flourishes */
+.site-header .brand .brand-emblem{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:clamp(112px,30vw,150px)!important;min-width:0!important;max-width:100%!important;
+ height:62px!important;flex:0 1 auto!important;margin:0 auto!important;padding:0!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;overflow:visible!important;position:relative!important;
+}
+.site-header .brand .lr-emblem-art{
+ display:block!important;width:100%!important;height:100%!important;max-width:150px!important;
+ overflow:visible!important;filter:drop-shadow(0 3px 5px #0008)!important;
+}
+.site-header .brand .simple-lr{display:none!important}
+@media(max-width:480px){
+ .site-header .brand .brand-emblem{width:clamp(108px,29vw,132px)!important;height:58px!important}
+ .site-header .brand .lr-emblem-art{max-width:132px!important}
+}
 </style>
 </head>
 <body>
@@ -1053,7 +1071,32 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 </div>
 <header class="site-header"><nav class="nav">
 <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button>
-<div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat LR logo"><span class="simple-lr" aria-hidden="true">LR</span></div></div>
+<div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat ornate LR logo">
+<svg class="lr-emblem-art" viewBox="0 0 260 126" role="img" aria-label="LR monogram with crown and gold flourishes">
+ <defs>
+  <linearGradient id="lrGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4c5"/><stop offset=".28" stop-color="#f8d77d"/><stop offset=".62" stop-color="#c8892d"/><stop offset=".84" stop-color="#ffe9a5"/><stop offset="1" stop-color="#9d621e"/></linearGradient>
+  <filter id="lrGlow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ </defs>
+ <g fill="url(#lrGold)" stroke="#f8df9c" stroke-width="1.2" filter="url(#lrGlow)">
+  <path d="M104 27 L96 11 L111 20 L126 4 L139 20 L154 11 L148 28 Z"/>
+  <path d="M96 28 Q126 34 156 28 L153 33 Q126 38 99 33 Z"/>
+  <circle cx="96" cy="10" r="3"/><circle cx="126" cy="4" r="3.2"/><circle cx="154" cy="10" r="3"/>
+ </g>
+ <g fill="none" stroke="url(#lrGold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M25 75 Q9 60 18 48 Q27 39 34 52 Q39 60 31 66"/>
+  <path d="M235 75 Q251 60 242 48 Q233 39 226 52 Q221 60 229 66"/>
+  <path d="M21 83 Q7 78 7 66 M239 83 Q253 78 253 66"/>
+  <path d="M35 91 Q22 96 17 108 M225 91 Q238 96 243 108"/>
+  <path d="M24 58 Q12 51 12 42 M236 58 Q248 51 248 42"/>
+  <path d="M13 42 Q25 43 28 54 M247 42 Q235 43 232 54"/>
+ </g>
+ <g fill="url(#lrGold)" stroke="#8e571d" stroke-width="1.1" paint-order="stroke" filter="url(#lrGlow)">
+  <text x="42" y="93" font-family="Bodoni MT, Didot, Georgia, serif" font-size="82" font-style="italic" font-weight="bold">L</text>
+  <text x="101" y="96" font-family="Bodoni MT, Didot, Georgia, serif" font-size="91" font-style="italic" font-weight="bold">R</text>
+ </g>
+ <path d="M30 103 Q80 116 130 105 Q180 116 230 103 Q202 124 166 115 Q130 126 94 115 Q58 124 30 103Z" fill="none" stroke="url(#lrGold)" stroke-width="3"/>
+ <path d="M119 115 Q130 106 141 115" fill="none" stroke="#ffe8a1" stroke-width="2"/>
+</svg></div></div>
 <div class="header-tools">
  <div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کھولیں" onclick="toggleHeaderSearch()">⌕</button></div></div>
  <div class="nav-actions"><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 3.5h2l2.2 11.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L21 8H6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.2" cy="19.5" r="1.4" fill="currentColor"/><circle cx="18" cy="19.5" r="1.4" fill="currentColor"/></svg><span id="cartCount">0</span></button></div>
