@@ -473,6 +473,45 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
 }
 @media(max-width:360px){.site-header .brand .brand-emblem{flex-basis:68px!important;width:68px!important}.site-header .brand .brand-copy{max-width:calc(100% - 76px)!important}.site-header .brand .brandname{font-size:14px!important}}
 
+
+/* Unified premium header: crest, brand, menu, search and cart on one row */
+.site-header .nav{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:clamp(6px,1.5vw,20px)!important;padding:7px clamp(8px,2.5vw,30px)!important;min-height:112px}
+.site-header .brand{display:flex!important;flex:1 1 auto!important;min-width:0!important;width:auto!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:clamp(6px,1.4vw,18px)!important;padding:0!important}
+.site-header .brand .brand-emblem{width:clamp(76px,13vw,150px)!important;height:clamp(62px,10vw,108px)!important;min-width:clamp(76px,13vw,150px)!important;flex:0 0 auto!important}
+.site-header .brand .brand-copy{min-width:0!important;max-width:none!important;flex:1 1 auto!important;align-items:flex-start!important;gap:5px!important;padding:0!important}
+.site-header .brand .brandname{font-size:clamp(18px,3.9vw,48px)!important;letter-spacing:clamp(.2px,.28vw,3px)!important;white-space:nowrap!important;line-height:1.08!important;padding:0 0 5px!important}
+.site-header .brand .brandname:after{height:2px!important;margin-top:5px!important}
+.site-header .brand .brandtag{font-size:clamp(10px,1.5vw,18px)!important;padding:2px clamp(7px,1.5vw,20px) 4px!important;line-height:1.65!important;white-space:nowrap!important}
+.site-header .nav-actions{width:auto!important;flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:clamp(2px,.7vw,10px)!important;min-height:0!important;padding:0!important}
+.site-header .nav-actions .iconbtn,.site-header .nav-actions .pillbtn{min-width:clamp(38px,4.5vw,58px)!important;min-height:46px!important;padding:5px 8px!important;font-size:clamp(22px,3vw,34px)!important}
+.site-header .nav-actions .menu-toggle{font-size:0!important}
+.site-header .nav-actions .menu-toggle:before{content:"☰";font-size:clamp(25px,3.3vw,38px)!important}
+.site-header .nav-actions .header-search-toggle{display:inline-flex!important;align-items:center!important;justify-content:center!important}
+.site-header .nav-actions .cart-icon-only{display:inline-flex!important;align-items:center!important;justify-content:center!important;position:relative!important}
+.site-header .nav-actions>*+*{border-left:0!important}
+.site-header .nav-actions .cart-icon-only #cartCount{top:0!important;right:0!important;min-width:19px!important;height:19px!important;font-size:10px!important}
+.site-header .store-menu{top:100%!important}
+@media(max-width:560px){
+ .site-header .nav{min-height:76px!important;padding:5px 7px!important;gap:3px!important}
+ .site-header .brand{gap:5px!important}
+ .site-header .brand .brand-emblem{width:clamp(54px,17vw,72px)!important;height:54px!important;min-width:clamp(54px,17vw,72px)!important}
+ .site-header .brand .brand-copy{gap:3px!important}
+ .site-header .brand .brandname{font-size:clamp(13px,4.1vw,19px)!important;letter-spacing:0!important;white-space:nowrap!important;padding-bottom:3px!important}
+ .site-header .brand .brandname:after{height:2px!important;margin-top:3px!important}
+ .site-header .brand .brandtag{font-size:clamp(8px,2.5vw,11px)!important;padding:1px 5px 2px!important;white-space:nowrap!important;border-width:1px!important}
+ .site-header .nav-actions{gap:0!important}
+ .site-header .nav-actions .iconbtn,.site-header .nav-actions .pillbtn{min-width:35px!important;width:35px!important;min-height:42px!important;padding:4px 2px!important;font-size:22px!important}
+ .site-header .nav-actions .menu-toggle:before{font-size:24px!important}
+ .site-header .nav-actions .cart-icon-only #cartCount{min-width:16px!important;height:16px!important;font-size:9px!important;right:-1px!important}
+ .site-header .store-menu{right:5px!important;left:auto!important}
+ body.store-english .site-header .store-menu{left:5px!important;right:auto!important}
+}
+@media(max-width:360px){
+ .site-header .brand .brand-emblem{width:48px!important;min-width:48px!important;height:48px!important}
+ .site-header .brand .brandname{font-size:12px!important}
+ .site-header .brand .brandtag{font-size:7.5px!important}
+ .site-header .nav-actions .iconbtn,.site-header .nav-actions .pillbtn{width:32px!important;min-width:32px!important}
+}
 </style>
 </head>
 <body>
@@ -497,7 +536,7 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
  <path d="M183 111 Q197 99 209 111" fill="none" stroke="#fce3a0" stroke-width="2"/>
  <path d="M32 150 Q15 133 27 119 Q39 107 51 124 M268 150 Q285 133 273 119 Q261 107 249 124" fill="none" stroke="url(#crestGold)" stroke-width="3"/>
  <circle cx="150" cy="11" r="5" fill="#fff0b5"/>
-</svg></div><div class="brand-copy"><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div></div>
+</svg></div><div class="brand-copy"><div class="brandname">LIBAAS E RAAHAT</div><div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div></div></div>
  <div class="nav-actions"><button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button><button type="button" class="iconbtn header-search-toggle" aria-label="Search" title="Search" onclick="toggleHeaderSearch()">🔍</button><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div><div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button></div>
 </nav></header>
 <main>
