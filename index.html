@@ -318,6 +318,48 @@ body.store-english .brand .brandtag{
  font-weight:600!important;letter-spacing:.3px!important;line-height:1.5!important;
 }
 @media(max-width:800px){.brand .logo{width:54px;height:54px;min-width:54px;font-size:21px!important}.brand .brandtag{font-size:12px!important}}
+
+/* Approved LIBAAS E RAAHAT horizontal premium wordmark */
+.brand{flex-direction:row!important;align-items:center!important;justify-content:center;gap:12px!important;text-align:left!important}
+.brand .logo{
+ width:72px!important;height:58px!important;min-width:72px!important;border-radius:10px!important;
+ display:grid!important;place-items:center!important;overflow:hidden!important;
+ color:#f7d58b!important;font-family:Georgia,"Times New Roman",serif!important;
+ font-size:27px!important;font-weight:700!important;letter-spacing:1px!important;
+ background:linear-gradient(135deg,#4a2b1d,#24140f 72%,#6a472b)!important;
+ border:1.5px solid #c9a15e!important;
+ box-shadow:inset 0 0 0 3px #ffffff12,0 3px 10px #39251d24!important;
+ text-shadow:0 2px 3px #1d100b!important;position:relative;
+}
+.brand .logo:after{
+ content:"";position:absolute;left:12px;right:12px;bottom:8px;height:1px;
+ border-radius:50%;background:linear-gradient(90deg,transparent,#f4d18a,transparent);
+}
+.brand .brand-copy{align-items:flex-start!important;gap:3px!important;padding:2px 0!important}
+.brand .brandname{
+ font-family:Georgia,"Times New Roman",serif!important;
+ font-size:clamp(18px,3vw,24px)!important;font-weight:800!important;
+ letter-spacing:1.5px!important;line-height:1.12!important;color:#684324!important;
+ text-shadow:0 1px 0 #fff!important;
+}
+.brand .brandname:after{
+ content:"";display:block;width:100%;height:2px;margin:4px 0 0;
+ background:linear-gradient(90deg,transparent,#b9955d 12%,#e7c98e 50%,#b9955d 88%,transparent);
+}
+.brand .brandtag{
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;padding:0!important;margin-top:2px!important;
+ color:#8a6845!important;font-size:12px!important;line-height:1.7!important;
+}
+body.store-english .brand .brandtag{font-size:11px!important}
+@media(max-width:800px){
+ .site-header .brand{flex-direction:row!important;justify-content:center!important;align-items:center!important;gap:10px!important}
+ .brand .logo{width:60px!important;height:50px!important;min-width:60px!important;font-size:23px!important}
+ .brand .brand-copy{align-items:flex-start!important}
+ .brand .brandname{font-size:clamp(16px,4.5vw,21px)!important;letter-spacing:1px!important}
+ .brand .brandtag{font-size:11px!important}
+}
+
 </style>
 </head>
 <body>
