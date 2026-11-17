@@ -682,7 +682,7 @@ https://maqboolahmed241.github.io/libaas-e-rahat-store/
 LIBAAS E RAAHAT
 
 🌷 خوش رہیں، سلامت رہیں، آباد رہیں! 🌷</textarea></div><button id="newsletterCampaignButton" class="wide" type="button" onclick="openNewsletterGmailCampaign()">منتخب ای میلز کو Gmail میں تیار کریں (اگلے 25)</button><p id="newsletterCampaignStatus" class="muted" role="status" aria-live="polite">Gmail میں ہر گروپ BCC کے ذریعے تیار ہوگا۔ آپ پیغام چیک کرکے خود Send دبائیں گے؛ کوئی ای میل خودکار طور پر نہیں بھیجی جائے گی۔</p></div>
-</div></div></div>
+</div></div></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script>
 const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
@@ -1173,7 +1173,7 @@ async function saveSettings(){
   if(!db)return say("سرور سے رابطہ نہیں ہے۔ صفحہ دوبارہ کھولیں۔",false);
   const auth=await db.auth.getUser();
   if(auth.error||!auth.data.user)return say("سیٹنگز محفوظ کرنے کے لیے پہلے ایڈمن لاگ اِن کریں۔",false);
-  const nums=["waNumber1","waNumber2","waNumber3"].map(function(id){const el=document.getElementById(id);return el?el.value.replace(/\\D/g,""):""});const visibility=[1,2,3].map(function(n){const cb=document.getElementById("waVisible"+n);return cb?cb.checked:true;});const savedNums=nums.filter(Boolean);
+  const nums=["waNumber1","waNumber2","waNumber3"].map(function(id){const el=document.getElementById(id);return el?el.value.replace(/\\D/g,""):""});const visibility=[1,2,3].map(function(n){const cb=document.getElementById("waVisible"+n);return cb?cb.checked:true;});const savedNums=nums;
   const orderWhatsAppIndex=Number(document.getElementById("orderWhatsAppIndex")?.value||0);if(!savedNums[orderWhatsAppIndex])return say("آرڈر وصول کرنے کے لیے منتخب واٹس ایپ نمبر پہلے درج کریں۔",false);
    const deliveryAreas=Array.from(document.querySelectorAll("#deliveryAreaEditors .delivery-area-row")).map(function(row){return {name:row.querySelector("[data-area-name]").value.trim(),fee:Math.max(0,Number(row.querySelector("[data-area-fee]").value)||0),active:row.querySelector("[data-area-active]").checked};}).filter(function(x){return x.name;});if(!deliveryAreas.length)return say("کم از کم ایک شہر یا علاقہ شامل کریں۔",false);if(new Set(deliveryAreas.map(function(x){return x.name.toLocaleLowerCase();})).size!==deliveryAreas.length)return say("ہر شہر کا نام منفرد درج کریں۔",false);const fee=Number(deliveryAreas[0].fee||0);
   const topNotice=document.getElementById("topNoticeInput")?.value.trim()||"";const showContact=!!document.getElementById("showContact")?.checked;
@@ -1188,10 +1188,10 @@ async function saveSettings(){
    accounts.push(a);
   }
   say("سیٹنگز محفوظ ہو رہی ہیں…",true);
-  const r=await db.from("store_settings").update({whatsapp_number:savedNums[0]||"",whatsapp_numbers:savedNums,whatsapp_visibility:visibility,order_whatsapp_index:orderWhatsAppIndex,delivery_fee:fee,delivery_areas:deliveryAreas,payment_accounts:accounts,top_notice:topNotice,show_contact:showContact,international_shipping:internationalShipping,social_links:socialLinks,updated_at:new Date().toISOString()}).eq("id",1).select("id,payment_accounts,delivery_fee,whatsapp_numbers,whatsapp_visibility,top_notice,show_contact,international_shipping,social_links").maybeSingle();
+  const r=await db.from("store_settings").update({whatsapp_number:savedNums[0]||savedNums.find(Boolean)||"",whatsapp_numbers:savedNums,whatsapp_visibility:visibility,order_whatsapp_index:orderWhatsAppIndex,delivery_fee:fee,delivery_areas:deliveryAreas,payment_accounts:accounts,top_notice:topNotice,show_contact:showContact,international_shipping:internationalShipping,social_links:socialLinks,updated_at:new Date().toISOString()}).eq("id",1).select("id,payment_accounts,delivery_fee,whatsapp_numbers,whatsapp_visibility,top_notice,show_contact,international_shipping,social_links").maybeSingle();
   if(r.error)return say("محفوظ نہیں ہوا: "+r.error.message,false);
   if(!r.data)return say("ڈیٹابیس نے تبدیلی قبول نہیں کی۔ ایڈمن اکاؤنٹ کی اجازت چیک کریں اور دوبارہ لاگ اِن کریں۔",false);
-  settings={wa:savedNums[0]||"",was:savedNums,whatsapp_visibility:visibility,order_whatsapp_index:Number(document.getElementById("orderWhatsAppIndex")?.value||0),fee:fee,delivery_areas:deliveryAreas,payment_accounts:Array.isArray(r.data.payment_accounts)?r.data.payment_accounts:[],top_notice:r.data.top_notice||topNotice,show_contact:r.data.show_contact!==false,international_shipping:r.data.international_shipping||internationalShipping,social_links:Array.isArray(r.data.social_links)?r.data.social_links:socialLinks};renderTopNotice();renderFooterContact();renderSocialLinks();
+  settings={wa:savedNums[0]||savedNums.find(Boolean)||"",was:savedNums,whatsapp_visibility:visibility,order_whatsapp_index:Number(document.getElementById("orderWhatsAppIndex")?.value||0),fee:fee,delivery_areas:deliveryAreas,payment_accounts:Array.isArray(r.data.payment_accounts)?r.data.payment_accounts:[],top_notice:r.data.top_notice||topNotice,show_contact:r.data.show_contact!==false,international_shipping:r.data.international_shipping||internationalShipping,social_links:Array.isArray(r.data.social_links)?r.data.social_links:socialLinks};renderTopNotice();renderFooterContact();renderSocialLinks();
   renderCustomerDeliveryAreas();renderCart();renderDeliveryAreaEditors();renderPaymentAccountEditors();renderCustomerPaymentOptions();renderInternationalCountryEditors();
   say("محفوظ ہوگیا! انٹرنیشنل ممالک کی سیٹنگز بھی ڈیٹابیس میں محفوظ ہیں۔",true);
  }catch(e){console.error("saveSettings failed:",e);say("محفوظ کرتے وقت خرابی: "+(e&&e.message?e.message:"نامعلوم مسئلہ"),false);}
