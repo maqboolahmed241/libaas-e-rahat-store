@@ -360,6 +360,40 @@ body.store-english .brand .brandtag{font-size:11px!important}
  .brand .brandtag{font-size:11px!important}
 }
 
+
+/* LIBAAS E RAAHAT premium header inspired by the approved gold-brown concept */
+.site-header{background:linear-gradient(110deg,#1e100b 0%,#3b1e10 48%,#1b0e09 100%)!important;border-bottom:3px solid #d8ad55!important;box-shadow:0 5px 22px #160b0870!important}
+.site-header .nav{max-width:100%!important;width:100%;padding:12px clamp(14px,4vw,54px) 17px!important;display:flex!important;flex-direction:column-reverse!important;align-items:stretch!important;gap:12px!important}
+.site-header .nav-actions{width:100%;display:flex!important;justify-content:space-between!important;align-items:center!important;gap:0!important;min-height:62px;padding:0 clamp(4px,5vw,70px)}
+.site-header .nav-actions .iconbtn,.site-header .nav-actions .pillbtn{background:transparent!important;border:0!important;border-radius:0!important;color:#f5cb70!important;box-shadow:none!important;min-width:64px;min-height:54px;padding:8px 18px!important;font-size:clamp(23px,4vw,34px)!important;line-height:1!important}
+.site-header .nav-actions .menu-toggle{font-size:0!important}
+.site-header .nav-actions .menu-toggle:before{content:"☰";font-size:clamp(27px,4vw,38px);font-weight:700}
+.site-header .nav-actions .header-search-toggle{display:inline-flex!important;align-items:center;justify-content:center;font-size:clamp(25px,4vw,36px)!important}
+.site-header .nav-actions .cart-icon-only{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-size:clamp(27px,4vw,38px)!important}
+.site-header .nav-actions .cart-icon-only #cartCount{position:absolute;top:0;right:3px;display:grid;place-items:center;min-width:25px;height:25px;padding:0 5px;border-radius:50%;background:linear-gradient(145deg,#ffe49a,#d69a32);color:#432513;font:700 13px Arial,sans-serif;border:1px solid #f9df9e}
+.site-header .nav-actions>*+*{border-left:1px solid #d7ad5b!important}
+.site-header .brand{width:100%;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:clamp(12px,3vw,32px)!important;padding:8px 10px 4px!important;text-align:left!important}
+.site-header .brand .logo{width:clamp(78px,12vw,150px)!important;height:clamp(68px,9vw,112px)!important;min-width:clamp(78px,12vw,150px)!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;color:#f7d58b!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(47px,8vw,92px)!important;font-weight:700!important;letter-spacing:-7px!important;text-shadow:0 2px 0 #8b571b,0 5px 12px #000!important;position:relative;overflow:visible!important}
+.site-header .brand .logo:before{content:"♛";position:absolute;top:-15%;left:50%;transform:translateX(-50%);font:clamp(17px,2.5vw,29px) Georgia,serif;color:#f5cb70;text-shadow:0 2px 4px #000}
+.site-header .brand .logo:after{content:"";position:absolute;left:0;right:0;bottom:5%;height:3px;background:linear-gradient(90deg,transparent,#f4d18a,transparent)}
+.site-header .brand .brand-copy{align-items:flex-start!important;gap:6px!important;padding:0!important;max-width:min(78vw,1050px)}
+.site-header .brand .brandname{font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(23px,5.3vw,clamp(23px,5.3vw,68px))!important;font-weight:700!important;letter-spacing:clamp(1px,.35vw,5px)!important;line-height:1.08!important;color:#f5c96e!important;text-shadow:0 2px 0 #70451a,0 4px 12px #000!important;padding:0 0 8px!important;white-space:nowrap}
+.site-header .brand .brandname:after{content:"";display:block;width:100%;height:3px;margin:8px 0 0;background:linear-gradient(90deg,transparent,#f9d987 12%,#b67b2c 50%,#f9d987 88%,transparent)}
+.site-header .brand .brandtag{display:inline-block!important;align-self:flex-start!important;margin:0!important;padding:3px clamp(10px,2vw,25px) 6px!important;border:1px solid #d7a64a!important;border-radius:30px!important;background:linear-gradient(90deg,#d69b39,#ffe49b,#d69b39)!important;color:#382014!important;font-size:clamp(13px,2.2vw,25px)!important;font-weight:900!important;line-height:1.8!important;box-shadow:0 2px 8px #0005!important}
+body.store-english .site-header .brand .brandtag{font-size:clamp(11px,1.6vw,17px)!important}
+@media(max-width:800px){
+ .site-header .nav{padding:8px 12px 12px!important;gap:6px!important}
+ .site-header .nav-actions{min-height:52px;padding:0 4px!important}
+ .site-header .nav-actions .iconbtn,.site-header .nav-actions .pillbtn{min-width:54px;min-height:46px;padding:6px 12px!important}
+ .site-header .brand{gap:9px!important;padding:5px 3px 2px!important}
+ .site-header .brand .logo{width:65px!important;height:59px!important;min-width:65px!important;font-size:47px!important;letter-spacing:-5px!important}
+ .site-header .brand .brand-copy{max-width:calc(100vw - 105px);gap:4px!important}
+ .site-header .brand .brandname{font-size:clamp(16px,4.9vw,27px)!important;letter-spacing:clamp(.5px,.3vw,1.8px)!important;white-space:normal!important}
+ .site-header .brand .brandtag{font-size:clamp(10px,2.8vw,14px)!important;padding:1px 8px 3px!important;line-height:1.8!important}
+ .site-header .nav-actions .cart-icon-only #cartCount{min-width:21px;height:21px;font-size:11px}
+}
+@media(max-width:360px){.site-header .brand{gap:5px!important}.site-header .brand .logo{width:55px!important;min-width:55px!important;font-size:40px!important}.site-header .brand .brandname{font-size:15px!important}}
+
 </style>
 </head>
 <body>
