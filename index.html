@@ -992,6 +992,20 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .nav-actions .cart-icon-only svg{width:22px!important;height:22px!important}
  .site-header .simple-lr{font-size:clamp(38px,9vw,48px)!important}
 }
+
+/* Refined LR boutique monogram */
+.site-header .simple-lr{
+ font-family:"Palatino Linotype","Book Antiqua",Georgia,serif!important;
+ font-style:italic!important;font-weight:900!important;
+ letter-spacing:-7px!important;
+ background:linear-gradient(180deg,#fff0b5 0%,#f5d27c 38%,#c58a32 72%,#ffe7a0 100%)!important;
+ -webkit-background-clip:text!important;background-clip:text!important;
+ -webkit-text-fill-color:transparent!important;
+ filter:drop-shadow(0 2px 0 #7b4a1a) drop-shadow(0 4px 5px #0008)!important;
+ transform:translateY(3px) skewX(-5deg)!important;
+}
+.site-header .nav-actions .cart-icon-only{cursor:pointer!important;pointer-events:auto!important}
+.site-header .header-tools,.site-header .nav-actions{pointer-events:auto!important}
 </style>
 </head>
 <body>
@@ -1192,7 +1206,12 @@ function setFilter(f,b){currentProductPage=1;activeFilter=f;document.querySelect
 function toggleMenuCollections(button){const list=button.closest(".menu-collections");if(!list)return;const expanded=list.classList.toggle("collapsed")===false;button.setAttribute("aria-expanded",String(expanded));}
 function selectMenuCollection(f,b){setFilter(f,b);closeStoreMenu();const section=document.getElementById("collection");if(section)section.scrollIntoView({behavior:"smooth",block:"start"});}
 function addCart(id){let p=products.find(function(x){return x.id===id});if(!p)return;if((cart[id]||0)>=p.stock)return alert("معذرت، اتنی تعداد دستیاب نہیں۔");cart[id]=(cart[id]||0)+1;saveCart();updateCount();openCart()}
-function openCart(){renderCart();document.getElementById("cartModal").classList.add("show")}
+function openCart(){
+ const modal=document.getElementById("cartModal");
+ if(!modal){console.error("Shopping cart modal is missing");return}
+ modal.classList.add("show");
+ try{renderCart()}catch(err){console.error("Cart render error:",err);const items=document.getElementById("cartItems");if(items)items.innerHTML='<p class="muted">کارٹ لوڈ کرنے میں مسئلہ آیا۔ براہِ کرم دوبارہ کوشش کریں۔</p>'}
+}
 function renderCart(){
  document.querySelectorAll("#cartModal .total,#cartModal .field").forEach(function(x){x.style.display="";});document.getElementById("submitOrderBtn").style.display="";document.getElementById("checkoutNote").style.display="";
  let rows=Object.entries(cart).filter(function(x){return x[1]>0}).map(function(x){let p=products.find(function(y){return y.id===x[0]});return p?'<div class="cartline"><div><b>'+esc(p.name)+'</b><br><span class="muted">'+customerMoney(p.price)+' × '+x[1]+'</span></div><div class="qty"><button onclick="changeQty(\''+x[0]+'\',-1)">−</button>'+x[1]+'<button onclick="changeQty(\''+x[0]+'\',1)">+</button></div><b>'+customerMoney(p.price*x[1])+'</b></div>':""}).join("");
