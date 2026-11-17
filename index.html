@@ -700,6 +700,24 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .nav-actions{left:76%!important;width:17%!important;height:34%!important}
  .site-header .header-top-row .cart-icon-only{width:100%!important;height:82%!important}
 }
+
+/* Align invisible functional hit areas exactly over the three visible SVG icons */
+.site-header .header-top-row{position:absolute!important;z-index:20!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:100%!important;display:block!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-sizing:border-box!important}
+.site-header .header-top-row>.menu-toggle{position:absolute!important;left:21.1%!important;top:18.8%!important;transform:translate(-50%,-50%)!important;width:12%!important;height:18%!important;min-width:0!important;opacity:.025!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
+.site-header .header-store-search{position:absolute!important;left:62.5%!important;top:18.8%!important;transform:translate(-50%,-50%)!important;width:14%!important;height:18%!important;min-width:0!important;opacity:.025!important;overflow:hidden!important}
+.site-header .header-store-search .store-search-label{display:none!important}
+.site-header .header-store-search .store-search-row{height:100%!important;min-height:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.site-header .header-store-search input{height:100%!important;min-height:0!important;width:100%!important;background:transparent!important;color:transparent!important;caret-color:transparent!important;border:0!important}
+.site-header .header-store-search .store-search-row>button{display:none!important}
+.site-header .nav-actions{position:absolute!important;z-index:21!important;top:18.8%!important;left:82%!important;right:auto!important;transform:translate(-50%,-50%)!important;width:12%!important;height:18%!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.site-header .header-top-row .cart-icon-only{width:100%!important;height:100%!important;min-width:0!important;opacity:.025!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
+.site-header .store-menu{position:absolute!important;z-index:30!important;top:34%!important;left:3%!important;right:auto!important}
+@media(max-width:600px){
+ .site-header .header-top-row{height:100%!important}
+ .site-header .header-top-row>.menu-toggle{left:21.1%!important;top:18.8%!important;width:13%!important;height:19%!important}
+ .site-header .header-store-search{left:62.5%!important;top:18.8%!important;width:15%!important;height:19%!important}
+ .site-header .nav-actions{left:82%!important;top:18.8%!important;width:13%!important;height:19%!important}
+}
 </style>
 </head>
 <body>
