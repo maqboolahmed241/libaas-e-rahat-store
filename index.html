@@ -580,6 +580,30 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
  .site-header .nav>.libaas-new-brand .brandname{font-size:clamp(10px,2.9vw,12px)!important;letter-spacing:0!important}
  .site-header .nav>.libaas-new-brand .brandtag{font-size:7px!important;padding:1px 3px 2px!important}
 }
+
+/* Version 3 boutique header: stitched-suit editorial photo strip */
+.site-header .nav{grid-template-rows:auto auto!important;row-gap:8px!important}
+.site-header .nav>.header-fashion-gallery{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:6px!important;width:min(100%,760px)!important;margin:0 auto!important;padding:8px 10px 10px!important;border:1px solid #d7b778!important;border-radius:15px!important;background:linear-gradient(110deg,#fffaf0,#f0e2d0 48%,#fff8ed)!important;box-shadow:inset 0 1px 0 #fff,0 4px 12px #3d24151c!important}
+.site-header .header-fashion-caption{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;color:#68452c!important;font-family:"Noto Nastaliq Urdu","Noto Sans Arabic",serif!important;font-size:clamp(10px,1.5vw,14px)!important;font-weight:800!important;line-height:1.6!important;text-align:center!important}
+.site-header .header-fashion-caption span{color:#b8873f!important;font-size:12px!important}
+.site-header .header-fashion-photos{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;width:100%!important}
+.site-header .header-fashion-photo{position:relative!important;min-width:0!important;height:clamp(66px,11vw,118px)!important;overflow:hidden!important;border:2px solid #fff!important;border-radius:10px!important;background:linear-gradient(135deg,#ead8c0,#c7a27a)!important;box-shadow:0 2px 8px #39251a25!important}
+.site-header .header-fashion-photo img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 28%!important}
+.site-header .header-fashion-photo span{position:absolute!important;right:4px!important;bottom:4px!important;left:4px!important;display:block!important;padding:2px 4px!important;border:1px solid #e8c982!important;border-radius:6px!important;background:#29171bd9!important;color:#ffe9bd!important;font-family:"Noto Nastaliq Urdu","Noto Sans Arabic",serif!important;font-size:clamp(8px,1vw,11px)!important;line-height:1.5!important;text-align:center!important;white-space:nowrap!important}
+.site-header .nav>.store-menu{grid-row:3!important}
+@media(max-width:560px){
+ .site-header .nav{row-gap:5px!important}
+ .site-header .nav>.header-fashion-gallery{padding:5px 6px 7px!important;gap:4px!important;border-radius:11px!important}
+ .site-header .header-fashion-caption{font-size:9px!important}
+ .site-header .header-fashion-photos{gap:5px!important}
+ .site-header .header-fashion-photo{height:68px!important;border-radius:8px!important}
+ .site-header .header-fashion-photo span{font-size:8px!important;padding:1px 2px!important}
+}
+@media(max-width:390px){
+ .site-header .header-fashion-photo{height:58px!important}
+ .site-header .header-fashion-photos{gap:4px!important}
+ .site-header .header-fashion-caption{font-size:8px!important}
+}
 </style>
 </head>
 <body>
@@ -599,6 +623,15 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
    <div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div>
   </div>
  </div>
+ <div class="header-fashion-gallery" aria-label="خواتین کے سلے ہوئے سوٹس کی جھلکیاں">
+  <div class="header-fashion-caption"><span>✦</span> لباسِ راحت — سلائی، نفاست اور خوبصورتی <span>✦</span></div>
+  <div class="header-fashion-photos">
+   <div class="header-fashion-photo"><img src="https://veezal.com/cdn/shop/files/www.Veezal.com_54.png?v=1695319552" alt="سیاہ اور سنہری کڑھائی والا خواتین کا سوٹ" loading="lazy" referrerpolicy="no-referrer"><span>نفیس کڑھائی</span></div>
+   <div class="header-fashion-photo"><img src="https://www.nameerabyfarooq.com/cdn/shop/collections/Salwar_Kameez_-_Salwar_Suits_-_Designer_Pakistani_Indian_Salwar_Kameez_Dresses_Online_1728x_0ca675df-00c5-4b35-85a4-6f6301dffead_1200x630.jpg?v=1697566806" alt="رنگین پاکستانی شلوار قمیض کلیکشن" loading="lazy" referrerpolicy="no-referrer"><span>خوبصورت ڈیزائن</span></div>
+   <div class="header-fashion-photo"><img src="https://www.asiancouture.co.uk/image/cache/A%20READY%20MADE%20SUIT/2020/Linen/AA1/1-1100x1100.jpg" alt="کڑھائی والے لینن خواتین کے سوٹ" loading="lazy" referrerpolicy="no-referrer"><span>تیار شدہ سوٹس</span></div>
+  </div>
+ </div>
+
  <div class="nav-actions"><button type="button" class="iconbtn header-search-toggle" aria-label="Search" title="Search" onclick="toggleHeaderSearch()">🔍</button><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div><div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button></div>
 </nav></header>
 <main>
