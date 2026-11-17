@@ -1006,6 +1006,44 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 }
 .site-header .nav-actions .cart-icon-only{cursor:pointer!important;pointer-events:auto!important}
 .site-header .header-tools,.site-header .nav-actions{pointer-events:auto!important}
+
+/* Boutique-style gold LR monogram — keep header layout and controls unchanged */
+.site-header .brand .brand-emblem{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:auto!important;min-width:0!important;height:58px!important;max-width:100%!important;
+ flex:0 1 auto!important;margin:0 auto!important;padding:0 8px!important;
+ border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;overflow:visible!important;
+ position:relative!important;
+}
+.site-header .brand .simple-lr{
+ display:inline-block!important;
+ font-family:"Bodoni MT","Didot","Times New Roman",Georgia,serif!important;
+ font-size:clamp(48px,12vw,64px)!important;
+ font-weight:900!important;font-style:italic!important;
+ letter-spacing:-8px!important;line-height:.95!important;
+ padding:0 7px 5px 0!important;
+ color:#f8d982!important;
+ background:linear-gradient(180deg,#fff4c8 0%,#f7d77e 32%,#d79a38 65%,#fff0b1 86%,#a96d22 100%)!important;
+ -webkit-background-clip:text!important;background-clip:text!important;
+ -webkit-text-fill-color:transparent!important;
+ text-shadow:0 2px 0 #8b571d,0 4px 0 #58300f,0 6px 10px #0009!important;
+ filter:drop-shadow(0 1px 1px #f9df9a)!important;
+ transform:translateY(2px) skewX(-7deg)!important;
+}
+.site-header .brand .brand-emblem:before,
+.site-header .brand .brand-emblem:after{
+ content:"";position:absolute;left:50%;width:76%;height:1px;
+ transform:translateX(-50%);
+ background:linear-gradient(90deg,transparent,#c99648 18%,#ffe7a0 50%,#c99648 82%,transparent);
+ opacity:.8;pointer-events:none;
+}
+.site-header .brand .brand-emblem:before{top:1px}
+.site-header .brand .brand-emblem:after{bottom:1px}
+@media(max-width:480px){
+ .site-header .brand .brand-emblem{height:56px!important;padding:0 5px!important}
+ .site-header .brand .simple-lr{font-size:clamp(46px,12vw,58px)!important;letter-spacing:-7px!important}
+}
 </style>
 </head>
 <body>
