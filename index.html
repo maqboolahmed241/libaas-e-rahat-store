@@ -612,6 +612,60 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
 .site-header .nav>.search-top input{min-width:0!important;flex:1!important;border:1px solid #c8a66b!important;border-radius:10px!important;background:#fffdf8!important;min-height:40px!important}
 .site-header .nav>.search-top button{width:auto!important;white-space:nowrap!important;min-height:40px!important;background:linear-gradient(135deg,#51303a,#2e1821)!important;color:#ffe5ad!important;border:1px solid #c69b55!important;border-radius:10px!important;padding:7px 12px!important}
 .site-header .nav>.store-menu{grid-row:4!important}
+
+/* Version 3: requested boutique header hierarchy — controls, centered wordmark, suit gallery */
+.site-header .nav.header-layout-v3{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:9px!important;padding:8px clamp(8px,2vw,22px)!important;min-height:0!important;position:relative!important}
+.site-header .header-top-row{display:grid!important;grid-template-columns:48px minmax(0,1fr) 94px!important;align-items:center!important;gap:10px!important;width:100%!important;min-height:48px!important}
+.site-header .header-top-row>.menu-toggle{grid-column:1!important;grid-row:1!important;display:flex!important;width:44px!important;min-width:44px!important;height:44px!important;align-items:center!important;justify-content:center!important}
+.site-header .header-top-row>.nav-actions{grid-column:3!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;width:94px!important;min-width:94px!important}
+.site-header .header-top-row .header-search-toggle{display:none!important}
+.site-header .header-top-row .cart-icon-only{width:44px!important;min-width:44px!important;height:44px!important}
+.site-header .header-search-field{grid-column:2!important;grid-row:1!important;display:flex!important;align-items:center!important;min-width:0!important;width:100%!important;height:42px!important;border:1px solid #c8a66b!important;border-radius:12px!important;background:#fffdf8!important;overflow:hidden!important;box-shadow:inset 0 1px 3px #4a2b1712!important}
+.site-header .header-search-field input{flex:1 1 auto!important;width:100%!important;min-width:0!important;height:40px!important;padding:0 12px!important;border:0!important;outline:0!important;background:transparent!important;color:#39251e!important;font-size:14px!important}
+.site-header .header-search-field button{flex:0 0 42px!important;width:42px!important;height:40px!important;border:0!important;border-left:1px solid #dfc99f!important;background:#f2e5d0!important;color:#68452c!important;font-size:27px!important;line-height:1!important}
+.site-header .header-brand-row{display:flex!important;justify-content:center!important;align-items:center!important;width:100%!important;padding:3px 0 5px!important}
+.site-header .header-brand-row>.libaas-new-brand{display:flex!important;justify-content:center!important;align-items:center!important;gap:12px!important;width:auto!important;max-width:100%!important;margin:0 auto!important;overflow:visible!important}
+.site-header .header-brand-row .libaas-monogram{width:68px!important;min-width:68px!important;height:68px!important;border-radius:20px 6px 20px 6px!important}
+.site-header .header-brand-row .libaas-monogram-letters{font-size:38px!important}
+.site-header .header-brand-row .brandname{font-size:clamp(20px,4vw,32px)!important;letter-spacing:1.5px!important}
+.site-header .header-brand-row .brandtag{font-size:clamp(10px,1.7vw,14px)!important;padding:2px 10px 4px!important}
+.site-header .header-fashion-gallery{display:flex!important;flex-direction:column!important;align-items:center!important;gap:8px!important;width:min(100%,1100px)!important;margin:10px auto 0!important;padding:10px 12px 12px!important;border:1px solid #d7b778!important;border-radius:16px!important;background:linear-gradient(110deg,#fffaf0,#f0e2d0 48%,#fff8ed)!important;box-shadow:inset 0 1px 0 #fff,0 4px 12px #3d24151c!important}
+.site-header .header-fashion-caption{display:flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;color:#68452c!important;font-family:"Noto Nastaliq Urdu","Noto Sans Arabic",serif!important;font-size:clamp(12px,1.8vw,16px)!important;font-weight:800!important;line-height:1.7!important;text-align:center!important}
+.site-header .header-fashion-caption span{color:#b8873f!important}
+.site-header .header-fashion-photos{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;width:100%!important}
+.site-header .header-fashion-photo{position:relative!important;min-width:0!important;height:clamp(125px,19vw,230px)!important;overflow:hidden!important;border:2px solid #fff!important;border-radius:12px!important;background:#ead8c0!important;box-shadow:0 3px 10px #39251a25!important}
+.site-header .header-fashion-photo img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 24%!important}
+.site-header .header-fashion-photo span{display:none!important}
+.site-header .nav>.store-menu{position:absolute!important;z-index:1000!important;top:56px!important;left:8px!important;right:auto!important;grid-row:auto!important;grid-column:auto!important}
+@media(max-width:560px){
+ .site-header .nav.header-layout-v3{gap:5px!important;padding:6px 7px!important}
+ .site-header .header-top-row{grid-template-columns:38px minmax(0,1fr) 48px!important;gap:5px!important;min-height:42px!important}
+ .site-header .header-top-row>.menu-toggle{width:36px!important;min-width:36px!important;height:40px!important}
+ .site-header .header-top-row>.nav-actions{width:48px!important;min-width:48px!important;justify-content:flex-end!important}
+ .site-header .header-top-row .cart-icon-only{width:42px!important;min-width:42px!important;height:40px!important}
+ .site-header .header-search-field{height:38px!important}
+ .site-header .header-search-field input{height:36px!important;padding:0 8px!important;font-size:12px!important}
+ .site-header .header-search-field button{height:36px!important;flex-basis:36px!important;width:36px!important;font-size:24px!important}
+ .site-header .header-brand-row{padding:3px 0!important}
+ .site-header .header-brand-row>.libaas-new-brand{gap:7px!important}
+ .site-header .header-brand-row .libaas-monogram{width:54px!important;min-width:54px!important;height:54px!important;border-radius:15px 5px 15px 5px!important}
+ .site-header .header-brand-row .libaas-monogram-letters{font-size:30px!important}
+ .site-header .header-brand-row .brandname{font-size:clamp(16px,4.8vw,22px)!important;letter-spacing:.4px!important}
+ .site-header .header-brand-row .brandtag{font-size:9px!important;padding:1px 6px 3px!important}
+ .site-header .header-fashion-gallery{margin-top:5px!important;padding:6px!important;gap:5px!important;border-radius:11px!important}
+ .site-header .header-fashion-caption{font-size:11px!important}
+ .site-header .header-fashion-photos{gap:5px!important}
+ .site-header .header-fashion-photo{height:clamp(88px,27vw,125px)!important;border-radius:8px!important}
+}
+@media(max-width:360px){
+ .site-header .header-top-row{grid-template-columns:34px minmax(0,1fr) 42px!important;gap:3px!important}
+ .site-header .header-top-row>.menu-toggle{width:32px!important;min-width:32px!important}
+ .site-header .header-top-row>.nav-actions{width:42px!important;min-width:42px!important}
+ .site-header .header-top-row .cart-icon-only{width:38px!important;min-width:38px!important}
+ .site-header .header-brand-row .libaas-monogram{width:48px!important;min-width:48px!important;height:48px!important}
+ .site-header .header-brand-row .brandname{font-size:15px!important}
+ .site-header .header-brand-row .brandtag{font-size:8px!important}
+}
 </style>
 </head>
 <body>
@@ -619,8 +673,9 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
 <div class="message-rotator message-tone-gold" id="brandMessageRotator" aria-live="polite" aria-atomic="true">
  <div class="message-rotator-inner"><span class="message-rotator-text" id="brandMessageText">لباسِ راحت — آپ کی پسند، آپ کے گھر تک!</span></div>
 </div>
-<header class="site-header"><nav class="nav">
- <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button><div class="brand libaas-new-brand" aria-label="Libaas e Raahat brand logo">
+<header class="site-header"><nav class="nav header-layout-v3">
+ <div class="header-top-row"><button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button><div class="header-search-field"><input id="storeProductSearch" type="search" aria-label="پراڈکٹ تلاش کریں" placeholder="سوٹ تلاش کریں..." oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" aria-label="تلاش کریں" onclick="searchStoreProducts(document.getElementById(&quot;storeProductSearch&quot;).value)">⌕</button></div><div class="nav-actions"><button type="button" class="iconbtn header-search-toggle" aria-label="Search" title="Search" onclick="toggleHeaderSearch()">🔍</button><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div></div>
+ <div class="header-brand-row"><div class="brand libaas-new-brand" aria-label="Libaas e Raahat brand logo">
   <div class="brand-emblem libaas-monogram" aria-hidden="true">
    <span class="libaas-monogram-flower">✦</span>
    <span class="libaas-monogram-letters">LR</span>
@@ -631,18 +686,16 @@ body.store-english .site-header .brand .brandtag{direction:ltr!important;font-si
    <div class="brandtag">لباسِ راحت · خوبصورتی، نفاست اور اعتماد</div>
   </div>
  </div>
- <div class="header-fashion-gallery" aria-label="خواتین کے سلے ہوئے سوٹس کی جھلکیاں">
-  <div class="header-fashion-caption"><span>✦</span> لباسِ راحت — سلائی، نفاست اور خوبصورتی <span>✦</span></div>
-  <div class="header-fashion-photos">
-   <div class="header-fashion-photo"><img src="https://flutterby.pk/cdn/shop/files/81198183-826d-4f7a-883c-4b5608bb9a80_copy_jpg.jpg?v=1771567081&width=1445" alt="سیاہ اور سنہری کڑھائی والا خواتین کا سوٹ" loading="lazy" referrerpolicy="no-referrer"><span>نفیس کڑھائی</span></div>
-   <div class="header-fashion-photo"><img src="https://www.yourlibaas.com/cdn/shop/products/14_e3713bad-4ded-40df-8e27-00dede56ed64_1200x1200.jpg?v=1618749425" alt="رنگین پاکستانی شلوار قمیض کلیکشن" loading="lazy" referrerpolicy="no-referrer"><span>خوبصورت ڈیزائن</span></div>
-   <div class="header-fashion-photo"><img src="https://www.yourlibaas.com/cdn/shop/products/Baroque-Festive-Eid-Lawn-Collection-2022-BQU-BL08-05.jpg?v=1650196577" alt="کڑھائی والے لینن خواتین کے سوٹ" loading="lazy" referrerpolicy="no-referrer"><span>تیار شدہ سوٹس</span></div>
-  </div>
- </div>
-
- <div class="nav-actions"><button type="button" class="iconbtn header-search-toggle" aria-label="Search" title="Search" onclick="toggleHeaderSearch()">🔍</button><button class="pillbtn cart-icon-only" type="button" aria-label="Shopping cart" title="Shopping cart" onclick="openCart()">🛒<span id="cartCount">0</span></button></div><div class="store-menu hidden" id="storeMenu"><div class="menu-preferences"><label for="storeLanguageSelect">Language</label><select class="language-select" id="storeLanguageSelect" aria-label="Choose language" onchange="applyStoreLanguage(this.value)"><option value="en">English</option><option value="ur">اردو</option></select><label for="storeCountrySelect">Delivery Country</label><select class="language-select country-select" id="storeCountrySelect" aria-label="Select delivery country" onchange="onStoreCountryChange(this.value)"><option value="Pakistan">Pakistan (PKR)</option></select><button class="iconbtn" id="installAppBtn" onclick="installStoreApp()">ایپ انسٹال کریں</button></div><a href="#home" onclick="closeStoreMenu()">ہوم</a><div class="menu-group-title">کلیکشن</div><div class="menu-collections collapsed"><button type="button" class="menu-filter active" aria-expanded="false" onclick="toggleMenuCollections(this)">تمام کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('لان',this)">لان کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کاٹن',this)">کاٹن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Chenille',this)">شنیل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Bana Dora',this)">بانا ڈورا</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Ready to Wear',this)">ریڈی ٹو وئیر</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Hand Stitched',this)">گھر کی سلی ہوئی کلیکشن</button><button type="button" class="menu-filter" onclick="selectMenuCollection('Kids Wear',this)">ننھے ستارے — بچوں کے سوٹ</button><button type="button" class="menu-filter" onclick="selectMenuCollection('فارمل',this)">فارمل</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کیمبرک',this)">کیمبرک</button><button type="button" class="menu-filter" onclick="selectMenuCollection('کھدر',this)">کھدر</button></div><a href="#about" onclick="closeStoreMenu()">ہمارے بارے میں</a><div id="menuSocialLinks" class="menu-social-links"></div><button class="iconbtn hidden" id="adminNavBtn" onclick="closeStoreMenu();openAdmin()">ایڈمن لاگ اِن</button><div class="store-search search-top"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ کا نام، کپڑا یا کوڈ لکھیں" oninput="searchStoreProducts(this.value)" autocomplete="off"><button type="button" onclick="searchStoreProducts(document.getElementById(&quot;storeProductSearch&quot;).value)">🔍 تلاش کریں</button></div></div>
+ 
 </div>
-</nav></header>
+</nav><div class="header-fashion-gallery" aria-label="خواتین کے سلے ہوئے سوٹس کی کلیکشن">
+ <div class="header-fashion-caption">خواتین کے خوبصورت سلے ہوئے سوٹس <span>✦</span></div>
+ <div class="header-fashion-photos">
+  <div class="header-fashion-photo"><img src="https://flutterby.pk/cdn/shop/files/81198183-826d-4f7a-883c-4b5608bb9a80_copy_jpg.jpg?v=1771567081&width=1445" alt="کڑھائی والا خواتین کا سوٹ" loading="lazy" referrerpolicy="no-referrer"></div>
+  <div class="header-fashion-photo"><img src="https://www.yourlibaas.com/cdn/shop/products/14_e3713bad-4ded-40df-8e27-00dede56ed64_1200x1200.jpg?v=1618749425" alt="خوبصورت پاکستانی خواتین کا سوٹ" loading="lazy" referrerpolicy="no-referrer"></div>
+  <div class="header-fashion-photo"><img src="https://www.yourlibaas.com/cdn/shop/products/Baroque-Festive-Eid-Lawn-Collection-2022-BQU-BL08-05.jpg?v=1650196577" alt="خواتین کے تیار شدہ سوٹ" loading="lazy" referrerpolicy="no-referrer"></div>
+ </div>
+</div></header>
 <main>
 
 <section class="hero" id="home"><div class="hero-inner">
