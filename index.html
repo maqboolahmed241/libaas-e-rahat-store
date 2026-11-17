@@ -874,6 +874,23 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .nav-actions{width:40px!important;height:40px!important}
  .site-header .nav-actions .cart-icon-only{width:38px!important;height:38px!important;min-width:38px!important}
 }
+
+/* Small final adjustment: lower the LR lettering and restore top controls */
+.site-header .brand{transform:translateY(7px)!important;position:relative!important;z-index:2!important}
+.site-header .simple-lr{transform:translateY(3px)!important;display:block!important}
+.site-header .nav{grid-template-columns:42px minmax(56px,1fr) minmax(100px,1.6fr) 44px!important;grid-template-rows:58px!important;min-height:74px!important}
+.site-header #storeMenuToggle{grid-column:1!important;grid-row:1!important;display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:10!important;transform:none!important}
+.site-header .nav-actions{grid-column:4!important;grid-row:1!important;display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:10!important}
+.site-header .nav-actions .cart-icon-only{display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important}
+.site-header .header-store-search{grid-column:3!important;grid-row:1!important;display:block!important;visibility:visible!important;opacity:1!important}
+@media(max-width:480px){
+ .site-header .nav{grid-template-columns:38px minmax(48px,.8fr) minmax(90px,1.5fr) 40px!important;grid-template-rows:54px!important;min-height:68px!important}
+ .site-header .brand{transform:translateY(6px)!important}
+ .site-header .simple-lr{transform:translateY(3px)!important}
+ .site-header #storeMenuToggle{display:grid!important;visibility:visible!important;opacity:1!important;width:36px!important;height:36px!important;min-width:36px!important}
+ .site-header .nav-actions{display:flex!important;visibility:visible!important;opacity:1!important;width:40px!important;height:40px!important}
+ .site-header .nav-actions .cart-icon-only{display:grid!important;visibility:visible!important;opacity:1!important;width:38px!important;height:38px!important;min-width:38px!important}
+}
 </style>
 </head>
 <body>
