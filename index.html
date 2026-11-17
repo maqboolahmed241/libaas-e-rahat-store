@@ -718,6 +718,29 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
  .site-header .header-store-search{left:62.5%!important;top:18.8%!important;width:15%!important;height:19%!important}
  .site-header .nav-actions{left:82%!important;top:18.8%!important;width:13%!important;height:19%!important}
 }
+
+/* Make the three header controls visibly rendered and usable */
+.site-header .header-top-row{position:absolute!important;z-index:20!important;top:0!important;left:0!important;right:0!important;width:100%!important;height:34%!important;display:block!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-sizing:border-box!important}
+.site-header .header-top-row>.menu-toggle{position:absolute!important;left:21.1%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:54px!important;height:44px!important;min-width:54px!important;opacity:1!important;display:grid!important;place-items:center!important;background:linear-gradient(145deg,#f8df9a,#bd8737)!important;border:2px solid #fff0b8!important;border-radius:12px!important;color:#32190b!important;font-size:25px!important;box-shadow:0 3px 10px #0008!important}
+.site-header .header-store-search{position:absolute!important;left:62.5%!important;top:50%!important;transform:translate(-50%,-50%)!important;width:min(27%,360px)!important;height:44px!important;min-width:0!important;opacity:1!important;overflow:visible!important}
+.site-header .header-store-search .store-search-label{display:none!important}
+.site-header .header-store-search .store-search-row{height:44px!important;min-height:44px!important;border:2px solid #f0d28b!important;border-radius:12px!important;background:#fffaf0!important;box-shadow:0 3px 10px #0008!important;overflow:hidden!important}
+.site-header .header-store-search input{height:40px!important;min-height:40px!important;width:100%!important;background:#fffaf0!important;color:#32190b!important;caret-color:#32190b!important;border:0!important;padding:5px 9px!important;font-size:13px!important;opacity:1!important}
+.site-header .header-store-search input::placeholder{color:#745b42!important;opacity:1!important}
+.site-header .header-store-search .store-search-row>button{display:grid!important;place-items:center!important;height:40px!important;min-width:42px!important;border:0!important;border-radius:0!important;background:linear-gradient(145deg,#f8df9a,#bd8737)!important;color:#32190b!important;font-size:23px!important;opacity:1!important}
+.site-header .nav-actions{position:absolute!important;z-index:21!important;top:17%!important;left:82%!important;right:auto!important;transform:translate(-50%,-50%)!important;width:58px!important;height:44px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.site-header .header-top-row .cart-icon-only{width:58px!important;height:44px!important;min-width:58px!important;opacity:1!important;display:grid!important;place-items:center!important;background:linear-gradient(145deg,#f8df9a,#bd8737)!important;border:2px solid #fff0b8!important;border-radius:12px!important;color:#32190b!important;font-size:24px!important;box-shadow:0 3px 10px #0008!important;padding:2px!important}
+.site-header .store-menu{position:absolute!important;z-index:30!important;top:35%!important;left:3%!important;right:auto!important}
+@media(max-width:600px){
+ .site-header .header-top-row{height:34%!important}
+ .site-header .header-top-row>.menu-toggle{left:21.1%!important;top:50%!important;width:38px!important;height:36px!important;min-width:38px!important;font-size:20px!important;border-radius:9px!important}
+ .site-header .header-store-search{left:62.5%!important;top:50%!important;width:29%!important;height:36px!important}
+ .site-header .header-store-search .store-search-row{height:36px!important;min-height:36px!important;border-radius:9px!important}
+ .site-header .header-store-search input{height:32px!important;min-height:32px!important;font-size:10px!important;padding:3px 5px!important}
+ .site-header .header-store-search .store-search-row>button{height:32px!important;min-width:30px!important;font-size:18px!important}
+ .site-header .nav-actions{left:82%!important;top:17%!important;width:40px!important;height:36px!important}
+ .site-header .header-top-row .cart-icon-only{width:40px!important;height:36px!important;min-width:40px!important;font-size:19px!important;border-radius:9px!important}
+}
 </style>
 </head>
 <body>
