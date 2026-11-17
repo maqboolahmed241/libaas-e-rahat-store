@@ -426,6 +426,26 @@ body.store-english .site-header .brand .brandtag{font-family:Georgia,serif!impor
 }
 @media(max-width:360px){.site-header .brand{gap:3px!important}.site-header .brand .brand-emblem{width:82px!important;min-width:82px!important}.site-header .brand .brandname{font-size:16px!important}}
 
+
+/* Final header alignment fix: keep the emblem and wordmark separate in both languages */
+.site-header .nav,.site-header .brand,.site-header .brand-copy{direction:ltr!important;unicode-bidi:isolate!important}
+.site-header .brand{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:clamp(10px,2vw,26px)!important;text-align:left!important;min-width:0}
+.site-header .brand .brand-emblem{position:relative!important;flex:0 0 clamp(110px,20vw,230px)!important;width:clamp(110px,20vw,230px)!important;min-width:0!important;height:clamp(82px,11vw,126px)!important;margin:0!important;inset:auto!important;transform:none!important;line-height:0!important}
+.site-header .brand .brand-emblem:before,.site-header .brand .brand-emblem:after{content:none!important;display:none!important}
+.site-header .brand .brand-emblem svg{position:static!important;display:block!important;width:100%!important;height:100%!important;transform:none!important}
+.site-header .brand .brand-copy{position:relative!important;flex:0 1 auto!important;min-width:0!important;width:auto!important;max-width:calc(100% - 125px)!important;align-items:flex-start!important;text-align:left!important;direction:ltr!important}
+.site-header .brand .brandname{position:static!important;display:block!important;direction:ltr!important;text-align:left!important;unicode-bidi:isolate!important;transform:none!important;margin:0!important;max-width:100%;overflow-wrap:normal!important}
+.site-header .brand .brandtag{direction:rtl!important;text-align:center!important;unicode-bidi:plaintext!important;max-width:100%;white-space:normal!important}
+body.store-english .site-header .brand .brandtag{direction:ltr!important;text-align:left!important}
+@media(max-width:800px){
+ .site-header .brand{justify-content:center!important;gap:6px!important;flex-direction:row!important;flex-wrap:nowrap!important}
+ .site-header .brand .brand-emblem{flex-basis:clamp(76px,23vw,112px)!important;width:clamp(76px,23vw,112px)!important;height:72px!important}
+ .site-header .brand .brand-copy{max-width:calc(100% - 88px)!important;gap:4px!important}
+ .site-header .brand .brandname{font-size:clamp(15px,4.3vw,25px)!important;letter-spacing:0!important;white-space:normal!important;line-height:1.15!important}
+ .site-header .brand .brandtag{font-size:clamp(9px,2.4vw,13px)!important;line-height:1.65!important;padding:2px 6px 3px!important}
+}
+@media(max-width:360px){.site-header .brand .brand-emblem{flex-basis:68px!important;width:68px!important}.site-header .brand .brand-copy{max-width:calc(100% - 76px)!important}.site-header .brand .brandname{font-size:14px!important}}
+
 </style>
 </head>
 <body>
