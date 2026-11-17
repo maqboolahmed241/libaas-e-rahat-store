@@ -1,43 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-<title id="title">LIBAAS E RAAHAT Ladies Collection</title><desc id="desc">Black and gold luxury ladies fashion logo with two elegant embroidered dress illustrations, crown and Urdu brand name</desc>
+<title id="title">Libaas E Raahat — Ladies Collection</title><desc id="desc">Luxury black and gold boutique crest with embroidered Pakistani ladies suits, crown and Urdu brand name</desc>
 <defs>
- <linearGradient id="black" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080808"/><stop offset=".5" stop-color="#211016"/><stop offset="1" stop-color="#090909"/></linearGradient>
- <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1bd"/><stop offset=".28" stop-color="#c9963e"/><stop offset=".52" stop-color="#ffe5a0"/><stop offset="1" stop-color="#8f5c20"/></linearGradient>
- <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d9c8"/><stop offset="1" stop-color="#9d5264"/></linearGradient>
- <linearGradient id="dressblack" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#292027"/><stop offset="1" stop-color="#050505"/></linearGradient>
- <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<linearGradient id="velvet" x2="1" y2="1"><stop stop-color="#080809"/><stop offset=".5" stop-color="#28121b"/><stop offset="1" stop-color="#080809"/></linearGradient>
+<linearGradient id="gold" x2="1" y2="1"><stop stop-color="#fff3c9"/><stop offset=".2" stop-color="#d5a34e"/><stop offset=".45" stop-color="#fff0b5"/><stop offset=".72" stop-color="#a76d27"/><stop offset="1" stop-color="#f7d98b"/></linearGradient>
+<linearGradient id="silk1" x2="1" y2="1"><stop stop-color="#4b303b"/><stop offset=".5" stop-color="#171116"/><stop offset="1" stop-color="#050506"/></linearGradient>
+<linearGradient id="silk2" x2="1" y2="1"><stop stop-color="#b45c78"/><stop offset=".55" stop-color="#5d1c37"/><stop offset="1" stop-color="#260d1a"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#bd914d" stop-opacity=".24"/><stop offset="1" stop-color="#bd914d" stop-opacity="0"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<g id="flower" fill="none" stroke="url(#gold)" stroke-width="2"><circle r="4" fill="url(#gold)"/><path d="M0-7C-15-24-7-30 0-15C7-30 15-24 0-7C24-15 30-7 15 0C30 7 24 15 7 7C15 24 7 30 0 15C-7 30-15 24-7 7C-24 15-30 7-15 0C-30-7-24-15-7-7Z"/></g>
 </defs>
-<rect x="8" y="8" width="1184" height="404" rx="30" fill="url(#black)" stroke="url(#gold)" stroke-width="5"/>
-<rect x="23" y="23" width="1154" height="374" rx="23" fill="none" stroke="url(#gold)" stroke-width="1.8"/>
-<!-- decorative arch -->
-<path d="M190 330 Q190 45 600 42 Q1010 45 1010 330" fill="none" stroke="url(#gold)" stroke-width="5" opacity=".8"/>
-<path d="M220 332 Q220 72 600 70 Q980 72 980 332" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity=".5"/>
-<!-- left elegant mannequin / embroidered suit -->
-<g transform="translate(85 84)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round">
- <circle cx="75" cy="26" r="23" fill="url(#rose)"/>
- <path d="M53 55 Q75 42 97 55 L117 105 L148 270 Q76 300 3 270 L33 105Z" fill="url(#dressblack)"/>
- <path d="M53 56 L29 105 L8 260 M97 56 L121 105 L143 260" fill="none"/>
- <path d="M55 67 Q75 93 95 67 L104 117 Q75 139 46 117Z" fill="#6e283d"/>
- <path d="M48 75l27 48 27-48M38 130l37 28 37-28M26 205q49 25 98 0" fill="none" stroke="#e4bd71" stroke-width="2"/>
- <g fill="url(#gold)" stroke="none"><circle cx="75" cy="145" r="4"/><circle cx="60" cy="166" r="3"/><circle cx="90" cy="166" r="3"/><circle cx="75" cy="190" r="4"/><circle cx="49" cy="218" r="3"/><circle cx="101" cy="218" r="3"/></g>
- <path d="M30 105l-20 44 22 12M120 105l20 44-22 12" fill="none"/>
+<rect x="8" y="8" width="1184" height="404" rx="30" fill="url(#velvet)" stroke="url(#gold)" stroke-width="5"/>
+<rect x="23" y="23" width="1154" height="374" rx="23" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+<ellipse cx="600" cy="205" rx="390" ry="195" fill="url(#halo)"/>
+<path d="M205 360C205 170 330 48 600 42C870 48 995 170 995 360M225 355C225 185 350 70 600 64C850 70 975 185 975 355" fill="none" stroke="url(#gold)" stroke-width="3"/>
+<!-- left formal embroidered outfit -->
+<g transform="translate(82 75)" stroke="url(#gold)" stroke-linejoin="round">
+<circle cx="74" cy="31" r="22" fill="#d9b39b" stroke-width="2"/>
+<path d="M56 56Q74 46 92 56L111 91 145 280Q74 312 3 280L37 91Z" fill="url(#silk1)" stroke-width="3"/>
+<path d="M56 57L34 105 8 269M92 57l22 48 26 164" fill="none" stroke-width="2"/>
+<path d="M55 60Q74 88 93 60L105 119Q74 145 43 119Z" fill="#401a2b" stroke-width="2"/>
+<path d="M55 64L74 112 93 64M44 120Q74 151 104 120M27 205Q74 236 121 205M15 264Q74 286 133 264M74 113V264M49 143l25 22 25-22M37 188l37 22 37-22" fill="none" stroke="#e4bd77" stroke-width="2"/>
+<g fill="url(#gold)" stroke="none"><circle cx="74" cy="145" r="4"/><circle cx="52" cy="174" r="3"/><circle cx="96" cy="174" r="3"/><circle cx="74" cy="193" r="4"/><circle cx="43" cy="225" r="3"/><circle cx="105" cy="225" r="3"/><circle cx="74" cy="245" r="3"/></g>
+<path d="M35 103l-23 49 24 17M113 103l23 49-24 17M18 285Q74 307 130 285" fill="none" stroke-width="3"/>
 </g>
-<!-- right elegant embroidered suit -->
-<g transform="translate(965 84)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round">
- <circle cx="75" cy="26" r="23" fill="url(#rose)"/>
- <path d="M53 55 Q75 42 97 55 L117 105 L148 270 Q76 300 3 270 L33 105Z" fill="#72283f"/>
- <path d="M53 56 L29 105 L8 260 M97 56 L121 105 L143 260" fill="none"/>
- <path d="M55 67 Q75 93 95 67 L104 117 Q75 139 46 117Z" fill="#3b1325"/>
- <path d="M48 75l27 48 27-48M38 130l37 28 37-28M26 205q49 25 98 0" fill="none" stroke="#f0ce87" stroke-width="2"/>
- <g fill="url(#gold)" stroke="none"><circle cx="75" cy="145" r="4"/><circle cx="60" cy="166" r="3"/><circle cx="90" cy="166" r="3"/><circle cx="75" cy="190" r="4"/><circle cx="49" cy="218" r="3"/><circle cx="101" cy="218" r="3"/></g>
- <path d="M30 105l-20 44 22 12M120 105l20 44-22 12" fill="none"/>
+<!-- right wine embroidered outfit -->
+<g transform="translate(968 75)" stroke="url(#gold)" stroke-linejoin="round">
+<circle cx="74" cy="31" r="22" fill="#d9b39b" stroke-width="2"/>
+<path d="M56 56Q74 46 92 56L111 91 145 280Q74 312 3 280L37 91Z" fill="url(#silk2)" stroke-width="3"/>
+<path d="M56 57L34 105 8 269M92 57l22 48 26 164" fill="none" stroke-width="2"/>
+<path d="M55 60Q74 88 93 60L105 119Q74 145 43 119Z" fill="#32101f" stroke-width="2"/>
+<path d="M55 64L74 112 93 64M44 120Q74 151 104 120M27 205Q74 236 121 205M15 264Q74 286 133 264M74 113V264M49 143l25 22 25-22M37 188l37 22 37-22" fill="none" stroke="#f3d28b" stroke-width="2"/>
+<g fill="url(#gold)" stroke="none"><circle cx="74" cy="145" r="4"/><circle cx="52" cy="174" r="3"/><circle cx="96" cy="174" r="3"/><circle cx="74" cy="193" r="4"/><circle cx="43" cy="225" r="3"/><circle cx="105" cy="225" r="3"/><circle cx="74" cy="245" r="3"/></g>
+<path d="M35 103l-23 49 24 17M113 103l23 49-24 17M18 285Q74 307 130 285" fill="none" stroke-width="3"/>
 </g>
-<!-- crown -->
-<path d="M525 88l26-39 48 35 48-35 28 39-19 25H544Z" fill="url(#gold)" stroke="#fff0c2" stroke-width="3" filter="url(#glow)"/>
-<path d="M545 118H655" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
-<text x="600" y="207" text-anchor="middle" font-family="Georgia,serif" font-size="66" font-weight="bold" letter-spacing="5" fill="url(#gold)">LIBAAS E RAAHAT</text>
-<path d="M340 230H860" stroke="url(#gold)" stroke-width="2"/>
-<text x="600" y="291" text-anchor="middle" font-family="serif" font-size="55" fill="url(#gold)">لباسِ راحت</text>
-<rect x="392" y="324" width="416" height="58" rx="25" fill="#4b1426" stroke="url(#gold)" stroke-width="3"/>
-<text x="600" y="364" text-anchor="middle" font-family="Georgia,serif" font-size="30" fill="#fff1d5">LADIES COLLECTION</text>
+<path d="M526 88L549 49 577 78 600 38 623 78 651 49 674 88 659 111H541Z" fill="url(#gold)" stroke="#fff1c5" stroke-width="2.5" filter="url(#glow)"/>
+<path d="M545 119H655" stroke="url(#gold)" stroke-width="6" stroke-linecap="round"/>
+<text x="600" y="205" text-anchor="middle" font-family="Georgia,serif" font-size="65" font-weight="bold" letter-spacing="4" fill="url(#gold)">LIBAAS E RAAHAT</text>
+<path d="M330 228H870" stroke="url(#gold)" stroke-width="2"/>
+<use href="#flower" transform="translate(350 228) scale(.55)"/><use href="#flower" transform="translate(850 228) scale(.55)"/>
+<text x="600" y="294" text-anchor="middle" font-family="serif" font-size="56" fill="url(#gold)">لباسِ راحت</text>
+<rect x="405" y="326" width="390" height="55" rx="25" fill="#4a1427" stroke="url(#gold)" stroke-width="3"/>
+<text x="600" y="363" text-anchor="middle" font-family="Georgia,serif" font-size="28" letter-spacing="2" fill="#fff0ce">LADIES COLLECTION</text>
+<use href="#flower" transform="translate(390 352) scale(.42)"/><use href="#flower" transform="translate(810 352) scale(.42)"/>
 </svg>
