@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">LIBAAS E RAAHAT Ladies Collection</title><desc id="desc">Black and gold luxury ladies fashion logo with two elegant embroidered dress illustrations, crown and Urdu brand name</desc>
+<defs>
+ <linearGradient id="black" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080808"/><stop offset=".5" stop-color="#211016"/><stop offset="1" stop-color="#090909"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff1bd"/><stop offset=".28" stop-color="#c9963e"/><stop offset=".52" stop-color="#ffe5a0"/><stop offset="1" stop-color="#8f5c20"/></linearGradient>
+ <linearGradient id="rose" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d9c8"/><stop offset="1" stop-color="#9d5264"/></linearGradient>
+ <linearGradient id="dressblack" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#292027"/><stop offset="1" stop-color="#050505"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect x="8" y="8" width="1184" height="404" rx="30" fill="url(#black)" stroke="url(#gold)" stroke-width="5"/>
+<rect x="23" y="23" width="1154" height="374" rx="23" fill="none" stroke="url(#gold)" stroke-width="1.8"/>
+<!-- decorative arch -->
+<path d="M190 330 Q190 45 600 42 Q1010 45 1010 330" fill="none" stroke="url(#gold)" stroke-width="5" opacity=".8"/>
+<path d="M220 332 Q220 72 600 70 Q980 72 980 332" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity=".5"/>
+<!-- left elegant mannequin / embroidered suit -->
+<g transform="translate(85 84)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round">
+ <circle cx="75" cy="26" r="23" fill="url(#rose)"/>
+ <path d="M53 55 Q75 42 97 55 L117 105 L148 270 Q76 300 3 270 L33 105Z" fill="url(#dressblack)"/>
+ <path d="M53 56 L29 105 L8 260 M97 56 L121 105 L143 260" fill="none"/>
+ <path d="M55 67 Q75 93 95 67 L104 117 Q75 139 46 117Z" fill="#6e283d"/>
+ <path d="M48 75l27 48 27-48M38 130l37 28 37-28M26 205q49 25 98 0" fill="none" stroke="#e4bd71" stroke-width="2"/>
+ <g fill="url(#gold)" stroke="none"><circle cx="75" cy="145" r="4"/><circle cx="60" cy="166" r="3"/><circle cx="90" cy="166" r="3"/><circle cx="75" cy="190" r="4"/><circle cx="49" cy="218" r="3"/><circle cx="101" cy="218" r="3"/></g>
+ <path d="M30 105l-20 44 22 12M120 105l20 44-22 12" fill="none"/>
+</g>
+<!-- right elegant embroidered suit -->
+<g transform="translate(965 84)" stroke="url(#gold)" stroke-width="3" stroke-linejoin="round">
+ <circle cx="75" cy="26" r="23" fill="url(#rose)"/>
+ <path d="M53 55 Q75 42 97 55 L117 105 L148 270 Q76 300 3 270 L33 105Z" fill="#72283f"/>
+ <path d="M53 56 L29 105 L8 260 M97 56 L121 105 L143 260" fill="none"/>
+ <path d="M55 67 Q75 93 95 67 L104 117 Q75 139 46 117Z" fill="#3b1325"/>
+ <path d="M48 75l27 48 27-48M38 130l37 28 37-28M26 205q49 25 98 0" fill="none" stroke="#f0ce87" stroke-width="2"/>
+ <g fill="url(#gold)" stroke="none"><circle cx="75" cy="145" r="4"/><circle cx="60" cy="166" r="3"/><circle cx="90" cy="166" r="3"/><circle cx="75" cy="190" r="4"/><circle cx="49" cy="218" r="3"/><circle cx="101" cy="218" r="3"/></g>
+ <path d="M30 105l-20 44 22 12M120 105l20 44-22 12" fill="none"/>
+</g>
+<!-- crown -->
+<path d="M525 88l26-39 48 35 48-35 28 39-19 25H544Z" fill="url(#gold)" stroke="#fff0c2" stroke-width="3" filter="url(#glow)"/>
+<path d="M545 118H655" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+<text x="600" y="207" text-anchor="middle" font-family="Georgia,serif" font-size="66" font-weight="bold" letter-spacing="5" fill="url(#gold)">LIBAAS E RAAHAT</text>
+<path d="M340 230H860" stroke="url(#gold)" stroke-width="2"/>
+<text x="600" y="291" text-anchor="middle" font-family="serif" font-size="55" fill="url(#gold)">لباسِ راحت</text>
+<rect x="392" y="324" width="416" height="58" rx="25" fill="#4b1426" stroke="url(#gold)" stroke-width="3"/>
+<text x="600" y="364" text-anchor="middle" font-family="Georgia,serif" font-size="30" fill="#fff1d5">LADIES COLLECTION</text>
+</svg>
