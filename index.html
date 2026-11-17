@@ -849,6 +849,31 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 .site-header .cart-icon-only #cartCount{position:absolute!important;top:-5px!important;right:-5px!important;display:grid!important;place-items:center!important;min-width:17px!important;height:17px!important;padding:0 3px!important;border-radius:50%!important;background:#fff0bd!important;color:#3b210e!important;font-size:10px!important;border:1px solid #b47b2d!important}
 .site-header .store-menu{position:absolute!important;z-index:99!important;top:100%!important;left:8px!important;right:auto!important}
 @media(max-width:380px){.site-header>.nav,.site-header .nav{grid-template-columns:36px minmax(42px,.7fr) minmax(100px,1.8fr) 38px!important;gap:5px!important;padding:7px 6px!important}.site-header .menu-toggle,.site-header .cart-icon-only{width:34px!important;height:34px!important;min-width:34px!important}.site-header .simple-lr{font-size:32px!important;letter-spacing:-4px!important}.site-header .header-store-search,.site-header .header-store-search .store-search-row{height:34px!important;min-height:34px!important}.site-header .header-store-search input{height:32px!important;min-height:32px!important;font-size:10px!important}.site-header .header-store-search .store-search-row>button{height:32px!important;min-height:32px!important;flex-basis:26px!important;width:26px!important;min-width:26px!important}.site-header .nav-actions{width:38px!important;height:36px!important}}
+
+/* Explicit final grid placement for all four header items */
+.site-header .nav{display:grid!important;grid-template-columns:42px minmax(56px,1fr) minmax(100px,1.6fr) 44px!important;grid-template-rows:58px!important;gap:7px!important;align-items:center!important;min-height:74px!important;padding:8px 9px!important;position:relative!important;overflow:visible!important}
+.site-header .header-top-row{display:contents!important}
+.site-header #storeMenuToggle{grid-column:1!important;grid-row:1!important;position:relative!important;display:grid!important;visibility:visible!important;opacity:1!important;z-index:5!important;width:40px!important;height:40px!important;min-width:40px!important;max-width:40px!important;padding:0!important;margin:0!important;place-items:center!important;color:#38200e!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;border:1px solid #f8e3ad!important;border-radius:10px!important;font-size:25px!important;line-height:1!important}
+.site-header .brand{grid-column:2!important;grid-row:1!important;position:relative!important;display:flex!important;visibility:visible!important;opacity:1!important;width:100%!important;min-width:0!important;justify-content:center!important;align-items:center!important}
+.site-header .brand .brand-emblem{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important}
+.site-header .simple-lr{font-size:clamp(38px,9vw,54px)!important;letter-spacing:-5px!important;color:#f4d080!important}
+.site-header .header-store-search{grid-column:3!important;grid-row:1!important;position:relative!important;display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;min-width:0!important;max-width:none!important;height:40px!important;overflow:hidden!important}
+.site-header .header-store-search .store-search-row{display:flex!important;visibility:visible!important;opacity:1!important;width:100%!important;height:40px!important;min-height:40px!important}
+.site-header .header-store-search input{display:block!important;visibility:visible!important;opacity:1!important;min-width:0!important}
+.site-header .header-store-search .store-search-row>button{display:grid!important;visibility:visible!important;opacity:1!important}
+.site-header .nav-actions{grid-column:4!important;grid-row:1!important;position:relative!important;display:flex!important;visibility:visible!important;opacity:1!important;z-index:5!important;width:44px!important;height:44px!important;align-items:center!important;justify-content:center!important}
+.site-header .nav-actions .cart-icon-only{display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important;place-items:center!important;width:42px!important;height:42px!important;min-width:42px!important;padding:0!important;margin:0!important;color:#38200e!important;background:linear-gradient(145deg,#f5dc9b,#bd8739)!important;border:1px solid #f8e3ad!important;border-radius:10px!important;font-size:22px!important}
+.site-header .cart-icon-only #cartCount{display:grid!important;visibility:visible!important;opacity:1!important;position:absolute!important;top:-5px!important;right:-5px!important;z-index:6!important}
+@media(max-width:480px){
+ .site-header .nav{grid-template-columns:38px minmax(48px,.8fr) minmax(90px,1.5fr) 40px!important;grid-template-rows:54px!important;gap:5px!important;padding:7px 6px!important;min-height:68px!important}
+ .site-header #storeMenuToggle{width:36px!important;height:36px!important;min-width:36px!important;max-width:36px!important;font-size:22px!important}
+ .site-header .simple-lr{font-size:42px!important;letter-spacing:-5px!important}
+ .site-header .header-store-search,.site-header .header-store-search .store-search-row{height:36px!important;min-height:36px!important}
+ .site-header .header-store-search input{height:34px!important;min-height:34px!important;font-size:10px!important}
+ .site-header .header-store-search .store-search-row>button{height:34px!important;min-height:34px!important;flex-basis:28px!important;width:28px!important;min-width:28px!important}
+ .site-header .nav-actions{width:40px!important;height:40px!important}
+ .site-header .nav-actions .cart-icon-only{width:38px!important;height:38px!important;min-width:38px!important}
+}
 </style>
 </head>
 <body>
