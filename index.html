@@ -1365,7 +1365,7 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 </div>
 <header class="site-header"><nav class="nav">
 <button type="button" class="iconbtn menu-toggle" id="storeMenuToggle" aria-label="مینو کھولیں" aria-expanded="false" onclick="toggleStoreMenu()">☰</button>
-<div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat ornate LR logo">
+<div class="brand"><div class="logo brand-emblem" aria-label="Libaas e Raahat ornate LR logo" onclick="handleSecretAdminTap(event)">
 <div class="lr-wordmark" role="img" aria-label="LR gold fashion monogram"><span>LR</span><i class="lr-gold-swish"></i><i class="lr-pink-swish"></i></div></div></div>
 <div class="header-tools">
  <div class="store-search header-store-search" id="headerSearchBox"><label class="store-search-label" for="storeProductSearch">پراڈکٹ تلاش کریں</label><div class="store-search-row"><input id="storeProductSearch" type="search" placeholder="سوٹ تلاش کریں" oninput="searchStoreProducts(this.value)" autocomplete="off"></div></div>
@@ -1732,9 +1732,17 @@ function toggleHeaderSearch(){
 function toggleStoreMenu(){const menu=document.getElementById("storeMenu"),btn=document.getElementById("storeMenuToggle");if(!menu||!btn)return;const opening=menu.classList.contains("hidden");menu.classList.toggle("hidden",!opening);btn.setAttribute("aria-expanded",opening?"true":"false")}
 function closeStoreMenu(){const menu=document.getElementById("storeMenu"),btn=document.getElementById("storeMenuToggle");if(menu)menu.classList.add("hidden");if(btn)btn.setAttribute("aria-expanded","false")}
 function openAdmin(){document.getElementById("adminModal").classList.add("show");document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden")}
+let secretAdminTapCount=0,secretAdminTapTimer=null;
+function handleSecretAdminTap(event){
+ if(event)event.preventDefault();
+ secretAdminTapCount++;
+ if(secretAdminTapTimer)clearTimeout(secretAdminTapTimer);
+ if(secretAdminTapCount>=5){secretAdminTapCount=0;secretAdminTapTimer=null;closeStoreMenu();openAdmin();return;}
+ secretAdminTapTimer=setTimeout(function(){secretAdminTapCount=0;secretAdminTapTimer=null;},1800);
+}
 async function refreshAdminNav(){
  const btn=document.getElementById("adminNavBtn");
- if(btn){btn.textContent="ایڈمن لاگ اِن";btn.classList.remove("hidden");}
+ if(btn)btn.classList.add("hidden");
 }
 async function createAdminAccount(){
  let email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
