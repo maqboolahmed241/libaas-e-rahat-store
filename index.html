@@ -1356,7 +1356,7 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 .tracking-footer{font-size:12px;padding:9px 4px 1px}
 .tracking-result{padding:12px;border-radius:14px}
 @media(max-width:600px){.tracking-card{max-width:440px;padding:11px}.tracking-brand{padding:12px 8px}.tracking-logo{font-size:22px}.tracking-brand h3{font-size:15px}.tracking-form input{padding:10px;font-size:14px}.tracking-submit{padding:10px;font-size:14px}}
-</style>
+.tracking-delivery-promise{margin:10px 3px 2px;padding:9px 11px;text-align:center;border:1px solid #80613a;border-radius:12px;background:#35251b;color:#e6c477;font-size:13px;line-height:1.8;font-weight:700}</style>
 </head>
 <body>
 <div class="topline" id="topNotice">🇵🇰 لباسِ راحت — پاکستان بھر میں ڈیلیوری دستیاب ہے | آپ کا پسندیدہ لباس، آپ کی دہلیز تک</div>
@@ -1389,7 +1389,7 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 </section>
 
 
-<section class="section order-tracking-section" id="orderTracking"><div class="section-head"><div><h2>اپنے آرڈر کا سفر دیکھیں</h2><p>آرڈر نمبر اور وہی موبائل نمبر درج کریں جو آرڈر کرتے وقت دیا تھا</p></div></div><div class="tracking-card"><div class="tracking-brand"><div class="tracking-logo">لباسِ راحت</div><div class="tracking-en">LIBAAS E RAAHAT · ORDER TRACKING</div><h3>آپ کے آرڈر کی تازہ صورتحال</h3></div><div class="tracking-form"><label for="trackOrderNo">آرڈر نمبر</label><input id="trackOrderNo" type="text" placeholder="مثلاً LR-XXXXXXXX" autocomplete="off"><label for="trackPhone">موبائل نمبر</label><input id="trackPhone" type="tel" placeholder="03XXXXXXXXX" autocomplete="tel"><button type="button" class="tracking-submit" id="trackOrderBtn" onclick="lookupStoreOrder()">آرڈر کا اسٹیٹس دیکھیں</button><p class="tracking-note" id="trackingMessage" role="status"></p></div><div id="trackingResult" class="tracking-result" aria-live="polite"></div><div class="tracking-footer">آپ کے اعتماد کا شکریہ 🌸</div></div></section></main>
+<section class="section order-tracking-section" id="orderTracking"><div class="section-head"><div><h2>اپنے آرڈر کا سفر دیکھیں</h2><p>آرڈر نمبر اور وہی موبائل نمبر درج کریں جو آرڈر کرتے وقت دیا تھا</p></div></div><div class="tracking-card"><div class="tracking-brand"><div class="tracking-logo">لباسِ راحت</div><div class="tracking-en">LIBAAS E RAAHAT · ORDER TRACKING</div><h3>آپ کے آرڈر کی تازہ صورتحال</h3></div><div class="tracking-form"><label for="trackOrderNo">آرڈر نمبر</label><input id="trackOrderNo" type="text" placeholder="مثلاً LR-XXXXXXXX" autocomplete="off"><label for="trackPhone">موبائل نمبر</label><input id="trackPhone" type="tel" placeholder="03XXXXXXXXX" autocomplete="tel"><button type="button" class="tracking-submit" id="trackOrderBtn" onclick="lookupStoreOrder()">آرڈر کا اسٹیٹس دیکھیں</button><p class="tracking-note" id="trackingMessage" role="status"></p></div><p class="tracking-delivery-promise">✦ ان شاء اللہ، آپ کا آرڈر 7 ورکنگ ڈیز کے اندر ڈیلیور کر دیا جائے گا۔</p><div id="trackingResult" class="tracking-result" aria-live="polite"></div><div class="tracking-footer">آپ کے اعتماد کا شکریہ 🌸</div></div></section></main>
 <footer class="footer"><div class="footer-inner"><div><div class="brandname">LIBAAS E RAAHAT</div><p>لباسِ راحت — خوبصورتی جو آپ کے انداز کو مکمل کرے۔</p></div><div id="footerContact"><b>رابطہ اور آرڈر</b><p>واٹس ایپ نمبر ایڈمن سیٹنگ میں شامل کیا جا سکتا ہے۔</p></div><div id="footerSocialLinks" class="footer-social-links"></div>
 <div class="newsletter-signup" aria-labelledby="newsletterHeading">
  <h3 id="newsletterHeading">🌸 نئی کلیکشن کی خبر سب سے پہلے پائیں</h3>
@@ -2400,6 +2400,7 @@ function applyStoreAttributeTranslations(language){
 }
 const STORE_TEXT_SOURCE=new WeakMap();
 const STORE_NODE_TRANSLATIONS={
+"✦ ان شاء اللہ، آپ کا آرڈر 7 ورکنگ ڈیز کے اندر ڈیلیور کر دیا جائے گا۔":{en:"✦ Insha’Allah, your order will be delivered within 7 working days."},
 "اپنے آرڈر کا سفر دیکھیں":{en:"Track Your Order"},
 "آرڈر نمبر اور وہی موبائل نمبر درج کریں جو آرڈر کرتے وقت دیا تھا":{en:"Enter your order number and the mobile number used when placing the order"},
 "آرڈر کی تازہ صورتحال":{en:"Your Latest Order Update"},
