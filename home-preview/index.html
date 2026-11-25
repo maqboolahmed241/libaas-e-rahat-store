@@ -2027,7 +2027,7 @@ async function enableCustomerPush(){
   let permission=Notification.permission;
   if(permission==="default")permission=await Notification.requestPermission();
   if(permission!=="granted")return say("نوٹیفکیشن کی اجازت نہیں ملی۔ Chrome Site Settings میں Notifications کو Allow کریں۔");
-  const reg=await navigator.serviceWorker.register("./sw.js",{scope:"./"});
+  const reg=await navigator.serviceWorker.register("../sw.js",{scope:"./"});
   await navigator.serviceWorker.ready;
   let sub=await reg.pushManager.getSubscription();
   if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array("BDWcucU-eKNPgdPGPnaXq4W0eG1mrYw37EXjDq7BjANmNXhQtcLM3BAsb5iGNoMd0-Nk4ggEaCMvkjHgCUTfTbA")});
@@ -2202,7 +2202,7 @@ async function requestAdminNotificationPermission(){
   }
  }
  try{
-  const registration=await navigator.serviceWorker.register("./sw.js",{scope:"./"});
+  const registration=await navigator.serviceWorker.register("../sw.js",{scope:"./"});
   await navigator.serviceWorker.ready;
   let subscription=await registration.pushManager.getSubscription();
   if(!subscription)subscription=await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array("BDWcucU-eKNPgdPGPnaXq4W0eG1mrYw37EXjDq7BjANmNXhQtcLM3BAsb5iGNoMd0-Nk4ggEaCMvkjHgCUTfTbA")});
@@ -2343,7 +2343,7 @@ function startBrandMessageRotator(){
 }
 async function startStore(){
  try{
-  if("serviceWorker" in navigator && window.isSecureContext){navigator.serviceWorker.register("./sw.js",{scope:"./"}).catch(function(e){console.warn("Store app service worker registration:",e);});}
+  if("serviceWorker" in navigator && window.isSecureContext){navigator.serviceWorker.register("../sw.js",{scope:"./"}).catch(function(e){console.warn("Store app service worker registration:",e);});}
   if(!window.supabase) await loadSupabaseFallback();
   db=window.supabase.createClient(SB_URL,SB_KEY);
   await loadStore();
