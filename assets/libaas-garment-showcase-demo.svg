@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900" role="img" aria-labelledby="title desc">
+<title id="title">Libaas e Raahat garment showcase</title><desc id="desc">A teal embroidered three-piece South Asian suit displayed on a headless boutique mannequin, with matching trousers and dupatta.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#6b4632"/><stop offset=".55" stop-color="#2d1a16"/><stop offset="1" stop-color="#9a7048"/></linearGradient>
+ <linearGradient id="cloth" x2="1" y2="0"><stop stop-color="#064c4b"/><stop offset=".5" stop-color="#08706a"/><stop offset="1" stop-color="#043e42"/></linearGradient>
+ <linearGradient id="gold" x2="1" y2="1"><stop stop-color="#fff0b7"/><stop offset=".5" stop-color="#d6a94f"/><stop offset="1" stop-color="#8f6228"/></linearGradient>
+ <pattern id="motif" width="82" height="86" patternUnits="userSpaceOnUse">
+  <path d="M41 8 C29 22 29 31 41 39 C53 31 53 22 41 8Z M41 39v31 M41 50c-15-13-25-8-19 3 7 9 15 5 19-3Zm0 0c15-13 25-8 19 3-7 9-15 5-19-3Z" fill="none" stroke="#e6c47b" stroke-width="2.6"/>
+  <circle cx="41" cy="8" r="3.5" fill="#f5dfaa"/><circle cx="22" cy="53" r="3" fill="#e9c87f"/><circle cx="60" cy="53" r="3" fill="#e9c87f"/>
+ </pattern>
+ <filter id="shadow"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="720" height="900" rx="34" fill="url(#bg)"/>
+<g opacity=".22" fill="none" stroke="#e7c98a" stroke-width="3"><path d="M35 0v900M685 0v900M70 0v900M650 0v900"/><path d="M0 95h720M0 805h720"/></g>
+<ellipse cx="360" cy="838" rx="230" ry="28" fill="#0b0807" opacity=".45" filter="url(#shadow)"/>
+<!-- mannequin neck / shoulders, no face -->
+<path d="M310 66h100v98c0 30 35 44 78 64l-52 67H284l-52-67c43-20 78-34 78-64Z" fill="#dfd1b9" stroke="#b89b70" stroke-width="5"/>
+<path d="M310 67h100v30H310Z" fill="#b18b54"/>
+<!-- kameez silhouette -->
+<path d="M284 211 230 238 153 422l58 28 62-105-19 390q106 36 212 0l-19-390 62 105 58-28-77-184-54-27-39 30h-72Z" fill="url(#cloth)" stroke="url(#gold)" stroke-width="7" stroke-linejoin="round"/>
+<path d="M284 211 230 238 153 422l58 28 62-105-19 390q106 36 212 0l-19-390 62 105 58-28-77-184-54-27-39 30h-72Z" fill="url(#motif)" opacity=".92"/>
+<!-- neckline and central embroidery -->
+<path d="M302 211q58 80 116 0M360 228v310" fill="none" stroke="url(#gold)" stroke-width="12"/>
+<path d="M325 245h70v190h-70z" fill="url(#motif)" opacity=".8"/>
+<path d="M222 645q138 40 276 0M211 668q149 42 298 0" fill="none" stroke="url(#gold)" stroke-width="8"/>
+<!-- sleeves cuffs -->
+<path d="m158 400 65 31-12 33-67-30ZM497 431l65-31 14 34-67 30Z" fill="url(#motif)" stroke="url(#gold)" stroke-width="4"/>
+<!-- matching trousers -->
+<path d="M277 682h75l-12 170h-76ZM368 682h75l13 170h-76Z" fill="#07504e" stroke="url(#gold)" stroke-width="5"/>
+<path d="M270 825h69M376 825h69" stroke="url(#gold)" stroke-width="13"/>
+<!-- dupatta flowing right -->
+<path d="M430 229q68 20 96 100l146 470q-62 42-123 20L445 410Z" fill="#0a625e" opacity=".78" stroke="url(#gold)" stroke-width="7"/>
+<path d="M430 229q68 20 96 100l146 470q-62 42-123 20L445 410Z" fill="url(#motif)" opacity=".75"/>
+<path d="M430 229q68 20 96 100l146 470" fill="none" stroke="#f1d38b" stroke-width="10" stroke-dasharray="4 12"/>
+<!-- embroidery sparkle movement -->
+<g fill="#ffe9ae"><circle cx="355" cy="316" r="5"><animate attributeName="opacity" values=".25;1;.25" dur="2.8s" repeatCount="indefinite"/></circle><circle cx="455" cy="510" r="4"><animate attributeName="opacity" values="1;.25;1" dur="3.4s" repeatCount="indefinite"/></circle><circle cx="250" cy="590" r="4"><animate attributeName="opacity" values=".2;1;.2" dur="2.4s" repeatCount="indefinite"/></circle></g>
+<g fill="none" stroke="#d8b46e" stroke-width="3" opacity=".8"><path d="M110 760q-30-55 0-110M610 160q30 55 0 110"/></g>
+<text x="360" y="885" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="#f8e4b4" letter-spacing="4">LIBAAS E RAAHAT</text>
+</svg>
