@@ -1511,7 +1511,12 @@ function startGarmentShowcaseVideo(root){
   if(!video) return;
   var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(reduce) return;
-  var play=function(){var p=video.play();if(p&&p.catch)p.catch(function(){video.controls=false;});};
+  var usePoster=function(){video.pause();video.style.display="none";};
+  video.addEventListener("error",usePoster,{once:true});
+  var play=function(){
+    var p=video.play();
+    if(p&&p.catch)p.catch(function(){usePoster();});
+  };
   if(video.readyState>=2) play();
   else video.addEventListener("canplay",play,{once:true});
 }
