@@ -1488,6 +1488,7 @@ async function loadStore(){
  const results=await Promise.all([db.from("products").select("*").eq("active",true).order("created_at",{ascending:false}),db.from("store_settings").select("*").eq("id",1).maybeSingle()]);
  if(results[0].error){console.error(results[0].error);document.getElementById("products").innerHTML='<p class="muted">مصنوعات لوڈ نہیں ہو سکیں۔</p>';return}
  products=results[0].data||[];
+ homeVideoUrl=results[1].data?.home_video_url||"";
  renderHeroSlideshow();
  Object.keys(cart).forEach(function(id){const p=products.find(function(x){return String(x.id)===String(id)});if(!p||Number(p.stock)<=0)delete cart[id];else if(Number(cart[id])>Number(p.stock))cart[id]=Number(p.stock);});
  saveCart();
