@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#24130f">
+<meta name="description" content="LIBAAS E RAAHAT — Discover the collection">
+<title>LIBAAS E RAAHAT | Home Page</title>
+<style>
+:root{color-scheme:dark;--brown:#24130f;--brown2:#3b241d;--gold:#d7b56f;--cream:#fff4df}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--brown);color:var(--cream);font-family:Arial,Helvetica,sans-serif}
+body{min-height:100svh;display:flex;flex-direction:column}
+header{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #d7b56f66;background:#24130ff2}
+.brand{font-family:Georgia,serif;color:var(--gold);font-size:clamp(22px,5vw,32px);font-weight:bold;letter-spacing:2px;text-decoration:none}
+.back{color:var(--cream);text-decoration:none;border:1px solid #d7b56f;border-radius:24px;padding:10px 16px;font-size:14px}
+main{width:min(100%,900px);margin:auto;padding:18px;display:flex;flex:1;flex-direction:column;justify-content:center;gap:18px}
+.intro{text-align:center}
+.kicker{color:var(--gold);font:700 11px Georgia,serif;letter-spacing:3px}
+h1{font:700 clamp(28px,6vw,48px)/1.1 Georgia,serif;margin:9px 0}
+.sub{color:#e4d3b8;font-size:14px;margin:0}
+.frame{position:relative;width:100%;aspect-ratio:9/14;max-height:68svh;min-height:320px;overflow:hidden;border:1px solid #d7b56f;border-radius:24px;background:radial-gradient(ellipse at center,#694638,#160b08);box-shadow:0 18px 60px #0008}
+video{width:100%;height:100%;object-fit:contain;background:#100806;display:block}
+.sound{position:absolute;left:14px;bottom:14px;z-index:2;border:1px solid var(--gold);border-radius:30px;background:#24130fe8;color:var(--cream);font-weight:700;padding:13px 20px;font-size:14px}
+.caption{position:absolute;right:14px;bottom:14px;max-width:60%;text-align:right;padding:12px 14px;border:1px solid #d7b56f99;border-radius:18px;background:#24130fce}
+.caption strong{display:block;font:700 18px Georgia,serif}
+.caption span{display:block;color:var(--gold);font:700 10px Georgia,serif;letter-spacing:1.5px;margin-bottom:5px}
+.actions{display:flex;justify-content:center}
+.shop{display:inline-block;text-decoration:none;background:linear-gradient(110deg,#f6dfaa,#c79b50);color:#2b1711;border-radius:28px;padding:13px 28px;font-weight:800}
+.note{text-align:center;color:#cbb89a;font-size:12px}
+@media(min-width:700px){.frame{aspect-ratio:16/9;max-height:64svh}.caption{max-width:42%}}
+@media(prefers-reduced-motion:reduce){video{animation:none}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="./index.html">LIBAAS E RAAHAT</a><a class="back" href="./index.html">Back to Store</a></header>
+<main>
+<section class="intro"><div class="kicker">LIBAAS E RAAHAT · EXCLUSIVE SHOWCASE</div><h1>Discover the Collection</h1><p class="sub">Elegance, beauty and confidence — all in one place</p></section>
+<section class="frame" aria-label="Libaas e Raahat home page video showcase">
+<video id="homeVideo" controls autoplay muted loop playsinline preload="metadata" aria-label="Libaas e Raahat collection video"></video>
+<button class="sound" id="soundButton" type="button" aria-pressed="false">Play with sound</button>
+<div class="caption"><span>LIBAAS E RAAHAT</span><strong>Your style. Your elegance.</strong></div>
+</section>
+<div class="actions"><a class="shop" href="./index.html#collection">Shop Now</a></div>
+<p class="note">Tap “Play with sound” to hear the video.</p>
+</main>
+<script>
+(function(){
+ const SB_URL="https://snkojsagkwbierzrkrvv.supabase.co";
+ const SB_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
+ const fallback=SB_URL+"/storage/v1/object/public/home-screen-media/home-screen/current.mp4";
+ const video=document.getElementById("homeVideo");
+ const sound=document.getElementById("soundButton");
+ function setVideo(url){video.src=url||fallback;video.load();const p=video.play();if(p&&p.catch)p.catch(function(){});}
+ fetch(SB_URL+"/rest/v1/store_settings?id=eq.1&select=home_video_url",{headers:{apikey:SB_KEY,Authorization:"Bearer "+SB_KEY,Accept:"application/json"}})
+  .then(function(r){if(!r.ok)throw new Error("settings unavailable");return r.json();})
+  .then(function(rows){setVideo(rows&&rows[0]&&rows[0].home_video_url||fallback);})
+  .catch(function(){setVideo(fallback);});
+ sound.addEventListener("click",async function(){
+  try{video.muted=false;video.volume=1;await video.play();sound.textContent="Sound On";sound.setAttribute("aria-pressed","true");}
+  catch(e){sound.textContent="Tap video to play sound";}
+ });
+ video.addEventListener("error",function(){sound.textContent="Video unavailable";});
+})();
+</script>
+</body>
+</html>
