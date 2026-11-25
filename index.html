@@ -97,6 +97,18 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-slideshow{position:absolute;inset:0;overflow:hidden;border-radius:0 0 0 0;background:linear-gradient(135deg,#ead9c8,#c9a77f)}
 .hero-slideshow.has-slides{background:#ead9c8}
 .hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(1.025);transition:opacity 1s ease,transform 5s ease,visibility 1s}
+.hero-home-label{display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:100%;margin:0 0 14px;padding:8px 13px;border:1px solid #c7a46a;border-radius:30px;background:linear-gradient(110deg,#fff8e9,#ead6ad);color:#503326;font:700 11px/1.2 Georgia,serif;letter-spacing:1.1px;direction:ltr;box-shadow:0 5px 16px #34211c12}
+.hero-home-label i{width:4px;height:4px;border-radius:50%;background:#a77d49}
+.hero-demo-layer{position:absolute;inset:0;z-index:4;overflow:hidden;background:linear-gradient(135deg,#ead9c8,#c9a77f);pointer-events:none}
+.hero-demo-motion{position:absolute;inset:0;background:linear-gradient(0deg,#24161038,transparent 42%),url("./assets/home-video-poster.jpg") center 35%/cover no-repeat;animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
+@keyframes heroDemoKenBurns{from{transform:scale(1)}to{transform:scale(1.09) translate3d(-1.2%,0,0)}}
+.hero-demo-copy{position:absolute;z-index:2;right:20px;bottom:22px;display:flex;flex-direction:column;gap:5px;max-width:80%;padding:10px 14px;border:1px solid #ffffff70;border-radius:14px;background:#2b1a16a8;color:#fff8e9;text-align:right;backdrop-filter:blur(8px);text-shadow:0 1px 4px #0005}
+.hero-demo-copy span{font:700 9px/1.4 Georgia,serif;letter-spacing:1px;color:#f3d28e}
+.hero-demo-copy strong{font-size:17px;line-height:1.4}
+.hero-demo-copy small{font-size:10px;letter-spacing:.8px;direction:ltr;text-align:right}
+@media(max-width:800px){.hero-home-label{margin-bottom:10px;padding:7px 11px;font-size:10px}.hero-demo-copy{right:12px;bottom:14px;padding:8px 11px}.hero-demo-copy strong{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.hero-demo-motion{animation:none}}
+
 .hero-slide.active{opacity:1;visibility:visible;transform:scale(1)}
 .hero-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%}
 .hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#241610b8 0%,#24161022 38%,transparent 72%),linear-gradient(135deg,var(--slide-tint),transparent 68%);pointer-events:none}
@@ -1375,7 +1387,7 @@ body.store-english .site-header .nav>.store-menu{right:auto!important;left:clamp
 </nav></header>
 <main>
 <section class="hero" id="home"><div class="hero-inner">
- <div class="hero-copy"><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">🛒 شاپنگ کارٹ</button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
+ <div class="hero-copy"><div class="hero-home-label" aria-label="Home Screen Shop Now"><span>HOME SCREEN</span><i></i><span>SHOP NOW</span></div><div class="hero-cta"><button class="primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">کلیکشن دریافت کریں <span>←</span></button><button class="secondary" onclick="openCart()">🛒 شاپنگ کارٹ</button></div><div class="hero-footnote"><span>✦</span> معیار، نفاست اور اعتماد — ایک ہی جگہ</div></div>
  <div class="hero-art"><div class="hero-slideshow" id="heroSlideshow" aria-label="لباسِ راحت کی تصویری کلیکشن"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="fabric-swatch swatch-back"></div><div class="fabric-swatch swatch-front"></div><div class="hero-monogram"><span class="monogram-small">لباس پہننے کا خوبصورت انداز</span><strong>LR</strong><span class="monogram-urdu">لباسِ راحت</span><i></i></div><div class="floating-tag"><span>✦</span> نئی کلیکشن <small>خاص آپ کے لیے</small></div><div class="art-side-note">ہر دن کے لیے نفاست</div></div></div>
 </div></section>
 <div class="home-promises"><div><span>✧</span><b>منتخب کلیکشن</b><small>ہر انداز کے لیے</small></div><i></i><div><span>◇</span><b>آسان آرڈر</b><small>سادہ اور محفوظ خریداری</small></div><i></i><div><span>♡</span><b>ذاتی توجہ</b><small>آپ کا اعتماد ہماری ترجیح</small></div></div>
@@ -1497,9 +1509,11 @@ function renderHeroSlideshow(){
    if(url&&!seen.has(url)&&items.length<8){seen.add(url);items.push({url:url,name:p.name||"خوبصورت کلیکشن",category:p.category||"لباسِ راحت"});}
   });
  });
- if(!items.length)return;
+ const demoVideoUrl=""; // Add the real MP4 URL here when the store's own fashion clip is ready.
+ const demoLayer='<div class="hero-demo-layer" aria-label="عارضہ ویڈیو ڈیمو"><div class="hero-demo-motion"></div><div class="hero-demo-copy"><span>DEMO PREVIEW · TEMPORARY</span><strong>LIBAAS E RAAHAT</strong><small>HOME SCREEN · SHOP NOW</small></div></div>';
+ if(!items.length){root.classList.add("has-slides");root.innerHTML=demoLayer;return;}
  root.classList.add("has-slides");
- root.innerHTML=items.map(function(item,i){
+ root.innerHTML=demoLayer+items.map(function(item,i){
   return '<div class="hero-slide hero-slide-tone-'+(i%6)+(i===0?' active':'')+'" aria-hidden="'+(i===0?'false':'true')+'"><img src="'+esc(item.url)+'" alt="'+esc(item.name)+'" '+(i===0?'fetchpriority="high"':'loading="lazy"')+'><div class="hero-slide-caption"><small>'+esc(item.category)+'</small><strong>'+esc(item.name)+'</strong><span>لباسِ راحت — نفاست، خوبصورتی اور اعتماد</span></div></div>';
  }).join("")+(items.length>1?'<div class="hero-slide-dots" aria-label="تصویری سلائیڈ منتخب کریں">'+items.map(function(_,i){return '<button type="button" class="hero-slide-dot '+(i===0?'active':'')+'" aria-label="تصویر '+(i+1)+'" aria-current="'+(i===0?'true':'false')+'" onclick="showHeroSlide('+i+')"></button>';}).join("")+'</div>':'');
  heroSlideIndex=0;
