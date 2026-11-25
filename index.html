@@ -99,15 +99,22 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(1.025);transition:opacity 1s ease,transform 5s ease,visibility 1s}
 .hero-home-label{display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:100%;margin:0 0 14px;padding:8px 13px;border:1px solid #c7a46a;border-radius:30px;background:linear-gradient(110deg,#fff8e9,#ead6ad);color:#503326;font:700 11px/1.2 Georgia,serif;letter-spacing:1.1px;direction:ltr;box-shadow:0 5px 16px #34211c12}
 .hero-home-label i{width:4px;height:4px;border-radius:50%;background:#a77d49}
-.hero-demo-layer{position:absolute;inset:0;z-index:4;overflow:hidden;background:transparent;pointer-events:none}
-.hero-demo-motion{position:absolute;inset:0;background:linear-gradient(0deg,#24161038,transparent 42%);animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
-@keyframes heroDemoKenBurns{from{transform:scale(1)}to{transform:scale(1.09) translate3d(-1.2%,0,0)}}
-.hero-demo-copy{position:absolute;z-index:2;right:20px;bottom:22px;display:flex;flex-direction:column;gap:5px;max-width:80%;padding:10px 14px;border:1px solid #ffffff70;border-radius:14px;background:#2b1a16a8;color:#fff8e9;text-align:right;backdrop-filter:blur(8px);text-shadow:0 1px 4px #0005}
+.hero-demo-layer{position:absolute;inset:0;z-index:4;overflow:hidden;background:radial-gradient(ellipse at 72% 42%,#8a6048 0,#4b3025 48%,#241712 100%);pointer-events:none}
+.hero-demo-motion{position:absolute;inset:0;background:linear-gradient(110deg,#1d120eaa 0%,transparent 70%);animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
+@keyframes heroDemoKenBurns{from{transform:scale(1)}to{transform:scale(1.06) translate3d(-1%,0,0)}}
+.hero-demo-garment{position:absolute;top:4%;right:14%;width:min(46%,260px);height:83%;filter:drop-shadow(0 14px 20px #120b09aa);animation:heroGarmentFloat 5s ease-in-out infinite alternate}
+.hero-demo-garment:before{content:"";position:absolute;left:31%;top:0;width:38%;height:13%;border-radius:45% 45% 20% 20%;background:linear-gradient(90deg,#c9bba5,#fff4df,#a9957d)}
+.hero-demo-garment:after{content:"";position:absolute;left:12%;top:11%;width:76%;height:88%;clip-path:polygon(30% 0,70% 0,82% 14%,100% 100%,0 100%,18% 14%);border:0;border-radius:12px 12px 4px 4px;background:repeating-linear-gradient(0deg,transparent 0 17px,#d8b16a88 18px 20px),repeating-linear-gradient(90deg,#572b55 0 18px,#713768 19px 35px,#4d254c 36px 52px);box-shadow:inset 0 0 0 4px #d7b36e}
+.hero-demo-garment i{position:absolute;z-index:2;left:43%;top:15%;width:14%;height:45%;border-left:2px solid #f0d28a;border-right:2px solid #f0d28a;background:repeating-linear-gradient(0deg,#f4d99b 0 3px,transparent 3px 12px);opacity:.9}
+.hero-demo-garment b,.hero-demo-garment em{position:absolute;z-index:2;top:22%;width:19%;height:39%;border:2px solid #d9b66e;border-radius:8px;background:repeating-linear-gradient(135deg,#e8ca85 0 2px,transparent 2px 9px)}
+.hero-demo-garment b{left:7%;transform:rotate(10deg)}.hero-demo-garment em{right:7%;transform:rotate(-10deg)}
+@keyframes heroGarmentFloat{from{transform:translateY(0) rotate(-1deg)}to{transform:translateY(-9px) rotate(1deg)}}
+.hero-demo-copy{position:absolute;z-index:3;right:18px;bottom:18px;display:flex;flex-direction:column;gap:5px;max-width:80%;padding:10px 14px;border:1px solid #d9b66e88;border-radius:14px;background:#241712d9;color:#fff8e9;text-align:right;backdrop-filter:blur(8px);text-shadow:0 1px 4px #0005}
 .hero-demo-copy span{font:700 9px/1.4 Georgia,serif;letter-spacing:1px;color:#f3d28e}
 .hero-demo-copy strong{font-size:17px;line-height:1.4}
-.hero-demo-copy small{font-size:10px;letter-spacing:.8px;direction:ltr;text-align:right}
-@media(max-width:800px){.hero-home-label{margin-bottom:10px;padding:7px 11px;font-size:10px}.hero-demo-copy{right:12px;bottom:14px;padding:8px 11px}.hero-demo-copy strong{font-size:14px}}
-@media(prefers-reduced-motion:reduce){.hero-demo-motion{animation:none}}
+.hero-demo-copy small{font-size:10px;letter-spacing:.5px;direction:ltr;text-align:right}
+@media(max-width:800px){.hero-home-label{margin-bottom:10px;padding:7px 11px;font-size:10px}.hero-demo-garment{right:8%;width:52%;height:78%}.hero-demo-copy{right:12px;bottom:12px;padding:8px 11px}.hero-demo-copy strong{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.hero-demo-motion,.hero-demo-garment{animation:none}}
 
 .hero-slide.active{opacity:1;visibility:visible;transform:scale(1)}
 .hero-slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%}
@@ -1510,7 +1517,7 @@ function renderHeroSlideshow(){
   });
  });
  const demoVideoUrl=""; // Add the real MP4 URL here when the store's own fashion clip is ready.
- const demoLayer='<div class="hero-demo-layer" aria-label="عارضہ ویڈیو ڈیمو"><div class="hero-demo-motion"></div><div class="hero-demo-copy"><span>DEMO PREVIEW · TEMPORARY</span><strong>LIBAAS E RAAHAT</strong><small>HOME SCREEN · SHOP NOW</small></div></div>';
+ const demoLayer='<div class="hero-demo-layer" aria-label="لباس اور سوٹ کی عارضی نمائش"><div class="hero-demo-motion"></div><div class="hero-demo-garment" aria-hidden="true"><i></i><b></b><em></em></div><div class="hero-demo-copy"><span>GARMENT SHOWCASE · TEMPORARY</span><strong>سوٹ کی نمائش</strong><small>LIBAAS E RAAHAT · HOME SCREEN · SHOP NOW</small></div></div>';
  if(!items.length){root.classList.add("has-slides");root.innerHTML=demoLayer;return;}
  root.classList.add("has-slides");
  root.innerHTML=demoLayer+items.map(function(item,i){
