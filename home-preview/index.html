@@ -34,6 +34,12 @@ h1{font-family:Georgia,serif;font-size:clamp(34px,8vw,64px);line-height:1.05;let
 footer{padding:14px 12px 20px;text-align:center;color:#9d8e7b;font-size:11px;border-top:1px solid #514335}
 @media(max-width:480px){header{padding-top:17px}.video-frame{height:clamp(280px,48svh,420px);border-radius:13px}.ticker{height:33px}}
 @media(prefers-reduced-motion:reduce){.ticker-track{animation:none}.cta{transition:none}}
+
+.brand-story{width:min(100%,700px);margin:12px auto 24px;padding:20px 18px;border:1px solid #705b3d;border-radius:16px;background:linear-gradient(145deg,#30251d,#211a16);text-align:center;line-height:2;color:#eadfcf}
+.brand-story h2{color:#e5c58c;font-size:clamp(20px,4vw,28px);margin:0 0 10px}
+.brand-story p{font-size:14px;color:#d5c7b2;margin:8px 0}
+.story-points{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:14px 0}
+.story-points span{border:1px solid #9d7c4c;border-radius:999px;padding:5px 11px;color:#f0d8a7;font-size:12px}
 </style>
 </head>
 <body>
@@ -51,8 +57,35 @@ footer{padding:14px 12px 20px;text-align:center;color:#9d8e7b;font-size:11px;bor
 <div class="video-caption">لباس کی نمائش · کڑھائی · دوپٹہ · نفیس تفصیلات</div>
 </div>
 <a class="cta" href="../" aria-label="اصل لباس راحت اسٹور کھولیں">SHOP NOW <span aria-hidden="true">←</span></a>
+<section class="brand-story" aria-labelledby="brandStoryTitle">
+<h2 id="brandStoryTitle">لباسِ راحت — ہر لباس میں نفاست کا احساس</h2>
+<p>ہم آپ کے لیے منتخب کرتے ہیں خوبصورت ڈیزائن، دلکش رنگ اور نفیس انداز، تاکہ ہر موقع پر آپ کا لباس آپ کی شخصیت کو خوبصورتی سے نمایاں کرے۔</p>
+<div class="story-points"><span>✦ منتخب کلیکشن</span><span>✦ نفیس کڑھائی اور خوبصورت فنشنگ</span><span>✦ آرام دہ اور دلکش انداز</span></div>
+<p>روزمرہ پہننے سے لے کر خاص تقریبات تک، اپنی پسند کا لباس اعتماد کے ساتھ منتخب کریں۔</p>
+</section>
 <p class="note">مزید کلیکشن اور آرڈر کے لیے اصل اسٹور پر جائیں</p>
 </main>
 <footer>© LIBAAS E RAAHAT · ALL RIGHTS RESERVED</footer>
+
+<script>
+(function(){
+ const VIDEO_URL="https://snkojsagkwbierzrkrvv.supabase.co";
+ const VIDEO_KEY="sb_publishable_OnzZ10TSRu8t0eGJLkqkAQ_58dn-3Xu";
+ const source=document.querySelector(".video-frame video");
+ if(!source)return;
+ function useSavedVideo(client){
+   client.from("store_settings").select("home_video_url").eq("id",1).maybeSingle().then(function(result){
+     if(result.error){console.warn("Home screen video setting:",result.error.message);return;}
+     const url=result.data&&result.data.home_video_url;
+     if(url){source.src=url+(url.indexOf("?")>=0?"&":"?")+"v="+Date.now();source.load();source.play().catch(function(){});}
+   }).catch(function(error){console.warn("Home screen video:",error);});
+ }
+ const script=document.createElement("script");
+ script.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+ script.onload=function(){try{const client=window.supabase.createClient(VIDEO_URL,VIDEO_KEY);useSavedVideo(client);}catch(e){console.warn(e);}};
+ script.onerror=function(){console.warn("Home screen video settings could not load; showing the demo poster video.");};
+ document.head.appendChild(script);
+})();
+</script>
 </body>
 </html>
