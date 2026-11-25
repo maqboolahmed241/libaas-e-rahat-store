@@ -102,8 +102,8 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-demo-layer{position:absolute;inset:0;z-index:4;overflow:hidden;background:transparent;pointer-events:none}
 .hero-demo-motion{position:absolute;inset:0;background:linear-gradient(110deg,#1d120e30 0%,transparent 62%);animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
 @keyframes heroDemoKenBurns{from{transform:scale(1)}to{transform:scale(1.06) translate3d(-1%,0,0)}}
-.hero-demo-garment{position:absolute;top:1%;right:8%;width:min(58%,340px);height:94%;object-fit:contain;filter:drop-shadow(0 14px 20px #120b09aa);animation:heroGarmentFloat 5s ease-in-out infinite alternate}
-.hero-demo-video{position:absolute;top:1%;right:8%;width:min(58%,340px);height:94%;object-fit:contain;filter:drop-shadow(0 14px 20px #120b09aa);background:transparent}
+.hero-demo-garment{position:absolute;z-index:1;top:1%;right:8%;width:min(58%,340px);height:94%;object-fit:contain;filter:drop-shadow(0 14px 20px #120b09aa);animation:heroGarmentFloat 5s ease-in-out infinite alternate}
+.hero-demo-video{position:absolute;z-index:2;top:1%;right:8%;width:min(58%,340px);height:94%;object-fit:contain;filter:drop-shadow(0 14px 20px #120b09aa);background:transparent}
 @media(max-width:800px){.hero-demo-video{right:4%;width:66%;height:88%}}
 @media(prefers-reduced-motion:reduce){.hero-demo-video{display:none}}
 @keyframes heroGarmentFloat{from{transform:translateY(0)}to{transform:translateY(-7px)}}
@@ -1532,6 +1532,7 @@ function renderHeroSlideshow(){
  heroSlideIndex=0;
  if(heroSlideTimer){clearInterval(heroSlideTimer);heroSlideTimer=null;}
  if(items.length>1)heroSlideTimer=window.setInterval(function(){if(!document.hidden)showHeroSlide(heroSlideIndex+1);},10000);
+ startGarmentShowcaseVideo(root);
 }
 let productViewMode="detail";
 function setProductViewMode(mode){
