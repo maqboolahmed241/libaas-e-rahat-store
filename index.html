@@ -103,6 +103,9 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-demo-motion{position:absolute;inset:0;background:linear-gradient(110deg,#1d120e30 0%,transparent 62%);animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
 @keyframes heroDemoKenBurns{from{transform:scale(1)}to{transform:scale(1.06) translate3d(-1%,0,0)}}
 .hero-demo-garment{position:absolute;top:1%;right:8%;width:min(58%,340px);height:94%;object-fit:contain;filter:drop-shadow(0 14px 20px #120b09aa);animation:heroGarmentFloat 5s ease-in-out infinite alternate}
+.hero-demo-video{position:absolute;top:1%;right:8%;width:min(58%,340px);height:94%;object-fit:contain;filter:drop-shadow(0 14px 20px #120b09aa);background:transparent}
+@media(max-width:800px){.hero-demo-video{right:4%;width:66%;height:88%}}
+@media(prefers-reduced-motion:reduce){.hero-demo-video{display:none}}
 @keyframes heroGarmentFloat{from{transform:translateY(0)}to{transform:translateY(-7px)}}
 .hero-demo-copy{position:absolute;z-index:3;right:18px;bottom:18px;display:flex;flex-direction:column;gap:5px;max-width:80%;padding:10px 14px;border:1px solid #d9b66e88;border-radius:14px;background:#241712d9;color:#fff8e9;text-align:right;backdrop-filter:blur(8px);text-shadow:0 1px 4px #0005}
 .hero-demo-copy span{font:700 9px/1.4 Georgia,serif;letter-spacing:1px;color:#f3d28e}
@@ -1503,6 +1506,15 @@ function showHeroSlide(index){
  slides.forEach(function(el,i){el.classList.toggle("active",i===heroSlideIndex);el.setAttribute("aria-hidden",i===heroSlideIndex?"false":"true");});
  dots.forEach(function(el,i){el.classList.toggle("active",i===heroSlideIndex);el.setAttribute("aria-current",i===heroSlideIndex?"true":"false");});
 }
+function startGarmentShowcaseVideo(root){
+  var video=root.querySelector(".hero-demo-video");
+  if(!video) return;
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce) return;
+  var play=function(){var p=video.play();if(p&&p.catch)p.catch(function(){video.controls=false;});};
+  if(video.readyState>=2) play();
+  else video.addEventListener("canplay",play,{once:true});
+}
 function renderHeroSlideshow(){
  const root=document.getElementById("heroSlideshow");if(!root)return;
  const seen=new Set(),items=[];
@@ -1511,8 +1523,8 @@ function renderHeroSlideshow(){
    if(url&&!seen.has(url)&&items.length<8){seen.add(url);items.push({url:url,name:p.name||"خوبصورت کلیکشن",category:p.category||"لباسِ راحت"});}
   });
  });
- const demoLayer='<div class="hero-demo-layer" aria-label="لباس اور سوٹ کی عارضی نمائش"><div class="hero-demo-motion"></div><img class="hero-demo-garment" src="./assets/libaas-garment-showcase-demo.svg" alt="گہرے فیروزی رنگ کا کڑھائی والا سوٹ، ٹراؤزر اور دوپٹہ" loading="eager" decoding="async"><div class="hero-demo-copy"><span>GARMENT SHOWCASE · TEMPORARY</span><strong>سوٹ کی نمائش</strong><small>LIBAAS E RAAHAT · HOME SCREEN · SHOP NOW</small></div></div>';
- if(!items.length){root.classList.add("has-slides");root.innerHTML=demoLayer;return;}
+ const demoLayer='<div class="hero-demo-layer" aria-label="لباس اور سوٹ کی عارضی نمائش"><div class="hero-demo-motion"></div><video class="hero-demo-video" muted loop playsinline preload="metadata" poster="./assets/libaas-garment-showcase-demo.svg" aria-label="کڑھائی والے سوٹ، ٹراؤزر اور دوپٹے کی ویڈیو"><source src="./assets/libaas-garment-showcase-preview.mp4" type="video/mp4"></video><img class="hero-demo-garment" src="./assets/libaas-garment-showcase-demo.svg" alt="گہرے فیروزی رنگ کا کڑھائی والا سوٹ، ٹراؤزر اور دوپٹہ" loading="eager" decoding="async"><div class="hero-demo-copy"><span>GARMENT SHOWCASE · HOME</span><strong>سوٹ کی نمائش</strong><small>LIBAAS E RAAHAT · HOME SCREEN · SHOP NOW</small></div></div>';
+ if(!items.length){root.classList.add("has-slides");root.innerHTML=demoLayer;startGarmentShowcaseVideo(root);return;}
  root.classList.add("has-slides");
  root.innerHTML=demoLayer+items.map(function(item,i){
   return '<div class="hero-slide hero-slide-tone-'+(i%6)+(i===0?' active':'')+'" aria-hidden="'+(i===0?'false':'true')+'"><img src="'+esc(item.url)+'" alt="'+esc(item.name)+'" '+(i===0?'fetchpriority="high"':'loading="lazy"')+'><div class="hero-slide-caption"><small>'+esc(item.category)+'</small><strong>'+esc(item.name)+'</strong><span>لباسِ راحت — نفاست، خوبصورتی اور اعتماد</span></div></div>';
