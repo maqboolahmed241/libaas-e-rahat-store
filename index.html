@@ -99,8 +99,8 @@ body{background:radial-gradient(ellipse at 12% 6%,#fffaf3 0,transparent 34%),var
 .hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(1.025);transition:opacity 1s ease,transform 5s ease,visibility 1s}
 .hero-home-label{display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:100%;margin:0 0 14px;padding:8px 13px;border:1px solid #c7a46a;border-radius:30px;background:linear-gradient(110deg,#fff8e9,#ead6ad);color:#503326;font:700 11px/1.2 Georgia,serif;letter-spacing:1.1px;direction:ltr;box-shadow:0 5px 16px #34211c12}
 .hero-home-label i{width:4px;height:4px;border-radius:50%;background:#a77d49}
-.hero-demo-layer{position:absolute;inset:0;z-index:4;overflow:hidden;background:linear-gradient(135deg,#ead9c8,#c9a77f);pointer-events:none}
-.hero-demo-motion{position:absolute;inset:0;background:linear-gradient(0deg,#24161038,transparent 42%),url("./assets/home-video-poster.jpg") center 35%/cover no-repeat;animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
+.hero-demo-layer{position:absolute;inset:0;z-index:4;overflow:hidden;background:transparent;pointer-events:none}
+.hero-demo-motion{position:absolute;inset:0;background:linear-gradient(0deg,#24161038,transparent 42%);animation:heroDemoKenBurns 8s ease-in-out infinite alternate}
 @keyframes heroDemoKenBurns{from{transform:scale(1)}to{transform:scale(1.09) translate3d(-1.2%,0,0)}}
 .hero-demo-copy{position:absolute;z-index:2;right:20px;bottom:22px;display:flex;flex-direction:column;gap:5px;max-width:80%;padding:10px 14px;border:1px solid #ffffff70;border-radius:14px;background:#2b1a16a8;color:#fff8e9;text-align:right;backdrop-filter:blur(8px);text-shadow:0 1px 4px #0005}
 .hero-demo-copy span{font:700 9px/1.4 Georgia,serif;letter-spacing:1px;color:#f3d28e}
