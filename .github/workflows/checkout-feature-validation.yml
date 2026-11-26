@@ -1,0 +1,64 @@
+name: Checkout feature validation
+
+on:
+  push:
+    branches:
+      - feature/free-delivery-payment-offer
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+      - name: Validate inline JavaScript syntax
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          class Scripts(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.inside = False
+                  self.external = False
+                  self.current = []
+                  self.scripts = []
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() == "script":
+                      self.inside = True
+                      self.external = any(k.lower() == "src" for k, _ in attrs)
+                      self.current = []
+              def handle_data(self, data):
+                  if self.inside and not self.external:
+                      self.current.append(data)
+              def handle_endtag(self, tag):
+                  if tag.lower() == "script" and self.inside:
+                      if not self.external and "".join(self.current).strip():
+                          self.scripts.append("".join(self.current))
+                      self.inside = False
+                      self.external = False
+          parser = Scripts()
+          parser.feed(Path("index.html").read_text(encoding="utf-8"))
+          Path("/tmp/inline-scripts").mkdir(exist_ok=True)
+          for i, script in enumerate(parser.scripts):
+              Path(f"/tmp/inline-scripts/script-{i}.js").write_text(script, encoding="utf-8")
+          print(f"Extracted {len(parser.scripts)} inline script block(s)")
+          if not parser.scripts:
+              raise SystemExit("No inline JavaScript found")
+          PY
+          for file in /tmp/inline-scripts/*.js; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+      - name: Confirm checkout and discount features exist
+        run: |
+          grep -q 'id="paymentMethodCards"' index.html
+          grep -q 'id="discountCodeInput"' index.html
+          grep -q 'function applyDiscountCode' index.html
+          grep -q 'function getCheckoutDeliveryFee' index.html
+          echo "Checkout, discount, and delivery feature markers found."
