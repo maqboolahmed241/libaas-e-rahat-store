@@ -1630,7 +1630,7 @@ async function submitOrder(ev){
   btn.disabled=true;btn.dataset.busy="1";btn.textContent="آرڈر محفوظ ہو رہا ہے…";
   if(note){note.style.display="block";note.style.color="";note.textContent="براہ کرم انتظار کریں، آپ کا آرڈر محفوظ کیا جا رہا ہے۔";}
   let receiptPath="";if(method==="online"){const ext=receiptFile.name.split(".").pop().toLowerCase();receiptPath="receipts/"+Date.now()+"-"+crypto.randomUUID()+"."+ext;const upload=await db.storage.from("payment-receipts").upload(receiptPath,receiptFile,{contentType:receiptFile.type,upsert:false});if(upload.error)return showError("رسید اپلوڈ نہیں ہوئی: "+upload.error.message);}
-  const payload={customer_name:name,phone:phone,area:area,address:address,items:selected,subtotal:subtotal,discount_code:appliedDiscount?.code||null,discount_amount:discountAmount,delivery_fee:deliveryFee,total:total,status:"pending",payment_method:method,payment_status:method==="online"?"pending_verification":"unpaid",payment_reference:method==="online"?(account.service+" | "+account.number+" | "+reference):"",payment_receipt_path:receiptPath||null,shipping_country:intl?intl.country:"Pakistan",currency_code:currency,exchange_rate_pkr:rate,subtotal_currency:subtotalCurrency,delivery_fee_currency:deliveryFeeCurrency,total_currency:totalCurrency};
+  const payload={customer_language:(document.documentElement.lang==="en"?"en":"ur"),customer_name:name,phone:phone,area:area,address:address,items:selected,subtotal:subtotal,discount_code:appliedDiscount?.code||null,discount_amount:discountAmount,delivery_fee:deliveryFee,total:total,status:"pending",payment_method:method,payment_status:method==="online"?"pending_verification":"unpaid",payment_reference:method==="online"?(account.service+" | "+account.number+" | "+reference):"",payment_receipt_path:receiptPath||null,shipping_country:intl?intl.country:"Pakistan",currency_code:currency,exchange_rate_pkr:rate,subtotal_currency:subtotalCurrency,delivery_fee_currency:deliveryFeeCurrency,total_currency:totalCurrency};
   const result=await db.from("store_orders").insert(payload);
   if(result.error){console.error("Order insert failed:",result.error);return showError("آرڈر محفوظ نہیں ہوا: "+(result.error.message||"سرور کی خرابی")+". آپ کی معلومات اسی اسکرین پر موجود ہیں؛ دوبارہ کوشش کریں۔");}
   const msg="السلام علیکم، میرا LIBAAS E RAAHAT کا آرڈر ہے۔\nملک: "+(intl?intl.country:"Pakistan")+"\nنام: "+name+"\nموبائل: "+phone+"\nشہر / علاقہ: "+area+"\nپتہ: "+address+"\n\n"+selected.map(function(x){return x.name+" × "+x.quantity+" = "+x.line_total+" PKR"}).join("\n")+"\nسب ٹوٹل: "+subtotal+" PKR"+(discountAmount?"\nڈسکاؤنٹ ("+(appliedDiscount?.code||"")+"): -"+discountAmount+" PKR":"")+"\nڈیلیوری: "+(intl?currency+" "+deliveryFeeCurrency:deliveryFee+" PKR")+"\nکل رقم: "+(intl?currency+" "+totalCurrency+" (تقریباً "+total+" PKR)":total+" PKR")+"\nادائیگی: "+(method==="online"?"آن لائن — "+account.service+" "+account.number+" — ریفرنس: "+reference:"کیش آن ڈیلیوری")+"\nشکریہ۔";
@@ -2137,7 +2137,28 @@ async function renderAdminOrders(){
 function sendThankYouSMS(id){
  const o=storeOrders.find(function(x){return x.id===id});if(!o)return;
  const phone=String(o.phone||"").replace(/[^0-9+]/g,"");if(!phone)return alert("اس آرڈر میں موبائل نمبر موجود نہیں۔");
-  const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+" صاحب/صاحبہ!\n\nلباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر نمبر "+(o.order_no||"")+" کامیابی سے موصول ہو گیا ہے۔\n\nان شاء اللہ آپ کا آرڈر جلد از جلد آپ کی دہلیز تک پہنچایا جائے گا۔\n\nاللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کا تہِ دل سے شکریہ۔\n\n🌸 ایک چھوٹی سی گزارش: براہِ کرم اپنا قیمتی فیڈبیک ضرور شیئر کریں۔ آپ کی رائے ہمارے لیے بہت اہم ہے۔\n\nلباسِ راحت — آپ کے اعتماد کا شکریہ!";
+  const isEnglish=o.customer_language==="en";
+  const message=isEnglish?"Assalamu Alaikum "+(o.customer_name||"Dear Customer")+"!
+
+Thank you for shopping with LIBAAS E RAAHAT. Your order "+(o.order_no||"")+" has been received successfully.
+
+We will do our best to deliver your order to your doorstep as soon as possible.
+
+May Allah bless you with health, happiness and prosperity. Your trust means a great deal to us.
+
+🌸 We would also appreciate your valuable feedback.
+
+LIBAAS E RAAHAT — Thank you for your trust!":"السلام علیکم "+(o.customer_name||"محترم گاہک")+" صاحب/صاحبہ!
+
+لباسِ راحت (LIBAAS E RAAHAT) سے خریداری کرنے کا بہت شکریہ۔ آپ کا آرڈر نمبر "+(o.order_no||"")+" کامیابی سے موصول ہو گیا ہے۔
+
+ان شاء اللہ آپ کا آرڈر جلد از جلد آپ کی دہلیز تک پہنچایا جائے گا۔
+
+اللہ تعالیٰ آپ کے رزق، صحت اور خوشیوں میں برکت عطا فرمائے۔ آپ کے اعتماد کا تہِ دل سے شکریہ۔
+
+🌸 ایک چھوٹی سی گزارش: براہِ کرم اپنا قیمتی فیڈبیک ضرور شیئر کریں۔ آپ کی رائے ہمارے لیے بہت اہم ہے۔
+
+لباسِ راحت — آپ کے اعتماد کا شکریہ!";
  window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);
 }
 function chooseOrderStatus(o,details){
@@ -2178,7 +2199,17 @@ async function showOrder(id){
  if(st==="delivered"){await loadStore();await renderAdminProducts();}
  if(st==="cancelled"&&previousStatus!=="cancelled"){
   const phone=String(o.phone||"").replace(/[^0-9+]/g,"");
-  const message="السلام علیکم "+(o.customer_name||"محترم گاہک")+" صاحب/صاحبہ!\n\nلباسِ راحت (LIBAAS E RAAHAT) سے آپ کے آرڈر نمبر "+(o.order_no||"")+" کے بارے میں معذرت خواہ ہیں۔ یہ کلیکشن دکان سے فروخت ہو چکی ہے، اس لیے فی الحال ہم آپ کا آرڈر مکمل نہیں کر سکتے۔ آپ کو ہونے والی زحمت کے لیے دل سے معذرت۔ ان شاء اللہ نئی کلیکشن میں آپ کی خدمت کریں گے۔\n\nشکریہ، لباسِ راحت";
+  const isEnglish=o.customer_language==="en";
+  const message=isEnglish?"Assalamu Alaikum "+(o.customer_name||"Dear Customer")+"!
+
+We sincerely apologize regarding your order "+(o.order_no||"")+". This collection has been sold out at our store, so we are unable to complete your order at this time. We are sorry for the inconvenience and hope to serve you again with our upcoming collection.
+
+Thank you for your understanding.
+LIBAAS E RAAHAT":"السلام علیکم "+(o.customer_name||"محترم گاہک")+" صاحب/صاحبہ!
+
+لباسِ راحت (LIBAAS E RAAHAT) سے آپ کے آرڈر نمبر "+(o.order_no||"")+" کے بارے میں معذرت خواہ ہیں۔ یہ کلیکشن دکان سے فروخت ہو چکی ہے، اس لیے فی الحال ہم آپ کا آرڈر مکمل نہیں کر سکتے۔ آپ کو ہونے والی زحمت کے لیے دل سے معذرت۔ ان شاء اللہ نئی کلیکشن میں آپ کی خدمت کریں گے۔
+
+شکریہ، لباسِ راحت";
   alert("آرڈر منسوخ ہوگیا۔ اب کسٹمر کے لیے معذرت کا SMS کھلے گا؛ براہِ کرم Messages میں Send ضرور دبائیں۔");
   if(phone.length>=10){window.location.href="sms:"+phone+"?body="+encodeURIComponent(message);}
   else alert("آرڈر منسوخ ہوگیا، لیکن اس میں درست موبائل نمبر موجود نہیں؛ کسٹمر کو الگ سے اطلاع دیں۔");
