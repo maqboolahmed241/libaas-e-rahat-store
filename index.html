@@ -1642,6 +1642,8 @@ async function submitOrder(ev){
   btn.style.display="none";if(note)note.style.display="none";
   document.getElementById("cartItems").innerHTML='<div class="admin-note" style="text-align:center;padding:22px"><div style="font-size:42px">✓</div><h2>آپ کا آرڈر موصول ہوگیا!</h2><p>محترم '+esc(name)+' صاحب/صاحبہ، لباسِ راحت سے خریداری کرنے کا دل سے شکریہ۔ اللہ تعالیٰ آپ کے رزق اور خوشیوں میں برکت عطا فرمائے۔ آپ کا اعتماد ہمارے لیے قیمتی ہے۔</p><p><b>آپ کا آرڈر کامیابی سے موصول ہوگیا ہے۔</b></p><p><b>کل رقم: '+money(total)+'</b></p>'+(waUrl?'<a class="wide" style="display:block;text-decoration:none;text-align:center;margin-top:14px" href="'+waUrl+'" target="_blank" rel="noopener">واٹس ایپ پر آرڈر کی تفصیل بھیجیں</a>':'')+'<button type="button" class="wide" style="margin-top:12px" onclick="closeModal(\'cartModal\')">خریداری جاری رکھیں</button></div>';
   modal.classList.add("show");
+  const successNote=document.createElement("p");successNote.style.cssText="text-align:center;margin:12px 0;color:#6b625c";successNote.textContent="چند لمحوں میں آپ دوبارہ کلیکشن دیکھ سکیں گے…";document.getElementById("cartItems").appendChild(successNote);
+  window.setTimeout(function(){window.location.reload();},7000);
  }catch(err){
   console.error("Order submit exception:",err);
   showError("آرڈر بھیجتے وقت مسئلہ پیش آیا: "+(err&&err.message?err.message:"نامعلوم خرابی")+". صفحہ بند نہ کریں، دوبارہ کوشش کریں۔");
